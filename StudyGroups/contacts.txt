@@ -9,3 +9,8 @@ Name: Xiaotong Huang
 Email: xiaotong.huang@mail.utoronto.ca
 Communications : WeChat
 WeChat ID: tonyxiaotong
+
+Name: Jiayi Su
+Email: sjy.su@mail.utoronto.ca
+Communications : WeChat
+WeChat ID: seraphsusu
