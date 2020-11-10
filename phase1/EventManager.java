@@ -12,7 +12,7 @@ public class EventManager implements Serializable{
 
 
     /**
-     * Creates an empty room manager
+     * Creates an empty event manager
      */
     public EventManager(){
         events = new ArrayList<>();

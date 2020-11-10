@@ -6,11 +6,16 @@
  */
 public class OrganizerController{
 
+    private EventManager em = new FileReadWriter().readFromEventFile("events.ser");
+    private SpeakerManager sm = new FileReadWriter().readFromSpeakerFile("speaker.ser");
+    private RoomManager rm = new FileReadWriter().readFromRoomFile("room.ser");
+
+
     /**
      * Create an event
      */
-    public void createEvent(Event event) {
-        // TODO
+    public Event createEvent(String title, String roomID, Speaker speaker, int startTime) {
+        em.createEvent(title, roomID, speaker, startTime);
     }
 
     /**

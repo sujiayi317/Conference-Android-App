@@ -40,4 +40,9 @@ public class SpeakerManager implements Serializable {
         events.add(event);
         eventsMap.put(speaker.getUserName(), events);
     }
+
+    public Map<String, List<String>> getEventsMap() {
+        return eventsMap;
+    }
+
 }

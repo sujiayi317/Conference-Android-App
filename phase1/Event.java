@@ -10,7 +10,7 @@ import java.util.ArrayList;
  * We can assume the title for each event is unique (Piazza @704)
  *
  */
-public class Event implements Serializable {
+public class Event implements Serializable, Comparable<Event> {
 
     private final String eventID;
     private final String title;
@@ -148,5 +148,10 @@ public class Event implements Serializable {
      */
     public String fullString() {
         return this.toString()+" in room " + this.roomID + " with speaker: " + this.speakers.get(0);
+    }
+
+    @Override
+    public int compareTo(Event event) {
+        return startTime.compareTo(event.startTime);
     }
 }

@@ -2,9 +2,10 @@ import java.io.Serializable;
 
 /**
  * The User class, this is used as a superclass for Attendees, Speakers and Organizers.
+ * It is abstract because it does not actually contain users.
  *
  */
-public class User implements Serializable {
+public abstract class User implements Serializable {
 
     private final String firstName;
     private final String lastName;
@@ -71,6 +72,6 @@ public class User implements Serializable {
      */
     @Override
     public String toString() {
-        return String.format("%s %s", this.firstName, this.lastName); //To change body of generated methods, choose Tools | Templates.
+        return String.format("%s %s", this.firstName, this.lastName);
     }
 }
