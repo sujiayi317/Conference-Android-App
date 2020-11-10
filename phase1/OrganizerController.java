@@ -4,11 +4,17 @@
  * The OrganizerController class, this is used as a Controller for what organizers can do.
  *
  */
+/**
+ * The OrganizerController class, this is the Controller class for an Organizer.
+ *
+ */
 public class OrganizerController{
 
-    private EventManager em = new FileReadWriter().readFromEventFile("events.ser");
-    private SpeakerManager sm = new FileReadWriter().readFromSpeakerFile("speaker.ser");
-    private RoomManager rm = new FileReadWriter().readFromRoomFile("room.ser");
+    FileReadWriter fileReadWriter = new FileReadWriter();
+
+    private EventManager em = fileReadWriter.readFromEventFile("event.ser");
+    private SpeakerManager sm = fileReadWriter.readFromSpeakerFile("speaker.ser");
+    private RoomManager rm = fileReadWriter.readFromRoomFile("room.ser");
 
 
     /**
