@@ -83,7 +83,7 @@ public class Event implements Serializable {
     /**
      * Remove an attendee
      *
-     * @param attendee Attendee object
+     * @param attendeeID Attendee object
      * @return boolean true if person existed in attendee list
      */
     public boolean removeAttendee(String attendeeID) {
