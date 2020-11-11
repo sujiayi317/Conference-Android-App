@@ -16,7 +16,8 @@ public abstract class User implements Serializable {
         this.firstName = setFirstName(firstName);
         this.lastName = setFirstName(lastName);
         this.email = setEmail(email);
-        this.userName = setUserName(firstName, lastName);
+        this.userName = getFirstName() + "_" + getLastName() + "_"
+                + getUserID().substring(0, 3);
         this.userID = UUID.randomUUID().toString().split("-")[0];
     }
 
@@ -63,16 +64,6 @@ public abstract class User implements Serializable {
      */
     public String getUserName() {
         return this.userName;
-    }
-
-    /**
-     * Set the value of userName
-     *
-     * @param firstName
-     * @param lastName
-     */
-    public void setUserName(String firstName, String lastName) {
-        this.userName = firstName + "_" + lastName + UUID.randomUUID().toString().split("-")[0];
     }
 
 
