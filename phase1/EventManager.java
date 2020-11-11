@@ -59,7 +59,9 @@ public class EventManager implements Serializable {
         return false;
     }
 
-
+    /**
+     * Return a list all Attendees from event with eventID. If event not found, return empty array list.
+     */
     public ArrayList<String> getAttendeesFromEvent(String eventID) {
         Event event = getEventFromID(eventID);
         if (event != null){ return event.getAttendees();}
