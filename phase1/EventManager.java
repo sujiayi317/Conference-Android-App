@@ -25,10 +25,11 @@ public class EventManager implements Serializable{
      */
     public boolean createEvent(String title, String roomID, Speaker speaker, int startTime) {
         for (Event event : this.events) {
-            if ((event.getSpeakers().contains(speaker.getUserName()) && event.getStartTime() == startTime)|| roomID.equals(event.getRoomID())) {
+            if ((event.getSpeakers().contains(speaker.getUserName())|| roomID.equals(event.getRoomID()) && event.getStartTime() == startTime)) {
                 return false;}
+        }
         Event newEvent = new Event(title, roomID, speaker, startTime);
-        events.add(newEvent);}
+        events.add(newEvent);
         return true;
     }
 
@@ -44,12 +45,13 @@ public class EventManager implements Serializable{
      * itself. If you want to add the Even to the User, the Controller would send only the String eventName to the
      * UserManager, to store the Event's name in a list of Strings inside the User object."
      */
-    public void addAttendeeToEvent(String userName, String eventID) {
+    public boolean addAttendeeToEvent(String userID, String eventID) {
         for (Event event: events) {
             if (event.getEventID().equals(eventID)) {
-                event.addAttendee(userName);
+                event.addAttendee(userID, events);
             }
         }
+        return false;
     }
 
 }

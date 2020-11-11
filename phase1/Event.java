@@ -16,7 +16,7 @@ public class Event implements Serializable {
     private final String eventID;
     private final String title;
     private final String roomID;
-    private ArrayList<String> userName;
+    private ArrayList<String> userID;
     private ArrayList<String> speakers;
     private int startTime;
     private int duration = 1;
@@ -25,7 +25,7 @@ public class Event implements Serializable {
         this.eventID = title;
         this.roomID = roomID;
         this.title = title;
-        this.userName = new ArrayList<>();
+        this.userID = new ArrayList<>();
         this.speakers = new ArrayList<>(1);
         speakers.add(speaker.getUserName());
         this.startTime = startTime;
@@ -35,7 +35,7 @@ public class Event implements Serializable {
         this.eventID = title;
         this.roomID = roomID;
         this.title = title;
-        this.userName = new ArrayList<>();
+        this.userID = new ArrayList<>();
         this.speakers = new ArrayList<>(1);
         speakers.add(speaker.getUserName());
         this.startTime = startTime;
@@ -67,16 +67,16 @@ public class Event implements Serializable {
      * @param attendee Attendee object
      * @return boolean true if we add attendee to the list
      */
-    public boolean addAttendee(Attendee attendee, List<Event> events) {
-        if (this.userName.contains(attendee.getUserName())) {
+    public boolean addAttendee(String attendeeID, List<Event> events) {
+        if (this.userID.contains(attendeeID)) {
             return false;
         }
         for (Event event : events){
-            if(event.getAttendees().contains(attendee.getUserName()) && event.getStartTime() == this.getStartTime()){
+            if(event.getAttendees().contains(attendeeID) && event.getStartTime() == this.getStartTime()){
                 return false;
             }
         }
-        this.userName.add(attendee.getUserName());
+        this.userID.add(attendeeID);
         return true;
     }
 
@@ -86,9 +86,9 @@ public class Event implements Serializable {
      * @param attendee Attendee object
      * @return boolean true if person existed in attendee list
      */
-    public boolean removeAttendee(Attendee attendee) {
-        if (userName.contains(attendee.getUserName())) {
-            return userName.remove(attendee.getUserName());
+    public boolean removeAttendee(String attendeeID) {
+        if (userID.contains(attendeeID)) {
+            return userID.remove(attendeeID);
         }
         return false;
     }
@@ -98,13 +98,13 @@ public class Event implements Serializable {
      *
      * @param speaker Speaker object
      */
-    public boolean addSpeaker(Speaker speaker, List<Event> events) {
+    public boolean addSpeaker(String speakerID, List<Event> events) {
         for (Event event : events) {
-            if (event.speakers.contains(speaker.getUserName()) && event.getStartTime() == this.getStartTime()) {
+            if (event.speakers.contains(speakerID) && event.getStartTime() == this.getStartTime()) {
                 return false;
             }
         }
-        this.speakers.add(speaker.getUserName());
+        this.speakers.add(speakerID);
         return true;
     }
 
@@ -114,9 +114,9 @@ public class Event implements Serializable {
      * @param speaker Speaker object
      * @return boolean true if person existed in attendee list
      */
-    public boolean removeSpeaker(Speaker speaker) {
-        if (this.speakers.contains(speaker.getUserName())) {
-            return this.speakers.remove(speaker.getUserName());
+    public boolean removeSpeaker(String speakerID) {
+        if (this.speakers.contains(speakerID)) {
+            return this.speakers.remove(speakerID);
         }
         return false;
     }
@@ -156,7 +156,7 @@ public class Event implements Serializable {
      * @return all attendeees
      */
     public ArrayList<String> getAttendees() {
-        return userName;
+        return userID;
     }
 
     /**
