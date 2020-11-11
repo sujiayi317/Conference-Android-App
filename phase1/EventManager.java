@@ -23,10 +23,13 @@ public class EventManager implements Serializable{
     /**
      * Creates a new event
      */
-    public Event createEvent(String title, String roomID, Speaker speaker, int startTime) {
-        Event event = new Event(title, roomID, speaker, startTime);
-        events.add(event);
-        return event;
+    public boolean createEvent(String title, String roomID, Speaker speaker, int startTime) {
+        for (Event event : this.events) {
+            if (event.getSpeakers().contains(speaker.getUserName()) && event.getStartTime() == startTime) {
+                return false;}
+        Event newEvent = new Event(title, roomID, speaker, startTime);
+        events.add(newEvent);
+        return true;
     }
 
 
