@@ -7,18 +7,17 @@ import java.io.Serializable;
  */
 public abstract class User implements Serializable {
 
-    private final String firstName;
-    private final String lastName;
+    private String firstName;
+    private String lastName;
+    private String userName;
     private String email;
-    private final String userName;
-    private String userID;
 
     public User(String firstName, String lastName, String email) {
         this.firstName = setFirstName(firstName);
         this.lastName = setFirstName(lastName);
         this.email = setEmail(email);
         this.userName = setUserName(firstName, lastName);
-        this.userID = UUID.randomUUID().toString();
+        this.userID = UUID.randomUUID().toString().split("-")[0];
     }
 
     /**
@@ -48,16 +47,17 @@ public abstract class User implements Serializable {
     }
 
     /**
-     * Set the value of firstName
+     * Set the value of lastName
      *
      * @param lastName
      */
-    public void setLastNameName(String lastName) {
+    public void setLastName(String lastName) {
         this.lastName = lastName;
     }
 
+
     /**
-     * Get the value of username
+     * Get the value of userName
      *
      * @return the value of lastName
      */
@@ -66,13 +66,13 @@ public abstract class User implements Serializable {
     }
 
     /**
-     * Set the value of username
+     * Set the value of userName
      *
      * @param firstName
      * @param lastName
      */
     public void setUserName(String firstName, String lastName) {
-        this.userName = firstName + "_" + lastName;
+        this.userName = firstName + "_" + lastName + UUID.randomUUID().toString().split("-")[0];
     }
 
 
@@ -94,23 +94,19 @@ public abstract class User implements Serializable {
         this.email = email;
     }
 
-    /**
-     * This will be for the lists, as the list uses toString to display an Object
-     *
-     * @return Name format of Person
-     */
 
     /**
      * Get the userID of this user
      *
      * @return the value of userID
      */
-    public String getUserName() {
+    public String getUserID() {
         return this.userID;
     }
 
+
     @Override
     public String toString() {
-        return String.format("%s %s", this.firstName, this.lastName);
+        return String.format("User: %s %s", this.firstName, this.lastName);
     }
 }
