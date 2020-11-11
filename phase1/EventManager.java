@@ -71,7 +71,7 @@ public class EventManager implements Serializable {
      * return an event based on its ID
      *
      * @param eventID String
-     * @return event true if eventID existed in events otherwise return null
+     * @return event if eventID existed in events otherwise return null
      */
     public Event getEventFromID(String eventID) {
         for (Event event : events) {

@@ -64,7 +64,7 @@ public class Event implements Serializable {
     /**
      * Adds an attendee
      *
-     * @param attendeeID Attendee object
+     * @param attendeeID String
      * @return boolean true if we add attendee to the list
      */
     public boolean addAttendee(String attendeeID, List<Event> events) {
@@ -83,7 +83,7 @@ public class Event implements Serializable {
     /**
      * Remove an attendee
      *
-     * @param attendeeID Attendee object
+     * @param attendeeID String
      * @return boolean true if person existed in attendee list
      */
     public boolean removeAttendee(String attendeeID) {
@@ -96,7 +96,7 @@ public class Event implements Serializable {
     /**
      * Adds a speaker
      *
-     * @param speakerID Speaker object
+     * @param speakerID String
      */
     public boolean addSpeaker(String speakerID, List<Event> events) {
         for (Event event : events) {
@@ -111,7 +111,7 @@ public class Event implements Serializable {
     /**
      * Remove an attendee
      *
-     * @param speakerID Speaker object
+     * @param speakerID String
      * @return boolean true if person existed in attendee list
      */
     public boolean removeSpeaker(String speakerID) {
@@ -122,7 +122,7 @@ public class Event implements Serializable {
     }
 
     /**
-     * Return the ID
+     * Return the ID String
      *
      * @return the ID
      */
@@ -131,7 +131,7 @@ public class Event implements Serializable {
     }
 
     /**
-     * Return the title
+     * Return the title String
      *
      * @return the title
      */
