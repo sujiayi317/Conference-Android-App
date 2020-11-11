@@ -13,7 +13,8 @@ public class Organizer extends User implements Serializable {
 
     public Organizer(String firstName, String lastName, String email) {
         super(firstName, lastName, email);
-        this.userName = "@" + firstName + " " + lastName;
+        this.userName = "@" + getFirstName() + "_" + getLastName() + "_"
+                + getUserID().substring(0, 3);
     }
 
 }

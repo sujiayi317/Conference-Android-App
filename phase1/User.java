@@ -1,4 +1,5 @@
 import java.io.Serializable;
+import java.util.UUID;
 
 /**
  * The User class, this is used as a superclass for Attendees, Speakers and Organizers.
