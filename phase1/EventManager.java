@@ -32,6 +32,13 @@ public class EventManager implements Serializable {
         return true;
     }
 
+    /**
+     * Return a list of all events.
+     */
+    public List<Event> getEvent() {
+        return events;
+    }
+
 
     /**
      * Adds an attendee to the eventsMap  (Piazza question @652)
