@@ -4,27 +4,28 @@
  */
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * The Meeting class, this is used to create meeting objects, and it holds person objects attending the meeting.
  * We can assume the title for each event is unique (Piazza @704)
  *
  */
-public class Event implements Serializable, Comparable<Event> {
+public class Event implements Serializable {
 
     private final String eventID;
     private final String title;
     private final String roomID;
-    private ArrayList<String> attendees;
+    private ArrayList<String> userName;
     private ArrayList<String> speakers;
     private int startTime;
-    private int duration;
+    private int duration = 1;
 
     public Event(String title, String roomID, Speaker speaker, int startTime) {
         this.eventID = title;
         this.roomID = roomID;
         this.title = title;
-        this.attendees = new ArrayList<>();
+        this.userName = new ArrayList<>();
         this.speakers = new ArrayList<>(1);
         speakers.add(speaker.getUserName());
         this.startTime = startTime;
@@ -34,7 +35,7 @@ public class Event implements Serializable, Comparable<Event> {
         this.eventID = title;
         this.roomID = roomID;
         this.title = title;
-        this.attendees = new ArrayList<>();
+        this.userName = new ArrayList<>();
         this.speakers = new ArrayList<>(1);
         speakers.add(speaker.getUserName());
         this.startTime = startTime;
@@ -56,46 +57,73 @@ public class Event implements Serializable, Comparable<Event> {
      *
      * @param startTime new value of timeSlot
      */
-    public void setStartTime(int startTime) {
-        this.startTime = startTime;
-    }
+//    public void setStartTime(int startTime) {
+//        this.startTime = startTime;
+//    }
 
     /**
      * Adds an attendee
+     *
      * @param attendee Attendee object
+     * @return boolean true if we add attendee to the list
      */
-    public void addAttendee(String attendee) {
-        attendees.add(attendee);
+    public boolean addAttendee(Attendee attendee, List<Event> events) {
+        if (this.userName.contains(attendee.getUserName())) {
+            return false;
+        }
+        for (Event event : events){
+            if(event.getAttendees().contains(attendee.getUserName()) && event.getStartTime() == this.getStartTime()){
+                return false;
+            }
+        }
+        this.userName.add(attendee.getUserName());
+        return true;
     }
 
     /**
      * Remove an attendee
+     *
      * @param attendee Attendee object
      * @return boolean true if person existed in attendee list
      */
     public boolean removeAttendee(Attendee attendee) {
-        return attendees.remove(attendee.getUserName());
+        if (userName.contains(attendee.getUserName())) {
+            return userName.remove(attendee.getUserName());
+        }
+        return false;
     }
 
     /**
      * Adds a speaker
+     *
      * @param speaker Speaker object
      */
-    public void addSpeaker(Speaker speaker) {
-        speakers.add(speaker.getUserName());
+    public boolean addSpeaker(Speaker speaker, List<Event> events) {
+        for (Event event : events) {
+            if (event.speakers.contains(speaker.getUserName()) && event.getStartTime() == this.getStartTime()) {
+                return false;
+            }
+        }
+        this.speakers.add(speaker.getUserName());
+        return true;
     }
 
     /**
      * Remove an attendee
+     *
      * @param speaker Speaker object
      * @return boolean true if person existed in attendee list
      */
     public boolean removeSpeaker(Speaker speaker) {
-        return speakers.remove(speaker.getUserName());
+        if (this.speakers.contains(speaker.getUserName())) {
+            return this.speakers.remove(speaker.getUserName());
+        }
+        return false;
     }
 
     /**
      * Return the ID
+     *
      * @return the ID
      */
     public String getEventID() {
@@ -104,6 +132,7 @@ public class Event implements Serializable, Comparable<Event> {
 
     /**
      * Return the title
+     *
      * @return the title
      */
     public String getTitle() {
@@ -112,6 +141,7 @@ public class Event implements Serializable, Comparable<Event> {
 
     /**
      * Returns all speakers
+     *
      * @return all speakers
      */
     public String getSpeakers() {
@@ -120,38 +150,42 @@ public class Event implements Serializable, Comparable<Event> {
 
     /**
      * Returns all attendeees
+     *
      * @return all attendeees
      */
     public ArrayList<String> getAttendees() {
-        return attendees;
+        return userName;
     }
 
     /**
      * Formats and returns the time slot
+     *
      * @return String of the time formated nicely
      */
-    public String getFormattedStartTime(){
+    public String getFormattedStartTime() {
         int tempTime;
         tempTime = startTime % 12;
         if (startTime == 12) tempTime = 12;
-        return String.format("%s:00 %s", tempTime, ((startTime < 9) || (startTime == 12) ? "PM": "AM"));
+        return String.format("%s:00 %s", tempTime, ((startTime < 9) || (startTime == 12) ? "PM" : "AM"));
     }
 
     @Override
     public String toString() {
-        return this.title+" at "+this.getFormattedStartTime();
+        return this.title + " at " + this.getFormattedStartTime();
     }
 
     /**
      * Returns a formatted string will more data
+     *
      * @return a formatted string will more data
      */
     public String fullString() {
-        return this.toString()+" in room " + this.roomID + " with speaker: " + this.speakers.get(0);
-    }
-
-    @Override
-    public int compareTo(Event event) {
-        return startTime.compareTo(event.startTime);
+        return this.toString() + " in room " + this.roomID + " with speaker: " + this.speakers.get(0);
     }
 }
+
+//    @Override
+//    public int compareTo(Event event) {
+//        return startTime.compareTo(event.startTime);
+//    }
+//}
