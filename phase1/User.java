@@ -11,12 +11,14 @@ public abstract class User implements Serializable {
     private final String lastName;
     private String email;
     private final String userName;
+    private String userID;
 
     public User(String firstName, String lastName, String email) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.userName = firstName + " " + lastName;
+        this.firstName = setFirstName(firstName);
+        this.lastName = setFirstName(lastName);
+        this.email = setEmail(email);
+        this.userName = setUserName(firstName, lastName);
+        this.userID = UUID.randomUUID().toString();
     }
 
     /**
@@ -26,6 +28,13 @@ public abstract class User implements Serializable {
      */
     public String getFirstName() {
         return firstName;
+    }
+
+    /**
+     * Set the value of firstName
+     */
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
 
@@ -39,12 +48,31 @@ public abstract class User implements Serializable {
     }
 
     /**
+     * Set the value of firstName
+     *
+     * @param lastName
+     */
+    public void setLastNameName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    /**
      * Get the value of username
      *
      * @return the value of lastName
      */
     public String getUserName() {
-        return userName;
+        return this.userName;
+    }
+
+    /**
+     * Set the value of username
+     *
+     * @param firstName
+     * @param lastName
+     */
+    public void setUserName(String firstName, String lastName) {
+        this.userName = firstName + "_" + lastName;
     }
 
 
@@ -68,8 +96,19 @@ public abstract class User implements Serializable {
 
     /**
      * This will be for the lists, as the list uses toString to display an Object
+     *
      * @return Name format of Person
      */
+
+    /**
+     * Get the userID of this user
+     *
+     * @return the value of userID
+     */
+    public String getUserName() {
+        return this.userID;
+    }
+
     @Override
     public String toString() {
         return String.format("%s %s", this.firstName, this.lastName);
