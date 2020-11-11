@@ -52,19 +52,24 @@ public class EventManager implements Serializable {
      * UserManager, to store the Event's name in a list of Strings inside the User object."
      */
     public boolean addAttendeeToEvent(String userID, String eventID) {
-            Event event = getEventFromID(eventID);
-            return event.addAttendee(userID, events);}
+        Event event = getEventFromID(eventID);
+        if (event != null) {
+            return event.addAttendee(userID, events);
+        }
+        return false;
+    }
 
 
     public ArrayList<String> getAttendeesFromEvent(String eventID) {
         Event event = getEventFromID(eventID);
-        return event.getAttendees();
+        if (event != null){ return event.getAttendees();}
+        return new ArrayList<>();
     }
     /**
      * get event from its ID
      *
      * @param eventID Attendee object
-     * @return event true if eventID existed in events
+     * @return event true if eventID existed in events otherwise return null
      */
     public Event getEventFromID(String eventID) {
         for (Event event : events) {
