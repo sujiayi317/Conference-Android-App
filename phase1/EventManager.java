@@ -49,7 +49,7 @@ public class EventManager implements Serializable {
             return event.addAttendee(userID, events);}
 
 
-    public ArrayList<String> getAttendeesToEvent(String eventID) {
+    public ArrayList<String> getAttendeesFromEvent(String eventID) {
         Event event = getEventFromID(eventID);
         return event.getAttendees();
     }
