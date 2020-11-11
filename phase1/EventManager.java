@@ -85,5 +85,18 @@ public class EventManager implements Serializable {
         return null;
     }
 
+    /**
+     * Return true if we remove the attendee from a event.
+     * @param eventID,userID String object,
+     * @return boolean
+     */
+    public boolean removeAttendeeFromEvent(String userID, String eventID) {
+        Event event = getEventFromID(eventID);
+        if (event != null) {
+            return event.removeAttendee(userID);
+        }
+        return false;
+    }
+
 
 }

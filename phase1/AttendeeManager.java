@@ -64,7 +64,7 @@ public class AttendeeManager implements Serializable {
 
         //update attendee to event
         EventManager eventManager = new EventManager();
-        eventManager.addAttendeeToEvent(attendee, event);
+        eventManager.addAttendeeToEvent(attendee.getUserName(), event.getEventID());
         eventManager.updateCapacity(event, 1);
 
         //update room
@@ -81,7 +81,7 @@ public class AttendeeManager implements Serializable {
 
         //update attendee to event
         EventManager eventManager = new EventManager();
-        eventManager.removeAttendeeFromEvent(attendee, event);
+        eventManager.removeAttendeeFromEvent(attendee.getUserName(), event.getEventID());
         eventManager.updateCapacity(event, -1);
 
         //update Room
