@@ -28,8 +28,8 @@ public class SpeakerManager implements Serializable {
     /**
      * Creates a Speaker and adds it to the map and lists
      */
-    public Speaker createSpeaker(String firstName, String lastName, String email) {
-        Speaker speaker = new Speaker(firstName, lastName, email);
+    public Speaker createSpeaker(String firstName, String lastName, String email, String password) {
+        Speaker speaker = new Speaker(firstName, lastName, email, password);
         speakerMap.put(speaker.getUserName(), speaker);
         speakers.add(speaker);
         return speaker;

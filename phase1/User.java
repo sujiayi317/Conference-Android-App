@@ -12,14 +12,17 @@ public abstract class User implements Serializable {
     private String lastName;
     private String userName;
     private String email;
+    private String userID;
+    private String password;
 
-    public User(String firstName, String lastName, String email) {
-        this.firstName = setFirstName(firstName);
-        this.lastName = setFirstName(lastName);
-        this.email = setEmail(email);
+    public User(String firstName, String lastName, String email, String password) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
         this.userName = getFirstName() + "_" + getLastName() + "_"
                 + getUserID().substring(0, 3);
         this.userID = UUID.randomUUID().toString().split("-")[0];
+        this.password = password;
     }
 
     /**

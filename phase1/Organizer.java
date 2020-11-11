@@ -11,8 +11,8 @@ public class Organizer extends User implements Serializable {
     private final String userName;
     private ArrayList<String> events;
 
-    public Organizer(String firstName, String lastName, String email) {
-        super(firstName, lastName, email);
+    public Organizer(String firstName, String lastName, String email, String password) {
+        super(firstName, lastName, email, password);
         this.userName = "@" + getFirstName() + "_" + getLastName() + "_"
                 + getUserID().substring(0, 3);
     }

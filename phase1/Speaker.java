@@ -7,7 +7,7 @@ import java.io.Serializable;
 
 public class Speaker extends User implements Serializable {
 
-    public Speaker(String firstName, String lastName, String email) {
-        super(firstName, lastName, email);
+    public Speaker(String firstName, String lastName, String email, String password) {
+        super(firstName, lastName, email, password);
     }
 }

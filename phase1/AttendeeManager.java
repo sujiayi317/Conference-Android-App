@@ -28,8 +28,8 @@ public class AttendeeManager implements Serializable {
     /**
      * Creates An attendee and adds it to the map and lists
      */
-    public Attendee createAttendee(String firstName, String lastName, String email) {
-        Attendee attendee = new Attendee(firstName, lastName, email);
+    public Attendee createAttendee(String firstName, String lastName, String email, String password) {
+        Attendee attendee = new Attendee(firstName, lastName, email, password);
         attendeeMap.put(attendee.getUserName(), attendee);
         attendees.add(attendee);
         return attendee;
