@@ -60,7 +60,12 @@ public class EventManager implements Serializable {
         Event event = getEventFromID(eventID);
         return event.getAttendees();
     }
-
+    /**
+     * get event from its ID
+     *
+     * @param eventID Attendee object
+     * @return event true if eventID existed in events
+     */
     public Event getEventFromID(String eventID) {
         for (Event event : events) {
             if (event.getEventID().equals(eventID)) {
