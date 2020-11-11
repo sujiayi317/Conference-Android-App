@@ -40,4 +40,54 @@ public class AttendeeManager implements Serializable {
         events.add(event);
         eventsMap.put(attendee.getUserName(), events);
     }
+
+
+    /**
+     * View all the events
+     * @return list of events
+     */
+    public List<Event> viewAllEvents() {
+        return EventManager.getAllEvents();
+    }
+
+
+    /**
+     * Sign an Attendee up for an event.
+     * @param event
+     * @return true iff signed up successfully
+     */
+    public boolean signUp(Attendee attendee, Event event) {
+        if(event.isFull()) return false;
+
+        //update event to attendee
+        addEventToAttendee(event, attendee);
+
+        //update attendee to event
+        EventManager eventManager = new EventManager();
+        eventManager.addAttendeeToEvent(attendee, event);
+        eventManager.updateCapacity(event, 1);
+
+        //update room
+        RoomManager roomManager = new RoomManager();
+        roomManager.updateCapacity(event, 1);
+
+        return true;
+    }
+
+    public boolean cancel(Attendee attendee, Event event) {
+        if(!event.hasAttendee(attendee)) return false;
+        //update event to attendee
+        removeEventFromAttendee(event, attendee);
+
+        //update attendee to event
+        EventManager eventManager = new EventManager();
+        eventManager.removeAttendeeFromEvent(attendee, event);
+        eventManager.updateCapacity(event, -1);
+
+        //update Room
+        RoomManager roomManager = new RoomManager();
+        roomManager.updateCapacity(event, -1);
+
+        return true;
+    }
 }
