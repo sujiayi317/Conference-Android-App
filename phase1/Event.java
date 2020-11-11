@@ -138,7 +138,9 @@ public class Event implements Serializable {
     public String getTitle() {
         return title;
     }
-
+    public String getRoomID(){
+        return this.roomID;
+    }
     /**
      * Returns all speakers
      *

@@ -25,10 +25,10 @@ public class EventManager implements Serializable{
      */
     public boolean createEvent(String title, String roomID, Speaker speaker, int startTime) {
         for (Event event : this.events) {
-            if (event.getSpeakers().contains(speaker.getUserName()) && event.getStartTime() == startTime) {
+            if ((event.getSpeakers().contains(speaker.getUserName()) && event.getStartTime() == startTime)|| roomID.equals(event.getRoomID())) {
                 return false;}
         Event newEvent = new Event(title, roomID, speaker, startTime);
-        events.add(newEvent);
+        events.add(newEvent);}
         return true;
     }
 
