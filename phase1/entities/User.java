@@ -29,10 +29,10 @@ public abstract class User implements Serializable {
         this.userName = userName;
         this.userID = UUID.randomUUID().toString().split("-")[0];
         this.password = password;
-        this.friendList = new ArrayList<>();
+        this.friendList = new ArrayList<String>();
     }
 
-    public ArrayList friendListGetter(){
+    public ArrayList<String> friendListGetter(){
         return (ArrayList)friendList.clone();
     }
 

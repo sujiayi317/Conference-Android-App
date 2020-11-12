@@ -114,4 +114,12 @@ public class AttendeeManager implements Serializable {
             return false;
         }
     }
+
+    public List<String> friendListGetter(String userId) {
+        for (Attendee attendee : attendees){
+            if (attendee.getUserID() == userId){
+                return attendee.friendListGetter();
+            }
+        }return null;
+    }
 }
