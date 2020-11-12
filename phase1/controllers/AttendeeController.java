@@ -20,13 +20,18 @@ public class AttendeeController {
             switch (choice) {
                 case 1:
                     // viewAllEvents
-                    viewAllEvents(viewAllExistingEvents, eventsController);
-                    String eventID = input.getInputString("Please choose an event and see the details or press enter");
-                    if (!eventID.equals("")){
-                        viewOneEventInfo(eventID, viewEventInfo, eventsController);
-                        String decision = input.getInputString("Yes=sign up OR No");
-                        if(decision.equals("Yes")){
-
+                    int check = 0;
+                    while (check != 1) {
+                        viewAllEvents(viewAllExistingEvents, eventsController);
+                        String eventID = input.getInputString("Please choose an event and see the details or press enter");
+                        if (!eventID.equals("")) {
+                            viewOneEventInfo(eventID, viewEventInfo, eventsController);
+                            String decision = input.getInputString("Yes=sign up OR No");
+                            if (decision.equals("Yes")) {
+                                attendeeManager.signUp(eventsController.getEventManager(), userID, eventID,
+                                        eventsController.getRoomManager());
+                                check +=1;
+                            }
                         }
                     }
                 case 2:

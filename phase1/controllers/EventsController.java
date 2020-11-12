@@ -18,6 +18,14 @@ public class EventsController{
         this.roomManager = roomManager;
     }
 
+    public EventManager getEventManager(){
+        return this.eventManager;
+    }
+
+    public RoomManager getRoomManager(){
+        return this.roomManager;
+    }
+
     public List<Event> getAllExistingEvents(){
         return this.eventManager.getAllEvent();
     }
