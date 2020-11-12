@@ -76,7 +76,7 @@ class FileReadWriter {
                 {
                 }
             }
-            input.close(); //can't close input
+            input.close(); //can't close input TODO
             return objList;
         } catch (IOException ex) {
             logger.log(Level.SEVERE, "Cannot read from input file, returning" +
