@@ -11,13 +11,19 @@ import java.util.InputMismatchException;
  */
 public class Conference {
 
-    private EventsController eventsController = new EventsController();
-    private AttendeeManager attendeeManager = new AttendeeManager();
-    private SpeakerManager speakerManager = new SpeakerManager();
-    private OrganizerManager organizerManager = new OrganizerManager();
+    private EventsController eventsController;
+    private AttendeeManager attendeeManager;
+    private SpeakerManager speakerManager;
+    private OrganizerManager organizerManager;
     /**
      * This is where our conference system starts.
      */
+    public void Conference(){
+        this.eventsController = new EventsController();
+        this.attendeeManager = new AttendeeManager();
+        this.speakerManager = new SpeakerManager();
+        this.organizerManager = new OrganizerManager();
+    }
     public void run(){
         try {
             //Initialize all managers, NO FILE FOUND AT THIS POINT, CREATE NEW MANAGERS

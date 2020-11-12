@@ -8,13 +8,16 @@ public class Login{
     private static InputManager input = new InputManager();
     private static OutputManager output = new OutputManager();
     private CreateAccount createAccount = new CreateAccount();
+    private static int ID;
+    private static int type;
+
 
     public void run(AttendeeManager attendeeManager, OrganizerManager organizerManager, SpeakerManager speakerManager) {
         while (true) {
             output.printPrompt("Welcome to main page of conference sign up centre! Please enter a number");
             Integer CurrentAction = input.getInputInt("1. Sign in \n2. Create an account");
             if (CurrentAction == 1) {
-                signIn();
+                signIn(attendeeManager, organizerManager, speakerManager);
             } else if (CurrentAction == 2) {
                 createAccount(attendeeManager, organizerManager, speakerManager);
             } else {
@@ -23,8 +26,16 @@ public class Login{
         }
     }
 
-    public boolean signIn(){
+    public boolean signIn(AttendeeManager attendeeManager, OrganizerManager organizerManager, SpeakerManager speakerManager){
+        while (true) {
+            String account = input.getInputString("Please enter your email:");
+            String password = input.getInputString("Please enter your password:");
+            if (attendeeManager.validLogIn(account, password).equals("NULL") &&
+                    speakerManager.validLogIn(account, password).equals("NULL") &&
+                    organizerManager.validLogIn(account, password).equals("NULL") {
 
+            }
+        }
     }
 
     public boolean createAccount(AttendeeManager attendeeManager, OrganizerManager organizerManager, SpeakerManager speakerManager){

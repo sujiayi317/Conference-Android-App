@@ -1,5 +1,8 @@
 package controllers;
 
+import Presenter.ViewAllAttendeeEvents;
+import Presenter.ViewAllAvailableRoom;
+import Presenter.ViewAllExistingEvents;
 import com.sun.org.apache.xpath.internal.operations.Bool;
 import entities.Organizer;
 import entities.Speaker;
@@ -14,8 +17,8 @@ public class OrganizerController {
     private static OutputManager output = new OutputManager();
     private CreateAccount create = new CreateAccount();
 
-    public void run(EventsController eventsController, ,AttendeeManager attendeeManager,
-                    OrganizerManager organizerManager, SpeakerManager speakerManager) {
+    public void run(EventsController eventsController, ViewAllExistingEvents viewAllExistingEvents, ViewAllAvailableRoom viewAllAvailableRoom , ViewAllAttendeeEvents viewAllAttendeeEvents, AttendeeManager attendeeManager,
+                    OrganizerManager organizerManager, SpeakerManager speakerManager, String userID) {
         //connect to Attendee Presenter - Menu options
 
         int choice = input.getInputInt("Please choose from the following options:");
@@ -32,15 +35,33 @@ public class OrganizerController {
                 case 2:
                     //get all available room info
                     int time = input.getInputInt("Please enter your event time");
-                    output.printPrompt(eventsController.getAvailableRoom(time));
+                    getAllAvailableRoomInfo(time, viewAllAvailableRoom, eventsController);
                 case 3:
                     //create a new event
-
-                    //connect to Schedule Controller
-                    break;
+                    //String title, String roomID, Speaker speaker, int startTime
+                    String title = input.getInputString("Please enter your event's title");
+                    String roomID = input.getInputString("Please enter your room ID");
+                    String speaker = input.getInputString("Please set your speaker");
+                    int startTime = input.getInputInt("Please enter your event time");
+                    createEvent(title,roomID,speaker,startTime, eventsController);
                 case 4:
-                    //connect to Contacts Controller
+                    // view all events
+                    viewAllEvents(viewAllExistingEvents, eventsController);
+                case 5:
+                    // view all attended events
+                    viewAllAttendeeEvents.printAllAttendeeEvents(eventsController.getALLAttendeeEvents(userID));
+
             }
         }
+    }
+    private void getAllAvailableRoomInfo(int time, ViewAllAvailableRoom viewAllAvailableRoom, EventsController eventsController){
+        viewAllAvailableRoom.printAllAvailableRoom(eventsController.getAvailableRoom(time));
+    }
+    private void createEvent(String title, String roomID,String speaker,int startTime, EventsController eventsController){
+        output.printPrompt(eventsController.createEvent(title,roomID,speaker,startTime));
+    }
+
+    private void viewAllEvents(ViewAllExistingEvents viewAllExistingEvents, EventsController eventsController){
+        viewAllExistingEvents.printAllExistingEvents(eventsController.getAllExistingEvents());
     }
 }
