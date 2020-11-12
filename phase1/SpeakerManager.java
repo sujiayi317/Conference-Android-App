@@ -9,19 +9,19 @@ import java.util.Map;
  *
  */
 public class SpeakerManager implements Serializable {
-    private List<String> events;
+    //private List<String> events;
     private List<Speaker> speakers;
 
-    private Map<String, Speaker> speakerMap;
-    private Map<String, List<String>> eventsMap;
+    //private Map<String, Speaker> speakerMap;
+    //private Map<String, List<String>> eventsMap;
 
     /**
      * Creates an SpeakerManager with lists of Events for a speaker that is empty
      */
     public SpeakerManager(){
-        events = new ArrayList<>();
-        speakerMap = new HashMap<>();
-        eventsMap = new HashMap<>();
+//        events = new ArrayList<>();
+//        speakerMap = new HashMap<>();
+//        eventsMap = new HashMap<>();
         speakers = new ArrayList<>(1);  // Initial Capacity is 1 in Phase 1
     }
 
@@ -30,19 +30,19 @@ public class SpeakerManager implements Serializable {
      */
     public Speaker createSpeaker(String firstName, String lastName, String email, String password) {
         Speaker speaker = new Speaker(firstName, lastName, email, password);
-        speakerMap.put(speaker.getUserName(), speaker);
+        //speakerMap.put(speaker.getUserName(), speaker);
         speakers.add(speaker);
         return speaker;
     }
 
-    public void addEventToSpeaker(String event, Speaker speaker) {
-        events = eventsMap.get(speaker.getUserName());
-        events.add(event);
-        eventsMap.put(speaker.getUserName(), events);
-    }
+//    public void addEventToSpeaker(String event, Speaker speaker) {
+//        events = eventsMap.get(speaker.getUserName());
+//        events.add(event);
+//        eventsMap.put(speaker.getUserName(), events);
+//    }
 
-    public Map<String, List<String>> getEventsMap() {
-        return eventsMap;
-    }
+//    public Map<String, List<String>> getEventsMap() {
+//        return eventsMap;
+//    }
 
 }

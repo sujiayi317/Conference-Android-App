@@ -6,8 +6,8 @@ import java.io.Serializable;
  */
 public class Attendee extends User  implements Serializable {
 
-    public Attendee(String firstName, String lastName, String email, String password) {
-        super(firstName, lastName, email, password);
+    public Attendee(String userName, String email, String password) {
+        super(userName, email, password);
     }
 
 
