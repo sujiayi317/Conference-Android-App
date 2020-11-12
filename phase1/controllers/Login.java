@@ -7,6 +7,7 @@ import javax.swing.*;
 public class Login{
     private static InputManager input = new InputManager();
     private static OutputManager output = new OutputManager();
+    private CreateAccount createAccount = new CreateAccount();
 
     public void run(AttendeeManager attendeeManager, OrganizerManager organizerManager, SpeakerManager speakerManager) {
         while (true) {
@@ -15,23 +16,25 @@ public class Login{
             if (CurrentAction == 1) {
                 signIn();
             } else if (CurrentAction == 2) {
-                createAccount();
+                createAccount(attendeeManager, organizerManager, speakerManager);
             } else {
                 output.printPrompt("Invalid action, directing back to ");
             }
         }
     }
 
-    public boolean signIn(){}
+    public boolean signIn(){
 
-    public boolean createAccount(){
+    }
+
+    public boolean createAccount(AttendeeManager attendeeManager, OrganizerManager organizerManager, SpeakerManager speakerManager){
         while (true) {
             output.printPrompt("Select what type of account you want to create, or enter 'cancel' to exit.");
             String CurrentAction = input.getInputString("1. Attendee account \n2. Organizer account");
             if (CurrentAction.equals("1")) {
-                return signIn();
+                return createAccount.CreateNewAccount(attendeeManager, organizerManager, speakerManager, "ATTENDEE");
             } else if (CurrentAction.equals("2")) {
-                return createAccount();
+                return createAccount.CreateNewAccount(attendeeManager, organizerManager, speakerManager, "ORGANIZER");
             } else if(CurrentAction.equals("cancel")){
                 return false;
             } else {

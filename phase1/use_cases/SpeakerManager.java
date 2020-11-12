@@ -1,5 +1,6 @@
 package use_cases;
 
+import entities.Attendee;
 import entities.Organizer;
 import entities.Speaker;
 
@@ -54,6 +55,17 @@ public class SpeakerManager implements Serializable {
             }
         }
         return true;
+    }
+
+    public String validLogIn(String account, String password){
+        for (Speaker speaker : speakers){
+            if (speaker.getEmail().equals(account) && speaker.getPassword().equals(password)){
+                return "VALID";
+            } else if (speaker.getEmail().equals(account)){
+                return "PASSWORD WRONG";
+            }
+        }
+        return "NULL";
     }
 
 //    public void addEventToSpeaker(String event, entities.Speaker speaker) {

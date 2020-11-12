@@ -11,8 +11,7 @@ import java.util.InputMismatchException;
  */
 public class Conference {
 
-    private EventManager eventManager = new EventManager();
-    private RoomManager roomManager = new RoomManager();
+    private EventsController eventsController = new EventsController();
     private AttendeeManager attendeeManager = new AttendeeManager();
     private SpeakerManager speakerManager = new SpeakerManager();
     private OrganizerManager organizerManager = new OrganizerManager();
@@ -45,7 +44,7 @@ public class Conference {
     private void start() {
         //connect to Gateway: set up database
         //connect to Login Controller - log User in
-        new Login().logIn(attendeeManager, organizerManager, speakerManager);
+        new Login().run(attendeeManager, organizerManager, speakerManager);
 
 
     }
@@ -64,7 +63,7 @@ public class Conference {
                 new SpeakerController().run();
                 break;
             case "ORGANIZER":
-                new OrganizerController().run(eventManager, roomManager, attendeeManager, organizerManager, speakerManager);
+                new OrganizerController().run(eventsController, attendeeManager, organizerManager, speakerManager);
         }
     }
 
