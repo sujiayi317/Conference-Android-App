@@ -9,85 +9,54 @@ import java.util.Map;
  *
  */
 public class AttendeeManager implements Serializable {
-    private List<String> events;
+    //private List<String> events;
     private List<Attendee> attendees;
 
-    private Map<String, Attendee> attendeeMap;
-    private Map<String, List<String>> eventsMap;
+    //private Map<String, Attendee> attendeeMap;
+    //private Map<String, List<String>> eventsMap;
 
     /**
      * Creates an AttendeeManager with lists of Events for an attendee that is empty
      */
     public AttendeeManager(){
-        events = new ArrayList<>();
-        attendeeMap = new HashMap<>();
-        eventsMap = new HashMap<>();
+        //events = new ArrayList<>();
+        //attendeeMap = new HashMap<>();
+        //eventsMap = new HashMap<>();
         attendees = new ArrayList<>();
     }
 
     /**
      * Creates An attendee and adds it to the map and lists
      */
-    public Attendee createAttendee(String firstName, String lastName, String email, String password) {
-        Attendee attendee = new Attendee(firstName, lastName, email, password);
-        attendeeMap.put(attendee.getUserName(), attendee);
+    public Attendee createAttendee(String userName, String email, String password) {
+        Attendee attendee = new Attendee(userName, email, password);
+        //attendeeMap.put(attendee.getUserName(), attendee);
         attendees.add(attendee);
         return attendee;
     }
 
-    public void addEventToAttendee(String event, Attendee attendee) {
-        events = eventsMap.get(attendee.getUserName());
-        events.add(event);
-        eventsMap.put(attendee.getUserName(), events);
+
+    public List<Attendee> getAttendees() {
+        return attendees;
     }
 
-
-    /**
-     * View all the events
-     * @return list of events
-     */
-    public List<Event> viewAllEvents() {
-        return EventManager.getAllEvents();
-    }
+//    public void addEventToAttendee(String event, Attendee attendee) {
+//        events = eventsMap.get(attendee.getUserName());
+//        events.add(event);
+//        eventsMap.put(attendee.getUserName(), events);
+//    }
 
 
     /**
      * Sign an Attendee up for an event.
-     * @param event
+     * @param userID,eventID user id of user and event id of event
      * @return true iff signed up successfully
      */
-    public boolean signUp(Attendee attendee, Event event) {
-        if(event.isFull()) return false;
-
-        //update event to attendee
-        addEventToAttendee(event, attendee);
-
-        //update attendee to event
-        EventManager eventManager = new EventManager();
-        eventManager.addAttendeeToEvent(attendee.getUserName(), event.getEventID());
-        eventManager.updateCapacity(event, 1);
-
-        //update room
-        RoomManager roomManager = new RoomManager();
-        roomManager.updateCapacity(event, 1);
-
-        return true;
+    public boolean signUp(EventManager eventManager, String userID, String eventID) {
+        return eventManager.addAttendeeToEvent(userID, eventID);
     }
 
-    public boolean cancel(Attendee attendee, Event event) {
-        if(!event.hasAttendee(attendee)) return false;
-        //update event to attendee
-        removeEventFromAttendee(event, attendee);
-
-        //update attendee to event
-        EventManager eventManager = new EventManager();
-        eventManager.removeAttendeeFromEvent(attendee.getUserName(), event.getEventID());
-        eventManager.updateCapacity(event, -1);
-
-        //update Room
-        RoomManager roomManager = new RoomManager();
-        roomManager.updateCapacity(event, -1);
-
-        return true;
+    public boolean cancel(EventManager eventManager, String userID, String eventID) {
+        return eventManager.removeAttendeeFromEvent(String userID, String eventID);
     }
 }
