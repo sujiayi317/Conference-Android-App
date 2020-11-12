@@ -8,13 +8,13 @@ import java.util.ArrayList;
 
 public class Organizer extends User implements Serializable {
 
-    private final String userName;
+    //private final String userName;
     private ArrayList<String> events;
 
-    public Organizer(String firstName, String lastName, String email, String password) {
-        super(firstName, lastName, email, password);
-        this.userName = "@" + getFirstName() + "_" + getLastName() + "_"
-                + getUserID().substring(0, 3);
+    public Organizer(String userName, String email, String password) {
+        super(userName, email, password);
+        //this.userName = "@" + getFirstName() + "_" + getLastName() + "_"
+                //+ getUserID().substring(0, 3);
     }
 
 }

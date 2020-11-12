@@ -61,7 +61,7 @@ public abstract class User implements Serializable {
 //        this.lastName = lastName;
 //    }
 
-    public String setUsername(String userName) {
+    public void setUsername(String userName) {
         this.userName = userName;
     }
 
@@ -104,9 +104,17 @@ public abstract class User implements Serializable {
         return this.userID;
     }
 
+    /**
+     * Get the password of this user
+     *
+     * @return the value of password
+     */
+    public String getPassword() {
+        return this.password;
+    }
 
     @Override
     public String toString() {
-        return String.format("User: %s %s", this.userName);
+        return String.format("User: %s", this.userName);
     }
 }
