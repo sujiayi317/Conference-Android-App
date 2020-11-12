@@ -12,4 +12,9 @@ public class Speaker extends User implements Serializable {
     public Speaker(String userName, String email, String password) {
         super(userName, email, password);
     }
+
+    @Override
+    public String getUserName() {
+        return super.getUserName();
+    }
 }
