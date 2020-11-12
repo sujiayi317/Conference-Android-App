@@ -57,7 +57,7 @@ public class EventManager implements Serializable {
         if (event != null) {
             Room room = roomManager.getRoomBasedOnItsID(event.getRoomID());
             if (room.getCurrentNum() < room.getCapacity()){
-                room.decreaseCurrentNum();
+                room.increaseCurrentNum();
                 return event.addAttendee(userID, events);}
         }
         return false;

@@ -50,6 +50,7 @@ public class RoomManager implements Serializable {
         events.add(event);
         eventsMap.put(roomID, events);
     }
+
     public Room getRoomBasedOnItsID(String roomID){
         for (Room room: rooms) {
             if (room.getRoomID().equals(roomID)){
@@ -58,6 +59,7 @@ public class RoomManager implements Serializable {
         }
         return null;
     }
+
     public ArrayList<String> getAvailableRoom(int time, EventManager eventManager){
         ArrayList<String> roomList = new ArrayList<>();
         for (Room room : rooms){
