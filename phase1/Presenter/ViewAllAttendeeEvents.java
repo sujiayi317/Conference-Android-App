@@ -5,7 +5,11 @@ import controllers.OutputManager;
 import java.util.ArrayList;
 
 public class ViewAllAttendeeEvents {
-    private static OutputManager output = new OutputManager();
+    private static OutputManager output;
+
+    public ViewAllAttendeeEvents(){
+        output = new OutputManager();
+    }
 
     public void printAllAttendeeEvents(ArrayList<String> ALLAttendeeEvents){
         StringBuilder returnString = new StringBuilder("There are all the events that you have attended:");

@@ -6,7 +6,11 @@ import entities.Event;
 import java.util.List;
 
 public class ViewAllExistingEvents {
-    private static OutputManager output = new OutputManager();
+    private static OutputManager output;
+
+    public ViewAllExistingEvents(){
+        output = new OutputManager();
+    }
     public void printAllExistingEvents(List<Event> AllExistingEvents){
         StringBuilder returnString = new StringBuilder("There are all existing events you may attend:");
         for (int i =0 ; i < AllExistingEvents.size();i++){

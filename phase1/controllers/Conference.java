@@ -21,7 +21,7 @@ public class Conference {
     /**
      * This is where our conference system starts.
      */
-    public void Conference(){
+    public Conference(){
         this.eventsController = new EventsController();
         this.attendeeManager = new AttendeeManager();
         this.speakerManager = new SpeakerManager();
