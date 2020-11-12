@@ -2,14 +2,16 @@ package Message;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 public class Conversation implements Serializable {
-    private String[] userIds = new String[2]; //Store uerIds of the two users
+    private HashSet<String> userIds = new HashSet<String>(); //Store uerIds of the two users
     private ArrayList<String[]> messages = new ArrayList<String[]>();
 
+
     public Conversation(String userId1, String userId2){
-        userIds[0] = userId1;
-        userIds[1] = userId2;
+        userIds.add(userId1);
+        userIds.add(userId2);
     }
 
     /**
@@ -42,5 +44,11 @@ public class Conversation implements Serializable {
      */
     public String[] getMessage(int index){
         return messages.get(index).clone(); //return a clone of the index's String[] in messages
+    }
+
+    public HashSet<String> getUserIds(){
+        HashSet<String> cloneSet = new HashSet<String>();
+        cloneSet = (HashSet<String>)userIds.clone();
+        return cloneSet;
     }
 }
