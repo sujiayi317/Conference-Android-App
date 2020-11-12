@@ -52,7 +52,7 @@ public class RoomManager implements Serializable {
     }
     public Room getRoomBasedOnItsID(String roomID){
         for (Room room: rooms) {
-            if (room.getRoomID() == roomID){
+            if (room.getRoomID().equals(roomID)){
                 return room;
             }
         }
