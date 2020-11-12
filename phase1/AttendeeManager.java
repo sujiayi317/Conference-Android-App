@@ -56,7 +56,7 @@ public class AttendeeManager implements Serializable {
         return eventManager.addAttendeeToEvent(userID, eventID, roomManager);
     }
 
-    public boolean cancel(EventManager eventManager, String userID, String eventID) {
-        return eventManager.removeAttendeeFromEvent(userID, eventID);
+    public boolean cancel(EventManager eventManager, String userID, String eventID, RoomManager roomManager) {
+        return eventManager.removeAttendeeFromEvent(userID, eventID, roomManager);
     }
 }
