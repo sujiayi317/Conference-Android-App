@@ -1,23 +1,29 @@
 package controllers;
 
+import Presenter.*;
 /**
  * This is the main controller for Attendee.
  */
 public class AttendeeController {
     private static InputManager input = new InputManager();
-
-    public void run(EventsController eventsController) {
+    private static OutputManager output = new OutputManager();
+    public void run(String userID, EventsController eventsController, ViewAllExistingEvents viewAllExistingEvents,
+                    ViewAllAttendeeEvents viewAllAttendeeEvents, ViewEventInfo viewEventInfo) {
         //connect to Attendee Presenter - Menu options
 
         int choice = input.getInputInt("Please choose from the following options:");
         if (choice != 0) {
             switch (choice) {
                 case 1:
-                    eventsController.getAllExistingEvents();
-                    break;
+                    // viewAllEvents
+                    viewAllEvents(viewAllExistingEvents, eventsController);
+                    String eventID = input.getInputString("Please choose an event and see the details or press enter");
+                    if (!eventID.equals("")){
+                        output.printPrompt(viewEventInfo);
+                    }
                 case 2:
-                    //connect to MyEvent Controller
-                    break;
+                    // view all attendee events
+                    viewAllAttendeeEvents(userID, viewAllAttendeeEvents, eventsController);
                 case 3:
                     //connect to Contacts Controller
                     break;
@@ -25,6 +31,15 @@ public class AttendeeController {
                     //connect to Announcements Controller
             }
         }
+    }
+
+    private void viewAllEvents(ViewAllExistingEvents viewAllExistingEvents, EventsController eventsController){
+        viewAllExistingEvents.printAllExistingEvents(eventsController.getAllExistingEvents());
+    }
+
+    private void viewAllAttendeeEvents(String userID, ViewAllAttendeeEvents viewAllAttendeeEvents,
+                                       EventsController eventsController){
+        viewAllAttendeeEvents.printAllAttendeeEvents(eventsController.getALLAttendeeEvents(userID));
     }
 
 }
