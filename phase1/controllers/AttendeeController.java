@@ -1,6 +1,9 @@
 package controllers;
 
 import Presenter.*;
+
+import java.util.ArrayList;
+
 /**
  * This is the main controller for Attendee.
  */
@@ -19,7 +22,7 @@ public class AttendeeController {
                     viewAllEvents(viewAllExistingEvents, eventsController);
                     String eventID = input.getInputString("Please choose an event and see the details or press enter");
                     if (!eventID.equals("")){
-                        output.printPrompt(viewEventInfo);
+                        viewOneEventInfo(eventID, viewEventInfo, eventsController);
                     }
                 case 2:
                     // view all attendee events
@@ -40,6 +43,11 @@ public class AttendeeController {
     private void viewAllAttendeeEvents(String userID, ViewAllAttendeeEvents viewAllAttendeeEvents,
                                        EventsController eventsController){
         viewAllAttendeeEvents.printAllAttendeeEvents(eventsController.getALLAttendeeEvents(userID));
+    }
+
+    private void viewOneEventInfo(String eventID, ViewEventInfo viewEventInfo, EventsController eventsController){
+        ArrayList<String> eventInfoList = eventsController.getEventInfo(eventID);
+        viewEventInfo.getEventInfo(eventInfoList);
     }
 
 }
