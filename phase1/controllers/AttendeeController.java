@@ -37,6 +37,7 @@ public class AttendeeController {
                             if (decision.equals("Yes")) {
                                 attendeeManager.signUp(eventsController.getEventManager(), userID, eventID,
                                         eventsController.getRoomManager());
+                                output.printPrompt("you're successfully in"+ eventID);
                                 check +=1;
                             }
                         }
