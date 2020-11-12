@@ -7,27 +7,56 @@ import java.util.InputMismatchException;
  */
 public class Conference {
 
-    private static InputManager in = new InputManager();
-    private static OutputManager out = new OutputManager();
-    private static DataManager data = new DataManager();
-
-    private static
-
-
     /**
      * This is where our conference system starts.
      */
     public void run(){
         try {
-            conferenceLoop();
+            conferenceSystem();
         } catch (InputMismatchException e) {
             e.printStackTrace();
-        } finally {
-            in.closeSanner();
         }
     }
 
+    /**
+     * The main program flow-of-control.
+     */
+    private void conferenceSystem() {
+        start();
 
+        iteration();
 
+        finish();
+    }
+
+    /**
+     * Any part of the login system that should be set up before an User logs into the account.
+     */
+    private void start() {
+        //connect to Gateway: set up database
+        //connect to Login Controller - log User in
+    }
+
+    /**
+     * Connect to one of the three types of User Controllers.
+     */
+    private void iteration() {
+        String userType = Login.getUserType();
+
+        switch(userType) {
+            case "ATTENDEE":
+                new AttendeeController().run();
+                break;
+            case "SPEAKER":
+                new SpeakerController().run();
+                break;
+            case "ORGANIZER":
+                new OrganizerController().run();
+        }
+    }
+
+    private void finish() {
+        System.out.print("You have successfully signed out.");
+    }
 
 }
