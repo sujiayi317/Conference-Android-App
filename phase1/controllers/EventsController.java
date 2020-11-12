@@ -8,7 +8,6 @@ import use_cases.RoomManager;
 
 import java.util.ArrayList;
 import java.util.List;
-
 public class EventsController{
     private EventManager eventManager;
     private RoomManager roomManager;
@@ -45,14 +44,14 @@ public class EventsController{
     }
 
     public ArrayList<String> getEventInfo(String eventID){
-        ArrayList<Object> info = new ArrayList<>();
+        ArrayList<String> info = new ArrayList<>();
         Event event = this.eventManager.getEventFromID(eventID);
         Room room = this.roomManager.getRoomBasedOnItsID(event.getRoomID());
         info.add(event.getTitle());
-        info.add(event.getStartTime());
+        info.add(Integer.toString(event.getStartTime()));
         info.add(event.getSpeakers());
-        info.add(room.getCurrentNum());
-        info.add(room.getCapacity());
-
+        info.add(Integer.toString(room.getCurrentNum()));
+        info.add(Integer.toString(room.getCapacity()));
+        return info;
     }
 }
