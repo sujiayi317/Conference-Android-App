@@ -23,7 +23,7 @@ public class Login{
             } else if (CurrentAction == 2) {
                 createAccount(attendeeManager, organizerManager, speakerManager);
             } else {
-                output.printPrompt("Invalid action, directing back to ");
+                output.printPrompt("Invalid action, directing back to main page.");
             }
         }
     }
@@ -50,13 +50,14 @@ public class Login{
                 type = "SPEAKER";
                 return true;
             }
+            return false;
         }
     }
 
     public boolean createAccount(AttendeeManager attendeeManager, OrganizerManager organizerManager, SpeakerManager speakerManager){
         while (true) {
             output.printPrompt("Select what type of account you want to create, or enter 'cancel' to exit.\n");
-            String CurrentAction = input.getInputString("1. Attendee account \n2. Organizer account");
+            String CurrentAction = input.getInputString("1. Attendee account \n2. Organizer account\n");
             if (CurrentAction.equals("1")) {
                 return createAccount.CreateNewAccount(attendeeManager, organizerManager, speakerManager, "ATTENDEE");
             } else if (CurrentAction.equals("2")) {
