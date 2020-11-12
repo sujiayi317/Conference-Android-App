@@ -11,4 +11,18 @@ public class Conversation implements Serializable {
         userIds[0] = userId1;
         userIds[1] = userId2;
     }
+
+    public int getMessagesLength(){
+        return messages.size();
+    }
+
+    public boolean addMessage(String userId, String text){
+        String[] message = {userId, text};
+        messages.add(message);
+        return true;
+    }
+
+    public String[] getMessage(int index){
+        return messages.get(index);
+    }
 }
