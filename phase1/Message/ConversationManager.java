@@ -53,6 +53,7 @@ public class ConversationManager implements Serializable{
 
     /**
      * Get the list of conversations of a certain user
+     * 待定
      */
     public List<Conversation> getUserConversations(String userId){
         ArrayList<Conversation> UserConversations = new ArrayList<Conversation>();
