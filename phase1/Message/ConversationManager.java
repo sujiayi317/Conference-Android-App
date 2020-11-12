@@ -32,6 +32,12 @@ public class ConversationManager implements Serializable{
     };
 
 
+    /**
+     * To check if the Conversation between two users has been created.
+     *
+     * @param talkersList the Hashset of two users.
+     * @return true iff the Conversation between two users from talkersList has been created.
+     */
     public boolean existConversation(HashSet<String> talkersList){
         if (conversations.containsKey(talkersList)) {
             return true;
@@ -39,6 +45,13 @@ public class ConversationManager implements Serializable{
         return false;
     }
 
+
+    /**
+     * To check if the Conversation between two users has been created.
+     *
+     * @param talkersList the Hashset of two users.
+     * @return true iff the Conversation between two users from talkersList has been created.
+     */
     public void currentConversationSetter(HashSet<String> talkersList){
         this.currentConversation = conversations.get(talkersList);
     }
