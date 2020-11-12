@@ -1,6 +1,9 @@
 package Message;
 
+import java.util.Arrays;
 import java.util.HashSet;
+import java.util.ArrayList;
+
 
 public class ConversationController {
     private ConversationManager conversationManager;
@@ -25,8 +28,15 @@ public class ConversationController {
         conversationManager.currentConversationSetter(setOfTalkersNow);
     }
 
-    public boolean sendToOneUser(String messageContent){
+    public void sendToIndividualUser(String messageContent){
         conversationManager.sendMessage(currentUserId, messageContent);
+    }
+
+    public void sendToMultipleUsers(String messageContent, ArrayList<String> listOfUsers){
+        for(String userId: listOfUsers){
+            enterConversation(userId);
+            sendToIndividualUser(messageContent);
+        }
     }
 
 }

@@ -36,6 +36,10 @@ public abstract class User implements Serializable {
         return (ArrayList)friendList.clone();
     }
 
+    public void friendListSetter(String userId){
+        friendList.add(userId);
+    }
+
     public void setType(String type) {
         this.type = type;
     }
