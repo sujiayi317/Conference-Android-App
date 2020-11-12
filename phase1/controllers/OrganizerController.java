@@ -17,6 +17,7 @@ public class OrganizerController {
     private static OutputManager output = new OutputManager();
     private CreateAccount create = new CreateAccount();
 
+
     public void run(EventsController eventsController, ViewAllExistingEvents viewAllExistingEvents, ViewAllAvailableRoom viewAllAvailableRoom , ViewAllAttendeeEvents viewAllAttendeeEvents, AttendeeManager attendeeManager,
                     OrganizerManager organizerManager, SpeakerManager speakerManager, String userID) {
         //connect to Attendee Presenter - Menu options
