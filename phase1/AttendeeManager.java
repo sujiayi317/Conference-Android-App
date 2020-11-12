@@ -52,11 +52,11 @@ public class AttendeeManager implements Serializable {
      * @param userID,eventID user id of user and event id of event
      * @return true iff signed up successfully
      */
-    public boolean signUp(EventManager eventManager, String userID, String eventID) {
-        return eventManager.addAttendeeToEvent(userID, eventID);
+    public boolean signUp(EventManager eventManager, String userID, String eventID, RoomManager roomManager) {
+        return eventManager.addAttendeeToEvent(userID, eventID, roomManager);
     }
 
     public boolean cancel(EventManager eventManager, String userID, String eventID) {
-        return eventManager.removeAttendeeFromEvent(String userID, String eventID);
+        return eventManager.removeAttendeeFromEvent(userID, eventID);
     }
 }
