@@ -37,6 +37,15 @@ public class SpeakerManager implements Serializable {
         return speaker;
     }
 
+    public boolean validSpeakerName(String name){
+        for (Speaker speaker : speakers){
+            if (speaker.getUserName().equals(name)){
+                return false;
+            }
+        }
+        return true;
+    }
+
 //    public void addEventToSpeaker(String event, entities.Speaker speaker) {
 //        events = eventsMap.get(speaker.getUserName());
 //        events.add(event);
