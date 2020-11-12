@@ -60,9 +60,9 @@ public class SpeakerManager implements Serializable {
     public String validLogIn(String account, String password){
         for (Speaker speaker : speakers){
             if (speaker.getEmail().equals(account) && speaker.getPassword().equals(password)){
-                return "VALID";
+                return speaker.getUserID();
             } else if (speaker.getEmail().equals(account)){
-                return "PASSWORD WRONG";
+                return "NULL";
             }
         }
         return "NULL";

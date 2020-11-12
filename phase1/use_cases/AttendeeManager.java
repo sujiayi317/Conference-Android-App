@@ -84,9 +84,9 @@ public class AttendeeManager implements Serializable {
     public String validLogIn(String account, String password){
         for (Attendee attendee : attendees){
             if (attendee.getEmail().equals(account) && attendee.getPassword().equals(password)){
-                return "VALID";
+                return attendee.getUserID();
             } else if (attendee.getEmail().equals(account)){
-                return "PASSWORD WRONG";
+                return "NULL";
             }
         }
         return "NULL";

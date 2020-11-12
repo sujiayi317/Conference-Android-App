@@ -1,5 +1,8 @@
 package controllers;
 
+import Presenter.ViewAllAttendeeEvents;
+import Presenter.ViewAllExistingEvents;
+import Presenter.ViewEventInfo;
 import entities.Attendee;
 import entities.Organizer;
 import use_cases.*;
@@ -60,16 +63,18 @@ public class Conference {
      */
     private void iteration() {
         String userType = Login.getUserType();
+        String userID = Login.
 
         switch(userType) {
             case "ATTENDEE":
                 new AttendeeController().run();
                 break;
             case "SPEAKER":
-                new SpeakerController().run();
+                new SpeakerController().run(userID, eventsController, viewAllExistingEvents,
+                        viewAllAttendeeEvents, viewEventInfo);
                 break;
             case "ORGANIZER":
-                new OrganizerController().run(eventsController, attendeeManager, organizerManager, speakerManager);
+                new OrganizerController().run(eventsController, viewAllExistingEvents, attendeeManager, organizerManager, speakerManager);
         }
     }
 

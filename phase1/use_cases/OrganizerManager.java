@@ -52,9 +52,9 @@ public class OrganizerManager implements Serializable{
     public String validLogIn(String account, String password){
         for (Organizer organizer : organizers){
             if (organizer.getEmail().equals(account) && organizer.getPassword().equals(password)){
-                return "VALID";
+                return organizer.getUserID();
             } else if (organizer.getEmail().equals(account)){
-                return "PASSWORD WRONG";
+                return "NULL";
             }
         }
         return "NULL";

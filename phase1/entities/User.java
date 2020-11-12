@@ -1,6 +1,7 @@
 package entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.UUID;
 
 /**
@@ -17,6 +18,7 @@ public abstract class User implements Serializable {
     private String userID;
     private String password;
     private String type;
+    private ArrayList<String> friendList;
 
     public User(String userName, String email, String password) {
         //this.firstName = firstName;
@@ -27,7 +29,12 @@ public abstract class User implements Serializable {
         this.userName = userName;
         this.userID = UUID.randomUUID().toString().split("-")[0];
         this.password = password;
+        this.friendlist = new ArrayList<>();
     }
+
+    public ArrayList friendListGetter(){}
+
+    public void setFriendList(ArrayList newList){}
 
     public void setType(String type) {
         this.type = type;

@@ -5,11 +5,11 @@ import use_cases.*;
 import javax.swing.*;
 
 public class Login{
-    private static InputManager input = new InputManager();
-    private static OutputManager output = new OutputManager();
+    private InputManager input = new InputManager();
+    private OutputManager output = new OutputManager();
     private CreateAccount createAccount = new CreateAccount();
-    private static int ID;
-    private static int type;
+    private String ID;
+    private String type;
 
 
     public void run(AttendeeManager attendeeManager, OrganizerManager organizerManager, SpeakerManager speakerManager) {
@@ -17,7 +17,9 @@ public class Login{
             output.printPrompt("Welcome to main page of conference sign up centre! Please enter a number");
             Integer CurrentAction = input.getInputInt("1. Sign in \n2. Create an account");
             if (CurrentAction == 1) {
-                signIn(attendeeManager, organizerManager, speakerManager);
+                if (signIn(attendeeManager, organizerManager, speakerManager)){
+                    break;
+                };
             } else if (CurrentAction == 2) {
                 createAccount(attendeeManager, organizerManager, speakerManager);
             } else {
@@ -30,10 +32,21 @@ public class Login{
         while (true) {
             String account = input.getInputString("Please enter your email:");
             String password = input.getInputString("Please enter your password:");
-            if (attendeeManager.validLogIn(account, password).equals("NULL") &&
-                    speakerManager.validLogIn(account, password).equals("NULL") &&
-                    organizerManager.validLogIn(account, password).equals("NULL") {
+//            if (attendeeManager.validLogIn(account, password).equals("NULL") &&
+//                    speakerManager.validLogIn(account, password).equals("NULL") &&
+//                    organizerManager.validLogIn(account, password).equals("NULL")){
+//
+//            }
 
+            if (!attendeeManager.validLogIn(account, password).equals("NULL")){
+                ID = attendeeManager.validLogIn(account, password);
+                type = "ATTENDEE";
+            } else if (!organizerManager.validLogIn(account, password).equals("NULL")){
+                ID = organizerManager.validLogIn(account, password);
+                type = "ORGANIZER";
+            } else if (!speakerManager.validLogIn(account, password).equals("NULL")){
+                ID = speakerManager.validLogIn(account, password);
+                type = "SPEAKER";
             }
         }
     }
@@ -55,7 +68,7 @@ public class Login{
     }
 
     public String getUserType(){
-        return
+        return type;
     }
 
 }
