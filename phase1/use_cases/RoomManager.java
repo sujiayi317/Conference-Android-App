@@ -1,3 +1,8 @@
+package use_cases;
+
+import entities.Event;
+import entities.Room;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -5,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * The RoomManager class, this is the use case class to manage all rooms.
+ * The use_cases.RoomManager class, this is the use case class to manage all rooms.
  *
  */
 public class RoomManager implements Serializable {
@@ -31,7 +36,7 @@ public class RoomManager implements Serializable {
      */
     private Room createRoom(String roomID) {
         Room room = new Room(roomID);
-        rooms.add(room);
+        this.rooms.add(room);
         return room;
     }
 
@@ -50,12 +55,29 @@ public class RoomManager implements Serializable {
         events.add(event);
         eventsMap.put(roomID, events);
     }
+
     public Room getRoomBasedOnItsID(String roomID){
         for (Room room: rooms) {
-            if (room.getRoomID() == roomID){
+            if (room.getRoomID().equals(roomID)){
                 return room;
             }
         }
         return null;
+    }
+
+    public ArrayList<String> getAvailableRoom(int time, EventManager eventManager){
+        ArrayList<String> roomList = new ArrayList<>();
+        for (Room room : rooms){
+            roomList.add(room.getRoomID());
+        }
+        for (String roomID : eventsMap.keySet()){
+            for (String eventID :eventsMap.get(roomID)){
+                Event event = eventManager.getEventFromID(eventID);
+                if (event.getStartTime() == time){
+                    roomList.remove(roomID);
+                }
+            }
+        }
+        return roomList;
     }
 }

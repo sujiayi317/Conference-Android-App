@@ -1,5 +1,5 @@
-/**
- * The Event class, this is the conference scheduled by Organizer for Attendees and Speakers.
+package entities; /**
+ * The entities.Event class, this is the conference scheduled by entities.Organizer for Attendees and Speakers.
  *
  */
 import java.io.Serializable;
@@ -187,7 +187,7 @@ public class Event implements Serializable {
 }
 
 //    @Override
-//    public int compareTo(Event event) {
+//    public int compareTo(entities.Event event) {
 //        return startTime.compareTo(event.startTime);
 //    }
 //}

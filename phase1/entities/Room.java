@@ -1,8 +1,10 @@
+package entities;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
- * The Room class, this is used to create room objects, it holds conference meeting objects held in the room.
+ * The entities.Room class, this is used to create room objects, it holds conference meeting objects held in the room.
  */
 public class Room implements Serializable{
 
@@ -37,7 +39,7 @@ public class Room implements Serializable{
 
     @Override
     public String toString() {
-        return "Room Number " + roomID;
+        return "entities.Room Number " + roomID;
 
     }
 
@@ -49,8 +51,13 @@ public class Room implements Serializable{
         return this.capacity;
     }
 
-    public void updateCurrentNum(){
+    public void increaseCurrentNum(){
         if (this.currentNum < this.capacity){
             this.currentNum +=1;}
+    }
+
+    public void decreaseCurrentNum(){
+        if (this.currentNum > 0){
+            this.currentNum -=1;}
     }
 }

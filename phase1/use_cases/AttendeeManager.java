@@ -1,22 +1,24 @@
+package use_cases;
+
+import entities.Attendee;
+
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
- * The AttendeeManager class, this is the use case class to manage the Attendees for this conference.
+ * The use_cases.AttendeeManager class, this is the use case class to manage the Attendees for this conference.
  *
  */
 public class AttendeeManager implements Serializable {
     //private List<String> events;
     private List<Attendee> attendees;
 
-    //private Map<String, Attendee> attendeeMap;
+    //private Map<String, entities.Attendee> attendeeMap;
     //private Map<String, List<String>> eventsMap;
 
     /**
-     * Creates an AttendeeManager with lists of Events for an attendee that is empty
+     * Creates an use_cases.AttendeeManager with lists of Events for an attendee that is empty
      */
     public AttendeeManager(){
         //events = new ArrayList<>();
@@ -40,7 +42,7 @@ public class AttendeeManager implements Serializable {
         return attendees;
     }
 
-//    public void addEventToAttendee(String event, Attendee attendee) {
+//    public void addEventToAttendee(String event, entities.Attendee attendee) {
 //        events = eventsMap.get(attendee.getUserName());
 //        events.add(event);
 //        eventsMap.put(attendee.getUserName(), events);
@@ -48,7 +50,7 @@ public class AttendeeManager implements Serializable {
 
 
     /**
-     * Sign an Attendee up for an event.
+     * Sign an entities.Attendee up for an event.
      * @param userID,eventID user id of user and event id of event
      * @return true iff signed up successfully
      */
@@ -56,7 +58,7 @@ public class AttendeeManager implements Serializable {
         return eventManager.addAttendeeToEvent(userID, eventID, roomManager);
     }
 
-    public boolean cancel(EventManager eventManager, String userID, String eventID) {
-        return eventManager.removeAttendeeFromEvent(userID, eventID);
+    public boolean cancel(EventManager eventManager, String userID, String eventID, RoomManager roomManager) {
+        return eventManager.removeAttendeeFromEvent(userID, eventID, roomManager);
     }
 }

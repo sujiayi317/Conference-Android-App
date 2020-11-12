@@ -1,7 +1,9 @@
+package entities;
+
 import java.io.Serializable;
 
 /**
- * The Attendee class, this creates instances of Attendee to attend a conference.
+ * The entities.Attendee class, this creates instances of entities.Attendee to attend a conference.
  *
  */
 public class Attendee extends User  implements Serializable {

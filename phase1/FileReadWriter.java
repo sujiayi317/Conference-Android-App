@@ -1,3 +1,8 @@
+import entities.User;
+import use_cases.EventManager;
+import use_cases.RoomManager;
+import use_cases.SpeakerManager;
+
 import java.io.*;
 import java.util.ArrayList;
 
@@ -9,13 +14,13 @@ class FileReadWriter {
             InputStream buffer = new BufferedInputStream(file);
             ObjectInput input = new ObjectInputStream(buffer);
 
-            // deserialize the EventManager
+            // deserialize the use_cases.EventManager
             EventManager sm = (EventManager) input.readObject();
             input.close();
             return sm;
         } catch (IOException ex) {
             logger.log(Level.SEVERE, "Cannot read from input file, returning" +
-                    "a new EventManager.", ex);
+                    "a new use_cases.EventManager.", ex);
             return new EventManager();
         }
     }
@@ -26,13 +31,13 @@ class FileReadWriter {
             InputStream buffer = new BufferedInputStream(file);
             ObjectInput input = new ObjectInputStream(buffer);
 
-            // deserialize the SpeakerManager
+            // deserialize the use_cases.SpeakerManager
             SpeakerManager sm = (SpeakerManager) input.readObject();
             input.close();
             return sm;
         } catch (IOException ex) {
             logger.log(Level.SEVERE, "Cannot read from input file, returning" +
-                    "a new SpeakerManager.", ex);
+                    "a new use_cases.SpeakerManager.", ex);
             return new SpeakerManager();
         }
     }
@@ -43,13 +48,13 @@ class FileReadWriter {
             InputStream buffer = new BufferedInputStream(file);
             ObjectInput input = new ObjectInputStream(buffer);
 
-            // deserialize the RoomManager
+            // deserialize the use_cases.RoomManager
             RoomManager sm = (RoomManager) input.readObject();
             input.close();
             return sm;
         } catch (IOException ex) {
             logger.log(Level.SEVERE, "Cannot read from input file, returning" +
-                    "a new RoomManager.", ex);
+                    "a new use_cases.RoomManager.", ex);
             return new RoomManager();
         }
     }
@@ -80,7 +85,7 @@ class FileReadWriter {
             return objList;
         } catch (IOException ex) {
             logger.log(Level.SEVERE, "Cannot read from input file, returning" +
-                    "a new User.", ex);
+                    "a new entities.User.", ex);
             return new ArrayList<>();
         }
     }

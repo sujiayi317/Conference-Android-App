@@ -1,22 +1,24 @@
+package use_cases;
+
+import entities.Speaker;
+
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
- * The SpeakerManager class, this is the use case class to manage the Speaker for this conference.
+ * The use_cases.SpeakerManager class, this is the use case class to manage the entities.Speaker for this conference.
  *
  */
 public class SpeakerManager implements Serializable {
     //private List<String> events;
     private List<Speaker> speakers;
 
-    //private Map<String, Speaker> speakerMap;
+    //private Map<String, entities.Speaker> speakerMap;
     //private Map<String, List<String>> eventsMap;
 
     /**
-     * Creates an SpeakerManager with lists of Events for a speaker that is empty
+     * Creates an use_cases.SpeakerManager with lists of Events for a speaker that is empty
      */
     public SpeakerManager(){
 //        events = new ArrayList<>();
@@ -26,7 +28,7 @@ public class SpeakerManager implements Serializable {
     }
 
     /**
-     * Creates a Speaker and adds it to the map and lists
+     * Creates a entities.Speaker and adds it to the map and lists
      */
     public Speaker createSpeaker(String userName, String email, String password) {
         Speaker speaker = new Speaker(userName, email, password);
@@ -35,7 +37,7 @@ public class SpeakerManager implements Serializable {
         return speaker;
     }
 
-//    public void addEventToSpeaker(String event, Speaker speaker) {
+//    public void addEventToSpeaker(String event, entities.Speaker speaker) {
 //        events = eventsMap.get(speaker.getUserName());
 //        events.add(event);
 //        eventsMap.put(speaker.getUserName(), events);
