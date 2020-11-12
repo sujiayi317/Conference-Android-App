@@ -28,9 +28,11 @@ public class ConversationController {
         conversationManager.currentConversationSetter(setOfTalkersNow);
     }
 
+
     public void sendToIndividualUser(String messageContent){
         conversationManager.sendMessage(currentUserId, messageContent);
     }
+
 
     public void sendToMultipleUsers(String messageContent, ArrayList<String> listOfUsers){
         for(String userId: listOfUsers){
