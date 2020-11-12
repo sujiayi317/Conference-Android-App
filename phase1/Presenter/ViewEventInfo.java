@@ -7,6 +7,7 @@ public class ViewEventInfo {
     public void ViewEventInfo(){
         this.infoPattern.add("Title");
         this.infoPattern.add("Time");
+        this.infoPattern.add("Speaker");
         this.infoPattern.add("Speakers");
         this.infoPattern.add("Current_Capacity");
 
