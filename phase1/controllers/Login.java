@@ -14,7 +14,7 @@ public class Login{
 
     public void run(AttendeeManager attendeeManager, OrganizerManager organizerManager, SpeakerManager speakerManager) {
         while (true) {
-            output.printPrompt("Welcome to main page of conference sign up centre! Please enter a number");
+            output.printPrompt("Welcome to main page of conference sign up centre! Please enter a number\n");
             Integer CurrentAction = input.getInputInt("1. Sign in \n2. Create an account");
             if (CurrentAction == 1) {
                 if (signIn(attendeeManager, organizerManager, speakerManager)){
@@ -30,8 +30,8 @@ public class Login{
 
     public boolean signIn(AttendeeManager attendeeManager, OrganizerManager organizerManager, SpeakerManager speakerManager){
         while (true) {
-            String account = input.getInputString("Please enter your email:");
-            String password = input.getInputString("Please enter your password:");
+            String account = input.getInputString("Please enter your email:\n");
+            String password = input.getInputString("Please enter your password:\n");
 //            if (attendeeManager.validLogIn(account, password).equals("NULL") &&
 //                    speakerManager.validLogIn(account, password).equals("NULL") &&
 //                    organizerManager.validLogIn(account, password).equals("NULL")){
@@ -53,7 +53,7 @@ public class Login{
 
     public boolean createAccount(AttendeeManager attendeeManager, OrganizerManager organizerManager, SpeakerManager speakerManager){
         while (true) {
-            output.printPrompt("Select what type of account you want to create, or enter 'cancel' to exit.");
+            output.printPrompt("Select what type of account you want to create, or enter 'cancel' to exit.\n");
             String CurrentAction = input.getInputString("1. Attendee account \n2. Organizer account");
             if (CurrentAction.equals("1")) {
                 return createAccount.CreateNewAccount(attendeeManager, organizerManager, speakerManager, "ATTENDEE");
@@ -62,7 +62,7 @@ public class Login{
             } else if(CurrentAction.equals("cancel")){
                 return false;
             } else {
-                output.printPrompt("Invalid action, please try again.");
+                output.printPrompt("Invalid action, please try again.\n");
             }
         }
     }
