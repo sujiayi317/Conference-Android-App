@@ -114,3 +114,4 @@ public class AttendeeManager implements Serializable {
             return false;
         }
     }
+}
