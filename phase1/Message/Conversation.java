@@ -23,6 +23,6 @@ public class Conversation implements Serializable {
     }
 
     public String[] getMessage(int index){
-        return messages.get(index);
+        return messages.get(index).clone(); //return a clone of the index's String[] in messages
     }
 }
