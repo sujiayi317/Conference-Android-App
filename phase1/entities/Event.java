@@ -37,7 +37,7 @@ public class Event implements Serializable {
         this.title = title;
         this.userID = new ArrayList<>();
         this.speakers = new ArrayList<>(1);
-        speakers.add(speaker.getUserName());
+        speakers.add(speakerID);
         this.startTime = startTime;
         this.duration = duration;
     }
