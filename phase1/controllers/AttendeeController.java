@@ -9,11 +9,17 @@ import java.util.ArrayList;
  * This is the main controller for Attendee.
  */
 public class AttendeeController {
-    private static InputManager input = new InputManager();
-    private static OutputManager output = new OutputManager();
+    private static InputManager input;
+    private static OutputManager output;
+    private final AttendeeMenu attendeeMenu;
+
+    public AttendeeController(){
+        input = new InputManager();
+        output = new OutputManager();
+        this.attendeeMenu = new AttendeeMenu();
+    }
     public void run(String userID, EventsController eventsController, ViewAllExistingEvents viewAllExistingEvents,
-                    ViewAllAttendeeEvents viewAllAttendeeEvents, ViewEventInfo viewEventInfo, AttendeeManager attendeeManager,
-    AttendeeMenu attendeeMenu) {
+                    ViewAllAttendeeEvents viewAllAttendeeEvents, ViewEventInfo viewEventInfo, AttendeeManager attendeeManager) {
         //connect to Attendee Presenter - Menu options
         attendeeMenu.printAttendeeMenu(userID);
         int choice = input.getInputInt("Please choose from the following options:");
