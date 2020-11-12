@@ -1,8 +1,11 @@
 package Presenter;
 
+import controllers.OutputManager;
+
 import java.util.ArrayList;
 
 public class ViewEventInfo {
+    private static OutputManager output = new OutputManager();
     private ArrayList<String> infoPattern;
     public void ViewEventInfo(){
         this.infoPattern.add("Title");
@@ -18,8 +21,7 @@ public class ViewEventInfo {
             returnString.append(this.infoPattern.get(i)).append(":").append(eventInfo.get(i)).append("\n");
         }
         returnString.append(this.infoPattern.get(3)).append(":").append(eventInfo.get(3)).append("/").append(eventInfo.get(4));
-        System.out.println(returnString);
+        output.printPrompt(returnString);
     }
 
     }
-}
