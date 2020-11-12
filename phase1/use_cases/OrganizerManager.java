@@ -1,6 +1,7 @@
 package use_cases;
 
 import entities.Organizer;
+import entities.Speaker;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -27,5 +28,23 @@ public class OrganizerManager implements Serializable{
         Organizer organizer = new Organizer(userName, email, password);
         organizers.add(organizer);
         return organizer;
+    }
+
+    public boolean validNewOrganizerEmail(String email){
+        for (Organizer organizer : organizers){
+            if (organizer.getEmail().equals(email)){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean validNewOrganizerName(String name){
+        for (Organizer organizer : organizers){
+            if (organizer.getUserName().equals(name)){
+                return false;
+            }
+        }
+        return true;
     }
 }

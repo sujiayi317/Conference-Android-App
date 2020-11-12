@@ -23,7 +23,7 @@ public class OrganizerController {
             switch (choice) {
                 case 1:
                     //connect to CreateSpeaker Controller
-                    create.CreateSpeaker(speakerManager);
+                    create.CreateNewAccount(attendeeManager, organizerManager, speakerManager);
                     break;
                 case 2:
                     //connect to EnterRoom Controller

@@ -1,6 +1,7 @@
 package use_cases;
 
 import entities.Attendee;
+import entities.Speaker;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -60,5 +61,23 @@ public class AttendeeManager implements Serializable {
 
     public boolean cancel(EventManager eventManager, String userID, String eventID, RoomManager roomManager) {
         return eventManager.removeAttendeeFromEvent(userID, eventID, roomManager);
+    }
+
+    public boolean validNewAttendeeName(String name){
+        for (Attendee attendee : attendees){
+            if (attendee.getUserName().equals(name)){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean validNewAttendeeEmail(String email){
+        for (Attendee attendee : attendees){
+            if (attendee.getEmail().equals(email)){
+                return false;
+            }
+        }
+        return true;
     }
 }

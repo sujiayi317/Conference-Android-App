@@ -1,5 +1,6 @@
 package use_cases;
 
+import entities.Organizer;
 import entities.Speaker;
 
 import java.io.Serializable;
@@ -37,9 +38,18 @@ public class SpeakerManager implements Serializable {
         return speaker;
     }
 
-    public boolean validSpeakerName(String name){
+    public boolean validNewSpeakerName(String name){
         for (Speaker speaker : speakers){
             if (speaker.getUserName().equals(name)){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean validNewSpeakerEmail(String email){
+        for (Speaker speaker : speakers){
+            if (speaker.getEmail().equals(email)){
                 return false;
             }
         }
