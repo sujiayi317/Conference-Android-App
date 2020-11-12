@@ -10,7 +10,7 @@ public class Attendee extends User  implements Serializable {
 
     public Attendee(String userName, String email, String password) {
         super(userName, email, password);
-        setType("Attendee");
+        setType("ATTENDEE");
     }
 
 
