@@ -26,23 +26,34 @@ public class ConversationManager implements Serializable{
         conversations.put(newConversationId, newConversation);
     };
 
+
+//    public boolean ExistConversation(String userId1, String userId2){
+//        HashSet<String> uncheckedSet = new HashSet<>();
+//        uncheckedSet.add(userId1);
+//        uncheckedSet.add(userId2);
+//        if (conversations.containsKey(uncheckedSet)) {
+//            return true;
+//        }
+//        return false;
+//    }
+
+
     /**
      * The method to send a message to another user
      */
-    public void SendMessage(String senderId, String receiverId, String text){
+    public boolean SendMessage(String senderId, String receiverId, String text){
         HashSet<String> userIds = new HashSet<String>();
         userIds.add(senderId);
         userIds.add(receiverId);
         if (!conversations.containsKey(userIds)) {
             CreateConversation(senderId, receiverId);
         }
-        conversations.get(userIds).addMessage(senderId, text);
-
-
+        return conversations.get(userIds).addMessage(senderId, text);
     }
 
     /**
      * Get the list of conversations of a certain user
+     * 待定
      */
     public List<Conversation> getUserConversations(String userId){
         ArrayList<Conversation> UserConversations = new ArrayList<Conversation>();
