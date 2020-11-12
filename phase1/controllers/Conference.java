@@ -15,14 +15,14 @@ import java.util.InputMismatchException;
  */
 public class Conference {
 
-    private EventsController eventsController;
-    private AttendeeManager attendeeManager;
-    private SpeakerManager speakerManager;
-    private OrganizerManager organizerManager;
-    private ViewAllAvailableRoom viewAllAvailableRoom;
-    private ViewAllAttendeeEvents viewAllAttendeeEvents;
-    private ViewAllExistingEvents viewAllExistingEvents;
-    private ViewEventInfo viewEventInfo;
+    private final EventsController eventsController;
+    private final AttendeeManager attendeeManager;
+    private final SpeakerManager speakerManager;
+    private final OrganizerManager organizerManager;
+    private final ViewAllAvailableRoom viewAllAvailableRoom;
+    private final ViewAllAttendeeEvents viewAllAttendeeEvents;
+    private final ViewAllExistingEvents viewAllExistingEvents;
+    private final ViewEventInfo viewEventInfo;
     /**
      * This is where our conference system starts.
      */

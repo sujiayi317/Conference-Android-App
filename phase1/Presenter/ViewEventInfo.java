@@ -5,7 +5,7 @@ import controllers.OutputManager;
 import java.util.ArrayList;
 
 public class ViewEventInfo {
-    private ArrayList<String> infoPattern;
+    private final ArrayList<String> infoPattern;
 
     public ViewEventInfo(){
         this.infoPattern = new ArrayList<>();
