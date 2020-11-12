@@ -39,11 +39,11 @@ public class AttendeeController {
                     // view all attendee events
                     viewAllAttendeeEvents(userID, viewAllAttendeeEvents, eventsController);
                 case 3:
-                    //attend to an event
+                    //View all my friend
 
                     break;
                 case 4:
-                    //connect to Announcements Controller
+                    //View all my message
             }
         }
     }
