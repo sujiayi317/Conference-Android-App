@@ -1,5 +1,9 @@
 package controllers;
 
+import entities.Attendee;
+import entities.Organizer;
+import use_cases.*;
+
 import java.util.InputMismatchException;
 
 /**
@@ -35,6 +39,15 @@ public class Conference {
     private void start() {
         //connect to Gateway: set up database
         //connect to Login Controller - log User in
+
+        //Initialize all managers, NO FILE FOUND AT THIS POINT, CREATE NEW MANAGERS
+        EventManager eventManager = new EventManager();
+        RoomManager roomManager = new RoomManager();
+        AttendeeManager attendeeManager = new AttendeeManager();
+        SpeakerManager speakerManager = new SpeakerManager();
+        OrganizerManager organizerManager = new OrganizerManager();
+
+
     }
 
     /**
