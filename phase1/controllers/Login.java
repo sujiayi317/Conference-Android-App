@@ -27,13 +27,15 @@ public class Login{
     public boolean createAccount(){
         while (true) {
             output.printPrompt("Select what type of account you want to create, or enter 'cancel' to exit.");
-            Integer CurrentAction = input.getInputInt("1. Attendee account \n2. Organizer account");
-            if (CurrentAction == 1) {
-                signIn();
-            } else if (CurrentAction == 2) {
-                createAccount();
+            String CurrentAction = input.getInputString("1. Attendee account \n2. Organizer account");
+            if (CurrentAction.equals("1")) {
+                return signIn();
+            } else if (CurrentAction.equals("2")) {
+                return createAccount();
+            } else if(CurrentAction.equals("cancel")){
+                return false;
             } else {
-                output.printPrompt("Invalid action, directing back to ");
+                output.printPrompt("Invalid action, please try again.");
             }
         }
     }
