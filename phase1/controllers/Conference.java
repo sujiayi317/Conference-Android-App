@@ -1,6 +1,7 @@
 package controllers;
 
 import Presenter.ViewAllAttendeeEvents;
+import Presenter.ViewAllAvailableRoom;
 import Presenter.ViewAllExistingEvents;
 import Presenter.ViewEventInfo;
 import entities.Attendee;
@@ -18,10 +19,14 @@ public class Conference {
     private AttendeeManager attendeeManager;
     private SpeakerManager speakerManager;
     private OrganizerManager organizerManager;
+    private ViewAllAvailableRoom viewAllAvailableRoom;
+    private ViewAllAttendeeEvents viewAllAttendeeEvents;
+    private ViewAllExistingEvents viewAllExistingEvents;
+    private ViewEventInfo viewEventInfo;
     /**
      * This is where our conference system starts.
      */
-    public void Conference(){
+    public Conference(){
         this.eventsController = new EventsController();
         this.attendeeManager = new AttendeeManager();
         this.speakerManager = new SpeakerManager();
@@ -62,19 +67,19 @@ public class Conference {
      * Connect to one of the three types of User Controllers.
      */
     private void iteration() {
-        String userType = Login.getUserType();
-        String userID = Login.
+        String userType = new Login().getUserType();
+        String userID = new Login().getUserID();
 
         switch(userType) {
             case "ATTENDEE":
                 new AttendeeController().run();
                 break;
             case "SPEAKER":
-                new SpeakerController().run(userID, eventsController, viewAllExistingEvents,
-                        viewAllAttendeeEvents, viewEventInfo);
+                new SpeakerController().run();
                 break;
             case "ORGANIZER":
-                new OrganizerController().run(eventsController, viewAllExistingEvents, attendeeManager, organizerManager, speakerManager);
+                new OrganizerController().run(eventsController, viewAllExistingEvents, viewAllAvailableRoom,
+                        viewAllAttendeeEvents, attendeeManager, organizerManager, speakerManager, userID);
         }
     }
 
