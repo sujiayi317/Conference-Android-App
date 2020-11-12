@@ -8,7 +8,17 @@ import java.util.ArrayList;
  */
 public class ConversationManager implements Serializable{
 
+    public void CreateConversation()
+    /**
+     * The method to send a message to another user
+     */
+    public void SendMessage(){
 
+    }
+
+    public void Announcement(){
+
+    }
 
 
 }
