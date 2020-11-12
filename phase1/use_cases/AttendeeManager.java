@@ -91,4 +91,8 @@ public class AttendeeManager implements Serializable {
         }
         return "NULL";
     }
+
+    public boolean addFriend(String userId, boolean accept){
+
+    }
 }

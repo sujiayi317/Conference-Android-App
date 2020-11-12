@@ -14,6 +14,10 @@ public class ConversationManager implements Serializable{
     private HashMap<HashSet<String>, Conversation> conversations;
     private Conversation currentConversation;
 
+    public ConversationManager(){
+        HashMap<HashSet<String>, Conversation> conversations = new HashMap<>();
+    }
+
     /**
      * The method to create a new conversation between different users.
      * Precondition: these doesn't already exist a conversation with the same two users

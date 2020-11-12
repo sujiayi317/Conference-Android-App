@@ -32,9 +32,9 @@ public abstract class User implements Serializable {
         this.friendList = new ArrayList<>();
     }
 
-    public ArrayList friendListGetter(){}
-
-    public void setFriendList(ArrayList newList){}
+    public ArrayList friendListGetter(){
+        return (ArrayList)friendList.clone();
+    }
 
     public void setType(String type) {
         this.type = type;
