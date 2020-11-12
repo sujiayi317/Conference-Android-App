@@ -27,8 +27,8 @@ public class OrganizerController{
     /**
      * Create an event
      */
-    public Event createEvent(String title, String roomID, Speaker speaker, int startTime) {
-        em.createEvent(title, roomID, speaker, startTime);
+    public Event createEvent(String title, String roomID, String speakerID, int startTime) {
+        em.createEvent(title, roomID, speakerID, startTime);
     }
 
     /**

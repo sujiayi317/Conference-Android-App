@@ -4,7 +4,7 @@ import controllers.OutputManager;
 
 import java.util.ArrayList;
 
-public class viewAllAvailableRoom {
+public class ViewAllAvailableRoom {
 
     private static OutputManager output = new OutputManager();
 
