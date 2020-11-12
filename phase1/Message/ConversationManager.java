@@ -31,16 +31,27 @@ public class ConversationManager implements Serializable{
         HashSet<String> userIds = new HashSet<String>();
         userIds.add(senderId);
         userIds.add(receiverId);
-        if (Conversations.containsKey(userIds)){
-            Conversations.get(userIds).addMessage(senderId, text);
-        }
-        else{
+        if (!Conversations.containsKey(userIds)) {
             CreateConversation(senderId, receiverId);
-            Conversations.get(userIds).addMessage(senderId, text);
         }
+        Conversations.get(userIds).addMessage(senderId, text);
 
 
     }
+
+    /**
+     * Get the list of conversations of a certain user
+     */
+    public List<Conversation> getUserConversations(String userId){
+        ArrayList<Conversation> UserConversations = new ArrayList<Conversation>();
+        for (HashSet<String> key: Conversations.keySet()){
+            if (key.contains(userId)){
+                UserConversations.add(Conversations.get(key));
+            }
+        }
+        return UserConversations;
+    }
+
 
     public void Announcement(){
 
