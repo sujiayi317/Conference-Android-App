@@ -7,37 +7,49 @@ import use_cases.SpeakerManager;
 
 public class CreateAccount {
     private static InputManager input = new InputManager();
-    private static OutputManager output = new OutputManager();
 
-    public void CreateNewAccount(AttendeeManager attendeeManager, OrganizerManager organizerManager,
-                              SpeakerManager speakerManager) {
-        String email = input.getInputString("Please enter the email for new speaker: (ex. 12345@abc.com)");
+    public boolean CreateNewAccount(AttendeeManager attendeeManager, OrganizerManager organizerManager,
+                              SpeakerManager speakerManager, String type) {
+        String email = input.getInputString("Please enter the email for new speaker: (ex. 12345@abc.com), or enter 'cancel' at any point to exit account creation");
         while (true) {
-            if (isValidEmail(email, attendeeManager, organizerManager, speakerManager)) {
+            if (email.equals("cancel")){
+                return false;
+            } else if (isValidEmail(email, attendeeManager, organizerManager, speakerManager)) {
                 break;
             } else {
-                email = input.getInputString("Invalid email, please enter another one:");
+                email = input.getInputString("Invalid email, please enter another one, or enter 'cancel' at any point to exit account creation");
             }
         }
 
-        String user = input.getInputString("Please enter the user name for new speaker: (must have length of at least 2)");
+        String user = input.getInputString("Please enter the user name for new speaker: (must have length of at least 2), or enter 'cancel' at any point to exit account creation");
         while (true) {
-            if (isValidUserName(user, attendeeManager, organizerManager, speakerManager)) {
+            if (user.equals("cancel")){
+                return false;
+            } else if (isValidUserName(user, attendeeManager, organizerManager, speakerManager)) {
                 break;
             } else {
-                user = input.getInputString("User name already used, please enter another username:");
+                user = input.getInputString("User name already used, please enter another username, or enter 'cancel' at any point to exit account creation");
             }
         }
         String password = input.getInputString("Please enter a password for " + user + ":");
         while (true) {
-            if (password.length() >= 8) {
+            if (password.equals("cancel")){
+                return false;
+            } else if (password.length() >= 8) {
                 break;
             } else {
-                output.printPrompt("Password must be at least length 8, please try again:");
+                password = input.getInputString("Password must be at least length 8, please try again, or enter 'cancel' at any point to exit account creation");
             }
         }
-        speakerManager.createSpeaker(user, "sample_email", password);
-        output.printPrompt("New speaker account successfully created.");
+
+        if (type.equals("Speaker")){
+            speakerManager.createSpeaker(user, email, password);
+        } else if (type.equals("Organizer")){
+            organizerManager.createOrganizer(user, email, password);
+        } else {
+            attendeeManager.createAttendee(user, email, password);
+        }
+        return true;
     }
 
     public boolean isValidEmail(String email, AttendeeManager attendeeManager, OrganizerManager organizerManager,

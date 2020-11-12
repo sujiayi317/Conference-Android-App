@@ -23,7 +23,11 @@ public class OrganizerController {
             switch (choice) {
                 case 1:
                     //connect to CreateSpeaker Controller
-                    create.CreateNewAccount(attendeeManager, organizerManager, speakerManager);
+                    if (create.CreateNewAccount(attendeeManager, organizerManager, speakerManager, "Speaker")){
+                        output.printPrompt("New speaker account successfully created.");
+                    } else {
+                        output.printPrompt("Create speaker action cancelled.");
+                    }
                     break;
                 case 2:
                     //connect to EnterRoom Controller
