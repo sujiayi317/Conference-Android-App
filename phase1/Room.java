@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public class Room implements Serializable{
 
     private final String roomID;
-
+    private final int capacity = 2;
     /**
      * Constructor  
      * @param roomID unique identification of the room
@@ -38,5 +38,9 @@ public class Room implements Serializable{
     public String toString() {
         return "Room Number " + roomID;
 
+    }
+
+    public int getCapacity(){
+        return this.capacity;
     }
 }
