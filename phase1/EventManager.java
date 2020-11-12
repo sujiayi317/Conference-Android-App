@@ -9,7 +9,6 @@ import java.util.List;
 public class EventManager implements Serializable {
 
     private List<Event> events;
-    private RoomManager rooms;
 
 
     /**
@@ -17,7 +16,6 @@ public class EventManager implements Serializable {
      */
     public EventManager(RoomManager rooms) {
         events = new ArrayList<>();
-        this.rooms = rooms;
 
     }
 
