@@ -14,7 +14,7 @@ public class OrganizerController {
     private static OutputManager output = new OutputManager();
     private CreateAccount create = new CreateAccount();
 
-    public void run(EventManager eventManager, RoomManager roomManager, AttendeeManager attendeeManager,
+    public void run(EventsController eventsController, ,AttendeeManager attendeeManager,
                     OrganizerManager organizerManager, SpeakerManager speakerManager) {
         //connect to Attendee Presenter - Menu options
 
@@ -30,9 +30,12 @@ public class OrganizerController {
                     }
                     break;
                 case 2:
-                    //connect to EnterRoom Controller
-                    break;
+                    //get all available room info
+                    int time = input.getInputInt("Please enter your event time");
+                    output.printPrompt(eventsController.getAvailableRoom(time));
                 case 3:
+                    //create a new event
+
                     //connect to Schedule Controller
                     break;
                 case 4:

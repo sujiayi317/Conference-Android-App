@@ -6,14 +6,14 @@ package controllers;
 public class AttendeeController {
     private static InputManager input = new InputManager();
 
-    public void run() {
+    public void run(EventsController eventsController) {
         //connect to Attendee Presenter - Menu options
 
         int choice = input.getInputInt("Please choose from the following options:");
         if (choice != 0) {
             switch (choice) {
                 case 1:
-                    //connect to Event Controller
+                    eventsController.getAllExistingEvents();
                     break;
                 case 2:
                     //connect to MyEvent Controller
