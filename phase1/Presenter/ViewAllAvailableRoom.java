@@ -6,7 +6,11 @@ import java.util.ArrayList;
 
 public class ViewAllAvailableRoom {
 
-    private static OutputManager output = new OutputManager();
+    private static OutputManager output;
+
+    public ViewAllAvailableRoom(){
+        output = new OutputManager();
+    }
 
     public void printAllAvailableRoom(ArrayList<String> allAvailableRoom){
         StringBuilder returnString = new StringBuilder("There are all available rooms you may choose:");
