@@ -1,3 +1,8 @@
+package use_cases;
+
+import entities.Event;
+import entities.Room;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -5,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * The RoomManager class, this is the use case class to manage all rooms.
+ * The use_cases.RoomManager class, this is the use case class to manage all rooms.
  *
  */
 public class RoomManager implements Serializable {

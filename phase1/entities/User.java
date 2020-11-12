@@ -1,8 +1,10 @@
+package entities;
+
 import java.io.Serializable;
 import java.util.UUID;
 
 /**
- * The User class, this is used as a superclass for Attendees, Speakers and Organizers.
+ * The entities.User class, this is used as a superclass for Attendees, Speakers and Organizers.
  * It is abstract because it does not actually contain users.
  *
  */
@@ -115,6 +117,6 @@ public abstract class User implements Serializable {
 
     @Override
     public String toString() {
-        return String.format("User: %s", this.userName);
+        return String.format("entities.User: %s", this.userName);
     }
 }

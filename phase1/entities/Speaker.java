@@ -1,7 +1,9 @@
+package entities;
+
 import java.io.Serializable;
 
 /**
- * The Speaker class, this creates instances of an Speaker for a conference.
+ * The entities.Speaker class, this creates instances of an entities.Speaker for a conference.
  *
  */
 

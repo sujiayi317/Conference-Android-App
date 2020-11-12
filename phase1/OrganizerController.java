@@ -4,8 +4,15 @@
  * The OrganizerController class, this is used as a Controller for what organizers can do.
  *
  */
+
+import entities.Event;
+import entities.Speaker;
+import use_cases.EventManager;
+import use_cases.RoomManager;
+import use_cases.SpeakerManager;
+
 /**
- * The OrganizerController class, this is the Controller class for an Organizer.
+ * The OrganizerController class, this is the Controller class for an entities.Organizer.
  *
  */
 public class OrganizerController{
@@ -26,7 +33,7 @@ public class OrganizerController{
 
     /**
      * Remove an event from the room
-     * @param event Event being removed
+     * @param event entities.Event being removed
      */
     public void removeEvent(Event event) {
         // TODO

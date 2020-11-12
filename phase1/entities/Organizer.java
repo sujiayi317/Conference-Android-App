@@ -1,8 +1,10 @@
+package entities;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
- * The Organizer class, this creates instances of an Organizer to organize a conference.
+ * The entities.Organizer class, this creates instances of an entities.Organizer to organize a conference.
  *
  */
 
