@@ -29,7 +29,7 @@ public abstract class User implements Serializable {
         this.userName = userName;
         this.userID = UUID.randomUUID().toString().split("-")[0];
         this.password = password;
-        this.friendlist = new ArrayList<>();
+        this.friendList = new ArrayList<>();
     }
 
     public ArrayList friendListGetter(){}
