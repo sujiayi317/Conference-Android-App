@@ -45,6 +45,7 @@ public class Conference {
     private void start() {
         //connect to Gateway: set up database
         //connect to Login Controller - log User in
+        new Login().logIn(attendeeManager, organizerManager, speakerManager);
 
 
     }
