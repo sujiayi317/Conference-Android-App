@@ -36,7 +36,7 @@ public class EventManager implements Serializable {
     /**
      * Return a list of all events.
      */
-    public List<Event> getEvent() {
+    public List<Event> getAllEvent() {
         return events;
     }
 
@@ -99,5 +99,14 @@ public class EventManager implements Serializable {
         return false;
     }
 
+    public ArrayList<String> getAllEventForTheAttendee(String userID){
+        ArrayList<String> eventList = new ArrayList<>();
+        for (Event event: events){
+            if (event.getAttendees().contains(userID)){
+                eventList.add(event.getEventID());
+            }
+        }
+        return eventList;
+    }
 
 }
