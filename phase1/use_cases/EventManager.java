@@ -52,7 +52,7 @@ public class EventManager implements Serializable {
 //            eventList.add(event.getEventID());
 //        }
 //        return eventList;
-    }
+//    }
 
     /**
      * Adds an attendee to the eventsMap  (Piazza question @652)
