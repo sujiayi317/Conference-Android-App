@@ -46,6 +46,8 @@ public class Conversation implements Serializable {
         return messages.get(index).clone(); //return a clone of the index's String[] in messages
     }
 
+
+
     public HashSet<String> getUserIds(){
         HashSet<String> cloneSet = new HashSet<String>();
         cloneSet = (HashSet<String>)userIds.clone();
