@@ -66,7 +66,7 @@ public class RoomManager implements Serializable {
         for (String roomID : eventsMap.keySet()){
             for (String eventID :eventsMap.get(roomID)){
                 Event event = eventManager.getEventFromID(eventID);
-                if (event.getStartTime() == time){
+                if (event.getStartTime() == time && roomList.contains(roomID)){
                     roomList.remove(roomID);
                 }
             }
