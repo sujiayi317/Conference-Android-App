@@ -31,7 +31,7 @@ public class Event implements Serializable {
         this.startTime = startTime;
     }
 
-    public Event(String title, String roomID, Speaker speaker, int startTime, int duration) {
+    public Event(String title, String roomID, String speakerID, int startTime, int duration) {
         this.eventID = title;
         this.roomID = roomID;
         this.title = title;
