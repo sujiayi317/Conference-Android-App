@@ -31,6 +31,10 @@ public class Conference {
         this.attendeeManager = new AttendeeManager();
         this.speakerManager = new SpeakerManager();
         this.organizerManager = new OrganizerManager();
+        this.viewAllAvailableRoom = new ViewAllAvailableRoom();
+        this.viewAllAttendeeEvents = new ViewAllAttendeeEvents();
+        this.viewAllExistingEvents = new ViewAllExistingEvents();
+        this.viewEventInfo = new ViewEventInfo();
     }
     public void run(){
         try {
@@ -72,7 +76,8 @@ public class Conference {
 
         switch(userType) {
             case "ATTENDEE":
-                new AttendeeController().run();
+                new AttendeeController().run(userID, eventsController, viewAllExistingEvents, viewAllAttendeeEvents,
+                        viewEventInfo, attendeeManager);
                 break;
             case "SPEAKER":
                 new SpeakerController().run();
