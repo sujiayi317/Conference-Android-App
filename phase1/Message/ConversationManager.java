@@ -28,7 +28,16 @@ public class ConversationManager implements Serializable{
      * The method to send a message to another user
      */
     public void SendMessage(String senderId, String receiverId, String text){
-
+        HashSet<String> userIds = new HashSet<String>();
+        userIds.add(senderId);
+        userIds.add(receiverId);
+        if (Conversations.containsKey(userIds)){
+            Conversations.get(userIds).addMessage(senderId, text);
+        }
+        else{
+            CreateConversation(senderId, receiverId);
+            Conversations.get(userIds).addMessage(senderId, text);
+        }
 
 
     }
