@@ -7,7 +7,8 @@ import java.util.ArrayList;
 public class Room implements Serializable{
 
     private final String roomID;
-
+    private final int capacity = 2;
+    private int currentNum = 0;
     /**
      * Constructor  
      * @param roomID unique identification of the room
@@ -38,5 +39,14 @@ public class Room implements Serializable{
     public String toString() {
         return "Room Number " + roomID;
 
+    }
+
+    public int currentNum(){
+        return this.currentNum;
+    }
+
+    public void updateCurrentNumy(){
+        if (this.currentNum < this.capacity){
+            this.currentNum +=1;}
     }
 }
