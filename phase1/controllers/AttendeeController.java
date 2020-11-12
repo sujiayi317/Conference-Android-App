@@ -12,9 +12,10 @@ public class AttendeeController {
     private static InputManager input = new InputManager();
     private static OutputManager output = new OutputManager();
     public void run(String userID, EventsController eventsController, ViewAllExistingEvents viewAllExistingEvents,
-                    ViewAllAttendeeEvents viewAllAttendeeEvents, ViewEventInfo viewEventInfo, AttendeeManager attendeeManager) {
+                    ViewAllAttendeeEvents viewAllAttendeeEvents, ViewEventInfo viewEventInfo, AttendeeManager attendeeManager,
+    AttendeeMenu attendeeMenu) {
         //connect to Attendee Presenter - Menu options
-
+        attendeeMenu.printAttendeeMenu(userID);
         int choice = input.getInputInt("Please choose from the following options:");
         if (choice != 0) {
             switch (choice) {
