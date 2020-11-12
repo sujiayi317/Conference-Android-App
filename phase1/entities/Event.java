@@ -21,13 +21,13 @@ public class Event implements Serializable {
     private int startTime;
     private int duration = 1;
 
-    public Event(String title, String roomID, Speaker speaker, int startTime) {
+    public Event(String title, String roomID, String speakerID, int startTime) {
         this.eventID = title;
         this.roomID = roomID;
         this.title = title;
         this.userID = new ArrayList<>();
         this.speakers = new ArrayList<>(1);
-        speakers.add(speaker.getUserName());
+        this.speakers.add(speakerID);
         this.startTime = startTime;
     }
 
@@ -37,7 +37,7 @@ public class Event implements Serializable {
         this.title = title;
         this.userID = new ArrayList<>();
         this.speakers = new ArrayList<>(1);
-        speakers.add(speaker.getUserName());
+        speakers.add(speakerID);
         this.startTime = startTime;
         this.duration = duration;
     }

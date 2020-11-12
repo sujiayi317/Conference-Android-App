@@ -1,5 +1,6 @@
 package use_cases;
 
+import entities.Attendee;
 import entities.Organizer;
 import entities.Speaker;
 
@@ -47,4 +48,16 @@ public class OrganizerManager implements Serializable{
         }
         return true;
     }
+
+    public String validLogIn(String account, String password){
+        for (Organizer organizer : organizers){
+            if (organizer.getEmail().equals(account) && organizer.getPassword().equals(password)){
+                return "VALID";
+            } else if (organizer.getEmail().equals(account)){
+                return "PASSWORD WRONG";
+            }
+        }
+        return "NULL";
+    }
+
 }

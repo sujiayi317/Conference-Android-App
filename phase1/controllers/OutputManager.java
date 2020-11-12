@@ -19,7 +19,7 @@ public class OutputManager {
      * @param prompt
      *      Prompt for the user.
      */
-    public void printPrompt(String prompt) {
+    public void printPrompt(Object prompt) {
         System.out.print(prompt);
     }
 

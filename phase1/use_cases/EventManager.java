@@ -29,12 +29,12 @@ public class EventManager implements Serializable {
     /**
      * Creates a new event
      */
-    public Event createEvent(String title, String roomID, Speaker speaker, int startTime) {
+    public Event createEvent(String title, String roomID, String speakerID, int startTime) {
         for (Event event : this.events) {
-            if ((event.getSpeakers().contains(speaker.getUserName()) || roomID.equals(event.getRoomID()) && event.getStartTime() == startTime)){
+            if ((event.getSpeakers().contains(speakerID) || roomID.equals(event.getRoomID()) && event.getStartTime() == startTime)){
                 return null;}
         }
-        Event newEvent = new Event(title, roomID, speaker, startTime);
+        Event newEvent = new Event(title, roomID, speakerID, startTime);
         events.add(newEvent);
         return newEvent;
     }
@@ -46,6 +46,13 @@ public class EventManager implements Serializable {
         return events;
     }
 
+//    public ArrayList<String> getAllEventID(){
+//        ArrayList<String> eventList = new ArrayList<>();
+//        for (Event event: events){
+//            eventList.add(event.getEventID());
+//        }
+//        return eventList;
+    }
 
     /**
      * Adds an attendee to the eventsMap  (Piazza question @652)
