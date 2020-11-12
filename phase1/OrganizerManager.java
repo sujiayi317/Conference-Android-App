@@ -19,8 +19,8 @@ public class OrganizerManager implements Serializable{
     }
 
 
-    public Organizer createOrganizer(String firstName, String lastName, String email, String password) {
-        Organizer organizer = new Organizer(firstName, lastName, email, password);
+    public Organizer createOrganizer(String userName, String email, String password) {
+        Organizer organizer = new Organizer(userName, email, password);
         organizers.add(organizer);
         return organizer;
     }
