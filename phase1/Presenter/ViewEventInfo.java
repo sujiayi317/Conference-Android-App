@@ -7,6 +7,7 @@ import java.util.ArrayList;
 public class ViewEventInfo {
     private static OutputManager output = new OutputManager();
     private ArrayList<String> infoPattern;
+
     public void ViewEventInfo(){
         this.infoPattern.add("Title");
         this.infoPattern.add("Time");
