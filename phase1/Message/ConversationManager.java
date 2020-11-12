@@ -12,6 +12,7 @@ import java.util.List;
 public class ConversationManager implements Serializable{
 
     private HashMap<HashSet<String>, Conversation> conversations;
+    private Conversation currentConversation;
 
     /**
      * The method to create a new conversation between different users.
@@ -20,35 +21,34 @@ public class ConversationManager implements Serializable{
      * @param userId1 the user id of the first user
      * @param userId2 the user id of the second user
      */
-    public void CreateConversation(String userId1, String userId2){
+    public void createConversation(String userId1, String userId2){
         Conversation newConversation = new Conversation(userId1, userId2);
         HashSet<String> newConversationId = newConversation.getUserIds();
         conversations.put(newConversationId, newConversation);
     };
 
 
-//    public boolean ExistConversation(String userId1, String userId2){
-//        HashSet<String> uncheckedSet = new HashSet<>();
-//        uncheckedSet.add(userId1);
-//        uncheckedSet.add(userId2);
-//        if (conversations.containsKey(uncheckedSet)) {
-//            return true;
-//        }
-//        return false;
-//    }
+    public boolean existConversation(HashSet<String> talkersList){
+        if (conversations.containsKey(talkersList)) {
+            return true;
+        }
+        return false;
+    }
+
+    public void currentConversationSetter(HashSet<String> talkersList){
+        this.currentConversation = conversations.get(talkersList);
+    }
+
 
 
     /**
      * The method to send a message to another user
      */
-    public boolean SendMessage(String senderId, String receiverId, String text){
-        HashSet<String> userIds = new HashSet<String>();
-        userIds.add(senderId);
-        userIds.add(receiverId);
-        if (!conversations.containsKey(userIds)) {
-            CreateConversation(senderId, receiverId);
-        }
-        return conversations.get(userIds).addMessage(senderId, text);
+    public boolean sendMessage(String senderId, String text){
+//        HashSet<String> userIds = new HashSet<String>();
+//        userIds.add(senderId);
+//        userIds.add(receiverId)；
+        return currentConversation.addMessage(senderId, text);
     }
 
     /**
@@ -66,7 +66,7 @@ public class ConversationManager implements Serializable{
     }
 
 
-    public void Announcement(){
+    public void announcement(){
 
     }
 
