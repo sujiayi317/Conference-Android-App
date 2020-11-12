@@ -22,7 +22,7 @@ public class OrganizerController {
         if (choice != 0) {
             switch (choice) {
                 case 1:
-                    //connect to CreateSpeaker Controller
+                    //connect to CreateAccount Controller to create enw speaker
                     if (create.CreateNewAccount(attendeeManager, organizerManager, speakerManager, "Speaker")){
                         output.printPrompt("New speaker account successfully created.");
                     } else {

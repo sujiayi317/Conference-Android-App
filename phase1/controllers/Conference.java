@@ -11,20 +11,18 @@ import java.util.InputMismatchException;
  */
 public class Conference {
 
+    private EventManager eventManager = new EventManager();
+    private RoomManager roomManager = new RoomManager();
+    private AttendeeManager attendeeManager = new AttendeeManager();
+    private SpeakerManager speakerManager = new SpeakerManager();
+    private OrganizerManager organizerManager = new OrganizerManager();
     /**
      * This is where our conference system starts.
      */
     public void run(){
         try {
             //Initialize all managers, NO FILE FOUND AT THIS POINT, CREATE NEW MANAGERS
-            EventManager eventManager = new EventManager();
-            RoomManager roomManager = new RoomManager();
-            AttendeeManager attendeeManager = new AttendeeManager();
-            SpeakerManager speakerManager = new SpeakerManager();
-            OrganizerManager organizerManager = new OrganizerManager();
-
-            conferenceSystem(EventManager eventManager, RoomManager roomManager, AttendeeManager attendeeManager,
-                    OrganizerManager organizerManager, SpeakerManager speakerManager);
+            conferenceSystem();
         } catch (InputMismatchException e) {
             e.printStackTrace();
         }
@@ -33,11 +31,10 @@ public class Conference {
     /**
      * The main program flow-of-control.
      */
-    private void conferenceSystem(EventManager eventManager, RoomManager roomManager, AttendeeManager attendeeManager,
-                                  OrganizerManager organizerManager, SpeakerManager speakerManager) {
+    private void conferenceSystem() {
         start();
 
-        iteration(eventManager, roomManager, attendeeManager, organizerManager, speakerManager);
+        iteration();
 
         finish();
     }
@@ -55,8 +52,7 @@ public class Conference {
     /**
      * Connect to one of the three types of User Controllers.
      */
-    private void iteration(EventManager eventManager, RoomManager roomManager, AttendeeManager attendeeManager,
-                           OrganizerManager organizerManager, SpeakerManager speakerManager) {
+    private void iteration() {
         String userType = Login.getUserType();
 
         switch(userType) {
