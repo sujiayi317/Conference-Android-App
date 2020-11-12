@@ -35,7 +35,7 @@ public class OrganizerController {
                 case 2:
                     //get all available room info
                     int time = input.getInputInt("Please enter your event time");
-                    viewAllAvailableRoom.printAllAvailableRoom(eventsController.getAvailableRoom(time));
+                    getAllAvailableRoomInfo(time, viewAllAvailableRoom, eventsController);
                 case 3:
                     //create a new event
                     //String title, String roomID, Speaker speaker, int startTime
@@ -43,15 +43,25 @@ public class OrganizerController {
                     String roomID = input.getInputString("Please enter your room ID");
                     String speaker = input.getInputString("Please set your speaker");
                     int startTime = input.getInputInt("Please enter your event time");
-                    output.printPrompt(eventsController.createEvent(title,roomID,speaker,startTime));
+                    createEvent(title,roomID,speaker,startTime, eventsController);
                 case 4:
                     // view all events
-                    viewAllExistingEvents.printAllExistingEvents(eventsController.getAllExistingEvents());
+                    viewAllEvents(viewAllExistingEvents, eventsController);
                 case 5:
                     // view all attended events
                     viewAllAttendeeEvents.printAllAttendeeEvents(eventsController.getALLAttendeeEvents(userID));
 
             }
         }
+    }
+    private void getAllAvailableRoomInfo(int time, ViewAllAvailableRoom viewAllAvailableRoom, EventsController eventsController){
+        viewAllAvailableRoom.printAllAvailableRoom(eventsController.getAvailableRoom(time));
+    }
+    private void createEvent(String title, String roomID,String speaker,int startTime, EventsController eventsController){
+        output.printPrompt(eventsController.createEvent(title,roomID,speaker,startTime));
+    }
+
+    private void viewAllEvents(ViewAllExistingEvents viewAllExistingEvents, EventsController eventsController){
+        viewAllExistingEvents.printAllExistingEvents(eventsController.getAllExistingEvents());
     }
 }
