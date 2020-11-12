@@ -8,56 +8,61 @@ import java.util.UUID;
  */
 public abstract class User implements Serializable {
 
-    private String firstName;
-    private String lastName;
+    //private String firstName;
+    //private String lastName;
     private String userName;
     private String email;
     private String userID;
     private String password;
 
-    public User(String firstName, String lastName, String email, String password) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+    public User(String userName, String email, String password) {
+        //this.firstName = firstName;
+        //this.lastName = lastName;
         this.email = email;
-        this.userName = getFirstName() + "_" + getLastName() + "_"
-                + getUserID().substring(0, 3);
+//        this.userName = getFirstName() + "_" + getLastName() + "_"
+//                + getUserID().substring(0, 3);
+        this.userName = userName;
         this.userID = UUID.randomUUID().toString().split("-")[0];
         this.password = password;
     }
 
-    /**
-     * Get the value of firstName
-     *
-     * @return the value of firstName
-     */
-    public String getFirstName() {
-        return firstName;
-    }
+//    /**
+//     * Get the value of firstName
+//     *
+//     * @return the value of firstName
+//     */
+//    public String getFirstName() {
+//        return firstName;
+//    }
+//
+//    /**
+//     * Set the value of firstName
+//     */
+//    public void setFirstName(String firstName) {
+//        this.firstName = firstName;
+//    }
+//
+//
+//    /**
+//     * Get the value of lastName
+//     *
+//     * @return the value of lastName
+//     */
+//    public String getLastName() {
+//        return lastName;
+//    }
+//
+//    /**
+//     * Set the value of lastName
+//     *
+//     * @param lastName
+//     */
+//    public void setLastName(String lastName) {
+//        this.lastName = lastName;
+//    }
 
-    /**
-     * Set the value of firstName
-     */
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-
-    /**
-     * Get the value of lastName
-     *
-     * @return the value of lastName
-     */
-    public String getLastName() {
-        return lastName;
-    }
-
-    /**
-     * Set the value of lastName
-     *
-     * @param lastName
-     */
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public String setUsername(String userName) {
+        this.userName = userName;
     }
 
 
@@ -102,6 +107,6 @@ public abstract class User implements Serializable {
 
     @Override
     public String toString() {
-        return String.format("User: %s %s", this.firstName, this.lastName);
+        return String.format("User: %s %s", this.userName);
     }
 }
