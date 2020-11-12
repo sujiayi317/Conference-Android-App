@@ -8,13 +8,14 @@ import use_cases.RoomManager;
 
 import java.util.ArrayList;
 import java.util.List;
+
 public class EventsController{
     private EventManager eventManager;
     private RoomManager roomManager;
 
-    public void EventsController(){
-        this.eventManager = new EventManager();
-        this.roomManager = new RoomManager();
+    public void EventsController(EventManager eventManager, RoomManager roomManager){
+        this.eventManager = eventManager;
+        this.roomManager = roomManager;
     }
 
     public List<Event> getAllExistingEvents(){
