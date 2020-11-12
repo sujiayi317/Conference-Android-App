@@ -15,7 +15,7 @@ public class Login{
     public void run(AttendeeManager attendeeManager, OrganizerManager organizerManager, SpeakerManager speakerManager) {
         while (true) {
             output.printPrompt("Welcome to main page of conference sign up centre! Please enter a number\n");
-            Integer CurrentAction = input.getInputInt("1. Sign in \n2. Create an account");
+            Integer CurrentAction = input.getInputInt("1. Sign in \n2. Create an account\n");
             if (CurrentAction == 1) {
                 if (signIn(attendeeManager, organizerManager, speakerManager)){
                     break;
@@ -37,16 +37,18 @@ public class Login{
 //                    organizerManager.validLogIn(account, password).equals("NULL")){
 //
 //            }
-
             if (!attendeeManager.validLogIn(account, password).equals("NULL")){
                 ID = attendeeManager.validLogIn(account, password);
                 type = "ATTENDEE";
+                return true;
             } else if (!organizerManager.validLogIn(account, password).equals("NULL")){
                 ID = organizerManager.validLogIn(account, password);
                 type = "ORGANIZER";
+                return true;
             } else if (!speakerManager.validLogIn(account, password).equals("NULL")){
                 ID = speakerManager.validLogIn(account, password);
                 type = "SPEAKER";
+                return true;
             }
         }
     }

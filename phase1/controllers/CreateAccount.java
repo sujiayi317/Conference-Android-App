@@ -10,35 +10,35 @@ public class CreateAccount {
 
     public boolean CreateNewAccount(AttendeeManager attendeeManager, OrganizerManager organizerManager,
                               SpeakerManager speakerManager, String type) {
-        String email = input.getInputString("Please enter the email for new speaker: (ex. 12345@abc.com), or enter 'cancel' at any point to exit account creation");
+        String email = input.getInputString("Please enter the email for new speaker: (ex. 12345@abc.com), or enter 'cancel' at any point to exit account creation\n");
         while (true) {
             if (email.equals("cancel")){
                 return false;
             } else if (isValidEmail(email, attendeeManager, organizerManager, speakerManager)) {
                 break;
             } else {
-                email = input.getInputString("Invalid email, please enter another one, or enter 'cancel' at any point to exit account creation");
+                email = input.getInputString("Invalid email, please enter another one, or enter 'cancel' at any point to exit account creation\n");
             }
         }
 
-        String user = input.getInputString("Please enter the user name for new speaker: (must have length of at least 2), or enter 'cancel' at any point to exit account creation");
+        String user = input.getInputString("Please enter the user name for new speaker: (must have length of at least 2), or enter 'cancel' at any point to exit account creation\n");
         while (true) {
             if (user.equals("cancel")){
                 return false;
             } else if (isValidUserName(user, attendeeManager, organizerManager, speakerManager)) {
                 break;
             } else {
-                user = input.getInputString("User name already used, please enter another username, or enter 'cancel' at any point to exit account creation");
+                user = input.getInputString("User name already used, please enter another username, or enter 'cancel' at any point to exit account creation\n");
             }
         }
-        String password = input.getInputString("Please enter a password for " + user + ":");
+        String password = input.getInputString("Please enter a password for " + user + ":\n");
         while (true) {
             if (password.equals("cancel")){
                 return false;
             } else if (password.length() >= 8) {
                 break;
             } else {
-                password = input.getInputString("Password must be at least length 8, please try again, or enter 'cancel' at any point to exit account creation");
+                password = input.getInputString("Password must be at least length 8, please try again, or enter 'cancel' at any point to exit account creation\n");
             }
         }
 
