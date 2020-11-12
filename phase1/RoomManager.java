@@ -31,7 +31,7 @@ public class RoomManager implements Serializable {
      */
     private Room createRoom(String roomID) {
         Room room = new Room(roomID);
-        rooms.add(room);
+        this.rooms.add(room);
         return room;
     }
 
