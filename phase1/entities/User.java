@@ -16,6 +16,7 @@ public abstract class User implements Serializable {
     private String email;
     private String userID;
     private String password;
+    private String type;
 
     public User(String userName, String email, String password) {
         //this.firstName = firstName;
@@ -28,7 +29,15 @@ public abstract class User implements Serializable {
         this.password = password;
     }
 
-//    /**
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    //    /**
 //     * Get the value of firstName
 //     *
 //     * @return the value of firstName

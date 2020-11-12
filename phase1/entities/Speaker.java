@@ -11,6 +11,7 @@ public class Speaker extends User implements Serializable {
 
     public Speaker(String userName, String email, String password) {
         super(userName, email, password);
+        setType("Speaker");
     }
 
     @Override
