@@ -2,6 +2,7 @@ package controllers;
 
 import entities.Event;
 import entities.Speaker;
+import entities.Room;
 import use_cases.EventManager;
 import use_cases.RoomManager;
 
@@ -41,5 +42,17 @@ public class EventsController{
         }
         this.roomManager.addEventToRoom(newEvent.getEventID(), roomID);
         return true;
+    }
+
+    public ArrayList<String> getEventInfo(String eventID){
+        ArrayList<Object> info = new ArrayList<>();
+        Event event = this.eventManager.getEventFromID(eventID);
+        Room room = this.roomManager.getRoomBasedOnItsID(event.getRoomID());
+        info.add(event.getTitle());
+        info.add(event.getStartTime());
+        info.add(event.getSpeakers());
+        info.add(room.getCurrentNum());
+        info.add(room.getCapacity());
+
     }
 }
