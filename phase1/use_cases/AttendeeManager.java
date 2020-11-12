@@ -92,7 +92,25 @@ public class AttendeeManager implements Serializable {
         return "NULL";
     }
 
-    public boolean addFriend(String userId, boolean accept){
-
+    public List<String> attendeeIdsGetter(){
+        ArrayList<String> attendeeIds = new ArrayList<>();
+        for (Attendee attendee : attendees){
+            attendeeIds.add(attendee.getUserID());
+        }
+        return attendeeIds;
     }
-}
+    public boolean addFriend(String currId1, String userId2) {
+        List<String> IdList = attendeeIdsGetter();
+        if (IdList.contains(currId1) && IdList.contains(userId2)) {
+            for (Attendee attendee : attendees) {
+                if (attendee.getUserID() == currId1) {
+                    attendee.friendListSetter(userId2);
+                } else {
+                    attendee.friendListSetter(currId1);
+                }
+            }
+            return true;
+        } else {
+            return false;
+        }
+    }
