@@ -10,6 +10,8 @@ import java.util.Map;
  */
 public class RoomManager implements Serializable {
 
+    private List<Room> rooms;
+
     private List<String> events;
 
     private final Map<String, List<String>> eventsMap;
@@ -18,6 +20,7 @@ public class RoomManager implements Serializable {
      * Creates an empty room manager
      */
     public RoomManager(){
+        rooms = new ArrayList<>();
         events = new ArrayList<>();
         eventsMap = new HashMap<>();
     }
@@ -27,7 +30,9 @@ public class RoomManager implements Serializable {
      * @param roomID the room to create and add
      */
     private Room createRoom(String roomID) {
-        return new Room(roomID);
+        Room room = new Room(roomID);
+        this.rooms.add(room);
+        return room;
     }
 
 
@@ -44,5 +49,30 @@ public class RoomManager implements Serializable {
         }
         events.add(event);
         eventsMap.put(roomID, events);
+    }
+
+    public Room getRoomBasedOnItsID(String roomID){
+        for (Room room: rooms) {
+            if (room.getRoomID().equals(roomID)){
+                return room;
+            }
+        }
+        return null;
+    }
+
+    public ArrayList<String> getAvailableRoom(int time, EventManager eventManager){
+        ArrayList<String> roomList = new ArrayList<>();
+        for (Room room : rooms){
+            roomList.add(room.getRoomID());
+        }
+        for (String roomID : eventsMap.keySet()){
+            for (String eventID :eventsMap.get(roomID)){
+                Event event = eventManager.getEventFromID(eventID);
+                if (event.getStartTime() == time){
+                    roomList.remove(roomID);
+                }
+            }
+        }
+        return roomList;
     }
 }

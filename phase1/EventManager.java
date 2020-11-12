@@ -52,10 +52,13 @@ public class EventManager implements Serializable {
      * itself. If you want to add the Even to the User, the Controller would send only the String eventName to the
      * UserManager, to store the Event's name in a list of Strings inside the User object."
      */
-    public boolean addAttendeeToEvent(String userID, String eventID) {
+    public boolean addAttendeeToEvent(String userID, String eventID, RoomManager roomManager) {
         Event event = getEventFromID(eventID);
         if (event != null) {
-            return event.addAttendee(userID, events);
+            Room room = roomManager.getRoomBasedOnItsID(event.getRoomID());
+            if (room.getCurrentNum() < room.getCapacity()){
+                room.increaseCurrentNum();
+                return event.addAttendee(userID, events);}
         }
         return false;
     }
@@ -91,9 +94,11 @@ public class EventManager implements Serializable {
      * @param eventID,userID String object,
      * @return boolean
      */
-    public boolean removeAttendeeFromEvent(String userID, String eventID) {
+    public boolean removeAttendeeFromEvent(String userID, String eventID, RoomManager roomManager) {
         Event event = getEventFromID(eventID);
         if (event != null) {
+            Room room = roomManager.getRoomBasedOnItsID(event.getRoomID());
+            room.decreaseCurrentNum();
             return event.removeAttendee(userID);
         }
         return false;

@@ -8,6 +8,7 @@ public class Room implements Serializable{
 
     private final String roomID;
     private final int capacity = 2;
+    private int currentNum = 0;
     /**
      * Constructor  
      * @param roomID unique identification of the room
@@ -40,7 +41,21 @@ public class Room implements Serializable{
 
     }
 
+    public int getCurrentNum(){
+        return this.currentNum;
+    }
+
     public int getCapacity(){
         return this.capacity;
+    }
+
+    public void increaseCurrentNum(){
+        if (this.currentNum < this.capacity){
+            this.currentNum +=1;}
+    }
+
+    public void decreaseCurrentNum(){
+        if (this.currentNum > 0){
+            this.currentNum -=1;}
     }
 }
