@@ -100,6 +100,15 @@ public abstract class User implements Serializable {
     }
 
 
+    /**
+     * Get the getPassword of this user
+     *
+     * @return the getPassword of user
+     */
+    public String getPassword() {
+        return this.password;
+    }
+
     @Override
     public String toString() {
         return String.format("User: %s %s", this.firstName, this.lastName);
