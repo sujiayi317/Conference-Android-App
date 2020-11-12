@@ -5,9 +5,9 @@ import java.util.HashSet;
 public class ConversationController {
     private ConversationManager conversationManager;
     private String currentUserId;
-    private
 
-    public void ConversationController(String currentUserId){
+
+    public ConversationController(String currentUserId){
         this.conversationManager = new ConversationManager();
         this.currentUserId = currentUserId;
     }
