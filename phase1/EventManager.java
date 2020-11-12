@@ -98,7 +98,11 @@ public class EventManager implements Serializable {
         }
         return false;
     }
-
+    /**
+     * Return ArrayList contains all events that attendee has.
+     * @param userID String object,
+     * @return ArrayList<String>
+     */
     public ArrayList<String> getAllEventForTheAttendee(String userID){
         ArrayList<String> eventList = new ArrayList<>();
         for (Event event: events){
