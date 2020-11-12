@@ -14,7 +14,7 @@ public class EventManager implements Serializable {
     /**
      * Creates an empty event manager
      */
-    public EventManager(RoomManager rooms) {
+    public EventManager() {
         events = new ArrayList<>();
 
     }
