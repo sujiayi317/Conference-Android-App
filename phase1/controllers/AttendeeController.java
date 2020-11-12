@@ -55,17 +55,17 @@ public class AttendeeController {
     }
 
     private void viewAllEvents(ViewAllExistingEvents viewAllExistingEvents, EventsController eventsController){
-        viewAllExistingEvents.printAllExistingEvents(eventsController.getAllExistingEvents());
+        output.printPrompt(viewAllExistingEvents.printAllExistingEvents(eventsController.getAllExistingEvents()));
     }
 
     private void viewAllAttendeeEvents(String userID, ViewAllAttendeeEvents viewAllAttendeeEvents,
                                        EventsController eventsController){
-        viewAllAttendeeEvents.printAllAttendeeEvents(eventsController.getALLAttendeeEvents(userID));
+        output.printPrompt(viewAllAttendeeEvents.printAllAttendeeEvents(eventsController.getALLAttendeeEvents(userID)));
     }
 
     private void viewOneEventInfo(String eventID, ViewEventInfo viewEventInfo, EventsController eventsController){
         ArrayList<String> eventInfoList = eventsController.getEventInfo(eventID);
-        viewEventInfo.getEventInfo(eventInfoList);
+        output.printPrompt(viewEventInfo.getEventInfo(eventInfoList));
     }
 
 }
