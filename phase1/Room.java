@@ -41,8 +41,12 @@ public class Room implements Serializable{
 
     }
 
-    public int currentNum(){
+    public int getCurrentNum(){
         return this.currentNum;
+    }
+
+    public int getCapacity(){
+        return this.capacity;
     }
 
     public void updateCurrentNum(){
