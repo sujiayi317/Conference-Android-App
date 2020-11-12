@@ -8,7 +8,7 @@ public class ViewEventInfo {
     private static OutputManager output = new OutputManager();
     private ArrayList<String> infoPattern;
 
-    public void ViewEventInfo(){
+    public ViewEventInfo(){
         this.infoPattern.add("Title");
         this.infoPattern.add("Time");
         this.infoPattern.add("Speaker");

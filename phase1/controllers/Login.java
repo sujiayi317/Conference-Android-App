@@ -5,11 +5,11 @@ import use_cases.*;
 import javax.swing.*;
 
 public class Login{
-    private InputManager input = new InputManager();
-    private OutputManager output = new OutputManager();
-    private CreateAccount createAccount = new CreateAccount();
-    private String ID;
-    private String type;
+    private static InputManager input = new InputManager();
+    private static OutputManager output = new OutputManager();
+    private static CreateAccount createAccount = new CreateAccount();
+    private static String ID;
+    private static String type;
 
 
     public void run(AttendeeManager attendeeManager, OrganizerManager organizerManager, SpeakerManager speakerManager) {
@@ -69,6 +69,10 @@ public class Login{
 
     public String getUserType(){
         return type;
+    }
+
+    public String getUserID(){
+        return ID;
     }
 
 }
