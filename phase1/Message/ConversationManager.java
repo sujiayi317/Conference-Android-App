@@ -11,17 +11,19 @@ import java.util.List;
  */
 public class ConversationManager implements Serializable{
 
-    private HashMap<HashSet<String>, Conversation> Conversations;
+    private HashMap<HashSet<String>, Conversation> conversations;
 
     /**
      * The method to create a new conversation between different users.
-     * @param userId1
-     * @param userId2
+     * Precondition: these doesn't already exist a conversation with the same two users
+     *
+     * @param userId1 the user id of the first user
+     * @param userId2 the user id of the second user
      */
     public void CreateConversation(String userId1, String userId2){
-        Conversation conversation = new Conversation(userId1, userId2);
-        HashSet<String> conversationId = conversation.getUserIds();
-        Conversations.put(conversationId, conversation);
+        Conversation newConversation = new Conversation(userId1, userId2);
+        HashSet<String> newConversationId = newConversation.getUserIds();
+        conversations.put(newConversationId, newConversation);
     };
 
     /**
@@ -31,10 +33,10 @@ public class ConversationManager implements Serializable{
         HashSet<String> userIds = new HashSet<String>();
         userIds.add(senderId);
         userIds.add(receiverId);
-        if (!Conversations.containsKey(userIds)) {
+        if (!conversations.containsKey(userIds)) {
             CreateConversation(senderId, receiverId);
         }
-        Conversations.get(userIds).addMessage(senderId, text);
+        conversations.get(userIds).addMessage(senderId, text);
 
 
     }
@@ -44,9 +46,9 @@ public class ConversationManager implements Serializable{
      */
     public List<Conversation> getUserConversations(String userId){
         ArrayList<Conversation> UserConversations = new ArrayList<Conversation>();
-        for (HashSet<String> key: Conversations.keySet()){
+        for (HashSet<String> key: conversations.keySet()){
             if (key.contains(userId)){
-                UserConversations.add(Conversations.get(key));
+                UserConversations.add(conversations.get(key));
             }
         }
         return UserConversations;
