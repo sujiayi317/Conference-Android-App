@@ -10,10 +10,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EventsController{
-    private EventManager eventManager;
-    private RoomManager roomManager;
+    private final EventManager eventManager;
+    private final RoomManager roomManager;
 
-    public void EventsController(EventManager eventManager, RoomManager roomManager){
+    public EventsController(EventManager eventManager, RoomManager roomManager){
         this.eventManager = eventManager;
         this.roomManager = roomManager;
     }
