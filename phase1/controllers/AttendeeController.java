@@ -27,7 +27,7 @@ public class AttendeeController {
                     ViewAllAttendeeEvents viewAllAttendeeEvents, ViewEventInfo viewEventInfo,
                     AttendeeManager attendeeManager, ViewFriendList viewFriendList,
                     ConversationController conversationController, ViewMessagesOfAConversation
-                            viewMessagesOfAConversation, ConversationManager conversationManager) {
+                            viewMessagesOfAConversation, ConversationManager conversationManager, ViewMessageList viewMessageList) {
         //connect to Attendee Presenter - Menu options
         boolean quit = false;
         while (! quit ) {
@@ -78,6 +78,11 @@ public class AttendeeController {
                         break;
                     case 4:
                         ArrayList<String[]> messageList = conversationManager.getUserConversations(userID);
+                        boolean check4 = false;
+                        while (!check4){
+                            viewMessageList(messageList, viewMessageList);
+                            int chooseConversation = input.getInputInt()
+                        }
                         //View all my message
                         break;
                     case 5:
@@ -104,6 +109,10 @@ public class AttendeeController {
 
     public static void viewAllFriends(ArrayList<String> friends,ViewFriendList viewFriendList){
         output.printPrompt(viewFriendList.getFriendList(friends));
+    }
+
+    public static void viewMessageList(ArrayList<String[]> conversations, ViewMessageList viewMessageList){
+        output.printPrompt(viewMessageList.getMessageList(conversations));
     }
 
 }
