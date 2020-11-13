@@ -26,6 +26,7 @@ public class Conference {
     private final ViewFriendList viewFriendList;
     private final ViewAllAvailableSpeaker viewAllAvailableSpeaker;
     private ConversationController conversationController;
+    private final ConversationManager conversationManager;
     /**
      * This is where our conference system starts.
      */
@@ -40,6 +41,7 @@ public class Conference {
         this.userManager = new UserManager();
         this.viewFriendList = new ViewFriendList();
         this.viewAllAvailableSpeaker = new ViewAllAvailableSpeaker();
+        this.conversationManager = new ConversationManager();
 
     }
     public void run(){
@@ -84,7 +86,7 @@ public class Conference {
         switch(userType) {
             case "ATTENDEE":
                 new AttendeeController().run(userID, eventsController, viewAllExistingEvents, viewAllAttendeeEvents,
-                        viewEventInfo, attendeeManager, viewFriendList, conversationController);
+                        viewEventInfo, attendeeManager, viewFriendList, conversationController, conversationManager);
                 break;
             case "SPEAKER":
                 new SpeakerController().run();
