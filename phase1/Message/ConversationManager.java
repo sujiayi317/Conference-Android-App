@@ -74,7 +74,7 @@ public class ConversationManager implements Serializable{
      * Get the list of conversations of a certain user
      * 待定
      */
-    public ArrayList<String[]> getUserConversations(String userId){
+    public ArrayList<String[]> getUserExistConversations(String userId){
         ArrayList<String[]> UserConversations = new ArrayList<String[]>();
         for (HashSet<String> key: conversations.keySet()){
             if (key.contains(userId)){

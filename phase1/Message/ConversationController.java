@@ -1,6 +1,7 @@
 package Message;
 
 import Presenter.*;
+import com.sun.org.apache.xpath.internal.operations.String;
 import use_cases.UserManager;
 import controllers.*;
 
@@ -101,7 +102,14 @@ public class ConversationController {
     }
 
     public ArrayList<String[]> getUserAllConversation(String userId){
-        return conversationManager.getUserConversations(userId);
+
+        ArrayList<String[]> userNameWithLastMessage;
+        for (String[] str: conversationManager.getUserExistConversations(userId)){
+            String[] msg = {userManager.getUserName(str[0]), str[1]};
+            userNameWithLastMessage.add(msg);
+        }
+        return userNameWithLastMessage;
+
     }
 
     public static void viewMessagesOfAConversation(ArrayList<String> messages,
