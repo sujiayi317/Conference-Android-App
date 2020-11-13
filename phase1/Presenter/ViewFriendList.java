@@ -6,8 +6,8 @@ public class ViewFriendList {
     public ViewFriendList(){}
     public StringBuilder getFriendList(ArrayList<String> friendList){
         StringBuilder returnList = new StringBuilder("Friends:\n");
-        for (int i =0 ; i < friendList.size();i++){
-            returnList.append(i).append(":").append(friendList.get(i)).append("\n");
+        for (int i = 0 ; i < friendList.size();i++){
+            returnList.append(i+1).append(":").append(friendList.get(i)).append("\n");
         }
         return returnList;
     }
