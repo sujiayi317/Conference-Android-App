@@ -28,47 +28,56 @@ public class AttendeeController {
                     ConversationController conversationController, ViewMessagesOfAConversation
                             viewMessagesOfAConversation) {
         //connect to Attendee Presenter - Menu options
-        attendeeMenu.printAttendeeMenu(userID);
-        int choice = input.getInputInt("Please choose from the above options:\n");
-        if (choice != 0) {
-            switch (choice) {
-                case 1:
-                    // viewAllEvents
-                    int check = 0;
-                    while (check != 1 && eventsController.getAllExistingEvents().size() != 0) {
-                        viewAllEvents(viewAllExistingEvents, eventsController);
-                        String eventID = input.getInputString("Please choose an event and see the details or press enter\n");
-                        if (!eventID.equals("")) {
-                            viewOneEventInfo(eventID, viewEventInfo, eventsController);
-                            String decision = input.getInputString("Yes=sign up OR No\n");
-                            if (decision.equals("Yes")) {
-                                attendeeManager.signUp(eventsController.getEventManager(), userID, eventID,
-                                        eventsController.getRoomManager());
-                                output.printPrompt("you're successfully in"+ eventID);
-                                check +=1;
+        boolean quit = false;
+        while (! quit ) {
+            attendeeMenu.printAttendeeMenu(userID);
+            int choice = input.getInputInt("Please choose from the above options:\n");
+            if (0<=choice && choice<=5) {
+                switch (choice) {
+                    case 0:
+                        quit = true;
+                        break;
+                    case 1:
+                        // viewAllEvents
+                        int check = 0;
+                        while (check != 1 && eventsController.getAllExistingEvents().size() != 0) {
+                            viewAllEvents(viewAllExistingEvents, eventsController);
+                            String eventID = input.getInputString("Please choose an event and see the details or press enter\n");
+                            if (!eventID.equals("")) {
+                                viewOneEventInfo(eventID, viewEventInfo, eventsController);
+                                String decision = input.getInputString("Yes=sign up OR No\n");
+                                if (decision.equals("Yes")) {
+                                    attendeeManager.signUp(eventsController.getEventManager(), userID, eventID,
+                                            eventsController.getRoomManager());
+                                    output.printPrompt("you're successfully in" + eventID);
+                                    check += 1;
+                                }
                             }
                         }
-                    }
-                case 2:
-                    // view all attendee events
-                    viewAllAttendeeEvents(userID, viewAllAttendeeEvents, eventsController);
-                case 3:
-                    //View all my friend
-                    ArrayList<String> friendList = attendeeManager.friendListGetter(userID);
-                    boolean check3 = false;
-                    while (check3 != true){
-                        viewAllFriends(friendList, viewFriendList); //output StringBuilder of the Friend list
-                        int chooseFriend = input.getInputInt("Choose a friend to start the conversation\n");
-                        if (0<= chooseFriend && chooseFriend<= friendList.size()){
-                            String friendId = friendList.get(chooseFriend);
-                            conversationController.enterConversation(friendId);
-                            viewMessagesOfAConversation.printMessages
-                                    (conversationController.getMessagesOfOneConversation(friendId));
-                            check3 = true;
+                        break;
+                    case 2:
+                        // view all attendee events
+                        viewAllAttendeeEvents(userID, viewAllAttendeeEvents, eventsController);
+                        break;
+                    case 3:
+                        //View all my friend
+                        ArrayList<String> friendList = attendeeManager.friendListGetter(userID);
+                        boolean check3 = false;
+                        while (!check3) {
+                            viewAllFriends(friendList, viewFriendList); //output StringBuilder of the Friend list
+                            int chooseFriend = input.getInputInt("Choose a friend to start the conversation\n");
+                            if (0 <= chooseFriend && chooseFriend <= friendList.size()) {
+                                String friendId = friendList.get(chooseFriend);
+                                conversationController.enterConversation(friendId);
+                                viewMessagesOfAConversation.printMessages
+                                        (conversationController.getMessagesOfOneConversation(friendId));
+                                check3 = true;
+                            }
                         }
-                    }
-                case 4:
-                    //View all my message
+                        break;
+                    case 4:
+                        //View all my message
+                }
             }
         }
     }
