@@ -55,6 +55,10 @@ class FileReadWriter {
         }
     }
 
+    public void ConversationReader(){
+
+    }
+
 
     public EventsController GetEventsController(){
         return eventsController;

@@ -1,10 +1,7 @@
 package Message;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 
 /**
  * The Message.Conversation Manager class, is a use case class to manage conversations.
@@ -82,6 +79,13 @@ public class ConversationManager implements Serializable{
             }
         }
         return UserConversations;
+    }
+
+    public void loadConversation(HashSet<String> users, ArrayList<String[]> messageHistory){
+        Iterator value = users.iterator();
+        Conversation addConversation = new Conversation((String)value.next(),(String)value.next());
+        addConversation.loadAllMessage(messageHistory);
+        conversations.put(users,addConversation);
     }
 
 }
