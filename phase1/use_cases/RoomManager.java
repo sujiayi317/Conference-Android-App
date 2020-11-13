@@ -52,8 +52,7 @@ public class RoomManager implements Serializable {
      */
     public void addEventToRoom(String event, String roomID) {
         if (!eventsMap.containsKey(roomID)) {
-            Room room = createRoom(roomID);
-            events = eventsMap.get(room.getRoomID());
+            events = new ArrayList<>();
         } else {
             events = eventsMap.get(roomID);
         }
