@@ -79,19 +79,22 @@ public class OrganizerController extends AttendeeController{
                     case 4:
                         //create a new event
                         //String title, String roomID, Speaker speaker, int startTime
-                        int startTime = input.getInputInt("Please enter your event time\n");
-                        if (eventsController.getAvailableRoom(startTime).size() == 0){
-                            output.printPrompt("sorry there is no available room yet, please go to create one first!\n");
-                        } else if (eventsController.getAllAvailableSpeaker(startTime).size() == 0){
-                            output.printPrompt("sorry there is no available speaker yet, please go to create one first!\n");
+                        String time = "-1";
+                        while (Integer.parseInt(time) < 0 || Integer.parseInt(time) > 24) {
+                            int startTime = input.getInputInt("Please enter your event time between 0-24\n");
+                            if (eventsController.getAvailableRoom(startTime).size() == 0) {
+                                output.printPrompt("sorry there is no available room yet, please go to create one first!\n");
+                            } else if (eventsController.getAllAvailableSpeaker(startTime).size() == 0) {
+                                output.printPrompt("sorry there is no available speaker yet, please go to create one first!\n");
+                            } else {
+                                getAllAvailableRoomInfo(startTime, viewAllAvailableRoom, eventsController);
+                                getAllAvailableSpeaker(startTime, eventsController, viewAllAvailableSpeaker);
+                                String title = input.getInputString("Please enter your event's title\n");
+                                String roomID = input.getInputString("Please enter your room ID\n");
+                                String speaker = input.getInputString("Please set your speaker\n");
+                                createEvent(title, roomID, speaker, startTime, eventsController);
+                            }
                         }
-                        else {
-                            getAllAvailableRoomInfo(startTime, viewAllAvailableRoom, eventsController);
-                            getAllAvailableSpeaker(startTime,eventsController,viewAllAvailableSpeaker);
-                            String title = input.getInputString("Please enter your event's title\n");
-                            String roomID = input.getInputString("Please enter your room ID\n");
-                            String speaker = input.getInputString("Please set your speaker\n");
-                            createEvent(title, roomID, speaker, startTime, eventsController);}
                         break;
                     case 5:
                         // view all events
@@ -101,10 +104,7 @@ public class OrganizerController extends AttendeeController{
                         break;
 
                     case 7:
-                        String time = "-1";
-                        while (Integer.parseInt(time) < 0 || Integer.parseInt(time) > 24){
-                        time = input.getInputString("Please enter your event time between 0-24\n");
-                        getAllAvailableRoomInfo(Integer.parseInt(time), viewAllAvailableRoom, eventsController);}
+                        //
                         break;
 
                     case 8:
