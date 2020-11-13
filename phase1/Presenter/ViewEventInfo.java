@@ -15,7 +15,7 @@ public class ViewEventInfo {
 
     }
     public StringBuilder getEventInfo(ArrayList<String> eventInfo){
-        StringBuilder returnString = new StringBuilder("There are all existing events you may attend:\n");
+        StringBuilder returnString = new StringBuilder("There is the detail for "+ eventInfo.get(0)+" you can view:\n");
         for (int i =0 ; i < eventInfo.size()-2;i++){
             returnString.append(this.infoPattern.get(i)).append(": ").append(eventInfo.get(i)).append("\n");
         }
