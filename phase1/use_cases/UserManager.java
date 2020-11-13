@@ -50,6 +50,7 @@ public class UserManager {
         return "NULL";
     }
 
+
     public List<String> UsersIdsGetter(){
         ArrayList<String> UserIds = new ArrayList<>();
         for (User user : users){
@@ -73,7 +74,7 @@ public class UserManager {
         }
     }
 
-    public List<String> friendListGetter(String userId) {
+    public ArrayList<String> friendListGetter(String userId) {
         for (User user : users){
             if (user.getUserID() == userId){
                 return user.friendListGetter();

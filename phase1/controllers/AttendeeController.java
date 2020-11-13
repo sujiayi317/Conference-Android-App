@@ -3,7 +3,9 @@ package controllers;
 import Presenter.*;
 import use_cases.AttendeeManager;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This is the main controller for Attendee.
@@ -19,7 +21,8 @@ public class AttendeeController {
         this.attendeeMenu = new AttendeeMenu();
     }
     public void run(String userID, EventsController eventsController, ViewAllExistingEvents viewAllExistingEvents,
-                    ViewAllAttendeeEvents viewAllAttendeeEvents, ViewEventInfo viewEventInfo, AttendeeManager attendeeManager) {
+                    ViewAllAttendeeEvents viewAllAttendeeEvents, ViewEventInfo viewEventInfo, AttendeeManager attendeeManager,
+                    ViewFriendList viewFriendList) {
         //connect to Attendee Presenter - Menu options
         attendeeMenu.printAttendeeMenu(userID);
         int choice = input.getInputInt("Please choose from the above options:\n");
@@ -47,8 +50,8 @@ public class AttendeeController {
                     viewAllAttendeeEvents(userID, viewAllAttendeeEvents, eventsController);
                 case 3:
                     //View all my friend
-
-                    break;
+                    ArrayList<String> friendList = attendeeManager.friendListGetter(userID);
+                    viewAllFriends(friendList, viewFriendList);
                 case 4:
                     //View all my message
             }
@@ -67,6 +70,10 @@ public class AttendeeController {
     public static void viewOneEventInfo(String eventID, ViewEventInfo viewEventInfo, EventsController eventsController){
         ArrayList<String> eventInfoList = eventsController.getEventInfo(eventID);
         output.printPrompt(viewEventInfo.getEventInfo(eventInfoList));
+    }
+
+    public static void viewAllFriends(ArrayList<String> friends,ViewFriendList viewFriendList){
+        output.printPrompt(viewFriendList.getFriendList(friends));
     }
 
 }
