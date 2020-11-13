@@ -2,14 +2,16 @@ package Presenter;
 
 import entities.Event;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ViewAllAvailableSpeaker {
     public ViewAllAvailableSpeaker(){}
-    public StringBuilder printAllAvailableSpeaker(List<Event> AllAvailableSpeake){
+
+    public StringBuilder printAllAvailableSpeaker(ArrayList<String> AllAvailableSpeake){
         StringBuilder returnString = new StringBuilder("There are all available speaker you may choose:");
         for (int i =0 ; i < AllAvailableSpeake.size();i++){
-            returnString.append(i).append(":").append(AllAvailableSpeake.get(i).getEventID()).append("\n");
+            returnString.append(i).append(":").append(AllAvailableSpeake.get(i)).append("\n");
         }
         return returnString;
     }

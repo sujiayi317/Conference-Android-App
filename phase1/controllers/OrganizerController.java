@@ -113,7 +113,7 @@ public class OrganizerController extends AttendeeController{
     }
 
     private void getAllAvailableSpeaker(int time, EventsController eventsController, ViewAllAvailableSpeaker viewAllAvailableSpeaker){
-        viewAllAvailableSpeaker.printAllAvailableSpeaker(eventsController.getAllAvailableSpeaker(time));
+       output.printPrompt(viewAllAvailableSpeaker.printAllAvailableSpeaker(eventsController.getAllAvailableSpeaker(time)));
 
     }
     private void createEvent(String title, String roomID,String speaker,int startTime, EventsController eventsController){
