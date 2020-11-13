@@ -20,7 +20,8 @@ public class Login{
     public void run(AttendeeManager attendeeManager, OrganizerManager organizerManager, SpeakerManager speakerManager,
                     UserManager usermanager) {
         while (true) {
-            output.printPrompt("\n** Welcome to login page of conference sign up center! Please enter a number **\n");
+            output.printPrompt("\n*** Welcome to login page of conference sign up center! Please enter '1' or '2' to " +
+                    "Login or create account,\nor enter 'EXIT' to fully exit program. ***");
             String CurrentAction = input.getInputString("1. Sign in \n2. Create an account\n");
             if (CurrentAction.equals("1")) {
                 if (signIn(usermanager)){
