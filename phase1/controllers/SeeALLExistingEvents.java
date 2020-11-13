@@ -23,7 +23,7 @@ public class SeeALLExistingEvents {
         int check = 0;
         while (check != 1 && eventsController.getAllExistingEvents().size() != 0) {
             viewAllEvents(viewAllExistingEvents, eventsController);
-            String eventTitle = input.getInputString("Please choose an event_title and see the details\n OR press enter back\n");
+            String eventTitle = input.getInputString("Please choose an event_title and see the details OR press enter to back\n");
             if (!eventTitle.equals("")) {
                 String eventID = eventsController.getEventManager().changeEventTitleIntoEventID(eventTitle);
                 viewOneEventInfo(eventID, viewEventInfo, eventsController);
