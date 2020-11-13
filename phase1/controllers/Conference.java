@@ -18,7 +18,6 @@ public class Conference {
     private final UserManager userManager;
     private final EventsController eventsController;
     private final AttendeeManager attendeeManager;
-    private final SpeakerManager speakerManager;
     private final OrganizerManager organizerManager;
     private final ViewAllAvailableRoom viewAllAvailableRoom;
     private final ViewAllAttendeeEvents viewAllAttendeeEvents;
@@ -32,7 +31,6 @@ public class Conference {
      */
     public Conference(){
         this.attendeeManager = new AttendeeManager();
-        this.speakerManager = new SpeakerManager();
         this.organizerManager = new OrganizerManager();
         this.viewAllAvailableRoom = new ViewAllAvailableRoom();
         this.viewAllAttendeeEvents = new ViewAllAttendeeEvents();
@@ -70,7 +68,7 @@ public class Conference {
     private void start() {
         //connect to Gateway: set up database
         //connect to Login Controller - log User in
-        new Login().run(attendeeManager, organizerManager, speakerManager, userManager);
+        new Login().run(attendeeManager, organizerManager, eventsController.getSpeakerManager(), userManager);
 
 
     }
@@ -94,7 +92,7 @@ public class Conference {
             case "ORGANIZER":
                 new OrganizerController().run(eventsController, viewAllExistingEvents, viewAllAvailableRoom,
                         viewAllAttendeeEvents, attendeeManager,viewEventInfo, viewAllAvailableSpeaker,
-                        organizerManager, speakerManager, userManager, userID);
+                        organizerManager, userManager, userID);
         }
     }
 
