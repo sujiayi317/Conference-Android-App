@@ -13,7 +13,7 @@ public class AttendeeMenu {
         StringBuilder returnString = new StringBuilder("Welcome");
         returnString.append(userID).append("\n");
         returnString.append(" 1) viewAllEvents\n 2)view all my events\n 3)View all my fiends\n 4)view all my message" +
-                "\n 5) send message");
+                "\n 5) send message\n 0) quit");
         output.printPrompt(returnString);
 
     }
