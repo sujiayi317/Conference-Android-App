@@ -40,7 +40,7 @@ public class CreateANewEvent {
                         String speakerNum = "-1";
                         while (0> Integer.parseInt(speakerNum) || Integer.parseInt(speakerNum)>= eventsController.getAllAvailableSpeaker(Integer.parseInt(timeInput)).size()){
                             speakerNum = input.getInputString("Please set the SpeakerNum of your speaker\n");
-                            if (0> Integer.parseInt(speakerNum) || Integer.parseInt(speakerNum)>= eventsController.getAllAvailableSpeaker(Integer.parseInt(timeInput)).size(){
+                            if (0> Integer.parseInt(speakerNum) || Integer.parseInt(speakerNum)>= eventsController.getAllAvailableSpeaker(Integer.parseInt(timeInput)).size()){
                                 output.printPrompt("The speakerNum you chose is out of the bound please enter the correct number");
                             }
                         }
