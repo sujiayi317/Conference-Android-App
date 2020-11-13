@@ -2,21 +2,23 @@ package entities;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.UUID;
 
 /**
  * The entities.Room class, this is used to create room objects, it holds conference meeting objects held in the room.
  */
 public class Room implements Serializable{
 
-    private final String roomID;
+    private final String roomID = UUID.randomUUID().toString().split("-")[0];
     private final int capacity = 2;
     private int currentNum = 0;
+    private String roomNum;
     /**
      * Constructor  
      * @param roomID unique identification of the room
      */
-    public Room(String roomID) {
-        this.roomID = roomID;
+    public Room(String roomNum) {
+        this.roomNum = roomNum;
     }
 
     /**
