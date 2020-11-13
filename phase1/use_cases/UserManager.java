@@ -65,14 +65,13 @@ public class UserManager {
             for (User user : users) {
                 if (user.getUserID() == currId1) {
                     user.friendListSetter(userId2);
-                } else {
+                } else if(user.getUserID() == userId2){
                     user.friendListSetter(currId1);
                 }
             }
             return true;
-        } else {
-            return false;
         }
+        return false;
     }
 
 
