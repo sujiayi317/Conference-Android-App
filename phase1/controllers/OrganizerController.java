@@ -36,7 +36,7 @@ public class OrganizerController extends AttendeeController{
         while (!quit) {
             organizerMenu.printOrganizerMenu(userID);
             int choice = input.getInputInt("Please choose from the above options:\n");
-            if (0<=choice && choice<=7) {
+            if (0<=choice && choice<=9) {
                 switch (choice) {
                     case 0:
                         quit = true;
