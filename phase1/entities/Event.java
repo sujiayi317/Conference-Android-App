@@ -5,6 +5,7 @@ package entities; /**
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * The Meeting class, this is used to create meeting objects, and it holds person objects attending the meeting.
@@ -22,7 +23,7 @@ public class Event implements Serializable {
     private int duration = 1;
 
     public Event(String title, String roomID, String speakerID, int startTime) {
-        this.eventID = title;
+        this.eventID = UUID.randomUUID().toString().split("-")[0];
         this.roomID = roomID;
         this.title = title;
         this.userID = new ArrayList<>();
