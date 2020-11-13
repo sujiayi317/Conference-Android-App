@@ -66,7 +66,7 @@ public class EventsController{
         return info;
     }
 
-    public List<Event> getAllAvailableSpeaker(int time){
+    public ArrayList<String> getAllAvailableSpeaker(int time){
         return this.speakerManager.getAllAvailableSpeaker(time, eventManager);
     }
 }
