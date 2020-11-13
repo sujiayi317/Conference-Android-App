@@ -27,9 +27,15 @@ public class CreateANewEvent {
                         getAllAvailableRoomInfo(Integer.parseInt(timeInput), viewAllAvailableRoom, eventsController);
                         getAllAvailableSpeaker(Integer.parseInt(timeInput), eventsController, viewAllAvailableSpeaker);
                         String title = input.getInputString("Please enter your event's title\n");
-                        String roomNUm = input.getInputString("Please enter the roomNum of the room you want to use\n");
+                        String roomNUm = "-1";
+                        while (0> Integer.parseInt(roomNUm) || Integer.parseInt(roomNUm)>= eventsController.getAvailableRoom(Integer.parseInt(timeInput)).size()){
+                            roomNUm = input.getInputString("Please enter the roomNum of the room you want to use\n");
+                        }
+                        String speakerNum = "-1";
+                        while (0> Integer.parseInt(speakerNum) || Integer.parseInt(speakerNum)>= eventsController.getAllAvailableSpeaker(Integer.parseInt(timeInput)).size()){
+                            speakerNum = input.getInputString("Please set the SpeakerNum of your speaker\n");
+                        }
                         String room = eventsController.getAvailableRoom(Integer.parseInt(timeInput)).get(Integer.parseInt(roomNUm));
-                        String speakerNum = input.getInputString("Please set the SpeakerNum of your speaker\n");
                         String speaker = eventsController.getAllAvailableSpeaker(Integer.parseInt(timeInput)).get(Integer.parseInt(speakerNum));
                         if (createEvent(title, eventsController.getRoomManager().changeNumTOID(room), speaker, Integer.parseInt(timeInput), eventsController)) {
                             output.printPrompt("The new Event named " + title + " at Room "
