@@ -18,7 +18,7 @@ public class SeeALLExistingEvents {
     public void getToSeeAllExistingEvents(EventsController eventsController, AttendeeManager attendeeManager,
                                           ViewAllExistingEvents viewAllExistingEvents, String userID, ViewEventInfo viewEventInfo){
         if (eventsController.getAllExistingEvents().size() == 0){
-            output.printPrompt("There is no event yet!");
+            output.printPrompt("There is no event yet!\nPlease go back to main menu to create one if you're the Organizer");
         }
         int check = 0;
         while (check != 1 && eventsController.getAllExistingEvents().size() != 0) {
@@ -29,10 +29,10 @@ public class SeeALLExistingEvents {
                 viewOneEventInfo(eventID, viewEventInfo, eventsController);
                 String decision = input.getInputString("Yes=sign up OR No\n");
                 if (decision.equals("Yes")) {
-                    attendeeManager.signUp(eventsController.getEventManager(), userID, eventID,
-                            eventsController.getRoomManager());
-                    output.printPrompt("you're successfully in " + eventTitle + "\n");
-                    check += 1;
+                    if (attendeeManager.signUp(eventsController.getEventManager(), userID, eventID,
+                            eventsController.getRoomManager())){
+                    output.printPrompt("You're successfully in " + eventTitle + "\n");
+                    check += 1;}
                 }
             }
             else{
