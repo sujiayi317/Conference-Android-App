@@ -22,6 +22,7 @@ public class OrganizerController extends AttendeeController{
     private final CreateAccount create;
     private final OrganizerMenu organizerMenu;
     private final CreateANewEvent createANewEvent;
+    private final createANewRoom createANewRoom;
     private final ViewAllAvailableRoom viewAllAvailableRoom;
     private final ViewFriendList viewFriendList;
     private final ViewAllAvailableSpeaker viewAllAvailableSpeaker;
@@ -32,6 +33,7 @@ public class OrganizerController extends AttendeeController{
         output = new OutputManager();
         this.create = new CreateAccount();
         createANewEvent = new CreateANewEvent();
+        createANewRoom = new createANewRoom();
         this.viewAllAvailableRoom = new ViewAllAvailableRoom();
         this.viewAllAvailableSpeaker = new ViewAllAvailableSpeaker();
         this.viewFriendList = new ViewFriendList();
@@ -141,13 +143,17 @@ public class OrganizerController extends AttendeeController{
                         break;
 
                     case 8:
-                        RoomManager roomManager = eventsController.getRoomManager();
-                        String roomNum = "-1";
-                        while (Integer.parseInt(roomNum)>100 || Integer.parseInt(roomNum)<0)
-                        roomNum = input.getInputString("Please enter your room Number between 0-100\n");
-                        if (roomManager.createRoom(roomNum)){
-                            output.printPrompt("room" +" " +roomNum+ " "+"is created successfully\n");
-                        }
+                        createANewRoom.getToCreateANewRoom(eventsController);
+//                        RoomManager roomManager = eventsController.getRoomManager();
+//                        String roomNum = "-1";
+//                        while (Integer.parseInt(roomNum)>100 || Integer.parseInt(roomNum)<0)
+//                        roomNum = input.getInputString("Please enter your room Number between 0-100\n");
+//                        if (roomManager.createRoom(roomNum)){
+//                            output.printPrompt("room" +" " +roomNum+ " "+"is created successfully\n");
+//                        }
+//                        else {
+//                            output.printPrompt("room" +" " +roomNum+ " "+"has been already existing\n");
+//                        }
                         break;
                     case 9:
                         //add friend
