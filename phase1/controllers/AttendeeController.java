@@ -99,6 +99,7 @@ public class AttendeeController {
                         }
                         break;
                     case 4:
+                        //view all my message
                         ArrayList<String[]> messageList = conversationController.getUserAllConversation(userID);
                         boolean check4 = false;
                         while (!check4){
