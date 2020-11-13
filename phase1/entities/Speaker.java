@@ -26,9 +26,4 @@ public class Speaker extends User implements Serializable {
         return this.userID;
     }
 
-
-    @Override
-    public String getUserName() {
-        return super.getUserName();
-    }
 }
