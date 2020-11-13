@@ -18,6 +18,7 @@ public class AttendeeController {
     private static InputManager input;
     private static OutputManager output;
     public final SeeALLExistingEvents seeALLExistingEvents;
+    public final SeeALLMyEvents seeALLMyEvents;
     private final AttendeeMenu attendeeMenu;
     public final ViewAllAttendeeEvents viewAllAttendeeEvents;
     public final ViewAllExistingEvents viewAllExistingEvents;
@@ -28,6 +29,7 @@ public class AttendeeController {
         input = new InputManager();
         output = new OutputManager();
         seeALLExistingEvents = new SeeALLExistingEvents();
+        seeALLMyEvents = new SeeALLMyEvents();
         this.attendeeMenu = new AttendeeMenu();
         this.viewAllAttendeeEvents = new ViewAllAttendeeEvents();
         this.viewAllExistingEvents = new ViewAllExistingEvents();
@@ -71,7 +73,8 @@ public class AttendeeController {
                         break;
                     case 2:
                         // view all attendee events
-                        viewAllAttendeeEvents(userID, viewAllAttendeeEvents, eventsController);
+                        seeALLMyEvents.getToSeeAllMyEvents(viewAllAttendeeEvents, eventsController, userID);
+//                        viewAllAttendeeEvents(userID, viewAllAttendeeEvents, eventsController);
                         break;
                     case 3:
                         //View all my friend
@@ -104,7 +107,7 @@ public class AttendeeController {
                                     conversationController.enterConversation(messageList.get(chooseConversation)[0]);
                                 }
                                 check4 = true;
-                            }else
+                            }else{}
                         }
                         break;
                     case 5:
@@ -134,10 +137,10 @@ public class AttendeeController {
 //        output.printPrompt(viewAllExistingEvents.printAllExistingEvents(eventsController.getAllExistingEvents()));
 //    }
 
-    public static void viewAllAttendeeEvents(String userID, ViewAllAttendeeEvents viewAllAttendeeEvents,
-                                       EventsController eventsController){
-        output.printPrompt(viewAllAttendeeEvents.printAllAttendeeEvents(eventsController.getALLAttendeeEvents(userID)));
-    }
+//    public static void viewAllAttendeeEvents(String userID, ViewAllAttendeeEvents viewAllAttendeeEvents,
+//                                       EventsController eventsController){
+//        output.printPrompt(viewAllAttendeeEvents.printAllAttendeeEvents(eventsController.getALLAttendeeEvents(userID)));
+//    }
 
 //    public static void viewOneEventInfo(String eventID, ViewEventInfo viewEventInfo, EventsController eventsController){
 //        ArrayList<String> eventInfoList = eventsController.getEventInfo(eventID);
