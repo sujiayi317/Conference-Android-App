@@ -100,7 +100,8 @@ public class ConversationController {
         return FinalTextsList;
     }
 
-    public static void viewMessagesOfAConversation(ArrayList<String> messages, ViewMessagesOfAConversation viewMessagesOfAConversation){
+    public static void viewMessagesOfAConversation(ArrayList<String> messages,
+                                                   ViewMessagesOfAConversation viewMessagesOfAConversation){
         output.printPrompt(viewMessagesOfAConversation.printMessages(messages));
     }
 }
