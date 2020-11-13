@@ -13,6 +13,7 @@ public class Console {
      *      An array of Strings that we can use to pass data into our program when it runs.
      */
     public static void main(String[] args) {
+        FileReadWriter reader = new FileReadWriter();
 
         Conference conference = new Conference();
         conference.run();

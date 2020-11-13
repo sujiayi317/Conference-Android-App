@@ -12,13 +12,23 @@ import java.util.Scanner;
 class FileReadWriter {
 
     public void UserReader() throws FileNotFoundException {
+        ArrayList<String> lines = new ArrayList();
         try {
             File UserFile = new File("Users.txt");
             Scanner myReader = new Scanner(UserFile);
-            UserFile.readall
+            while (myReader.hasNextLine()){
+                lines.add(myReader.nextLine());
+            }
         } catch (FileNotFoundException e) {
             System.out.println("User File Not Found");
         }
+        for (int i = 0; i < lines.size(); i++){
+            ArrayList wordList = new ArrayList<String>();
+            for(String word : lines.get(i).split(" ")) {
+                wordList.add(word);
+            }
+        }
+
     }
 }
 ////    public EventManager readFromEventFile(String path) throws ClassNotFoundException {
