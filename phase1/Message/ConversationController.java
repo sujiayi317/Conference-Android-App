@@ -81,20 +81,20 @@ public class ConversationController {
 
 
 
-    public ArrayList<String> getMessagesOfOneConversation(String userId){
-        enterConversation(userId);
-        ArrayList<String> FinalTextsList = new ArrayList<>();
-        for(String[] oneMessage: conversationManager.getMessagesOfCurrentConversation()){
-            String finalText = userManager.getUserName(oneMessage[0]) + oneMessage[1];
-            FinalTextsList.add(finalText);
-        }
-        return FinalTextsList;
-    }
+//    public ArrayList<String> getMessagesOfOneConversation(String userId){
+//        enterConversation(userId);
+//        ArrayList<String> FinalTextsList = new ArrayList<>();
+//        for(String[] oneMessage: conversationManager.getMessagesOfCurrentConversation()){
+//            String finalText = userManager.getUserName(oneMessage[0]) + oneMessage[1];
+//            FinalTextsList.add(finalText);
+//        }
+//        return FinalTextsList;
+//    }
 
     public ArrayList<String> getMessagesOfCurrentConversation(){
         ArrayList<String> FinalTextsList = new ArrayList<>();
         for(String[] oneMessage: conversationManager.getMessagesOfCurrentConversation()){
-            String finalText = userManager.getUserName(oneMessage[0]) + oneMessage[1];
+            String finalText = userManager.getUserName(oneMessage[0]) + ": " + oneMessage[1];
             FinalTextsList.add(finalText);
         }
         return FinalTextsList;

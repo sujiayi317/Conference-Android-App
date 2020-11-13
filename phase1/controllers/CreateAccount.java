@@ -18,7 +18,7 @@ public class CreateAccount {
             } else if (isValidEmail(email, userManager)) {
                 break;
             } else {
-                email = input.getInputString("Invalid email, please enter another one, or enter 'cancel' at any point to exit account creation\n");
+                email = input.getInputString("Please enter another one, or enter 'cancel' at any point to exit account creation\n");
             }
         }
 
@@ -29,7 +29,7 @@ public class CreateAccount {
             } else if (isValidUserName(user, userManager)) {
                 break;
             } else {
-                user = input.getInputString("User name already used, please enter another username, or enter 'cancel' at any point to exit account creation\n");
+                user = input.getInputString("Invalid User name or user name already used, please enter another one, or enter 'cancel' at any point to exit account creation\n");
             }
         }
         String password = input.getInputString("Please enter a password for " + user + ":\n");
@@ -53,10 +53,18 @@ public class CreateAccount {
     }
 
     public boolean isValidEmail(String email, UserManager userManager){
-        return email.length() >= 6 && email.contains("@") && email.charAt(0) != '@' && email.contains(".") &&
+        if (!userManager.validNewEmail(email)){
+            new OutputManager().printPrompt("Email already exists in the system...\n");
+            return false;
+        } else if (email.length() >= 6 && email.contains("@") && email.charAt(0) != '@' && email.contains(".") &&
                 email.charAt(email.length() - 1) != '.' && email.length() - email.replace(".", "").length() == 1 &&
                 email.length() - email.replace("@", "").length() == 1 && email.indexOf('@') < email.indexOf('.') &&
-                email.indexOf('@') != email.indexOf('.') - 1 && userManager.validNewEmail(email);
+                email.indexOf('@') != email.indexOf('.') - 1 && userManager.validNewEmail(email) ){
+            return true;
+        } else {
+            new OutputManager().printPrompt("Invalid Email format...\n");
+            return false;
+        }
     }
 
     public boolean isValidUserName(String user, UserManager userManager){
