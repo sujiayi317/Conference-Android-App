@@ -54,6 +54,7 @@ public class OrganizerController extends AttendeeController{
                 switch (choice) {
                     case 0:
                         quit = true;
+                        output.printPrompt("You have signed out.\n");
                         break;
                     case 1:
                         //connect to CreateAccount Controller to create new speaker
