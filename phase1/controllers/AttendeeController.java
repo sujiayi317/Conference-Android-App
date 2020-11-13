@@ -37,7 +37,7 @@ public class AttendeeController {
     }
     public void run(String userID, EventsController eventsController,
                     AttendeeManager attendeeManager,
-                    ConversationController conversationController, ConversationManager conversationManager, UserManager userManager,
+                    ConversationController conversationController, UserManager userManager,
                     ViewMessageList viewMessageList) {
         //connect to Attendee Presenter - Menu options
         boolean quit = false;
@@ -92,7 +92,7 @@ public class AttendeeController {
                         }
                         break;
                     case 4:
-                        ArrayList<String[]> messageList = conversationManager.getUserConversations(userID);
+                        ArrayList<String[]> messageList = conversationController.getUserAllConversation(userID);
                         boolean check4 = false;
                         while (!check4){
                             viewMessageList(messageList, viewMessageList);
@@ -104,7 +104,7 @@ public class AttendeeController {
                                     conversationController.enterConversation(messageList.get(chooseConversation)[0]);
                                 }
                                 check4 = true;
-                            }
+                            }else
                         }
                         break;
                     case 5:

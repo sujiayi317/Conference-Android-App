@@ -90,7 +90,7 @@ public class Conference {
         switch(userType) {
             case "ATTENDEE":
                 new AttendeeController().run(userID, eventsController, attendeeManager,
-                        conversationController,conversationManager, userManager,viewMessageList);
+                        conversationController, userManager,viewMessageList);
                 break;
             case "SPEAKER":
                 new SpeakerController().run(userID, eventsController,
