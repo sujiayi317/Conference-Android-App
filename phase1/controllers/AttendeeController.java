@@ -106,11 +106,9 @@ public class AttendeeController {
 
                         ArrayList<String[]> userNameWithLastMessage = new ArrayList<>();
                         for (String[] s: messageList){
-                            String[] msg = {userManager.getUserName(s[0]), s[1]};
+                            String[] msg = {userManager.getUserName(s[2]), s[3]};
                             userNameWithLastMessage.add(msg);
                         }//有问题
-
-
                         boolean check4 = false;
                         while (!check4){
                             viewMessageList(userNameWithLastMessage, viewMessageList);
