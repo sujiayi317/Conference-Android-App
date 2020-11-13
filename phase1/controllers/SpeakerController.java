@@ -1,9 +1,12 @@
 package controllers;
 
+import Message.ConversationController;
 import Presenter.SpeakerMenu;
+import Presenter.ViewAllEventAttendees;
 import Presenter.ViewAllSpeakerEvents;
 import Presenter.ViewEventInfo;
 import use_cases.EventManager;
+import use_cases.UserManager;
 
 import java.util.ArrayList;
 
@@ -19,40 +22,72 @@ public class SpeakerController {
 
     public SpeakerController(){
         input = new InputManager();
+        output = new OutputManager();
         this.speakermenu = new SpeakerMenu();
     }
     public void run(String userID, EventsController eventsController, ViewAllSpeakerEvents viewAllSpeakerEvents,
-                    ViewEventInfo viewEventInfo) {
+                    ViewEventInfo viewEventInfo, ConversationController conversationController, ViewAllEventAttendees
+                    viewAllEventAttendees, UserManager userManager) {
         //connect to Speaker Presenter - Menu options
-
-        int choice = input.getInputInt("Please choose from the following options:");
-        if (choice != 0) {
-            switch (choice) {
-                case 1:
-                    //connect to MyEvent Controller
-                    viewAllSpeakerEvents(userID, viewAllSpeakerEvents, eventsController);
-                    EventManager eventManager = eventsController.getEventManager();
-                    ArrayList<String> eventList = eventManager.getAllEventForTheSpeaker(userID);
-                    int chooseEvent = input.getInputInt("Choose an event to view\n");
-                    if (0<= chooseEvent && chooseEvent<=eventList.size()){
-                        String eventId = eventList.get(chooseEvent);
-                        //display event info
-                        viewOneEventInfo(eventId, viewEventInfo, eventsController);
-
-                        //options: message all attendees, message individual attendee
-                        //message all attendees: (need method)
-                        //message individual attendee: display list of attendees of the event:
-                        //choose an attendee to message
-
-                    }
-                case 2:
-                    //connect to Contacts Controller
-                    break;
-                //case 3:
-                    //connect to Announcements Controller
+        boolean quit = false;
+        while (!quit ) {
+            speakermenu.printSpeakerMenu(userManager.getUserName(userID));
+            int choice = input.getInputInt("Please choose from the following options:");
+            if (0<=choice && choice<=1) {
+                switch (choice) {
+                    case 0:
+                        quit = true;
+                        break;
+                    case 1:
+                        //connect to MyEvent Controller
+                        viewAllSpeakerEvents(userID, viewAllSpeakerEvents, eventsController);
+                        EventManager eventManager = eventsController.getEventManager();
+                        ArrayList<String> eventList = eventManager.getAllEventForTheSpeaker(userID);
+                        int chooseEvent = input.getInputInt("Choose an event to view\n");
+                        if (0<= chooseEvent && chooseEvent<=eventList.size()){
+                            String eventId = eventList.get(chooseEvent);
+                            //display event info
+                            viewSelectedEventInfo(eventId, viewEventInfo, eventsController);
+                            //options: make an announcement for the event, message individual attendee
+                            int eventAction = input.getInputInt("Please select one of the above actions:\n");
+                            if (0<=eventAction && eventAction <=2) {
+                                switch (eventAction) {
+                                    case 0:
+                                        quit = true;
+                                        break;
+                                    case 1:
+                                        ArrayList<String> receivers = new ArrayList<>(
+                                                eventsController.getAttendeesFromEvent(eventId));
+                                        String message = input.getInputString("Please enter the message of " +
+                                                "the announcement:\n");
+                                        conversationController.sendToMultipleUsers(message, receivers);
+                                    case 2:
+                                        //message individual attendee: display list of attendees of the event:
+                                        viewAllEventAttendees(eventId, viewAllEventAttendees, eventsController);
+                                        //choose an attendee to message
+                                        int chooseAttendee = input.getInputInt("Choose an attendee to message:\n");
+                                        ArrayList<String> attendeeList = eventManager.getAttendeesFromEvent(eventId);
+                                        if (0 <= chooseAttendee && chooseAttendee <= attendeeList.size()) {
+                                            String attendeeId = attendeeList.get(chooseAttendee);
+                                            conversationController.enterConversation(attendeeId);
+                                        }
+                                    }
+                                }
+                            }
+                        break;
+                    //case 2:
+                        //connect to Announcements Controller
+                        //break;
+                    //case 3:
+                        //connect to Contacts Controller
+                        //break;
+                }
             }
         }
+
     }
+
+
 
     public static void viewAllSpeakerEvents(String userID, ViewAllSpeakerEvents viewAllSpeakerEvents,
                                             EventsController eventsController){
@@ -60,8 +95,19 @@ public class SpeakerController {
                 eventsController.getAllEventsForTheSpeaker(userID)));
     }
 
-    public static void viewOneEventInfo(String eventID, ViewEventInfo viewEventInfo, EventsController eventsController){
+    public static void viewSelectedEventInfo(String eventID, ViewEventInfo viewEventInfo,
+                                             EventsController eventsController){
         ArrayList<String> eventInfoList = eventsController.getEventInfo(eventID);
-        output.printPrompt(viewEventInfo.getEventInfo(eventInfoList));
+        StringBuilder returnString = viewEventInfo.getEventInfo(eventInfoList);
+        returnString.append("\n 1) make an announcement for the event\n 2) message individual attendee\n 0) Quit\n");
+        output.printPrompt(returnString);
     }
+
+    public static void viewAllEventAttendees(String eventID, ViewAllEventAttendees viewAllEventAttendees,
+                                             EventsController eventsController){
+        output.printPrompt(viewAllEventAttendees.printAllEventAttendees(
+                eventsController.getAttendeesFromEvent(eventID)));
+
+    }
+
 }

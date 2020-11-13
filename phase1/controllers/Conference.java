@@ -30,6 +30,7 @@ public class Conference {
     private final ConversationManager conversationManager;
     private final ViewMessagesOfAConversation viewMessagesOfAConversation;
     private final ViewMessageList viewMessageList;
+    private final ViewAllEventAttendees viewAllEventAttendees;
 
     /**
      * This is where our conference system starts.
@@ -51,6 +52,7 @@ public class Conference {
         this.viewMessagesOfAConversation = new ViewMessagesOfAConversation();
         this.conversationManager = new ConversationManager();
         this.viewMessageList = new ViewMessageList();
+        this.viewAllEventAttendees = new ViewAllEventAttendees();
     }
     public void run(){
         try {
@@ -98,7 +100,8 @@ public class Conference {
                         viewMessagesOfAConversation,conversationManager, userManager,viewMessageList);
                 break;
             case "SPEAKER":
-                new SpeakerController().run(userID, eventsController, viewAllSpeakerEvents, viewEventInfo);
+                new SpeakerController().run(userID, eventsController, viewAllSpeakerEvents, viewEventInfo,
+                        conversationController, viewAllEventAttendees, userManager);
                 break;
             case "ORGANIZER":
                 new OrganizerController().run(eventsController, viewAllExistingEvents, viewAllAvailableRoom,
