@@ -73,6 +73,8 @@ public class AttendeeController {
                                 String friendId = friendList.get(chooseFriend);
                                 conversationController.enterConversation(friendId);
                                 check3 = true;
+                            }else if (chooseFriend == 88){
+                                check3 = true;
                             }
                         }
                         break;
