@@ -145,4 +145,22 @@ public class EventManager implements Serializable {
         return eventList;
     }
 
+    public String changeEventIDIntoEventTile(String eventID){
+        for (Event event: events){
+            if (event.getEventID().equals(eventID)){
+                return event.getTitle();
+            }
+        }
+        return "NULL";
+    }
+
+    public String changeEventTitleIntoEventID(String eventTitle){
+        for (Event event: events){
+            if (event.getTitle().equals(eventTitle)){
+                return event.getEventID();
+            }
+        }
+        return "NULL";
+    }
+
 }

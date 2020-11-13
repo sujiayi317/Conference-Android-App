@@ -23,16 +23,20 @@ public class SeeALLExistingEvents {
         int check = 0;
         while (check != 1 && eventsController.getAllExistingEvents().size() != 0) {
             viewAllEvents(viewAllExistingEvents, eventsController);
-            String eventID = input.getInputString("Please choose an event_title and see the details or press enter\n");
-            if (!eventID.equals("")) {
+            String eventTitle = input.getInputString("Please choose an event_title and see the details\n OR press enter back\n");
+            if (!eventTitle.equals("")) {
+                String eventID = eventsController.getEventManager().changeEventTitleIntoEventID(eventTitle);
                 viewOneEventInfo(eventID, viewEventInfo, eventsController);
                 String decision = input.getInputString("Yes=sign up OR No\n");
                 if (decision.equals("Yes")) {
                     attendeeManager.signUp(eventsController.getEventManager(), userID, eventID,
                             eventsController.getRoomManager());
-                    output.printPrompt("you're successfully in " + eventID + "\n");
+                    output.printPrompt("you're successfully in " + eventTitle + "\n");
                     check += 1;
                 }
+            }
+            else{
+                check +=1;
             }
         }
     }
