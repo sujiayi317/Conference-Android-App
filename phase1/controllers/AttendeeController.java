@@ -23,8 +23,10 @@ public class AttendeeController {
         this.attendeeMenu = new AttendeeMenu();
     }
     public void run(String userID, EventsController eventsController, ViewAllExistingEvents viewAllExistingEvents,
-                    ViewAllAttendeeEvents viewAllAttendeeEvents, ViewEventInfo viewEventInfo, AttendeeManager attendeeManager,
-                    ViewFriendList viewFriendList, ConversationController conversationController, ConversationManager conversationManager) {
+                    ViewAllAttendeeEvents viewAllAttendeeEvents, ViewEventInfo viewEventInfo,
+                    AttendeeManager attendeeManager, ViewFriendList viewFriendList,
+                    ConversationController conversationController, ViewMessagesOfAConversation
+                            viewMessagesOfAConversation) {
         //connect to Attendee Presenter - Menu options
         attendeeMenu.printAttendeeMenu(userID);
         int choice = input.getInputInt("Please choose from the above options:\n");
@@ -55,16 +57,17 @@ public class AttendeeController {
                     ArrayList<String> friendList = attendeeManager.friendListGetter(userID);
                     boolean check3 = false;
                     while (check3 != true){
-                        viewAllFriends(friendList, viewFriendList);
+                        viewAllFriends(friendList, viewFriendList); //output StringBuilder of the Friend list
                         int chooseFriend = input.getInputInt("Choose a friend to start the conversation\n");
                         if (0<= chooseFriend && chooseFriend<= friendList.size()){
                             String friendId = friendList.get(chooseFriend);
                             conversationController.enterConversation(friendId);
+                            viewMessagesOfAConversation.printMessages
+                                    (conversationController.getMessagesOfOneConversation(friendId));
                             check3 = true;
                         }
                     }
                 case 4:
-                    int chooseConversation = input.getInputInt("Choose a conversation to start\n");
                     //View all my message
             }
         }
