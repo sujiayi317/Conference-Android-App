@@ -13,7 +13,7 @@ import java.util.List;
  * The use_cases.SpeakerManager class, this is the use case class to manage the entities.Speaker for this conference.
  *
  */
-public class SpeakerManager implements Serializable {
+public class SpeakerManager extends UserManager implements Serializable {
     //private List<String> events;
     private List<Speaker> speakers;
 
@@ -27,7 +27,7 @@ public class SpeakerManager implements Serializable {
 //        events = new ArrayList<>();
 //        speakerMap = new HashMap<>();
 //        eventsMap = new HashMap<>();
-        speakers = new ArrayList<>(1);  // Initial Capacity is 1 in Phase 1
+        speakers = new ArrayList<>();
     }
 
     /**
@@ -37,6 +37,7 @@ public class SpeakerManager implements Serializable {
         Speaker speaker = new Speaker(userName, email, password);
         //speakerMap.put(speaker.getUserName(), speaker);
         speakers.add(speaker);
+        super.users.add(speaker);
         return speaker;
     }
 

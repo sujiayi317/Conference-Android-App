@@ -45,6 +45,7 @@ public class CreateAccount {
 
         if (type.equals("SPEAKER")){
             speakerManager.createSpeaker(user, email, password);
+            userManager.
         } else if (type.equals("ORGANIZER")){
             organizerManager.createOrganizer(user, email, password);
         } else {

@@ -35,6 +35,7 @@ public class AttendeeManager extends UserManager implements Serializable {
         Attendee attendee = new Attendee(userName, email, password);
         //attendeeMap.put(attendee.getUserName(), attendee);
         attendees.add(attendee);
+        super.users.add(attendee);
         return attendee;
     }
 
