@@ -6,45 +6,49 @@ import Presenter.ViewAllAvailableSpeaker;
 public class CreateANewEvent {
     private static OutputManager output;
     private static InputManager input;
-    public CreateANewEvent(){
+
+    public CreateANewEvent() {
         output = new OutputManager();
         input = new InputManager();
     }
-    public void getToCreateANewEvent(EventsController eventsController,ViewAllAvailableRoom viewAllAvailableRoom,
-                                     ViewAllAvailableSpeaker viewAllAvailableSpeaker ){
-        String time = "-1";
-        while (Integer.parseInt(time) < 0 || Integer.parseInt(time) > 24) {
-            int startTime = input.getInputInt("Please enter your event time between 0-24 OR PRESS -1 back to Menu\n");
-            if (startTime == -1){
-                break;
-            }
-            if (eventsController.getAvailableRoom(startTime).size() == 0) {
-                output.printPrompt("sorry there is no available room yet, please go to create one first!\n");
-            } else if (eventsController.getAllAvailableSpeaker(startTime).size() == 0) {
-                output.printPrompt("sorry there is no available speaker yet, please go to create one first!\n");
-            } else {
-                getAllAvailableRoomInfo(startTime, viewAllAvailableRoom, eventsController);
-                getAllAvailableSpeaker(startTime, eventsController, viewAllAvailableSpeaker);
-                String title = input.getInputString("Please enter your event's title\n");
-                String roomNUm = input.getInputString("Please enter your room Num\n");
-                String speaker = input.getInputString("Please set your speaker\n");
-                if (createEvent(title, eventsController.getRoomManager().changeNumTOID(roomNUm), speaker, startTime, eventsController)){
-                output.printPrompt("The new Event named "+title+" at "
-                        +roomNUm+" taught by "
-                        +speaker+" will start at "+startTime);
-                break;}
-            }
+
+    public void getToCreateANewEvent(EventsController eventsController, ViewAllAvailableRoom viewAllAvailableRoom,
+                                     ViewAllAvailableSpeaker viewAllAvailableSpeaker) {
+        String timeInput = "-2";
+        while (((Integer.parseInt(timeInput) < 0 || Integer.parseInt(timeInput) > 24)) && Integer.parseInt(timeInput) != -1) {
+            timeInput = input.getInputString("Please enter your event time between 0-24 OR PRESS -1 back to Menu\n");
+        }
+        if (!timeInput.equals("-1")) {
+                    if (eventsController.getAvailableRoom(Integer.parseInt(timeInput)).size() == 0) {
+                        output.printPrompt("sorry there is no available room yet, please go to create one first!\n");
+                    } else if (eventsController.getAllAvailableSpeaker(Integer.parseInt(timeInput)).size() == 0) {
+                        output.printPrompt("sorry there is no available speaker yet, please go to create one first!\n");
+                    } else {
+                        getAllAvailableRoomInfo(Integer.parseInt(timeInput), viewAllAvailableRoom, eventsController);
+                        getAllAvailableSpeaker(Integer.parseInt(timeInput), eventsController, viewAllAvailableSpeaker);
+                        String title = input.getInputString("Please enter your event's title\n");
+                        String roomNUm = input.getInputString("Please enter your room Num\n");
+                        String speaker = input.getInputString("Please set your speaker\n");
+                        if (createEvent(title, eventsController.getRoomManager().changeNumTOID(roomNUm), speaker, Integer.parseInt(timeInput), eventsController)) {
+                            output.printPrompt("The new Event named " + title + " at "
+                                    + roomNUm + " taught by "
+                                    + speaker + " will start at " + Integer.parseInt(timeInput));
+                        }
+                    }
         }
     }
-    private void getAllAvailableRoomInfo(int time, ViewAllAvailableRoom viewAllAvailableRoom, EventsController eventsController){
-        viewAllAvailableRoom.printAllAvailableRoom(eventsController.getAvailableRoom(time));
-    }
-    private void getAllAvailableSpeaker(int time, EventsController eventsController, ViewAllAvailableSpeaker viewAllAvailableSpeaker){
-        output.printPrompt(viewAllAvailableSpeaker.printAllAvailableSpeaker(eventsController.getAllAvailableSpeaker(time)));
+        private void getAllAvailableRoomInfo ( int time, ViewAllAvailableRoom viewAllAvailableRoom, EventsController
+        eventsController){
+            viewAllAvailableRoom.printAllAvailableRoom(eventsController.getAvailableRoom(time));
+        }
+        private void getAllAvailableSpeaker ( int time, EventsController eventsController, ViewAllAvailableSpeaker
+        viewAllAvailableSpeaker){
+            output.printPrompt(viewAllAvailableSpeaker.printAllAvailableSpeaker(eventsController.getAllAvailableSpeaker(time)));
 
-    }
-    private boolean createEvent(String title, String roomID,String speaker,int startTime, EventsController eventsController){
-        return eventsController.createEvent(title,roomID,speaker,startTime);
-    }
+        }
+        private boolean createEvent (String title, String roomID, String speaker,int startTime, EventsController
+        eventsController){
+            return eventsController.createEvent(title, roomID, speaker, startTime);
+        }
 }
 
