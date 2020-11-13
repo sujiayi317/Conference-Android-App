@@ -25,7 +25,6 @@ public class Conference {
 //    private final ViewAllSpeakerEvents viewAllSpeakerEvents;
 //    private final ViewEventInfo viewEventInfo;
 //    private final ViewFriendList viewFriendList;
-    private final ConversationManager conversationManager;
     private final ViewMessageList viewMessageList;
 //    private final ViewAllEventAttendees viewAllEventAttendees;
 
@@ -44,7 +43,6 @@ public class Conference {
 //        this.viewAllSpeakerEvents = new ViewAllSpeakerEvents();
 //        this.viewEventInfo = new ViewEventInfo();
 //        this.viewFriendList = new ViewFriendList();
-        this.conversationManager = new ConversationManager();
         this.viewMessageList = new ViewMessageList();
 //        this.viewAllEventAttendees = new ViewAllEventAttendees();
     }
