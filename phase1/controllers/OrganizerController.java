@@ -93,6 +93,9 @@ public class OrganizerController extends AttendeeController{
                                 String roomID = input.getInputString("Please enter your room ID\n");
                                 String speaker = input.getInputString("Please set your speaker\n");
                                 createEvent(title, roomID, speaker, startTime, eventsController);
+                                output.printPrompt("The new Event named "+title+" at "
+                                        +eventsController.getRoomManager().changeIdTONum(roomID)+"\n"+" taught by "
+                                        +speaker+" will start at "+startTime);
                             }
                         }
                         break;
