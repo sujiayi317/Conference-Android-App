@@ -18,7 +18,7 @@ public class CreateANewEvent {
         while (((Integer.parseInt(timeInput) < 0 || Integer.parseInt(timeInput) > 24)) && Integer.parseInt(timeInput) != -1) {
             timeInput = input.getInputString("Please enter your event time between 0-24 OR PRESS -1 back to Menu\n");
             if ((Integer.parseInt(timeInput) < 0 || Integer.parseInt(timeInput) > 24)&& Integer.parseInt(timeInput) != -1){
-                output.printPrompt("The time you chose is not out of bound please enter the correct number");
+                output.printPrompt("The time you chose is not out of bound please enter the correct number\n");
             }
         }
         if (!timeInput.equals("-1")) {
@@ -34,14 +34,14 @@ public class CreateANewEvent {
                         while (0> Integer.parseInt(roomNUm) || Integer.parseInt(roomNUm)>= eventsController.getAvailableRoom(Integer.parseInt(timeInput)).size()){
                             roomNUm = input.getInputString("Please enter the roomNum of the room you want to use\n");
                             if (0> Integer.parseInt(roomNUm) || Integer.parseInt(roomNUm)>= eventsController.getAvailableRoom(Integer.parseInt(timeInput)).size()){
-                                output.printPrompt("The roomNum you chose is out of the bound please enter the correct number");
+                                output.printPrompt("The roomNum you chose is out of the bound please enter the correct number\n");
                             }
                         }
                         String speakerNum = "-1";
                         while (0> Integer.parseInt(speakerNum) || Integer.parseInt(speakerNum)>= eventsController.getAllAvailableSpeaker(Integer.parseInt(timeInput)).size()){
                             speakerNum = input.getInputString("Please set the SpeakerNum of your speaker\n");
                             if (0> Integer.parseInt(speakerNum) || Integer.parseInt(speakerNum)>= eventsController.getAllAvailableSpeaker(Integer.parseInt(timeInput)).size()){
-                                output.printPrompt("The speakerNum you chose is out of the bound please enter the correct number");
+                                output.printPrompt("The speakerNum you chose is out of the bound please enter the correct number\n");
                             }
                         }
                         String room = eventsController.getAvailableRoom(Integer.parseInt(timeInput)).get(Integer.parseInt(roomNUm));
