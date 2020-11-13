@@ -5,6 +5,7 @@ import entities.Speaker;
 import entities.Room;
 import use_cases.EventManager;
 import use_cases.RoomManager;
+import use_cases.SpeakerManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,10 +13,12 @@ import java.util.List;
 public class EventsController{
     private final EventManager eventManager;
     private final RoomManager roomManager;
+    private final SpeakerManager speakerManager;
 
     public EventsController(){
         this.eventManager = new EventManager();
         this.roomManager = new RoomManager();
+        this.speakerManager = new SpeakerManager();
     }
 
     public EventManager getEventManager(){
@@ -62,5 +65,9 @@ public class EventsController{
         info.add(Integer.toString(room.getCurrentNum()));
         info.add(Integer.toString(room.getCapacity()));
         return info;
+    }
+
+    public ArrayList<String> getAllAvailableSpeaker(int time){
+        return this.speakerManager.getAllAvailableSpeaker(time, eventManager);
     }
 }

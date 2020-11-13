@@ -7,8 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserManager {
-    private List<User> users;
-
+    protected List<User> users;
 
     public boolean validNewName(String name){
         for (User user : users){
