@@ -33,7 +33,7 @@ public class AttendeeController {
                 case 1:
                     // viewAllEvents
                     int check = 0;
-                    while (check != 1) {
+                    while (check != 1 && eventsController.getAllExistingEvents().size() != 0) {
                         viewAllEvents(viewAllExistingEvents, eventsController);
                         String eventID = input.getInputString("Please choose an event and see the details or press enter\n");
                         if (!eventID.equals("")) {

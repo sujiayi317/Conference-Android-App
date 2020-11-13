@@ -50,7 +50,7 @@ public class OrganizerController extends AttendeeController{
                         break;
                     case 2:
                         //view all existing events
-                        viewAllEvents(viewAllExistingEvents, eventsController);
+//                        viewAllEvents(viewAllExistingEvents, eventsController);
                         int check = 0;
                         while (check != 1 && eventsController.getAllExistingEvents().size() != 0) {
                             viewAllEvents(viewAllExistingEvents, eventsController);
