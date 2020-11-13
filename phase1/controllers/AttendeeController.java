@@ -98,7 +98,9 @@ public class AttendeeController {
                         boolean check5 = false;
                         while (!check5){
                             String friendId = input.getInputString("Please enter the userId, or 0 to quit:\n");
-                            if (userList.contains(friendId)){
+                            if (userManager.friendListGetter(userID).contains(friendId)){
+                                System.out.println("Friend already in your friend list.");
+                            }else if(userList.contains(friendId)){
                                 userManager.addFriend(userID, friendId);
                                 check5 = true;
                             }else if (friendId.equals("0")){
