@@ -1,5 +1,8 @@
 package controllers;
 
+import Message.Conversation;
+import Message.ConversationController;
+import Message.ConversationManager;
 import Presenter.*;
 import entities.Attendee;
 import entities.Organizer;
@@ -23,6 +26,7 @@ public class Conference {
     private final ViewEventInfo viewEventInfo;
     private final ViewFriendList viewFriendList;
     private final ViewAllAvailableSpeaker viewAllAvailableSpeaker;
+    private final ConversationController conversationController;
     /**
      * This is where our conference system starts.
      */
@@ -38,6 +42,7 @@ public class Conference {
         this.userManager = new UserManager();
         this.viewFriendList = new ViewFriendList();
         this.viewAllAvailableSpeaker = new ViewAllAvailableSpeaker();
+        this.conversationController =new ConversationController();
 
     }
     public void run(){
@@ -81,7 +86,7 @@ public class Conference {
         switch(userType) {
             case "ATTENDEE":
                 new AttendeeController().run(userID, eventsController, viewAllExistingEvents, viewAllAttendeeEvents,
-                        viewEventInfo, attendeeManager, viewFriendList);
+                        viewEventInfo, attendeeManager, viewFriendList, conversationController);
                 break;
             case "SPEAKER":
                 new SpeakerController().run();
