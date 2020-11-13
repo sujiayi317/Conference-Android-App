@@ -61,8 +61,9 @@ public class Conference {
     private void conferenceSystem() {
         while (!new Login().getEXITStatus()) {
             start();
-
+            if (!(new Login().getEXITStatus())){
             iteration();
+            }
         }
 
         finish();
