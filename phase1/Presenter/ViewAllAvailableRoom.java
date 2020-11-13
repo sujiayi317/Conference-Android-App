@@ -13,9 +13,9 @@ public class ViewAllAvailableRoom {
     }
 
     public void printAllAvailableRoom(ArrayList<String> allAvailableRoom){
-        StringBuilder returnString = new StringBuilder("There are all available rooms you may choose:");
+        StringBuilder returnString = new StringBuilder("There are all available rooms you may choose:\n");
         for (int i =0 ; i < allAvailableRoom.size();i++){
-            returnString.append(i).append(":").append(allAvailableRoom.get(i)).append("\n");
+            returnString.append(i).append(") :\t").append(allAvailableRoom.get(i)).append("\n");
         }
         output.printPrompt(returnString);
     }
