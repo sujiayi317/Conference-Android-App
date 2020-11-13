@@ -16,7 +16,7 @@ public class OrganizerController {
 
     private static InputManager input;
     private static OutputManager output;
-    private CreateAccount create;
+    private final CreateAccount create;
     private final OrganizerMenu organizerMenu;
 
     public OrganizerController(){
@@ -43,12 +43,15 @@ public class OrganizerController {
                     } else {
                         output.printPrompt("Create speaker action cancelled.");
                     }
-                    break;
                 case 2:
-                    //get all available room info
-                    int time = input.getInputInt("Please enter your event time\n");
-                    getAllAvailableRoomInfo(time, viewAllAvailableRoom, eventsController);
+                    //view all existing events
+                    viewAllEvents(viewAllExistingEvents, eventsController);
+
                 case 3:
+                    // view all his/her events
+                    viewAllAttendeeEvents(userID, viewAllAttendeeEvents, eventsController);
+
+                case 4:
                     //create a new event
                     //String title, String roomID, Speaker speaker, int startTime
                     String title = input.getInputString("Please enter your event's title\n");
@@ -56,13 +59,16 @@ public class OrganizerController {
                     String speaker = input.getInputString("Please set your speaker\n");
                     int startTime = input.getInputInt("Please enter your event time\n");
                     createEvent(title,roomID,speaker,startTime, eventsController);
-                case 4:
+                case 5:
                     // view all events
                     viewAllEvents(viewAllExistingEvents, eventsController);
-                case 5:
+                case 6:
                     // view all attended events
                     viewAllAttendeeEvents.printAllAttendeeEvents(eventsController.getALLAttendeeEvents(userID));
 
+                case 7:
+                    int time = input.getInputInt("Please enter your event time between 0-24\n");
+                    getAllAvailableRoomInfo(time, viewAllAvailableRoom, eventsController);
             }
         }
     }
@@ -73,7 +79,12 @@ public class OrganizerController {
         output.printPrompt(eventsController.createEvent(title,roomID,speaker,startTime));
     }
 
+    private void viewAllAttendeeEvents(String userID, ViewAllAttendeeEvents viewAllAttendeeEvents,
+                                       EventsController eventsController){
+        output.printPrompt(viewAllAttendeeEvents.printAllAttendeeEvents(eventsController.getALLAttendeeEvents(userID)));
+    }
+
     private void viewAllEvents(ViewAllExistingEvents viewAllExistingEvents, EventsController eventsController){
-        viewAllExistingEvents.printAllExistingEvents(eventsController.getAllExistingEvents());
+        output.printPrompt(viewAllExistingEvents.printAllExistingEvents(eventsController.getAllExistingEvents()));
     }
 }
