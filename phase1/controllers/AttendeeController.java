@@ -28,7 +28,8 @@ public class AttendeeController {
                     ViewAllAttendeeEvents viewAllAttendeeEvents, ViewEventInfo viewEventInfo,
                     AttendeeManager attendeeManager, ViewFriendList viewFriendList,
                     ConversationController conversationController, ViewMessagesOfAConversation
-                            viewMessagesOfAConversation, ConversationManager conversationManager, UserManager userManager) {
+                            viewMessagesOfAConversation, ConversationManager conversationManager, UserManager userManager,
+                    ViewMessageList viewMessageList) {
         //connect to Attendee Presenter - Menu options
         boolean quit = false;
         while (! quit ) {
@@ -79,7 +80,21 @@ public class AttendeeController {
                         break;
                     case 4:
                         ArrayList<String[]> messageList = conversationManager.getUserConversations(userID);
-                        //View all my message
+                        boolean check4 = false;
+                        while (!check4){
+                            viewMessageList(messageList, viewMessageList);
+                            int chooseConversation = input.getInputInt("Choose a message to start the conversation\n");
+                            if (0 <= chooseConversation && chooseConversation <= messageList.size()-1){
+                                if (messageList.get(chooseConversation)[0].equals(userID)){
+                                    conversationController.enterConversation(messageList.get(chooseConversation)[1]);
+                                    viewMessagesOfAConversation.printMessages(conversationController.getMessagesOfOneConversation(messageList.get(chooseConversation)[1]));
+                                }else{
+                                    conversationController.enterConversation(messageList.get(chooseConversation)[0]);
+                                    viewMessagesOfAConversation.printMessages(conversationController.getMessagesOfOneConversation(messageList.get(chooseConversation)[0]));
+                                }
+                                check4 = true;
+                            }
+                        }
                         break;
                     case 5:
                         //
@@ -105,6 +120,10 @@ public class AttendeeController {
 
     public static void viewAllFriends(ArrayList<String> friends,ViewFriendList viewFriendList){
         output.printPrompt(viewFriendList.getFriendList(friends));
+    }
+
+    public static void viewMessageList(ArrayList<String[]> conversations, ViewMessageList viewMessageList){
+        output.printPrompt(viewMessageList.getMessageList(conversations));
     }
 
 }
