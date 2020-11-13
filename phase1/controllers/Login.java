@@ -10,6 +10,7 @@ public class Login{
     private static CreateAccount createAccount;
     private static String ID;
     private static String type;
+    private static boolean EXIT = false;
 
     public Login(){
         input = new InputManager();
@@ -33,6 +34,9 @@ public class Login{
                 } else {
                     output.printPrompt("Account creation cancelled, directing back to main page now...\n");
                 }
+            } else if (CurrentAction.equals("EXIT")){
+                EXIT = true;
+                break;
             } else {
                 output.printPrompt("Invalid action entered  :(  directing back to main page now...\n");
             }
@@ -68,6 +72,7 @@ public class Login{
             }
         }
     }
+    public boolean getEXITStatus(){return EXIT;}
 
     public String getUserType(){
         return type;

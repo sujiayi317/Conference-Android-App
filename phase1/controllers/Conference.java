@@ -81,22 +81,24 @@ public class Conference {
      * Connect to one of the three types of User Controllers.
      */
     private void iteration() {
-        String userType = new Login().getUserType();
-        String userID = new Login().getUserID();
-        ConversationController conversationController = new ConversationController(userID);
+        while (!new Login().getEXITStatus()) {
+            String userType = new Login().getUserType();
+            String userID = new Login().getUserID();
+            ConversationController conversationController = new ConversationController(userID);
 
-        switch(userType) {
-            case "ATTENDEE":
-                new AttendeeController().run(userID, eventsController, attendeeManager,
-                        conversationController, userManager,viewMessageList);
-                break;
-            case "SPEAKER":
-                new SpeakerController().run(userID, eventsController,
-                        conversationController, userManager);
-                break;
-            case "ORGANIZER":
-                new OrganizerController().run(eventsController, attendeeManager,
-                        organizerManager, userManager, conversationController, userID);
+            switch(userType) {
+                case "ATTENDEE":
+                    new AttendeeController().run(userID, eventsController, attendeeManager,
+                            conversationController, userManager,viewMessageList);
+                    break;
+                case "SPEAKER":
+                    new SpeakerController().run(userID, eventsController,
+                            conversationController, userManager);
+                    break;
+                case "ORGANIZER":
+                    new OrganizerController().run(eventsController, attendeeManager,
+                            organizerManager, userManager, conversationController, userID);
+            }
         }
     }
 
