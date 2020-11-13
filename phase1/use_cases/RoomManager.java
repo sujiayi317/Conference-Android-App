@@ -37,13 +37,21 @@ public class RoomManager implements Serializable {
 
     public boolean createRoom(String roomNum) {
         for (Room room : this.rooms) {
-            if (room.getRoomNum() == roomNum){
+            if (room.getRoomNum().equals(roomNum)){
                 return false;
             }
         }
         Room room = new Room(roomNum);
         this.rooms.add(room);
         return true;
+    }
+
+    public String changeIdTONum(String roomID){
+        for (Room room: rooms){
+            if (room.getRoomID().equals(roomID)){
+                return room.getRoomNum();
+            }
+        }
     }
 
 
@@ -73,13 +81,13 @@ public class RoomManager implements Serializable {
     public ArrayList<String> getAvailableRoom(int time, EventManager eventManager){
         ArrayList<String> roomList = new ArrayList<>();
         for (Room room : rooms){
-            roomList.add(room.getRoomID());
+            roomList.add(changeIdTONum(room.getRoomID()));
         }
         for (String roomID : eventsMap.keySet()){
             for (String eventID :eventsMap.get(roomID)){
                 Event event = eventManager.getEventFromID(eventID);
                 if (event.getStartTime() == time){
-                    roomList.remove(roomID);
+                    roomList.remove(changeIdTONum(roomID));
                 }
             }
         }
