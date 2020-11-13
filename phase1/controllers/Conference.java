@@ -104,7 +104,7 @@ public class Conference {
     }
 
     private void finish() {
-        System.out.print("You have successfully signed out.");
+        System.out.print("Program exited.");
     }
 
 }
