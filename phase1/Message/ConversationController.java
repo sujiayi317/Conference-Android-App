@@ -1,5 +1,7 @@
 package Message;
 
+import use_cases.UserManager;
+
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.ArrayList;
@@ -8,10 +10,11 @@ import java.util.ArrayList;
 public class ConversationController {
     private ConversationManager conversationManager;
     private String currentUserId;
-
+    private UserManager userManager;
 
     public ConversationController(String currentUserId){
         this.conversationManager = new ConversationManager();
+        this.userManager = new UserManager();
         this.currentUserId = currentUserId;
     }
 
@@ -57,9 +60,14 @@ public class ConversationController {
     }
 
 
+
     public ArrayList<String> getMessagesOfOneConversation(String userId){
         enterConversation(userId);
-
-        return
+        ArrayList<String> FinalTextsList = new ArrayList<>();
+        for(String[] oneMessage: conversationManager.getMessagesOfCurrentConversation()){
+            String finalText = userManager.getUserName(oneMessage[0]) + oneMessage[1];
+            FinalTextsList.add(finalText);
+        }
+        return FinalTextsList;
     }
 }

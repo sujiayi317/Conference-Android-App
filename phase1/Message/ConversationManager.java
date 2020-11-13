@@ -67,14 +67,10 @@ public class ConversationManager implements Serializable{
         currentConversation.addMessage(senderId, text);
     }
 
-    public ArrayList<String> getMessagesOfCurrentConversation(){
-        ArrayList<String> stringOfMessages = new ArrayList<>();
-        for(int i = 0; i < currentConversation.getMessagesLength(); i++){
-            stringOfMessages.add();
-        }
+
+    public ArrayList<String[]> getMessagesOfCurrentConversation(){
+        return currentConversation.getMessages();
     }
-
-
 
 
     /**
