@@ -75,6 +75,8 @@ public class AttendeeController {
                                 check3 = true;
                             }else if (chooseFriend == -1){
                                 check3 = true;
+                            }else{
+                                System.out.println("Friend not found.");
                             }
                         }
                         break;
