@@ -13,9 +13,9 @@ public class EventsController{
     private final EventManager eventManager;
     private final RoomManager roomManager;
 
-    public EventsController(EventManager eventManager, RoomManager roomManager){
-        this.eventManager = eventManager;
-        this.roomManager = roomManager;
+    public EventsController(){
+        this.eventManager = new EventManager();
+        this.roomManager = new RoomManager();
     }
 
     public EventManager getEventManager(){

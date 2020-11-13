@@ -14,16 +14,22 @@ public class Login{
 
     public void run(AttendeeManager attendeeManager, OrganizerManager organizerManager, SpeakerManager speakerManager) {
         while (true) {
-            output.printPrompt("Welcome to main page of conference sign up centre! Please enter a number\n");
+            output.printPrompt("***Welcome to main page of conference sign up centre! Please enter a number***\n");
             Integer CurrentAction = input.getInputInt("1. Sign in \n2. Create an account\n");
             if (CurrentAction == 1) {
                 if (signIn(attendeeManager, organizerManager, speakerManager)){
                     break;
-                };
+                } else {
+                    output.printPrompt("Sign in failed, directing back to main page now...\n");
+                }
             } else if (CurrentAction == 2) {
-                createAccount(attendeeManager, organizerManager, speakerManager);
+                if (createAccount(attendeeManager, organizerManager, speakerManager)){
+                    output.printPrompt("New account successfully created! Directing back to main page now...\n");
+                } else {
+                    output.printPrompt("Account creation cancelled, directing back to main page now...\n");
+                }
             } else {
-                output.printPrompt("Invalid action, directing back to main page.");
+                output.printPrompt("Invalid action entered, directing back to main page now...\n");
             }
         }
     }
