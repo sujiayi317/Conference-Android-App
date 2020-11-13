@@ -95,11 +95,9 @@ public class OrganizerController extends AttendeeController{
                         break;
                     case 5:
                         // view all events
-                        AttendeeController.viewAllEvents(viewAllExistingEvents, eventsController);
                         break;
                     case 6:
                         // view all attended events
-                        viewAllAttendeeEvents.printAllAttendeeEvents(eventsController.getALLAttendeeEvents(userID));
                         break;
 
                     case 7:
@@ -108,10 +106,8 @@ public class OrganizerController extends AttendeeController{
                         time = input.getInputString("Please enter your event time between 0-24\n");
                         getAllAvailableRoomInfo(Integer.parseInt(time), viewAllAvailableRoom, eventsController);}
                         break;
-                    case 8:
-                        break;
 
-                    case 9:
+                    case 8:
                         RoomManager roomManager = eventsController.getRoomManager();
                         String roomNum = "-1";
                         while (Integer.parseInt(roomNum)>100 || Integer.parseInt(roomNum)<0)
