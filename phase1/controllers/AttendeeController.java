@@ -102,9 +102,17 @@ public class AttendeeController {
                     case 4:
                         //view all my message
                         ArrayList<String[]> messageList = conversationController.getUserAllConversation(userID);
+
+                        ArrayList<String[]> userNameWithLastMessage = new ArrayList<>();
+                        for (String[] s: messageList){
+                            String[] msg = {userManager.getUserName(s[0]), s[1]};
+                            userNameWithLastMessage.add(msg);
+                        }//有问题
+
+
                         boolean check4 = false;
                         while (!check4){
-                            viewMessageList(messageList, viewMessageList);
+                            viewMessageList(userNameWithLastMessage, viewMessageList);
                             int chooseConversation = input.getInputInt("Choose a message to start the conversation\n");
                             if (0 <= chooseConversation && chooseConversation <= messageList.size()-1){
                                 if (messageList.get(chooseConversation)[0].equals(userID)){
