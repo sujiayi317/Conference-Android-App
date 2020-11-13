@@ -97,14 +97,14 @@ public class AttendeeController {
                         ArrayList<String> friendList2 = attendeeManager.friendListGetter(userID);
                         boolean check5 = false;
                         while (!check5){
-                            String friendId = input.getInputString("Please enter the userId, or 0 to quit");
+                            String friendId = input.getInputString("Please enter the userId, or 0 to quit:\n");
                             if (friendList2.contains(friendId)){
                                 userManager.addFriend(userID, friendId);
                                 check5 = true;
                             }else if (friendId.equals("0")){
                                 check5 = true;
                             }else{
-                                System.out.println("Can't find the user");
+                                System.out.println("Can't find the user.");
                             }
                         }
                         break;
