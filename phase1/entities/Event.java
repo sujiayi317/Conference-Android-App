@@ -131,6 +131,9 @@ public class Event implements Serializable {
         return eventID;
     }
 
+    public String getEventTitle(){
+        return this.title;
+    }
     /**
      * Return the title String
      *
