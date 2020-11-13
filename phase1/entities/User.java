@@ -44,6 +44,8 @@ public abstract class User implements Serializable {
         return type;
     }
 
+    public abstract String getUserID();
+
     /**
      * Set the type of this user
      */
