@@ -35,6 +35,7 @@ public class Conference {
                       OrganizerManager organizerManager, UserManager userManager){
 
         this.attendeeManager = attendeeManager;
+        System.out.println(attendeeManager.getAttendees().get(0).getUserName());
         this.organizerManager = organizerManager;
         this.viewAllAvailableRoom = new ViewAllAvailableRoom();
         this.viewAllAttendeeEvents = new ViewAllAttendeeEvents();

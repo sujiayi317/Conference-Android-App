@@ -28,7 +28,6 @@ public class OrganizerManager extends UserManager implements Serializable{
     public void createOrganizer(String userName, String email, String password) {
         Organizer organizer = new Organizer(userName, email, password);
         this.organizers.add(organizer);
-        System.out.println(organizers.get(0));
         UserManager.users.add(organizer);
     }
 }
