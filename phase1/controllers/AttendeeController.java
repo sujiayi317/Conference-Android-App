@@ -23,6 +23,7 @@ public class AttendeeController {
         input = new InputManager();
         output = new OutputManager();
         this.attendeeMenu = new AttendeeMenu();
+
     }
     public void run(String userID, EventsController eventsController, ViewAllExistingEvents viewAllExistingEvents,
                     ViewAllAttendeeEvents viewAllAttendeeEvents, ViewEventInfo viewEventInfo,
@@ -87,12 +88,8 @@ public class AttendeeController {
                             if (0 <= chooseConversation && chooseConversation <= messageList.size()-1){
                                 if (messageList.get(chooseConversation)[0].equals(userID)){
                                     conversationController.enterConversation(messageList.get(chooseConversation)[1]);
-                                    viewMessagesOfAConversation.printMessages(conversationController.getMessagesOfOneConversation
-                                            (messageList.get(chooseConversation)[1]));
                                 }else{
                                     conversationController.enterConversation(messageList.get(chooseConversation)[0]);
-                                    viewMessagesOfAConversation.printMessages(conversationController.getMessagesOfOneConversation
-                                            (messageList.get(chooseConversation)[0]));
                                 }
                                 check4 = true;
                             }

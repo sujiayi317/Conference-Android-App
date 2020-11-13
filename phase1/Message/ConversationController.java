@@ -1,8 +1,10 @@
 package Message;
 
+import Presenter.*;
 import use_cases.UserManager;
 import controllers.*;
 
+import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.ArrayList;
@@ -11,9 +13,10 @@ import java.util.ArrayList;
 public class ConversationController {
     private static InputManager input;
     private static OutputManager output;
-    private ConversationManager conversationManager;
-    private String currentUserId;
-    private UserManager userManager;
+    private final ConversationManager conversationManager;
+    private final String currentUserId;
+    private final UserManager userManager;
+    private final ViewMessagesOfAConversation viewMessagesOfAConversation;
 
     public ConversationController(String currentUserId){
         input = new InputManager();
@@ -21,6 +24,7 @@ public class ConversationController {
         this.conversationManager = new ConversationManager();
         this.userManager = new UserManager();
         this.currentUserId = currentUserId;
+        this.viewMessagesOfAConversation = new ViewMessagesOfAConversation();
     }
 
 
@@ -41,6 +45,8 @@ public class ConversationController {
         conversationManager.currentConversationSetter(setOfTalkersNow);
         boolean keepSending = true;
         while (keepSending){
+            ArrayList<String> messageList = getMessagesOfCurrentConversation();
+            viewMessagesOfAConversation(messageList, viewMessagesOfAConversation);
             String message = input.getInputString("Enter \"quit\" to quit, other messages to send:\n");
             if (message.equals("quit")){
                 keepSending = false;
@@ -83,5 +89,18 @@ public class ConversationController {
             FinalTextsList.add(finalText);
         }
         return FinalTextsList;
+    }
+
+    public ArrayList<String> getMessagesOfCurrentConversation(){
+        ArrayList<String> FinalTextsList = new ArrayList<>();
+        for(String[] oneMessage: conversationManager.getMessagesOfCurrentConversation()){
+            String finalText = userManager.getUserName(oneMessage[0]) + oneMessage[1];
+            FinalTextsList.add(finalText);
+        }
+        return FinalTextsList;
+    }
+
+    public static void viewMessagesOfAConversation(ArrayList<String> messages, ViewMessagesOfAConversation viewMessagesOfAConversation){
+        output.printPrompt(viewMessagesOfAConversation.printMessages(messages));
     }
 }
