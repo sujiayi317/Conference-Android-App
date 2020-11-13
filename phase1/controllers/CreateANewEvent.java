@@ -28,7 +28,8 @@ public class CreateANewEvent {
                         getAllAvailableSpeaker(Integer.parseInt(timeInput), eventsController, viewAllAvailableSpeaker);
                         String title = input.getInputString("Please enter your event's title\n");
                         String roomNUm = input.getInputString("Please enter your room Num\n");
-                        String speaker = input.getInputString("Please set your speaker\n");
+                        String speakerNum = input.getInputString("Please set the SpeakerNum of your speaker\n");
+                        String speaker = eventsController.getAllAvailableSpeaker(Integer.parseInt(timeInput)).get(Integer.parseInt(speakerNum));
                         if (createEvent(title, eventsController.getRoomManager().changeNumTOID(roomNUm), speaker, Integer.parseInt(timeInput), eventsController)) {
                             output.printPrompt("The new Event named " + title + " at "
                                     + roomNUm + " taught by "
