@@ -22,6 +22,7 @@ public class Conference {
     private final ViewAllAvailableRoom viewAllAvailableRoom;
     private final ViewAllAttendeeEvents viewAllAttendeeEvents;
     private final ViewAllExistingEvents viewAllExistingEvents;
+    private final ViewAllSpeakerEvents viewAllSpeakerEvents;
     private final ViewEventInfo viewEventInfo;
     private final ViewFriendList viewFriendList;
     private final ViewAllAvailableSpeaker viewAllAvailableSpeaker;
@@ -36,6 +37,7 @@ public class Conference {
         this.viewAllAvailableRoom = new ViewAllAvailableRoom();
         this.viewAllAttendeeEvents = new ViewAllAttendeeEvents();
         this.viewAllExistingEvents = new ViewAllExistingEvents();
+        this.viewAllSpeakerEvents = new ViewAllSpeakerEvents();
         this.viewEventInfo = new ViewEventInfo();
         this.eventsController = new EventsController();
         this.userManager = new UserManager();
@@ -89,7 +91,7 @@ public class Conference {
                         viewMessagesOfAConversation);
                 break;
             case "SPEAKER":
-                new SpeakerController().run();
+                new SpeakerController().run(userID, eventsController, viewAllSpeakerEvents, viewEventInfo);
                 break;
             case "ORGANIZER":
                 new OrganizerController().run(eventsController, viewAllExistingEvents, viewAllAvailableRoom,

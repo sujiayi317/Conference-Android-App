@@ -38,6 +38,10 @@ public class EventsController{
         return this.eventManager.getAllEventForTheAttendee(userID);
     }
 
+    public ArrayList<String> getAllEventsForTheSpeaker(String userID){
+        return this.eventManager.getAllEventForTheSpeaker(userID);
+    }
+
     public boolean cancelEvent(String userID, String eventID){
         return this.eventManager.removeAttendeeFromEvent(userID,eventID, this.roomManager);
     }
