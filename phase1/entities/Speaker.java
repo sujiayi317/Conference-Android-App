@@ -14,8 +14,8 @@ public class Speaker extends User implements Serializable {
         setType("SPEAKER");
     }
 
-    @Override
-    public String getUserName() {
-        return super.getUserName();
-    }
+//    @Override
+//    public String getUserName() {
+//        return super.getUserName();
+//    }
 }
