@@ -1,6 +1,7 @@
 package Message;
 
 import use_cases.UserManager;
+import controllers.*;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -8,11 +9,15 @@ import java.util.ArrayList;
 
 
 public class ConversationController {
+    private static InputManager input;
+    private static OutputManager output;
     private ConversationManager conversationManager;
     private String currentUserId;
     private UserManager userManager;
 
     public ConversationController(String currentUserId){
+        input = new InputManager();
+        output = new OutputManager();
         this.conversationManager = new ConversationManager();
         this.userManager = new UserManager();
         this.currentUserId = currentUserId;
@@ -34,6 +39,15 @@ public class ConversationController {
             conversationManager.createConversation(currentUserId, secondUserId);
         }
         conversationManager.currentConversationSetter(setOfTalkersNow);
+        boolean keepSending = true;
+        while (keepSending){
+            String message = input.getInputString("Enter quit to quit, other messages to send");
+            if (message.equals("quit")){
+                keepSending = false;
+            }else {
+                sendToIndividualUser(message);
+            }
+        }
     }
 
     /**
