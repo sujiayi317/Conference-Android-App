@@ -7,11 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserManager {
-    public static List<User> users;
+    public static List<User> users = new ArrayList<>();
 
-    public UserManager(){
-        users = new ArrayList<>();
-    }
     public boolean validNewName(String name){
         for (User user : users){
             if (user.getUserName().equals(name)){
