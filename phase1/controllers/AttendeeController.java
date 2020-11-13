@@ -91,11 +91,10 @@ public class AttendeeController {
                             if (0 <= chooseConversation && chooseConversation <= messageList.size()-1){
                                 if (messageList.get(chooseConversation)[0].equals(userID)){
                                     conversationController.enterConversation(messageList.get(chooseConversation)[1]);
-                                    check4 = true;
-                                }else(messageList.get(chooseConversation)[1].equals(userID)){
+                                }else{
                                     conversationController.enterConversation(messageList.get(chooseConversation)[0]);
-                                    check4 = true;
                                 }
+                                check4 = true;
 
                             }else if(chooseConversation == 88){
                                 check4 = true;
