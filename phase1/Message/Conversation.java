@@ -35,6 +35,10 @@ public class Conversation implements Serializable {
         return true;
     }
 
+    public void loadAllMessage(ArrayList<String[]> messages){
+        this.messages = messages;
+    }
+
     /**
      * Get the messages of this conversation.
      *

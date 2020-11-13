@@ -22,6 +22,7 @@ public class AttendeeController {
     private final AttendeeMenu attendeeMenu;
     public final ViewAllAttendeeEvents viewAllAttendeeEvents;
     public final ViewAllExistingEvents viewAllExistingEvents;
+    public final ViewMessageList viewMessageList;
     public final ViewEventInfo viewEventInfo;
     private final ViewFriendList viewFriendList;
     private final SeeAllFriend seeAllFriend;
@@ -39,12 +40,12 @@ public class AttendeeController {
         this.viewAllExistingEvents = new ViewAllExistingEvents();
         this.viewEventInfo = new ViewEventInfo();
         this.viewFriendList = new ViewFriendList();
+        this.viewMessageList = new ViewMessageList();
 
     }
     public void run(String userID, EventsController eventsController,
                     AttendeeManager attendeeManager,
-                    ConversationController conversationController, UserManager userManager,
-                    ViewMessageList viewMessageList) {
+                    ConversationController conversationController, UserManager userManager) {
         //connect to Attendee Presenter - Menu options
         boolean quit = false;
         while (! quit ) {
@@ -134,6 +135,7 @@ public class AttendeeController {
                         break;
                     case 5:
                         //add friend
+                        //记得不能加管理员（还没写
                         ArrayList<String> userList = userManager.userListGetter();
                         boolean check5 = false;
                         while (!check5){

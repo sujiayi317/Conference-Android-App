@@ -23,21 +23,27 @@ public class SeeALLExistingEvents {
         int check = 0;
         while (check != 1 && eventsController.getAllExistingEvents().size() != 0) {
             viewAllEvents(viewAllExistingEvents, eventsController);
-            String eventTitle = input.getInputString("Please choose an event_title and see the details\n OR press enter back\n");
-            if (!eventTitle.equals("")) {
-                String eventID = eventsController.getEventManager().changeEventTitleIntoEventID(eventTitle);
-                viewOneEventInfo(eventID, viewEventInfo, eventsController);
-                String decision = input.getInputString("Yes=sign up OR No\n");
-                if (decision.equals("Yes")) {
-                    if (attendeeManager.signUp(eventsController.getEventManager(), userID, eventID,
-                            eventsController.getRoomManager())){
-                    output.printPrompt("You're successfully in " + eventTitle + "\n");
-                    check += 1;}
+            String eventNum = input.getInputString("Please choose an Event_Num and see the details OR press enter to back\n");
+            if (!eventNum.equals("") && eventsController.getAllExistingEvents().size() <= Integer.parseInt(eventNum)) {
+                String eventTitle = eventsController.getAllExistingEvents().get(Integer.parseInt(eventNum)).getTitle();
+                if (!eventTitle.equals("")) {
+                    String eventID = eventsController.getEventManager().changeEventTitleIntoEventID(eventTitle);
+                    viewOneEventInfo(eventID, viewEventInfo, eventsController);
+                    String decision = input.getInputString("Press: Yes to sign up OR No to back menu\n");
+                    if (decision.equals("Yes")) {
+                        if (attendeeManager.signUp(eventsController.getEventManager(), userID, eventID,
+                                eventsController.getRoomManager())) {
+                            output.printPrompt("You're successfully in " + eventTitle + "\n");
+                            check += 1;
+                        }else {
+                        output.printPrompt("You're already in " + eventTitle + "\n");}
+                    }
                 }
             }
-            else{
-                check +=1;
+            else if (eventsController.getAllExistingEvents().size() != 0){
+                output.printPrompt("Your enter is out of the bound please choose the correct Number of Event\n");
             }
+            else {check +=1;}
         }
     }
     public static void viewAllEvents(ViewAllExistingEvents viewAllExistingEvents, EventsController eventsController){
