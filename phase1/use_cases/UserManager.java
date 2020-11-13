@@ -7,11 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserManager {
-    public static  List<User> users;
+    public static List<User> users = new ArrayList<>();
 
-    public UserManager(){
-        users = new ArrayList<>();
-    }
     public boolean validNewName(String name){
         for (User user : users){
             if (user.getUserName().equals(name)){
@@ -58,21 +55,22 @@ public class UserManager {
         }
         return UserIds;
     }
+
     public boolean addFriend(String currId1, String userId2) {
-        List<String> IdList = UsersIdsGetter();
-        if (IdList.contains(currId1) && IdList.contains(userId2)) {
+        List<String> idList = UsersIdsGetter();
+        if (idList.contains(currId1) && idList.contains(userId2)) {
             for (User user : users) {
                 if (user.getUserID() == currId1) {
                     user.friendListSetter(userId2);
-                } else {
+                } else if(user.getUserID() == userId2){
                     user.friendListSetter(currId1);
                 }
             }
             return true;
-        } else {
-            return false;
         }
+        return false;
     }
+
 
     public ArrayList<String> friendListGetter(String userId) {
         for (User user : users){

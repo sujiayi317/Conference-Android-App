@@ -43,11 +43,11 @@ public class CreateAccount {
             }
         }
         if (type.equals("SPEAKER")){
-            speakerManager.createSpeaker(user, email, password);
+            speakerManager.createSpeaker(email, user, password);
         } else if (type.equals("ORGANIZER")){
-            organizerManager.createOrganizer(user, email, password);
+            organizerManager.createOrganizer(email, user, password);
         } else {
-            attendeeManager.createAttendee(user, email, password);
+            attendeeManager.createAttendee(email, user, password);
         }
         return true;
     }

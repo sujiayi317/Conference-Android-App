@@ -9,6 +9,7 @@ import entities.Organizer;
 import entities.User;
 import use_cases.*;
 
+import java.io.FileReader;
 import java.util.InputMismatchException;
 
 /**
@@ -26,24 +27,30 @@ public class Conference {
     private final ViewEventInfo viewEventInfo;
     private final ViewFriendList viewFriendList;
     private final ViewAllAvailableSpeaker viewAllAvailableSpeaker;
-    private ViewMessagesOfAConversation viewMessagesOfAConversation;
-    private ConversationController conversationController;
+    private final ConversationManager conversationManager;
+    private final ViewMessagesOfAConversation viewMessagesOfAConversation;
+    private final ViewMessageList viewMessageList;
+
     /**
      * This is where our conference system starts.
      */
-    public Conference(){
-        this.attendeeManager = new AttendeeManager();
-        this.organizerManager = new OrganizerManager();
+    public Conference(EventsController eventsController, AttendeeManager attendeeManager,
+                      OrganizerManager organizerManager, UserManager userManager){
+
+        this.attendeeManager = attendeeManager;
+        this.organizerManager = organizerManager;
         this.viewAllAvailableRoom = new ViewAllAvailableRoom();
         this.viewAllAttendeeEvents = new ViewAllAttendeeEvents();
         this.viewAllExistingEvents = new ViewAllExistingEvents();
         this.viewAllSpeakerEvents = new ViewAllSpeakerEvents();
         this.viewEventInfo = new ViewEventInfo();
-        this.eventsController = new EventsController();
-        this.userManager = new UserManager();
+        this.eventsController = eventsController;
+        this.userManager = userManager;
         this.viewFriendList = new ViewFriendList();
         this.viewAllAvailableSpeaker = new ViewAllAvailableSpeaker();
         this.viewMessagesOfAConversation = new ViewMessagesOfAConversation();
+        this.conversationManager = new ConversationManager();
+        this.viewMessageList = new ViewMessageList();
     }
     public void run(){
         try {
@@ -82,13 +89,13 @@ public class Conference {
     private void iteration() {
         String userType = new Login().getUserType();
         String userID = new Login().getUserID();
-        this.conversationController = new ConversationController(userID);
+        ConversationController conversationController = new ConversationController(userID);
 
         switch(userType) {
             case "ATTENDEE":
                 new AttendeeController().run(userID, eventsController, viewAllExistingEvents, viewAllAttendeeEvents,
                         viewEventInfo, attendeeManager, viewFriendList, conversationController,
-                        viewMessagesOfAConversation);
+                        viewMessagesOfAConversation,conversationManager, userManager,viewMessageList);
                 break;
             case "SPEAKER":
                 new SpeakerController().run(userID, eventsController, viewAllSpeakerEvents, viewEventInfo);
@@ -96,7 +103,7 @@ public class Conference {
             case "ORGANIZER":
                 new OrganizerController().run(eventsController, viewAllExistingEvents, viewAllAvailableRoom,
                         viewAllAttendeeEvents, attendeeManager,viewEventInfo, viewAllAvailableSpeaker,
-                        organizerManager, userManager, userID);
+                        organizerManager, userManager, conversationController, userID);
         }
     }
 

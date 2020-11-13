@@ -1,0 +1,4 @@
+SPEAKER shawn@123.com Shawn 12345678
+ORGANIZER steve@123.com Steve 12345678
+ATTENDEE hardy@123.com Hardy 12345678
+ATTENDEE tony@123.com Tony 12345678

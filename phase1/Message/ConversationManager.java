@@ -39,10 +39,7 @@ public class ConversationManager implements Serializable{
      * @return true iff the Conversation between two users from talkersList has been created.
      */
     public boolean existConversation(HashSet<String> talkersList){
-        if (conversations.containsKey(talkersList)) {
-            return true;
-        }
-        return false;
+        return conversations.containsKey(talkersList);
     }
 
 
@@ -77,11 +74,11 @@ public class ConversationManager implements Serializable{
      * Get the list of conversations of a certain user
      * 待定
      */
-    public List<Conversation> getUserConversations(String userId){
-        ArrayList<Conversation> UserConversations = new ArrayList<Conversation>();
+    public ArrayList<String[]> getUserConversations(String userId){
+        ArrayList<String[]> UserConversations = new ArrayList<String[]>();
         for (HashSet<String> key: conversations.keySet()){
             if (key.contains(userId)){
-                UserConversations.add(conversations.get(key));
+                UserConversations.add(conversations.get(key).getLastMessage());
             }
         }
         return UserConversations;

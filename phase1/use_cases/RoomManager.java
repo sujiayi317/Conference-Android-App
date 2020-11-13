@@ -52,6 +52,15 @@ public class RoomManager implements Serializable {
                 return room.getRoomNum();
             }
         }
+        return "NULL";
+    }
+    public String changeNumTOID(String roomNum){
+        for (Room room: rooms){
+            if (room.getRoomNum().equals(roomNum)){
+                return room.getRoomID();
+            }
+        }
+        return "NULL";
     }
 
 

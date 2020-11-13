@@ -1,42 +1,37 @@
-package entities; /**
- * The entities.Event class, this is the conference scheduled by entities.Organizer for Attendees and Speakers.
- *
- */
+package entities;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 /**
- * The Meeting class, this is used to create meeting objects, and it holds person objects attending the meeting.
- * We can assume the title for each event is unique (Piazza @704)
- *
+ * The entities.Event class, this is the conference scheduled by entities.Organizer for Attendees and Speakers.
  */
 public class Event implements Serializable {
 
-    private final String eventID;
     private final String title;
+    private final String eventID;
     private final String roomID;
-    private ArrayList<String> userID;
+    private ArrayList<String> userIDs;
     private ArrayList<String> speakers;
     private int startTime;
     private int duration = 1;
 
     public Event(String title, String roomID, String speakerID, int startTime) {
+        this.title = title;
         this.eventID = UUID.randomUUID().toString().split("-")[0];
         this.roomID = roomID;
-        this.title = title;
-        this.userID = new ArrayList<>();
+        this.userIDs = new ArrayList<>();
         this.speakers = new ArrayList<>(1);
         this.speakers.add(speakerID);
         this.startTime = startTime;
     }
 
     public Event(String title, String roomID, String speakerID, int startTime, int duration) {
+        this.title = title;
         this.eventID = title;
         this.roomID = roomID;
-        this.title = title;
-        this.userID = new ArrayList<>();
+        this.userIDs = new ArrayList<>();
         this.speakers = new ArrayList<>(1);
         speakers.add(speakerID);
         this.startTime = startTime;
@@ -54,22 +49,13 @@ public class Event implements Serializable {
     }
 
     /**
-     * Set the value of timeSlot
-     *
-     * @param startTime new value of timeSlot
-     */
-//    public void setStartTime(int startTime) {
-//        this.startTime = startTime;
-//    }
-
-    /**
      * Adds an attendee
      *
      * @param attendeeID String
      * @return boolean true if we add attendee to the list
      */
     public boolean addAttendee(String attendeeID, List<Event> events) {
-        if (this.userID.contains(attendeeID)) {
+        if (this.userIDs.contains(attendeeID)) {
             return false;
         }
         for (Event event : events){
@@ -77,7 +63,7 @@ public class Event implements Serializable {
                 return false;
             }
         }
-        this.userID.add(attendeeID);
+        this.userIDs.add(attendeeID);
         return true;
     }
 
@@ -88,8 +74,8 @@ public class Event implements Serializable {
      * @return boolean true if person existed in attendee list
      */
     public boolean removeAttendee(String attendeeID) {
-        if (userID.contains(attendeeID)) {
-            return userID.remove(attendeeID);
+        if (userIDs.contains(attendeeID)) {
+            return userIDs.remove(attendeeID);
         }
         return false;
     }
@@ -131,9 +117,6 @@ public class Event implements Serializable {
         return eventID;
     }
 
-    public String getEventTitle(){
-        return this.title;
-    }
     /**
      * Return the title String
      *
@@ -142,11 +125,18 @@ public class Event implements Serializable {
     public String getTitle() {
         return title;
     }
+
+    /**
+     * Return the roomID String
+     *
+     * @return the roomID
+     */
     public String getRoomID(){
         return this.roomID;
     }
+
     /**
-     * Returns all speakers
+     * Returns all speakers for this event
      *
      * @return all speakers
      */
@@ -155,12 +145,12 @@ public class Event implements Serializable {
     }
 
     /**
-     * Returns all attendeees
+     * Returns all attendeees for this event
      *
      * @return all attendeees
      */
     public ArrayList<String> getAttendees() {
-        return userID;
+        return userIDs;
     }
 
     /**
@@ -190,8 +180,3 @@ public class Event implements Serializable {
     }
 }
 
-//    @Override
-//    public int compareTo(entities.Event event) {
-//        return startTime.compareTo(event.startTime);
-//    }
-//}

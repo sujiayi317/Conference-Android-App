@@ -2,6 +2,7 @@ package use_cases;
 
 import entities.Attendee;
 import entities.Speaker;
+import entities.User;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -37,6 +38,7 @@ public class AttendeeManager extends UserManager implements Serializable {
         this.attendees.add(attendee);
         UserManager.users.add(attendee);
     }
+
 
     public List<Attendee> getAttendees() {
         return attendees;
