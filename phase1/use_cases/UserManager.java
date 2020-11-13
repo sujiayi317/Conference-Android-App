@@ -39,6 +39,17 @@ public class UserManager {
         return "NULL";
     }
 
+    public String getUserType(String account, String password){
+        for (User user : users){
+            if (user.getEmail().equals(account) && user.getPassword().equals(password)){
+                return user.getType();
+            } else if (user.getEmail().equals(account)){
+                return "NULL";
+            }
+        }
+        return "NULL";
+    }
+
     public List<String> UsersIdsGetter(){
         ArrayList<String> UserIds = new ArrayList<>();
         for (User user : users){

@@ -12,18 +12,19 @@ public class Login{
     private static String type;
 
 
-    public void run(AttendeeManager attendeeManager, OrganizerManager organizerManager, SpeakerManager speakerManager) {
+    public void run(AttendeeManager attendeeManager, OrganizerManager organizerManager, SpeakerManager speakerManager,
+                    UserManager usermanager) {
         while (true) {
             output.printPrompt("** Welcome to login page of conference sign up center! Please enter a number **\n");
             Integer CurrentAction = input.getInputInt("1. Sign in \n2. Create an account\n");
             if (CurrentAction == 1) {
-                if (signIn(attendeeManager, organizerManager, speakerManager)){
+                if (signIn(usermanager)){
                     break;
                 } else {
                     output.printPrompt("Sign in failed, directing back to main page now...\n");
                 }
             } else if (CurrentAction == 2) {
-                if (createAccount(attendeeManager, organizerManager, speakerManager)){
+                if (createAccount(attendeeManager, organizerManager, speakerManager, usermanager)){
                     output.printPrompt("New account successfully created! Directing back to main page now...\n");
                 } else {
                     output.printPrompt("Account creation cancelled, directing back to main page now...\n");
@@ -34,7 +35,7 @@ public class Login{
         }
     }
 
-    public boolean signIn(AttendeeManager attendeeManager, OrganizerManager organizerManager, SpeakerManager speakerManager){
+    public boolean signIn(UserManager userManager){
         while (true) {
             String account = input.getInputString("Please enter your email:\n");
             String password = input.getInputString("Please enter your password:\n");
@@ -43,31 +44,24 @@ public class Login{
 //                    organizerManager.validLogIn(account, password).equals("NULL")){
 //
 //            }
-            if (!attendeeManager.validLogIn(account, password).equals("NULL")){
-                ID = attendeeManager.validLogIn(account, password);
-                type = "ATTENDEE";
-                return true;
-            } else if (!organizerManager.validLogIn(account, password).equals("NULL")){
-                ID = organizerManager.validLogIn(account, password);
-                type = "ORGANIZER";
-                return true;
-            } else if (!speakerManager.validLogIn(account, password).equals("NULL")){
-                ID = speakerManager.validLogIn(account, password);
-                type = "SPEAKER";
+            if (!userManager.validLogIn(account, password).equals("NULL")){
+                ID = userManager.validLogIn(account, password);
+                type = userManager.getUserType(account, password);
                 return true;
             }
             return false;
         }
     }
 
-    public boolean createAccount(AttendeeManager attendeeManager, OrganizerManager organizerManager, SpeakerManager speakerManager){
+    public boolean createAccount(AttendeeManager attendeeManager, OrganizerManager organizerManager,
+                                 SpeakerManager speakerManager, UserManager userManager){
         while (true) {
             output.printPrompt("Select what type of account you want to create, or enter 'cancel' to exit.\n");
             String CurrentAction = input.getInputString("1. Attendee account \n2. Organizer account\n");
             if (CurrentAction.equals("1")) {
-                return createAccount.CreateNewAccount(attendeeManager, organizerManager, speakerManager, "ATTENDEE");
+                return createAccount.CreateNewAccount(attendeeManager, organizerManager, speakerManager, userManager,"ATTENDEE");
             } else if (CurrentAction.equals("2")) {
-                return createAccount.CreateNewAccount(attendeeManager, organizerManager, speakerManager, "ORGANIZER");
+                return createAccount.CreateNewAccount(attendeeManager, organizerManager, speakerManager, userManager,"ORGANIZER");
             } else if(CurrentAction.equals("cancel")){
                 return false;
             } else {
