@@ -8,7 +8,6 @@ public class Conversation implements Serializable {
     private HashSet<String> userIds = new HashSet<String>(); //Store uerIds of the two users
     private ArrayList<String[]> messages = new ArrayList<String[]>();
 
-
     public Conversation(String userId1, String userId2){
         userIds.add(userId1);
         userIds.add(userId2);
@@ -46,12 +45,11 @@ public class Conversation implements Serializable {
     }
 
     public String[] getLastMessage(){
-        int lastIndex = messages.size()-1;
-        Object [] userInfo = userIds.toArray();
+        int lastIndex = messages.size() - 1;
+        String [] userInfo = (String[]) userIds.toArray();
         String [] messageInfo = messages.get(lastIndex);
-        return new String[]{(String)userInfo[0], (String)userInfo[1], messageInfo[0], messageInfo[1]};
+        return new String[]{userInfo[0], userInfo[1], messageInfo[0], messageInfo[1]};
     }
-
 
     /**
      * Get the userIds of the current conversation.
