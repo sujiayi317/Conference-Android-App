@@ -2,6 +2,7 @@ package use_cases;
 
 import entities.Attendee;
 import entities.Speaker;
+import entities.User;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -36,6 +37,22 @@ public class AttendeeManager extends UserManager implements Serializable {
         //attendeeMap.put(attendee.getUserName(), attendee);
         this.attendees.add(attendee);
         UserManager.users.add(attendee);
+    }
+
+    public boolean addFriend(String currId1, String userId2) {
+        List<String> IdList = UsersIdsGetter();
+        if (IdList.contains(currId1) && IdList.contains(userId2)) {
+            for (User user : users) {
+                if (user.getUserID() == currId1) {
+                    user.friendListSetter(userId2);
+                } else {
+                    user.friendListSetter(currId1);
+                }
+            }
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public List<Attendee> getAttendees() {
