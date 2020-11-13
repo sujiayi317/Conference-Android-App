@@ -35,7 +35,7 @@ public class SpeakerManager extends UserManager implements Serializable {
         Speaker speaker = new Speaker(userName, email, password);
         //speakerMap.put(speaker.getUserName(), speaker);
         speakers.add(speaker);
-        super.users.add(speaker);
+        UserManager.users.add(speaker);
     }
 
     public boolean validNewSpeakerName(String name){
