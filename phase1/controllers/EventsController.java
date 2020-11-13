@@ -28,6 +28,8 @@ public class EventsController{
         return this.roomManager;
     }
 
+    public SpeakerManager getSpeakerManager(){return this.speakerManager;}
+
     public List<Event> getAllExistingEvents(){
         return this.eventManager.getAllEvent();
     }

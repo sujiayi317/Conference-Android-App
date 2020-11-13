@@ -30,7 +30,7 @@ public class OrganizerController extends AttendeeController{
     public void run(EventsController eventsController, ViewAllExistingEvents viewAllExistingEvents,
                     ViewAllAvailableRoom viewAllAvailableRoom , ViewAllAttendeeEvents viewAllAttendeeEvents,
                     AttendeeManager attendeeManager,ViewEventInfo viewEventInfo, ViewAllAvailableSpeaker viewAllAvailableSpeaker,
-                    OrganizerManager organizerManager, SpeakerManager speakerManager, UserManager userManager, String userID) {
+                    OrganizerManager organizerManager, UserManager userManager, String userID) {
         //connect to Attendee Presenter - Menu options
         boolean quit = false;
         while (!quit) {
@@ -42,7 +42,7 @@ public class OrganizerController extends AttendeeController{
                         quit = true;
                     case 1:
                         //connect to CreateAccount Controller to create enw speaker
-                        if (create.CreateNewAccount(attendeeManager, organizerManager, speakerManager, userManager, "SPEAKER")) {
+                        if (create.CreateNewAccount(attendeeManager, organizerManager, eventsController.getSpeakerManager(), userManager, "SPEAKER")) {
                             output.printPrompt("New speaker account successfully created.\n");
                         } else {
                             output.printPrompt("Create speaker action cancelled.\n");

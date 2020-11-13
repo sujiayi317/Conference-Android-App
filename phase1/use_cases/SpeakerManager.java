@@ -25,7 +25,7 @@ public class SpeakerManager extends UserManager implements Serializable {
 //        events = new ArrayList<>();
 //        speakerMap = new HashMap<>();
 //        eventsMap = new HashMap<>();
-        speakers = new ArrayList<>();
+        this.speakers = new ArrayList<>();
     }
 
     /**
@@ -34,8 +34,8 @@ public class SpeakerManager extends UserManager implements Serializable {
     public void createSpeaker(String userName, String email, String password) {
         Speaker speaker = new Speaker(userName, email, password);
         //speakerMap.put(speaker.getUserName(), speaker);
-        speakers.add(speaker);
-        super.users.add(speaker);
+        this.speakers.add(speaker);
+        users.add(speaker);
     }
 
     public boolean validNewSpeakerName(String name){
