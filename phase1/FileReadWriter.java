@@ -1,7 +1,10 @@
+import controllers.EventsController;
+import entities.Event;
 import entities.User;
 import use_cases.EventManager;
 import use_cases.RoomManager;
 import use_cases.SpeakerManager;
+import use_cases.*;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -10,96 +13,134 @@ import java.io.FileNotFoundException;  // Import this class to handle errors
 import java.util.Scanner;
 
 class FileReadWriter {
+    private EventsController eventsController;
+    private AttendeeManager attendeeManager;
+    private OrganizerManager organizerManager;
 
-    public void UserReader() throws FileNotFoundException {
+    public FileReadWriter() {
+        eventsController = new EventsController();
+        attendeeManager = new AttendeeManager();
+        organizerManager = new OrganizerManager();
+    }
+
+    public void UserReader() {
+        ArrayList<String> lines = new ArrayList();
         try {
             File UserFile = new File("Users.txt");
             Scanner myReader = new Scanner(UserFile);
-            UserFile.readall
+            while (myReader.hasNextLine()) {
+                while (myReader.hasNextLine()) {
+                    lines.add(myReader.nextLine());
+                }
+            }
         } catch (FileNotFoundException e) {
             System.out.println("User File Not Found");
         }
+        SpeakerManager speakermanager = eventsController.getSpeakerManager();
+        for (int i = 0; i < lines.size(); i++) {
+            ArrayList<String> wordList = new ArrayList<String>();
+            for (String word : lines.get(i).split(" ")) {
+                if (wordList.get(0).equals("SPEAKER")) {
+                    speakermanager.createSpeaker(wordList.get(1), wordList.get(2), wordList.get(3));
+                } else if (wordList.get(0).equals("ATTENDEE")) {
+                    attendeeManager.createAttendee(wordList.get(1), wordList.get(2), wordList.get(3));
+                } else if (wordList.get(0).equals("ORGANIZER")) {
+                    organizerManager.createOrganizer(wordList.get(1), wordList.get(2), wordList.get(3));
+                }
+
+            }
+        }
+    }
+
+
+    public EventsController eventsController(){
+        return eventsController();
+    }
+    public OrganizerManager organizerManager(){
+        return organizerManager();
+    }
+    public AttendeeManager attendeeManager(){
+        return attendeeManager();
     }
 }
-////    public EventManager readFromEventFile(String path) throws ClassNotFoundException {
-////        try {
-////            InputStream file = new FileInputStream(path); // String path should be "fileName.ser"
-////            InputStream buffer = new BufferedInputStream(file);
-////            ObjectInput input = new ObjectInputStream(buffer);
-////
-////            // deserialize the use_cases.EventManager
-////            EventManager sm = (EventManager) input.readObject();
-////            input.close();
-////            return sm;
-////        } catch (IOException ex) {
-////            logger.log(Level.SEVERE, "Cannot read from input file, returning" +
-////                    "a new use_cases.EventManager.", ex);
-////            return new EventManager();
-////        }
-////    }
-////
-////    public SpeakerManager readFromSpeakerFile(String path) throws ClassNotFoundException {
-////        try {
-////            InputStream file = new FileInputStream(path); // String path should be "fileName.ser"
-////            InputStream buffer = new BufferedInputStream(file);
-////            ObjectInput input = new ObjectInputStream(buffer);
-////
-////            // deserialize the use_cases.SpeakerManager
-////            SpeakerManager sm = (SpeakerManager) input.readObject();
-////            input.close();
-////            return sm;
-////        } catch (IOException ex) {
-////            logger.log(Level.SEVERE, "Cannot read from input file, returning" +
-////                    "a new use_cases.SpeakerManager.", ex);
-////            return new SpeakerManager();
-////        }
-////    }
-////
-////    public RoomManager readFromRoomFile(String path) throws ClassNotFoundException {
-////        try {
-////            InputStream file = new FileInputStream(path); // String path should be "fileName.ser"
-////            InputStream buffer = new BufferedInputStream(file);
-////            ObjectInput input = new ObjectInputStream(buffer);
-////
-////            // deserialize the use_cases.RoomManager
-////            RoomManager sm = (RoomManager) input.readObject();
-////            input.close();
-////            return sm;
-////        } catch (IOException ex) {
-////            logger.log(Level.SEVERE, "Cannot read from input file, returning" +
-////                    "a new use_cases.RoomManager.", ex);
-////            return new RoomManager();
-////        }
-////    }
-////
-////    public ArrayList<User> readFromUserFile(String path) throws ClassNotFoundException {
-////        try {
-////            InputStream file = new FileInputStream(path); // String path should be "fileName.ser"
-////            InputStream buffer = new BufferedInputStream(file);
-////
-////            ArrayList<User> objList = new ArrayList<>();
-////            boolean load = true;
-////            while (load)
-////            {
-////                try (ObjectInput input = new ObjectInputStream(buffer))
-////                {
-////                    User sm = (User) input.readObject();
-////                    if (sm != null) {
-////                        objList.add(sm);
-////                    } else {
-////                        load = false;
-////                    }
-////                }
-////                catch (Exception e)
-////                {
-////                }
-////            }
-////            input.close(); //can't close input TODO
-////            return objList;
-////        } catch (IOException ex) {
-////            logger.log(Level.SEVERE, "Cannot read from input file, returning" +
-////                    "a new entities.User.", ex);
-////            return new ArrayList<>();
-////        }
-////    }
-//}
+//    public EventManager readFromEventFile(String path) throws ClassNotFoundException {
+//        try {
+//            InputStream file = new FileInputStream(path); // String path should be "fileName.ser"
+//            InputStream buffer = new BufferedInputStream(file);
+//            ObjectInput input = new ObjectInputStream(buffer);
+//
+//            // deserialize the use_cases.EventManager
+//            EventManager sm = (EventManager) input.readObject();
+//            input.close();
+//            return sm;
+//        } catch (IOException ex) {
+//            logger.log(Level.SEVERE, "Cannot read from input file, returning" +
+//                    "a new use_cases.EventManager.", ex);
+//            return new EventManager();
+//        }
+//    }
+//
+//    public SpeakerManager readFromSpeakerFile(String path) throws ClassNotFoundException {
+//        try {
+//            InputStream file = new FileInputStream(path); // String path should be "fileName.ser"
+//            InputStream buffer = new BufferedInputStream(file);
+//            ObjectInput input = new ObjectInputStream(buffer);
+//
+//            // deserialize the use_cases.SpeakerManager
+//            SpeakerManager sm = (SpeakerManager) input.readObject();
+//            input.close();
+//            return sm;
+//        } catch (IOException ex) {
+//            logger.log(Level.SEVERE, "Cannot read from input file, returning" +
+//                    "a new use_cases.SpeakerManager.", ex);
+//            return new SpeakerManager();
+//        }
+//    }
+//
+//    public RoomManager readFromRoomFile(String path) throws ClassNotFoundException {
+//        try {
+//            InputStream file = new FileInputStream(path); // String path should be "fileName.ser"
+//            InputStream buffer = new BufferedInputStream(file);
+//            ObjectInput input = new ObjectInputStream(buffer);
+//
+//            // deserialize the use_cases.RoomManager
+//            RoomManager sm = (RoomManager) input.readObject();
+//            input.close();
+//            return sm;
+//        } catch (IOException ex) {
+//            logger.log(Level.SEVERE, "Cannot read from input file, returning" +
+//                    "a new use_cases.RoomManager.", ex);
+//            return new RoomManager();
+//        }
+//    }
+//
+//    public ArrayList<User> readFromUserFile(String path) throws ClassNotFoundException {
+//        try {
+//            InputStream file = new FileInputStream(path); // String path should be "fileName.ser"
+//            InputStream buffer = new BufferedInputStream(file);
+//
+//            ArrayList<User> objList = new ArrayList<>();
+//            boolean load = true;
+//            while (load)
+//            {
+//                try (ObjectInput input = new ObjectInputStream(buffer))
+//                {
+//                    User sm = (User) input.readObject();
+//                    if (sm != null) {
+//                        objList.add(sm);
+//                    } else {
+//                        load = false;
+//                    }
+//                }
+//                catch (Exception e)
+//                {
+//                }
+//            }
+//            input.close(); //can't close input TODO
+//            return objList;
+//        } catch (IOException ex) {
+//            logger.log(Level.SEVERE, "Cannot read from input file, returning" +
+//                    "a new entities.User.", ex);
+//            return new ArrayList<>();
+//        }
+//    }

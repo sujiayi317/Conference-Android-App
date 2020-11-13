@@ -9,6 +9,7 @@ import entities.Organizer;
 import entities.User;
 import use_cases.*;
 
+import java.io.FileReader;
 import java.util.InputMismatchException;
 
 /**
@@ -30,14 +31,16 @@ public class Conference {
     /**
      * This is where our conference system starts.
      */
-    public Conference(){
-        this.attendeeManager = new AttendeeManager();
-        this.organizerManager = new OrganizerManager();
+    public Conference(EventsController eventsController, AttendeeManager attendeeManager,
+                      OrganizerManager organizerManager){
+
+        this.attendeeManager = attendeeManager;
+        this.organizerManager = organizerManager;
         this.viewAllAvailableRoom = new ViewAllAvailableRoom();
         this.viewAllAttendeeEvents = new ViewAllAttendeeEvents();
         this.viewAllExistingEvents = new ViewAllExistingEvents();
         this.viewEventInfo = new ViewEventInfo();
-        this.eventsController = new EventsController();
+        this.eventsController = eventsController;
         this.userManager = new UserManager();
         this.viewFriendList = new ViewFriendList();
         this.viewAllAvailableSpeaker = new ViewAllAvailableSpeaker();
