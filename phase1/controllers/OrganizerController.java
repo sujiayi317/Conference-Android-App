@@ -40,7 +40,6 @@ public class OrganizerController extends AttendeeController{
                 switch (choice) {
                     case 0:
                         quit = true;
-                        break;
                     case 1:
                         //connect to CreateAccount Controller to create enw speaker
                         if (create.CreateNewAccount(attendeeManager, organizerManager, speakerManager, userManager, "SPEAKER")) {
@@ -53,7 +52,7 @@ public class OrganizerController extends AttendeeController{
                         //view all existing events
                         viewAllEvents(viewAllExistingEvents, eventsController);
                         int check = 0;
-                        while (check != 1) {
+                        while (check != 1 && eventsController.getAllExistingEvents().size() != 0) {
                             viewAllEvents(viewAllExistingEvents, eventsController);
                             String eventID = input.getInputString("Please choose an event and see the details or press enter\n");
                             if (!eventID.equals("")) {
@@ -72,7 +71,7 @@ public class OrganizerController extends AttendeeController{
                     case 3:
                         // view all his/her events
                         viewAllAttendeeEvents(userID, viewAllAttendeeEvents, eventsController);
-                        break;
+                        break;;
 
                     case 4:
                         //create a new event
@@ -91,12 +90,10 @@ public class OrganizerController extends AttendeeController{
                             String speaker = input.getInputString("Please set your speaker\n");
                             createEvent(title, roomID, speaker, startTime, eventsController);}
                         break;
-
                     case 5:
                         // view all events
                         AttendeeController.viewAllEvents(viewAllExistingEvents, eventsController);
                         break;
-
                     case 6:
                         // view all attended events
                         viewAllAttendeeEvents.printAllAttendeeEvents(eventsController.getALLAttendeeEvents(userID));
@@ -105,6 +102,8 @@ public class OrganizerController extends AttendeeController{
                     case 7:
                         int time = input.getInputInt("Please enter your event time between 0-24\n");
                         getAllAvailableRoomInfo(time, viewAllAvailableRoom, eventsController);
+                        break;
+                    case 8:
                         break;
 
                     case 9:
