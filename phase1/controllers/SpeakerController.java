@@ -1,10 +1,7 @@
 package controllers;
 
 import Message.ConversationController;
-import Presenter.SpeakerMenu;
-import Presenter.ViewAllEventAttendees;
-import Presenter.ViewAllSpeakerEvents;
-import Presenter.ViewEventInfo;
+import Presenter.*;
 import use_cases.EventManager;
 import use_cases.UserManager;
 
@@ -18,16 +15,21 @@ public class SpeakerController {
     private static InputManager input;
     private static OutputManager output;
     private final SpeakerMenu speakermenu;
+    private final ViewAllSpeakerEvents viewAllSpeakerEvents;
+    private final ViewEventInfo viewEventInfo;
+    private final ViewAllEventAttendees viewAllAttendeeEvents;
 
 
     public SpeakerController(){
         input = new InputManager();
         output = new OutputManager();
         this.speakermenu = new SpeakerMenu();
+        this.viewAllAttendeeEvents = new ViewAllEventAttendees();
+        this.viewEventInfo = new ViewEventInfo();
+        this.viewAllSpeakerEvents = new ViewAllSpeakerEvents();
     }
-    public void run(String userID, EventsController eventsController, ViewAllSpeakerEvents viewAllSpeakerEvents,
-                    ViewEventInfo viewEventInfo, ConversationController conversationController, ViewAllEventAttendees
-                    viewAllEventAttendees, UserManager userManager) {
+    public void run(String userID, EventsController eventsController, ConversationController conversationController,
+                    UserManager userManager) {
         //connect to Speaker Presenter - Menu options
         boolean quit = false;
         while (!quit ) {
@@ -63,7 +65,7 @@ public class SpeakerController {
                                         conversationController.sendToMultipleUsers(message, receivers);
                                     case 2:
                                         //message individual attendee: display list of attendees of the event:
-                                        viewAllEventAttendees(eventId, viewAllEventAttendees, eventsController);
+                                        viewAllEventAttendees(eventId, viewAllAttendeeEvents, eventsController);
                                         //choose an attendee to message
                                         int chooseAttendee = input.getInputInt("Choose an attendee to message:\n");
                                         ArrayList<String> attendeeList = eventManager.getAttendeesFromEvent(eventId);

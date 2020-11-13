@@ -18,16 +18,23 @@ public class AttendeeController {
     private static InputManager input;
     private static OutputManager output;
     private final AttendeeMenu attendeeMenu;
+    public final ViewAllAttendeeEvents viewAllAttendeeEvents;
+    public final ViewAllExistingEvents viewAllExistingEvents;
+    public final ViewEventInfo viewEventInfo;
+    private final ViewFriendList viewFriendList;
 
     public AttendeeController(){
         input = new InputManager();
         output = new OutputManager();
         this.attendeeMenu = new AttendeeMenu();
+        this.viewAllAttendeeEvents = new ViewAllAttendeeEvents();
+        this.viewAllExistingEvents = new ViewAllExistingEvents();
+        this.viewEventInfo = new ViewEventInfo();
+        this.viewFriendList = new ViewFriendList();
 
     }
-    public void run(String userID, EventsController eventsController, ViewAllExistingEvents viewAllExistingEvents,
-                    ViewAllAttendeeEvents viewAllAttendeeEvents, ViewEventInfo viewEventInfo,
-                    AttendeeManager attendeeManager, ViewFriendList viewFriendList,
+    public void run(String userID, EventsController eventsController,
+                    AttendeeManager attendeeManager,
                     ConversationController conversationController, ConversationManager conversationManager, UserManager userManager,
                     ViewMessageList viewMessageList) {
         //connect to Attendee Presenter - Menu options
