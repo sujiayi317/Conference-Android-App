@@ -21,18 +21,22 @@ public class OrganizerController extends AttendeeController{
     private static OutputManager output;
     private final CreateAccount create;
     private final OrganizerMenu organizerMenu;
+    private final ViewAllAvailableRoom viewAllAvailableRoom;
+    private final ViewFriendList viewFriendList;
+    private final ViewAllAvailableSpeaker viewAllAvailableSpeaker;
 
     public OrganizerController(){
         this.organizerMenu = new OrganizerMenu();
         input = new InputManager();
         output = new OutputManager();
         this.create = new CreateAccount();
+        this.viewAllAvailableRoom = new ViewAllAvailableRoom();
+        this.viewAllAvailableSpeaker = new ViewAllAvailableSpeaker();
+        this.viewFriendList = new ViewFriendList();
     }
 
 
-    public void run(EventsController eventsController, ViewAllExistingEvents viewAllExistingEvents,
-                    ViewAllAvailableRoom viewAllAvailableRoom , ViewAllAttendeeEvents viewAllAttendeeEvents,
-                    AttendeeManager attendeeManager, ViewEventInfo viewEventInfo, ViewAllAvailableSpeaker viewAllAvailableSpeaker,
+    public void run(EventsController eventsController, AttendeeManager attendeeManager,
                     OrganizerManager organizerManager, UserManager userManager,
                     ConversationController conversationController, String userID) {
         //connect to Attendee Presenter - Menu options

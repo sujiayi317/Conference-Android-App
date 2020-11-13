@@ -20,15 +20,14 @@ public class Conference {
     private final EventsController eventsController;
     private final AttendeeManager attendeeManager;
     private final OrganizerManager organizerManager;
-    private final ViewAllAvailableRoom viewAllAvailableRoom;
-    private final ViewAllAttendeeEvents viewAllAttendeeEvents;
-    private final ViewAllExistingEvents viewAllExistingEvents;
-    private final ViewAllSpeakerEvents viewAllSpeakerEvents;
-    private final ViewEventInfo viewEventInfo;
-    private final ViewFriendList viewFriendList;
-    private final ViewAllAvailableSpeaker viewAllAvailableSpeaker;
+//    private final ViewAllAttendeeEvents viewAllAttendeeEvents;
+//    private final ViewAllExistingEvents viewAllExistingEvents;
+//    private final ViewAllSpeakerEvents viewAllSpeakerEvents;
+//    private final ViewEventInfo viewEventInfo;
+//    private final ViewFriendList viewFriendList;
+    private final ConversationManager conversationManager;
     private final ViewMessageList viewMessageList;
-    private final ViewAllEventAttendees viewAllEventAttendees;
+//    private final ViewAllEventAttendees viewAllEventAttendees;
 
     /**
      * This is where our conference system starts.
@@ -40,15 +39,14 @@ public class Conference {
         this.attendeeManager = attendeeManager;
         this.organizerManager = organizerManager;
         this.eventsController = eventsController;
-        this.viewAllAvailableRoom = new ViewAllAvailableRoom();
-        this.viewAllAttendeeEvents = new ViewAllAttendeeEvents();
-        this.viewAllExistingEvents = new ViewAllExistingEvents();
-        this.viewAllSpeakerEvents = new ViewAllSpeakerEvents();
-        this.viewEventInfo = new ViewEventInfo();
-        this.viewFriendList = new ViewFriendList();
-        this.viewAllAvailableSpeaker = new ViewAllAvailableSpeaker();
+//        this.viewAllAttendeeEvents = new ViewAllAttendeeEvents();
+//        this.viewAllExistingEvents = new ViewAllExistingEvents();
+//        this.viewAllSpeakerEvents = new ViewAllSpeakerEvents();
+//        this.viewEventInfo = new ViewEventInfo();
+//        this.viewFriendList = new ViewFriendList();
+        this.conversationManager = new ConversationManager();
         this.viewMessageList = new ViewMessageList();
-        this.viewAllEventAttendees = new ViewAllEventAttendees();
+//        this.viewAllEventAttendees = new ViewAllEventAttendees();
     }
     public void run(){
         try {
@@ -91,16 +89,15 @@ public class Conference {
 
         switch(userType) {
             case "ATTENDEE":
-                new AttendeeController().run(userID, eventsController, viewAllExistingEvents, viewAllAttendeeEvents,
-                        viewEventInfo, attendeeManager, viewFriendList, conversationController,userManager,viewMessageList);
+                new AttendeeController().run(userID, eventsController, attendeeManager,
+                        conversationController,conversationManager, userManager,viewMessageList);
                 break;
             case "SPEAKER":
-                new SpeakerController().run(userID, eventsController, viewAllSpeakerEvents, viewEventInfo,
-                        conversationController, viewAllEventAttendees, userManager);
+                new SpeakerController().run(userID, eventsController,
+                        conversationController, userManager);
                 break;
             case "ORGANIZER":
-                new OrganizerController().run(eventsController, viewAllExistingEvents, viewAllAvailableRoom,
-                        viewAllAttendeeEvents, attendeeManager,viewEventInfo, viewAllAvailableSpeaker,
+                new OrganizerController().run(eventsController, attendeeManager,
                         organizerManager, userManager, conversationController, userID);
         }
     }
