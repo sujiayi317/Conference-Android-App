@@ -14,7 +14,6 @@ public abstract class User implements Serializable {
     //private String lastName;
     private String userName;
     private String email;
-    private final String userID;
     private String password;
     private String type;
     private ArrayList<String> friendList;
@@ -24,7 +23,6 @@ public abstract class User implements Serializable {
         //this.lastName = lastName;
         this.email = email;
         this.userName = userName;
-        this.userID = UUID.randomUUID().toString().split("-")[0];
         this.password = password;
         this.friendList = new ArrayList<String>();
     }
@@ -94,9 +92,6 @@ public abstract class User implements Serializable {
      *
      * @return the value of userID
      */
-    public String getUserID() {
-        return this.userID;
-    }
 
     /**
      * Get the password of this user
