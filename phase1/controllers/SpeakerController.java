@@ -5,8 +5,11 @@ package controllers;
  */
 public class SpeakerController {
 
-    private static InputManager input = new InputManager();
+    private static InputManager input;
 
+    public SpeakerController(){
+        input = new InputManager();
+    }
     public void run() {
         //connect to Attendee Presenter - Menu options
 
