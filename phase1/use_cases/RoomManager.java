@@ -32,10 +32,10 @@ public class RoomManager implements Serializable {
 
     /**
      * Creates a new room (helper method for addEventToRoom method)
-     * @param roomID the room to create and add
+     * @param roomNum the room to create and add
      */
-    private Room createRoom(String roomID) {
-        Room room = new Room(roomID);
+    private Room createRoom(String roomNum) {
+        Room room = new Room(roomNum);
         this.rooms.add(room);
         return room;
     }

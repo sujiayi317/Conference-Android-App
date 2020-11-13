@@ -21,7 +21,11 @@ public class Login{
                     break;
                 };
             } else if (CurrentAction == 2) {
-                createAccount(attendeeManager, organizerManager, speakerManager);
+                if (createAccount(attendeeManager, organizerManager, speakerManager)){
+                    output.printPrompt("New account successfully created! Directing back to main page now...\n");
+                } else {
+                    output.printPrompt("Account creation cancelled, directing back to main page now...");
+                }
             } else {
                 output.printPrompt("Invalid action, directing back to main page.");
             }
