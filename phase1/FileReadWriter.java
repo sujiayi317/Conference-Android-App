@@ -1,13 +1,21 @@
-//import entities.User;
-//import use_cases.EventManager;
-//import use_cases.RoomManager;
-//import use_cases.SpeakerManager;
-//
-//import java.io.*;
-//import java.util.ArrayList;
-//
-//class FileReadWriter {
-//
+import entities.User;
+import use_cases.EventManager;
+import use_cases.RoomManager;
+import use_cases.SpeakerManager;
+
+import java.io.*;
+import java.util.ArrayList;
+
+class FileReadWriter {
+
+
+    public void UserReader throws FileNotFoundException{
+        try {
+            File UserFile = new File("Users.txt");
+        } catch (FileNotFoundException e){
+            System.out.println("User File Not Found");
+        }
+    }
 //    public EventManager readFromEventFile(String path) throws ClassNotFoundException {
 //        try {
 //            InputStream file = new FileInputStream(path); // String path should be "fileName.ser"
@@ -89,4 +97,4 @@
 //            return new ArrayList<>();
 //        }
 //    }
-//}
+}
