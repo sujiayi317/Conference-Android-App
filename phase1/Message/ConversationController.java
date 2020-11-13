@@ -41,7 +41,7 @@ public class ConversationController {
         conversationManager.currentConversationSetter(setOfTalkersNow);
         boolean keepSending = true;
         while (keepSending){
-            String message = input.getInputString("Enter quit to quit, other messages to send");
+            String message = input.getInputString("Enter \"quit\" to quit, other messages to send:\n");
             if (message.equals("quit")){
                 keepSending = false;
             }else {
