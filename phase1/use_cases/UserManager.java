@@ -61,9 +61,9 @@ public class UserManager {
         List<String> idList = UsersIdsGetter();
         if (idList.contains(currId1) && idList.contains(userId2)) {
             for (User user : users) {
-                if (user.getUserID() == currId1) {
+                if (user.getUserID().equals(currId1)) {
                     user.friendListSetter(userId2);
-                } else if(user.getUserID() == userId2){
+                } else if(user.getUserID().equals(userId2)){
                     user.friendListSetter(currId1);
                 }
             }
