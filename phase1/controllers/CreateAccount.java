@@ -42,9 +42,9 @@ public class CreateAccount {
             }
         }
 
-        if (type.equals("Speaker")){
+        if (type.equals("SPEAKER")){
             speakerManager.createSpeaker(user, email, password);
-        } else if (type.equals("Organizer")){
+        } else if (type.equals("ORGANIZER")){
             organizerManager.createOrganizer(user, email, password);
         } else {
             attendeeManager.createAttendee(user, email, password);

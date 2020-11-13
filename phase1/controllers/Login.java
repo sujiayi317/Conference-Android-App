@@ -14,7 +14,7 @@ public class Login{
 
     public void run(AttendeeManager attendeeManager, OrganizerManager organizerManager, SpeakerManager speakerManager) {
         while (true) {
-            output.printPrompt("***Welcome to main page of conference sign up centre! Please enter a number***\n");
+            output.printPrompt("** Welcome to login page of conference sign up center! Please enter a number **\n");
             Integer CurrentAction = input.getInputInt("1. Sign in \n2. Create an account\n");
             if (CurrentAction == 1) {
                 if (signIn(attendeeManager, organizerManager, speakerManager)){
