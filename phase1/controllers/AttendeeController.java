@@ -1,5 +1,7 @@
 package controllers;
 
+import Message.ConversationController;
+import Message.ConversationManager;
 import Presenter.*;
 import use_cases.AttendeeManager;
 
@@ -22,7 +24,7 @@ public class AttendeeController {
     }
     public void run(String userID, EventsController eventsController, ViewAllExistingEvents viewAllExistingEvents,
                     ViewAllAttendeeEvents viewAllAttendeeEvents, ViewEventInfo viewEventInfo, AttendeeManager attendeeManager,
-                    ViewFriendList viewFriendList) {
+                    ViewFriendList viewFriendList, ConversationController conversationController) {
         //connect to Attendee Presenter - Menu options
         attendeeMenu.printAttendeeMenu(userID);
         int choice = input.getInputInt("Please choose from the above options:\n");
@@ -51,7 +53,15 @@ public class AttendeeController {
                 case 3:
                     //View all my friend
                     ArrayList<String> friendList = attendeeManager.friendListGetter(userID);
-                    viewAllFriends(friendList, viewFriendList);
+                    boolean check3 = false;
+                    while (check3 != true){
+                        viewAllFriends(friendList, viewFriendList);
+                        int chooseFriend = input.getInputInt("Choose a friend to start the conversation\n");
+                        if (0<= chooseFriend && chooseFriend<= friendList.size()){
+                            String friendId = friendList.get(chooseFriend);
+                            conversationController.enterConversation(friendId);
+                        }
+                    }
                 case 4:
                     //View all my message
             }
