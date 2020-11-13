@@ -1,7 +1,8 @@
 package controllers;
 
+import jdk.nashorn.internal.runtime.regexp.joni.exception.ValueException;
 import use_cases.RoomManager;
-
+import java.lang.String.*;
 public class createANewRoom {
     private static OutputManager output;
     private static InputManager input;
@@ -18,6 +19,12 @@ public class createANewRoom {
             roomNum = input.getInputString("Please enter your room Number between 0-100\n");
             if (Integer.parseInt(roomNum)>100 || Integer.parseInt(roomNum)<0){
                 output.printPrompt("The RoomNum you chose is out of the bound please enter the correct number\n");
+            }
+            else{
+                try{
+                int val = Integer.parseInt(roomNum);}
+                catch (ValueException e){
+                output.printPrompt("That's not an int!");}
             }
         }
         if (roomManager.createRoom(roomNum)){
