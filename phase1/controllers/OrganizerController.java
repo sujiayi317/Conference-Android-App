@@ -57,7 +57,7 @@ public class OrganizerController extends AttendeeController{
                         int check = 0;
                         while (check != 1 && eventsController.getAllExistingEvents().size() != 0) {
                             viewAllEvents(viewAllExistingEvents, eventsController);
-                            String eventID = input.getInputString("Please choose an event and see the details or press enter\n");
+                            String eventID = input.getInputString("Please choose an event_title and see the details or press enter\n");
                             if (!eventID.equals("")) {
                                 OrganizerController.viewOneEventInfo(eventID, viewEventInfo, eventsController);
                                 String decision = input.getInputString("Yes=sign up OR No\n");
@@ -103,15 +103,19 @@ public class OrganizerController extends AttendeeController{
                         break;
 
                     case 7:
-                        int time = input.getInputInt("Please enter your event time between 0-24\n");
-                        getAllAvailableRoomInfo(time, viewAllAvailableRoom, eventsController);
+                        String time = "-1";
+                        while (Integer.parseInt(time) < 0 || Integer.parseInt(time) > 24){
+                        time = input.getInputString("Please enter your event time between 0-24\n");
+                        getAllAvailableRoomInfo(Integer.parseInt(time), viewAllAvailableRoom, eventsController);}
                         break;
                     case 8:
                         break;
 
                     case 9:
                         RoomManager roomManager = eventsController.getRoomManager();
-                        String roomNum = input.getInputString("Please enter your room Number between 0-100\n");
+                        String roomNum = "-1";
+                        while (Integer.parseInt(roomNum)>100 || Integer.parseInt(roomNum)<0)
+                        roomNum = input.getInputString("Please enter your room Number between 0-100\n");
                         if (roomManager.createRoom(roomNum)){
                             output.printPrompt("room" +" " +roomNum+ " "+"is created successfully\n");
                         }
@@ -119,6 +123,7 @@ public class OrganizerController extends AttendeeController{
 
                 }
             }
+
         }
     }
     private void getAllAvailableRoomInfo(int time, ViewAllAvailableRoom viewAllAvailableRoom, EventsController eventsController){

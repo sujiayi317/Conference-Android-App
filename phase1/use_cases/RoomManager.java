@@ -52,6 +52,7 @@ public class RoomManager implements Serializable {
                 return room.getRoomNum();
             }
         }
+        return "NULL";
     }
 
 
