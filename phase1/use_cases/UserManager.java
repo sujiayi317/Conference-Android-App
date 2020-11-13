@@ -7,8 +7,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserManager {
-    protected List<User> users = new ArrayList<>();
+    public static  List<User> users;
 
+    public UserManager(){
+        users = new ArrayList<>();
+    }
     public boolean validNewName(String name){
         for (User user : users){
             if (user.getUserName().equals(name)){
@@ -33,7 +36,6 @@ public class UserManager {
                 return user.getUserID();
             }
         }
-        System.out.println(users.get(0));
         return "NULL";
     }
 
@@ -74,7 +76,7 @@ public class UserManager {
 
     public ArrayList<String> friendListGetter(String userId) {
         for (User user : users){
-            if (user.getUserID() == userId){
+            if (user.getUserID().equals(userId)){
                 return user.friendListGetter();
             }
         }return null;

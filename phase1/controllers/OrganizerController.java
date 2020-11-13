@@ -43,15 +43,16 @@ public class OrganizerController extends AttendeeController{
                     case 1:
                         //connect to CreateAccount Controller to create enw speaker
                         if (create.CreateNewAccount(attendeeManager, organizerManager, speakerManager, userManager, "SPEAKER")) {
-                            output.printPrompt("New speaker account successfully created.");
+                            output.printPrompt("New speaker account successfully created.\n");
                         } else {
-                            output.printPrompt("Create speaker action cancelled.");
+                            output.printPrompt("Create speaker action cancelled.\n");
                         }
+                        break;
                     case 2:
                         //view all existing events
                         viewAllEvents(viewAllExistingEvents, eventsController);
                         int check = 0;
-                        while (check != 1) {
+                        while (check != 1 && eventsController.getAllExistingEvents().size() != 0) {
                             viewAllEvents(viewAllExistingEvents, eventsController);
                             String eventID = input.getInputString("Please choose an event and see the details or press enter\n");
                             if (!eventID.equals("")) {
@@ -60,25 +61,26 @@ public class OrganizerController extends AttendeeController{
                                 if (decision.equals("Yes")) {
                                     attendeeManager.signUp(eventsController.getEventManager(), userID, eventID,
                                             eventsController.getRoomManager());
-                                    output.printPrompt("you're successfully in" + eventID);
+                                    output.printPrompt("you're successfully in " + eventID + "\n");
                                     check += 1;
                                 }
                             }
                         }
+                        break;
 
                     case 3:
                         // view all his/her events
                         viewAllAttendeeEvents(userID, viewAllAttendeeEvents, eventsController);
+                        break;
 
                     case 4:
                         //create a new event
                         //String title, String roomID, Speaker speaker, int startTime
                         int startTime = input.getInputInt("Please enter your event time\n");
                         if (eventsController.getAvailableRoom(startTime).size() == 0){
-                            output.printPrompt("sorry there is no available room yet, please go to create one first!");
-                        }
-                        if (eventsController.getAllAvailableSpeaker(startTime).size() == 0){
-                            output.printPrompt("sorry there is no available speaker yet, please go to create one first!");
+                            output.printPrompt("sorry there is no available room yet, please go to create one first!\n");
+                        } else if (eventsController.getAllAvailableSpeaker(startTime).size() == 0){
+                            output.printPrompt("sorry there is no available speaker yet, please go to create one first!\n");
                         }
                         else {
                             getAllAvailableRoomInfo(startTime, viewAllAvailableRoom, eventsController);
@@ -87,22 +89,30 @@ public class OrganizerController extends AttendeeController{
                             String roomID = input.getInputString("Please enter your room ID\n");
                             String speaker = input.getInputString("Please set your speaker\n");
                             createEvent(title, roomID, speaker, startTime, eventsController);}
+                        break;
                     case 5:
                         // view all events
                         AttendeeController.viewAllEvents(viewAllExistingEvents, eventsController);
+                        break;
                     case 6:
                         // view all attended events
                         viewAllAttendeeEvents.printAllAttendeeEvents(eventsController.getALLAttendeeEvents(userID));
+                        break;
 
                     case 7:
                         int time = input.getInputInt("Please enter your event time between 0-24\n");
                         getAllAvailableRoomInfo(time, viewAllAvailableRoom, eventsController);
+                        break;
+                    case 8:
+                        break;
+
                     case 9:
                         RoomManager roomManager = eventsController.getRoomManager();
                         String roomNum = input.getInputString("Please enter your room Number between 0-100\n");
                         if (roomManager.createRoom(roomNum)){
-                            output.printPrompt("room"+roomNum+"is created successfully");
+                            output.printPrompt("room"+roomNum+"is created successfully\n");
                         }
+                        break;
 
                 }
             }
