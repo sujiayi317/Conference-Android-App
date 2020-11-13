@@ -24,7 +24,7 @@ public class SeeALLExistingEvents {
         while (check != 1 && eventsController.getAllExistingEvents().size() != 0) {
             viewAllEvents(viewAllExistingEvents, eventsController);
             String eventNum = input.getInputString("Please choose an Event_Num and see the details OR press enter to back\n");
-            if (!eventNum.equals("")) {
+            if (!eventNum.equals("") && eventsController.getAllExistingEvents().size() <= Integer.parseInt(eventNum)) {
                 String eventTitle = eventsController.getAllExistingEvents().get(Integer.parseInt(eventNum)).getTitle();
                 if (!eventTitle.equals("")) {
                     String eventID = eventsController.getEventManager().changeEventTitleIntoEventID(eventTitle);
@@ -41,6 +41,7 @@ public class SeeALLExistingEvents {
                 }
             }
             else{
+                output.printPrompt("Your enter is out of the bound please choose the correct Number of Event");
                 check +=1;
             }
         }
