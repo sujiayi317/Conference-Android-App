@@ -59,6 +59,22 @@ public class UserManager {
         return UserIds;
     }
 
+    public boolean addFriend(String currId1, String userId2) {
+        List<String> IdList = UsersIdsGetter();
+        if (IdList.contains(currId1) && IdList.contains(userId2)) {
+            for (User user : users) {
+                if (user.getUserID() == currId1) {
+                    user.friendListSetter(userId2);
+                } else {
+                    user.friendListSetter(currId1);
+                }
+            }
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 
     public ArrayList<String> friendListGetter(String userId) {
         for (User user : users){
