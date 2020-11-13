@@ -24,7 +24,7 @@ public class AttendeeController {
     }
     public void run(String userID, EventsController eventsController, ViewAllExistingEvents viewAllExistingEvents,
                     ViewAllAttendeeEvents viewAllAttendeeEvents, ViewEventInfo viewEventInfo, AttendeeManager attendeeManager,
-                    ViewFriendList viewFriendList, ConversationController conversationController) {
+                    ViewFriendList viewFriendList, ConversationController conversationController, ConversationManager conversationManager) {
         //connect to Attendee Presenter - Menu options
         attendeeMenu.printAttendeeMenu(userID);
         int choice = input.getInputInt("Please choose from the above options:\n");
@@ -64,6 +64,7 @@ public class AttendeeController {
                         }
                     }
                 case 4:
+                    int chooseConversation = input.getInputInt("Choose a conversation to start\n");
                     //View all my message
             }
         }
