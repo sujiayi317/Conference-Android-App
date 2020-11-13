@@ -33,7 +33,6 @@ public class UserManager {
                 return user.getUserID();
             }
         }
-        System.out.println(users.get(0));
         return "NULL";
     }
 
