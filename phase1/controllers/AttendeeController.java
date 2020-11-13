@@ -73,6 +73,8 @@ public class AttendeeController {
                                 String friendId = friendList.get(chooseFriend);
                                 conversationController.enterConversation(friendId);
                                 check3 = true;
+                            }else if (chooseFriend == 88){
+                                check3 = true;
                             }
                         }
                         break;
@@ -93,7 +95,22 @@ public class AttendeeController {
                         }
                         break;
                     case 5:
-                        //
+                        //add friend
+                        ArrayList<String> userList = userManager.userListGetter();
+                        boolean check5 = false;
+                        while (!check5){
+                            String friendId = input.getInputString("Please enter the userId, or 0 to quit:\n");
+                            if (userManager.friendListGetter(userID).contains(friendId)){
+                                System.out.println("Friend already in your friend list.");
+                            }else if(userList.contains(friendId)){
+                                userManager.addFriend(userID, friendId);
+                                check5 = true;
+                            }else if (friendId.equals("0")){
+                                check5 = true;
+                            }else{
+                                System.out.println("Can't find the user.");
+                            }
+                        }
                         break;
                 }
             }

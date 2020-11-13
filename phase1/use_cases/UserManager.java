@@ -3,6 +3,7 @@ package use_cases;
 import entities.Attendee;
 import entities.User;
 import java.io.Serializable;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -78,6 +79,15 @@ public class UserManager {
                 return user.friendListGetter();
             }
         }return null;
+    }
+
+    public ArrayList<String> userListGetter(){
+        ArrayList<String> idList = new ArrayList<String>();
+        for (User user : users){
+            idList.add(user.getUserID());
+        }
+        return idList;
+
     }
 
     public String getUserName(String userId){

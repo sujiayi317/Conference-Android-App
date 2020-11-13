@@ -38,6 +38,16 @@ public class SpeakerManager extends UserManager implements Serializable {
         UserManager.users.add(speaker);
     }
 
+    /**
+     * Load a entities.Speaker from file and adds it to the map and lists
+     */
+    public void loadSpeaker(String userName, String email, String password, String ID) {
+        Speaker speaker = new Speaker(userName, email, password, ID);
+        //speakerMap.put(speaker.getUserName(), speaker);
+        speakers.add(speaker);
+        UserManager.users.add(speaker);
+    }
+
     public boolean validNewSpeakerName(String name){
         for (Speaker speaker : speakers){
             if (speaker.getUserName().equals(name)){

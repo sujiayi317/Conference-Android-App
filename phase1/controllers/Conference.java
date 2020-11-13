@@ -37,15 +37,15 @@ public class Conference {
     public Conference(EventsController eventsController, AttendeeManager attendeeManager,
                       OrganizerManager organizerManager, UserManager userManager){
 
+        this.userManager = userManager;
         this.attendeeManager = attendeeManager;
         this.organizerManager = organizerManager;
+        this.eventsController = eventsController;
         this.viewAllAvailableRoom = new ViewAllAvailableRoom();
         this.viewAllAttendeeEvents = new ViewAllAttendeeEvents();
         this.viewAllExistingEvents = new ViewAllExistingEvents();
         this.viewAllSpeakerEvents = new ViewAllSpeakerEvents();
         this.viewEventInfo = new ViewEventInfo();
-        this.eventsController = eventsController;
-        this.userManager = userManager;
         this.viewFriendList = new ViewFriendList();
         this.viewAllAvailableSpeaker = new ViewAllAvailableSpeaker();
         this.conversationManager = new ConversationManager();
