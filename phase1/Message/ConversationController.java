@@ -100,7 +100,12 @@ public class ConversationController {
         return FinalTextsList;
     }
 
+    public ArrayList<String[]> getUserAllConversation(String userId){
+        return conversationManager.getUserConversations(userId);
+    }
+
     public static void viewMessagesOfAConversation(ArrayList<String> messages, ViewMessagesOfAConversation viewMessagesOfAConversation){
         output.printPrompt(viewMessagesOfAConversation.printMessages(messages));
     }
+
 }

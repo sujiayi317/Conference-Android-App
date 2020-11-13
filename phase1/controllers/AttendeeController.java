@@ -28,7 +28,7 @@ public class AttendeeController {
     public void run(String userID, EventsController eventsController, ViewAllExistingEvents viewAllExistingEvents,
                     ViewAllAttendeeEvents viewAllAttendeeEvents, ViewEventInfo viewEventInfo,
                     AttendeeManager attendeeManager, ViewFriendList viewFriendList,
-                    ConversationController conversationController, ConversationManager conversationManager, UserManager userManager,
+                    ConversationController conversationController, UserManager userManager,
                     ViewMessageList viewMessageList) {
         //connect to Attendee Presenter - Menu options
         boolean quit = false;
@@ -80,8 +80,10 @@ public class AttendeeController {
                             }
                         }
                         break;
+
                     case 4:
-                        ArrayList<String[]> messageList = conversationManager.getUserConversations(userID);
+                        //view all my message
+                        ArrayList<String[]> messageList = conversationController.getUserAllConversation(userID);
                         boolean check4 = false;
                         while (!check4){
                             viewMessageList(messageList, viewMessageList);
@@ -89,9 +91,13 @@ public class AttendeeController {
                             if (0 <= chooseConversation && chooseConversation <= messageList.size()-1){
                                 if (messageList.get(chooseConversation)[0].equals(userID)){
                                     conversationController.enterConversation(messageList.get(chooseConversation)[1]);
-                                }else{
+                                    check4 = true;
+                                }else(messageList.get(chooseConversation)[1].equals(userID)){
                                     conversationController.enterConversation(messageList.get(chooseConversation)[0]);
+                                    check4 = true;
                                 }
+
+                            }else if(chooseConversation == 88){
                                 check4 = true;
                             }
                         }
