@@ -31,12 +31,11 @@ public class AttendeeManager extends UserManager implements Serializable {
     /**
      * Creates An attendee and adds it to the map and lists
      */
-    public Attendee createAttendee(String userName, String email, String password) {
+    public void createAttendee(String userName, String email, String password) {
         Attendee attendee = new Attendee(userName, email, password);
         //attendeeMap.put(attendee.getUserName(), attendee);
         attendees.add(attendee);
         super.users.add(attendee);
-        return attendee;
     }
 
     public List<Attendee> getAttendees() {

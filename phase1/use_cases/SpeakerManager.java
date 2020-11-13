@@ -1,8 +1,6 @@
 package use_cases;
 
-import entities.Attendee;
 import entities.Event;
-import entities.Organizer;
 import entities.Speaker;
 
 import java.io.Serializable;
@@ -33,12 +31,11 @@ public class SpeakerManager extends UserManager implements Serializable {
     /**
      * Creates a entities.Speaker and adds it to the map and lists
      */
-    public Speaker createSpeaker(String userName, String email, String password) {
+    public void createSpeaker(String userName, String email, String password) {
         Speaker speaker = new Speaker(userName, email, password);
         //speakerMap.put(speaker.getUserName(), speaker);
         speakers.add(speaker);
         super.users.add(speaker);
-        return speaker;
     }
 
     public boolean validNewSpeakerName(String name){

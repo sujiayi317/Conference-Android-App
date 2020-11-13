@@ -9,6 +9,9 @@ import java.util.List;
 public class UserManager {
     protected List<User> users;
 
+    public UserManager(){
+        users = new ArrayList<>();
+    }
     public boolean validNewName(String name){
         for (User user : users){
             if (user.getUserName().equals(name)){
@@ -31,8 +34,6 @@ public class UserManager {
         for (User user : users){
             if (user.getEmail().equals(account) && user.getPassword().equals(password)){
                 return user.getUserID();
-            } else if (user.getEmail().equals(account)){
-                return "NULL";
             }
         }
         return "NULL";
@@ -75,7 +76,7 @@ public class UserManager {
 
     public ArrayList<String> friendListGetter(String userId) {
         for (User user : users){
-            if (user.getUserID() == userId){
+            if (user.getUserID().equals(userId)){
                 return user.friendListGetter();
             }
         }return null;

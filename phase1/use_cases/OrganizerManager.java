@@ -25,20 +25,9 @@ public class OrganizerManager extends UserManager implements Serializable{
     }
 
 
-    public Organizer createOrganizer(String userName, String email, String password) {
+    public void createOrganizer(String userName, String email, String password) {
         Organizer organizer = new Organizer(userName, email, password);
         organizers.add(organizer);
         super.users.add(organizer);
-        return organizer;
     }
-
-    public boolean validNewOrganizerEmail(String email){
-        for (Organizer organizer : organizers){
-            if (organizer.getEmail().equals(email)){
-                return false;
-            }
-        }
-        return true;
-    }
-
 }

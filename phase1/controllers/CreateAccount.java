@@ -22,7 +22,7 @@ public class CreateAccount {
             }
         }
 
-        String user = input.getInputString("Please enter the user name for new speaker: (must have length of at least 2), or enter 'cancel' at any point to exit account creation\n");
+        String user = input.getInputString("Please enter a user name for new account: (must have length of at least 2), or enter 'cancel' at any point to exit account creation\n");
         while (true) {
             if (user.equals("cancel")){
                 return false;

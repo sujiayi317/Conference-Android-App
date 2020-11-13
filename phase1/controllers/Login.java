@@ -16,14 +16,14 @@ public class Login{
                     UserManager usermanager) {
         while (true) {
             output.printPrompt("** Welcome to login page of conference sign up center! Please enter a number **\n");
-            Integer CurrentAction = input.getInputInt("1. Sign in \n2. Create an account\n");
-            if (CurrentAction == 1) {
+            String CurrentAction = input.getInputString("1. Sign in \n2. Create an account\n");
+            if (CurrentAction.equals("1")) {
                 if (signIn(usermanager)){
                     break;
                 } else {
                     output.printPrompt("Sign in failed, directing back to main page now...\n");
                 }
-            } else if (CurrentAction == 2) {
+            } else if (CurrentAction.equals("2")) {
                 if (createAccount(attendeeManager, organizerManager, speakerManager, usermanager)){
                     output.printPrompt("New account successfully created! Directing back to main page now...\n");
                 } else {
