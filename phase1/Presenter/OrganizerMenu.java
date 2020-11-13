@@ -11,8 +11,9 @@ public class OrganizerMenu {
     public void printOrganizerMenu(String userID){
         StringBuilder returnString = new StringBuilder("Welcome");
         returnString.append(userID).append("\n");
-        returnString.append(" 1) viewAllEvents\n 2)view all my events\n 3) create new event \n 4)View all my fiends\n 5)view all my message" +
-                "\n 6) send message \n 7) send to all attendees");
+        returnString.append(" 1) create a new speaker\n 2) viewAllEvents\n 3)view all my events\n 4) create new event \n " +
+                "5)View all my fiends\n 6)view all my message" +
+                "\n 7) send message \n 8) send to all attendees");
         output.printPrompt(returnString);
 
     }

@@ -27,7 +27,9 @@ public class OrganizerController {
     }
 
 
-    public void run(EventsController eventsController, ViewAllExistingEvents viewAllExistingEvents, ViewAllAvailableRoom viewAllAvailableRoom , ViewAllAttendeeEvents viewAllAttendeeEvents, AttendeeManager attendeeManager,
+    public void run(EventsController eventsController, ViewAllExistingEvents viewAllExistingEvents,
+                    ViewAllAvailableRoom viewAllAvailableRoom , ViewAllAttendeeEvents viewAllAttendeeEvents,
+                    AttendeeManager attendeeManager,
                     OrganizerManager organizerManager, SpeakerManager speakerManager, String userID) {
         //connect to Attendee Presenter - Menu options
         organizerMenu.printOrganizerMenu(userID);
