@@ -32,7 +32,7 @@ public class Conference {
      * This is where our conference system starts.
      */
     public Conference(EventsController eventsController, AttendeeManager attendeeManager,
-                      OrganizerManager organizerManager){
+                      OrganizerManager organizerManager, UserManager userManager){
 
         this.attendeeManager = attendeeManager;
         this.organizerManager = organizerManager;
@@ -41,7 +41,7 @@ public class Conference {
         this.viewAllExistingEvents = new ViewAllExistingEvents();
         this.viewEventInfo = new ViewEventInfo();
         this.eventsController = eventsController;
-        this.userManager = new UserManager();
+        this.userManager = userManager;
         this.viewFriendList = new ViewFriendList();
         this.viewAllAvailableSpeaker = new ViewAllAvailableSpeaker();
         this.viewMessagesOfAConversation = new ViewMessagesOfAConversation();

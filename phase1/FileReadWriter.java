@@ -16,8 +16,10 @@ class FileReadWriter {
     private EventsController eventsController;
     private AttendeeManager attendeeManager;
     private OrganizerManager organizerManager;
+    private UserManager userManager;
 
     public FileReadWriter() {
+        userManager = new UserManager();
         eventsController = new EventsController();
         attendeeManager = new AttendeeManager();
         organizerManager = new OrganizerManager();
@@ -53,14 +55,17 @@ class FileReadWriter {
     }
 
 
-    public EventsController eventsController(){
-        return eventsController();
+    public EventsController GetEventsController(){
+        return eventsController;
     }
-    public OrganizerManager organizerManager(){
-        return organizerManager();
+    public OrganizerManager GetOrganizerManager(){
+        return organizerManager;
     }
-    public AttendeeManager attendeeManager(){
-        return attendeeManager();
+    public AttendeeManager GetAttendeeManager(){
+        return attendeeManager;
+    }
+    public UserManager GetUserManager(){
+        return userManager;
     }
 }
 //    public EventManager readFromEventFile(String path) throws ClassNotFoundException {

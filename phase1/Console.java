@@ -17,8 +17,8 @@ public class Console {
     public static void main(String[] args) {
         FileReadWriter reader = new FileReadWriter();
         reader.UserReader();
-        Conference conference = new Conference(reader.eventsController(), reader.attendeeManager(),
-                reader.organizerManager());
+        Conference conference = new Conference(reader.GetEventsController(), reader.GetAttendeeManager(),
+                reader.GetOrganizerManager(), reader.GetUserManager());
         conference.run();
     }
 }
