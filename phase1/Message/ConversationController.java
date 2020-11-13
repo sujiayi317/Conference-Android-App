@@ -101,12 +101,13 @@ public class ConversationController {
     }
 
     public ArrayList<String[]> getUserAllConversation(String userId){
-        ArrayList<String[]> userNameWithLastMessage = new ArrayList<>();
-        for (String[] s: conversationManager.getUserConversations(userId)){
-            String[] msg = {userManager.getUserName(s[0]), s[1]};
-            userNameWithLastMessage.add(msg);
-        }
-        return userNameWithLastMessage;
+//        ArrayList<String[]> userNameWithLastMessage = new ArrayList<>();
+//        for (String[] s: conversationManager.getUserConversations(userId)){
+//            String[] msg = {userManager.getUserName(s[0]), s[1]};
+//            userNameWithLastMessage.add(msg);
+//        }
+//        return userNameWithLastMessage;
+        return conversationManager.getUserConversations(userId);
     }
 
     public static void viewMessagesOfAConversation(ArrayList<String> messages,
