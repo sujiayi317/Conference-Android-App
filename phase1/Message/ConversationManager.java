@@ -39,10 +39,7 @@ public class ConversationManager implements Serializable{
      * @return true iff the Conversation between two users from talkersList has been created.
      */
     public boolean existConversation(HashSet<String> talkersList){
-        if (conversations.containsKey(talkersList)) {
-            return true;
-        }
-        return false;
+        return conversations.containsKey(talkersList);
     }
 
 

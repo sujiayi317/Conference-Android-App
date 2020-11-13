@@ -87,10 +87,12 @@ public class AttendeeController {
                             if (0 <= chooseConversation && chooseConversation <= messageList.size()-1){
                                 if (messageList.get(chooseConversation)[0].equals(userID)){
                                     conversationController.enterConversation(messageList.get(chooseConversation)[1]);
-                                    viewMessagesOfAConversation.printMessages(conversationController.getMessagesOfOneConversation(messageList.get(chooseConversation)[1]));
+                                    viewMessagesOfAConversation.printMessages(conversationController.getMessagesOfOneConversation
+                                            (messageList.get(chooseConversation)[1]));
                                 }else{
                                     conversationController.enterConversation(messageList.get(chooseConversation)[0]);
-                                    viewMessagesOfAConversation.printMessages(conversationController.getMessagesOfOneConversation(messageList.get(chooseConversation)[0]));
+                                    viewMessagesOfAConversation.printMessages(conversationController.getMessagesOfOneConversation
+                                            (messageList.get(chooseConversation)[0]));
                                 }
                                 check4 = true;
                             }
