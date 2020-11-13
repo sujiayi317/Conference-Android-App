@@ -57,8 +57,8 @@ public class UserManager {
     }
 
     public boolean addFriend(String currId1, String userId2) {
-        List<String> IdList = UsersIdsGetter();
-        if (IdList.contains(currId1) && IdList.contains(userId2)) {
+        List<String> idList = UsersIdsGetter();
+        if (idList.contains(currId1) && idList.contains(userId2)) {
             for (User user : users) {
                 if (user.getUserID() == currId1) {
                     user.friendListSetter(userId2);
