@@ -51,6 +51,9 @@ public class OrganizerController extends AttendeeController{
                     case 2:
                         //view all existing events
 //                        viewAllEvents(viewAllExistingEvents, eventsController);
+                        if (eventsController.getAllExistingEvents().size() == 0){
+                            output.printPrompt("There is no event yet!");
+                        }
                         int check = 0;
                         while (check != 1 && eventsController.getAllExistingEvents().size() != 0) {
                             viewAllEvents(viewAllExistingEvents, eventsController);
@@ -110,7 +113,7 @@ public class OrganizerController extends AttendeeController{
                         RoomManager roomManager = eventsController.getRoomManager();
                         String roomNum = input.getInputString("Please enter your room Number between 0-100\n");
                         if (roomManager.createRoom(roomNum)){
-                            output.printPrompt("room"+roomNum+"is created successfully\n");
+                            output.printPrompt("room" +" "+roomNum+"is created successfully\n");
                         }
                         break;
 
