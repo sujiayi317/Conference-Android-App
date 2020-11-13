@@ -1,7 +1,6 @@
 package Message;
 
 import Presenter.*;
-import com.sun.org.apache.xpath.internal.operations.String;
 import use_cases.UserManager;
 import controllers.*;
 
@@ -108,7 +107,6 @@ public class ConversationController {
             userNameWithLastMessage.add(msg);
         }
         return userNameWithLastMessage;
-
     }
 
     public static void viewMessagesOfAConversation(ArrayList<String> messages,
