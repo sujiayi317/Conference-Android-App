@@ -86,7 +86,8 @@ public class AttendeeController {
                         boolean check3 = false;
                         while (!check3) {
                             viewAllFriends(friendList, viewFriendList); //output StringBuilder of the Friend list
-                            int chooseFriend = input.getInputInt("Choose a friend to start the conversation\n") - 1;
+                            int chooseFriend = input.getInputInt("Choose a friend to start the conversation, or" +
+                                    " \"0\" to quit:\n") - 1;
                             if (0 <= chooseFriend && chooseFriend <= friendList.size()-1) {
                                 String friendId = friendList.get(chooseFriend);
                                 conversationController.enterConversation(friendId);
