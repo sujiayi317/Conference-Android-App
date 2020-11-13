@@ -41,7 +41,7 @@ public class Login{
 
     public boolean signIn(UserManager userManager){
         while (true) {
-            String account = input.getInputString("Please enter your username:\n");
+            String account = input.getInputString("Please enter your email:\n");
             String password = input.getInputString("Please enter your password:\n");
 //            if (attendeeManager.validLogIn(account, password).equals("NULL") &&
 //                    speakerManager.validLogIn(account, password).equals("NULL") &&
