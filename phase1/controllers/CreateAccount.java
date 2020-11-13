@@ -42,7 +42,6 @@ public class CreateAccount {
                 password = input.getInputString("Password must be at least length 8, please try again, or enter 'cancel' at any point to exit account creation\n");
             }
         }
-
         if (type.equals("SPEAKER")){
             speakerManager.createSpeaker(user, email, password);
         } else if (type.equals("ORGANIZER")){
