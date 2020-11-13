@@ -25,11 +25,11 @@ public class CreateANewEvent {
                 String title = input.getInputString("Please enter your event's title\n");
                 String roomNUm = input.getInputString("Please enter your room Num\n");
                 String speaker = input.getInputString("Please set your speaker\n");
-                createEvent(title, eventsController.getRoomManager().changeNumTOID(roomNUm), speaker, startTime, eventsController);
+                if (createEvent(title, eventsController.getRoomManager().changeNumTOID(roomNUm), speaker, startTime, eventsController)){
                 output.printPrompt("The new Event named "+title+" at "
                         +roomNUm+"\n"+" taught by "
                         +speaker+" will start at "+startTime);
-                break;
+                break;}
             }
         }
     }
@@ -40,8 +40,8 @@ public class CreateANewEvent {
         output.printPrompt(viewAllAvailableSpeaker.printAllAvailableSpeaker(eventsController.getAllAvailableSpeaker(time)));
 
     }
-    private void createEvent(String title, String roomID,String speaker,int startTime, EventsController eventsController){
-        output.printPrompt(eventsController.createEvent(title,roomID,speaker,startTime));
+    private boolean createEvent(String title, String roomID,String speaker,int startTime, EventsController eventsController){
+        return eventsController.createEvent(title,roomID,speaker,startTime);
     }
 }
 
