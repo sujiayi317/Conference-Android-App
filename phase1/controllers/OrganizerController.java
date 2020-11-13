@@ -73,11 +73,16 @@ public class OrganizerController extends AttendeeController{
                     case 4:
                         //create a new event
                         //String title, String roomID, Speaker speaker, int startTime
-                        String title = input.getInputString("Please enter your event's title\n");
-                        String roomID = input.getInputString("Please enter your room ID\n");
-                        String speaker = input.getInputString("Please set your speaker\n");
                         int startTime = input.getInputInt("Please enter your event time\n");
-                        createEvent(title, roomID, speaker, startTime, eventsController);
+                        if (eventsController.getAvailableRoom(startTime).size() == 0){
+                            output.printPrompt("sorry there is no available room yet, please go to create one first!");
+                        }
+                        else {
+                            getAllAvailableRoomInfo(startTime, viewAllAvailableRoom, eventsController);
+                            String title = input.getInputString("Please enter your event's title\n");
+                            String roomID = input.getInputString("Please enter your room ID\n");
+                            String speaker = input.getInputString("Please set your speaker\n");
+                            createEvent(title, roomID, speaker, startTime, eventsController);}
                     case 5:
                         // view all events
                         AttendeeController.viewAllEvents(viewAllExistingEvents, eventsController);
@@ -88,6 +93,13 @@ public class OrganizerController extends AttendeeController{
                     case 7:
                         int time = input.getInputInt("Please enter your event time between 0-24\n");
                         getAllAvailableRoomInfo(time, viewAllAvailableRoom, eventsController);
+                    case 9:
+                        RoomManager roomManager = eventsController.getRoomManager();
+                        String roomNum = input.getInputString("Please enter your room Number between 0-100\n");
+                        if (roomManager.createRoom(roomNum)){
+                            output.printPrompt("room"+roomNum+"is created successfully");
+                        }
+
                 }
             }
         }
