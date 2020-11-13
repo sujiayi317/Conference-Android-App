@@ -38,7 +38,7 @@ public class OrganizerController extends AttendeeController{
         //connect to Attendee Presenter - Menu options
         boolean quit = false;
         while (!quit) {
-            organizerMenu.printOrganizerMenu(userID);
+            organizerMenu.printOrganizerMenu(userManager.getUserName(userID));
             int choice = input.getInputInt("Please choose from the above options:\n");
             if (0<=choice && choice<=9) {
                 switch (choice) {
@@ -94,15 +94,15 @@ public class OrganizerController extends AttendeeController{
                                 getAllAvailableRoomInfo(startTime, viewAllAvailableRoom, eventsController);
                                 getAllAvailableSpeaker(startTime, eventsController, viewAllAvailableSpeaker);
                                 String title = input.getInputString("Please enter your event's title\n");
-                                String roomID = input.getInputString("Please enter your room ID\n");
+                                String roomNUm = input.getInputString("Please enter your room Num\n");
                                 String speaker = input.getInputString("Please set your speaker\n");
-                                createEvent(title, roomID, speaker, startTime, eventsController);
+                                createEvent(title, eventsController.getRoomManager().changeNumTOID(roomNUm), speaker, startTime, eventsController);
                                 output.printPrompt("The new Event named "+title+" at "
-                                        +eventsController.getRoomManager().changeIdTONum(roomID)+"\n"+" taught by "
+                                        +roomNUm+"\n"+" taught by "
                                         +speaker+" will start at "+startTime);
+                                break;
                             }
                         }
-                        break;
                     case 5:
                         // view all events
                         break;

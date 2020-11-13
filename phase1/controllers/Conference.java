@@ -26,6 +26,7 @@ public class Conference {
     private final ViewEventInfo viewEventInfo;
     private final ViewFriendList viewFriendList;
     private final ViewAllAvailableSpeaker viewAllAvailableSpeaker;
+    private final ConversationManager conversationManager;
     private ViewMessagesOfAConversation viewMessagesOfAConversation;
     private ConversationController conversationController;
     /**
@@ -45,6 +46,7 @@ public class Conference {
         this.viewFriendList = new ViewFriendList();
         this.viewAllAvailableSpeaker = new ViewAllAvailableSpeaker();
         this.viewMessagesOfAConversation = new ViewMessagesOfAConversation();
+        this.conversationManager = new ConversationManager();
     }
     public void run(){
         try {
@@ -89,7 +91,7 @@ public class Conference {
             case "ATTENDEE":
                 new AttendeeController().run(userID, eventsController, viewAllExistingEvents, viewAllAttendeeEvents,
                         viewEventInfo, attendeeManager, viewFriendList, conversationController,
-                        viewMessagesOfAConversation);
+                        viewMessagesOfAConversation,conversationManager, userManager);
                 break;
             case "SPEAKER":
                 new SpeakerController().run();
