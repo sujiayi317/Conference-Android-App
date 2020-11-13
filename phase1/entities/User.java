@@ -20,7 +20,7 @@ public abstract class User implements Serializable {
     private String type;
     private ArrayList<String> friendList;
 
-    public User(String userName, String email, String password) {
+    public User(String email, String userName, String password) {
         //this.firstName = firstName;
         //this.lastName = lastName;
         this.email = email;
