@@ -32,8 +32,8 @@ public class CreateANewEvent {
                         String speakerNum = input.getInputString("Please set the SpeakerNum of your speaker\n");
                         String speaker = eventsController.getAllAvailableSpeaker(Integer.parseInt(timeInput)).get(Integer.parseInt(speakerNum));
                         if (createEvent(title, eventsController.getRoomManager().changeNumTOID(room), speaker, Integer.parseInt(timeInput), eventsController)) {
-                            output.printPrompt("The new Event named " + title + " at "
-                                    + roomNUm + " taught by "
+                            output.printPrompt("The new Event named " + title + " at Room "
+                                    + room + " taught by "
                                     + speaker + " will start at " + Integer.parseInt(timeInput));
                         }
                     }
