@@ -80,4 +80,14 @@ public class UserManager {
             }
         }return null;
     }
+
+    public String getUserName(String userId){
+        for(User user: users){
+            if(user.getUserID().equals(userId)){
+                return user.getUserName();
+            }
+        }
+        return null;
+    }
+
 }
