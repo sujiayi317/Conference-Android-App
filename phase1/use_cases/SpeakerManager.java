@@ -1,6 +1,7 @@
 package use_cases;
 
 import entities.Attendee;
+import entities.Event;
 import entities.Organizer;
 import entities.Speaker;
 
@@ -12,7 +13,7 @@ import java.util.List;
  * The use_cases.SpeakerManager class, this is the use case class to manage the entities.Speaker for this conference.
  *
  */
-public class SpeakerManager extends UserManager implements Serializable {
+public class SpeakerManager implements Serializable {
     //private List<String> events;
     private List<Speaker> speakers;
 
@@ -26,7 +27,7 @@ public class SpeakerManager extends UserManager implements Serializable {
 //        events = new ArrayList<>();
 //        speakerMap = new HashMap<>();
 //        eventsMap = new HashMap<>();
-        speakers = new ArrayList<>();
+        speakers = new ArrayList<>(1);  // Initial Capacity is 1 in Phase 1
     }
 
     /**
@@ -48,6 +49,39 @@ public class SpeakerManager extends UserManager implements Serializable {
         return true;
     }
 
+    public boolean validNewSpeakerEmail(String email){
+        for (Speaker speaker : speakers){
+            if (speaker.getEmail().equals(email)){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public String validLogIn(String account, String password){
+        for (Speaker speaker : speakers){
+            if (speaker.getEmail().equals(account) && speaker.getPassword().equals(password)){
+                return speaker.getUserID();
+            } else if (speaker.getEmail().equals(account)){
+                return "NULL";
+            }
+        }
+        return "NULL";
+    }
+
+    public ArrayList<String> getAllAvailableSpeaker(int time, EventManager eventManager){
+        ArrayList<String> availableSpeaker = new ArrayList<>();
+        List<Event> events = eventManager.getAllEvent();
+        for (Speaker speaker : speakers){
+            availableSpeaker.add(speaker.getUserName());
+            for (Event event : events){
+                if (event.getSpeakers().equals(speaker.getUserName()) && time == event.getStartTime()){
+                    availableSpeaker.remove(speaker.getUserName());
+                }
+            }
+        }
+        return availableSpeaker;
+    }
 
 //    public void addEventToSpeaker(String event, entities.Speaker speaker) {
 //        events = eventsMap.get(speaker.getUserName());

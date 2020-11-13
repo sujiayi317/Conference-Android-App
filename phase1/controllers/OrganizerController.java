@@ -107,6 +107,10 @@ public class OrganizerController extends AttendeeController{
     private void getAllAvailableRoomInfo(int time, ViewAllAvailableRoom viewAllAvailableRoom, EventsController eventsController){
         viewAllAvailableRoom.printAllAvailableRoom(eventsController.getAvailableRoom(time));
     }
+
+    private void getAllAvailableSpeaker(int time, ){
+
+    }
     private void createEvent(String title, String roomID,String speaker,int startTime, EventsController eventsController){
         output.printPrompt(eventsController.createEvent(title,roomID,speaker,startTime));
     }
