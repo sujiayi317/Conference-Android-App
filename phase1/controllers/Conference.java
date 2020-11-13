@@ -99,7 +99,7 @@ public class Conference {
             case "ORGANIZER":
                 new OrganizerController().run(eventsController, viewAllExistingEvents, viewAllAvailableRoom,
                         viewAllAttendeeEvents, attendeeManager,viewEventInfo, viewAllAvailableSpeaker,
-                        organizerManager, userManager, userID);
+                        organizerManager, userManager, conversationController, userID);
         }
     }
 

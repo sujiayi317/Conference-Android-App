@@ -1,5 +1,6 @@
 package controllers;
 
+import Message.ConversationController;
 import Presenter.*;
 import Presenter.ViewAllAttendeeEvents;
 import Presenter.ViewAllAvailableRoom;
@@ -8,6 +9,8 @@ import Presenter.ViewAllExistingEvents;
 import entities.Organizer;
 import entities.Speaker;
 import use_cases.*;
+
+import java.util.ArrayList;
 
 /**
  * This is the main controller for Organizer.
@@ -29,8 +32,9 @@ public class OrganizerController extends AttendeeController{
 
     public void run(EventsController eventsController, ViewAllExistingEvents viewAllExistingEvents,
                     ViewAllAvailableRoom viewAllAvailableRoom , ViewAllAttendeeEvents viewAllAttendeeEvents,
-                    AttendeeManager attendeeManager,ViewEventInfo viewEventInfo, ViewAllAvailableSpeaker viewAllAvailableSpeaker,
-                    OrganizerManager organizerManager, UserManager userManager, String userID) {
+                    AttendeeManager attendeeManager, ViewEventInfo viewEventInfo, ViewAllAvailableSpeaker viewAllAvailableSpeaker,
+                    OrganizerManager organizerManager, UserManager userManager,
+                    ConversationController conversationController, String userID) {
         //connect to Attendee Presenter - Menu options
         boolean quit = false;
         while (!quit) {
@@ -41,7 +45,7 @@ public class OrganizerController extends AttendeeController{
                     case 0:
                         quit = true;
                     case 1:
-                        //connect to CreateAccount Controller to create enw speaker
+                        //connect to CreateAccount Controller to create new speaker
                         if (create.CreateNewAccount(attendeeManager, organizerManager, eventsController.getSpeakerManager(), userManager, "SPEAKER")) {
                             output.printPrompt("New speaker account successfully created.\n");
                         } else {
@@ -100,14 +104,27 @@ public class OrganizerController extends AttendeeController{
                             }
                         }
                     case 5:
-                        // view all events
+                        //View all my fiends
                         break;
                     case 6:
-                        // view all attended events
+                        // view all my message
                         break;
 
                     case 7:
-                        //
+                        //send to all attendees of an event/events
+                        ArrayList<String> receivers = new ArrayList<>();
+                        boolean check7 = true;
+                        while(check7) {
+                            String eventId = input.getInputString("Please enter the event ID one by one, and " +
+                                    "enter \"done\" to finish:\n");
+                            if(eventId.equals("done")){
+                                check7 = false;
+                            }else{
+                                receivers.addAll(eventsController.getAttendeesFromEvent(eventId));
+                            }
+                        }
+                        String message = input.getInputString("Please enter the message you want to send:\n");
+                        conversationController.sendToMultipleUsers(message, receivers);
                         break;
 
                     case 8:
