@@ -78,7 +78,7 @@ public class OrganizerController extends AttendeeController{
                             output.printPrompt("sorry there is no available room yet, please go to create one first!");
                         }
                         if (eventsController.getAllAvailableSpeaker(startTime).size() == 0){
-                            output.printPrompt("sorry there is no available speaker yet, please go to create one first!")
+                            output.printPrompt("sorry there is no available speaker yet, please go to create one first!");
                         }
                         else {
                             getAllAvailableRoomInfo(startTime, viewAllAvailableRoom, eventsController);

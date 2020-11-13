@@ -22,6 +22,7 @@ public class Conference {
     private final ViewAllExistingEvents viewAllExistingEvents;
     private final ViewEventInfo viewEventInfo;
     private final ViewFriendList viewFriendList;
+    private final ViewAllAvailableSpeaker viewAllAvailableSpeaker;
     /**
      * This is where our conference system starts.
      */
@@ -36,6 +37,7 @@ public class Conference {
         this.eventsController = new EventsController();
         this.userManager = new UserManager();
         this.viewFriendList = new ViewFriendList();
+        this.viewAllAvailableSpeaker = new ViewAllAvailableSpeaker();
 
     }
     public void run(){
@@ -86,8 +88,8 @@ public class Conference {
                 break;
             case "ORGANIZER":
                 new OrganizerController().run(eventsController, viewAllExistingEvents, viewAllAvailableRoom,
-                        viewAllAttendeeEvents, attendeeManager,viewEventInfo, organizerManager, speakerManager,
-                        userManager, userID);
+                        viewAllAttendeeEvents, attendeeManager,viewEventInfo, viewAllAvailableSpeaker,
+                        organizerManager, speakerManager, userManager, userID);
         }
     }
 
