@@ -17,6 +17,7 @@ import java.util.List;
 public class AttendeeController {
     private static InputManager input;
     private static OutputManager output;
+    public final SeeALLExistingEvents seeALLExistingEvents;
     private final AttendeeMenu attendeeMenu;
     public final ViewAllAttendeeEvents viewAllAttendeeEvents;
     public final ViewAllExistingEvents viewAllExistingEvents;
@@ -26,6 +27,7 @@ public class AttendeeController {
     public AttendeeController(){
         input = new InputManager();
         output = new OutputManager();
+        seeALLExistingEvents = new SeeALLExistingEvents();
         this.attendeeMenu = new AttendeeMenu();
         this.viewAllAttendeeEvents = new ViewAllAttendeeEvents();
         this.viewAllExistingEvents = new ViewAllExistingEvents();
@@ -49,21 +51,23 @@ public class AttendeeController {
                         break;
                     case 1:
                         // viewAllEvents
-                        int check = 0;
-                        while (check != 1 && eventsController.getAllExistingEvents().size() != 0) {
-                            viewAllEvents(viewAllExistingEvents, eventsController);
-                            String eventID = input.getInputString("Please choose an event and see the details or press enter\n");
-                            if (!eventID.equals("")) {
-                                viewOneEventInfo(eventID, viewEventInfo, eventsController);
-                                String decision = input.getInputString("Yes=sign up OR No\n");
-                                if (decision.equals("Yes")) {
-                                    attendeeManager.signUp(eventsController.getEventManager(), userID, eventID,
-                                            eventsController.getRoomManager());
-                                    output.printPrompt("you're successfully in" + eventID);
-                                    check += 1;
-                                }
-                            }
-                        }
+//                        int check = 0;
+//                        while (check != 1 && eventsController.getAllExistingEvents().size() != 0) {
+//                            viewAllEvents(viewAllExistingEvents, eventsController);
+//                            String eventID = input.getInputString("Please choose an event and see the details or press enter\n");
+//                            if (!eventID.equals("")) {
+//                                viewOneEventInfo(eventID, viewEventInfo, eventsController);
+//                                String decision = input.getInputString("Yes=sign up OR No\n");
+//                                if (decision.equals("Yes")) {
+//                                    attendeeManager.signUp(eventsController.getEventManager(), userID, eventID,
+//                                            eventsController.getRoomManager());
+//                                    output.printPrompt("you're successfully in" + eventID);
+//                                    check += 1;
+//                                }
+//                            }
+//                        }
+                        seeALLExistingEvents.getToSeeAllExistingEvents(eventsController, attendeeManager,
+                                viewAllExistingEvents, userID, viewEventInfo);
                         break;
                     case 2:
                         // view all attendee events
@@ -129,19 +133,19 @@ public class AttendeeController {
         }
     }
 
-    public static void viewAllEvents(ViewAllExistingEvents viewAllExistingEvents, EventsController eventsController){
-        output.printPrompt(viewAllExistingEvents.printAllExistingEvents(eventsController.getAllExistingEvents()));
-    }
+//    public static void viewAllEvents(ViewAllExistingEvents viewAllExistingEvents, EventsController eventsController){
+//        output.printPrompt(viewAllExistingEvents.printAllExistingEvents(eventsController.getAllExistingEvents()));
+//    }
 
     public static void viewAllAttendeeEvents(String userID, ViewAllAttendeeEvents viewAllAttendeeEvents,
                                        EventsController eventsController){
         output.printPrompt(viewAllAttendeeEvents.printAllAttendeeEvents(eventsController.getALLAttendeeEvents(userID)));
     }
 
-    public static void viewOneEventInfo(String eventID, ViewEventInfo viewEventInfo, EventsController eventsController){
-        ArrayList<String> eventInfoList = eventsController.getEventInfo(eventID);
-        output.printPrompt(viewEventInfo.getEventInfo(eventInfoList));
-    }
+//    public static void viewOneEventInfo(String eventID, ViewEventInfo viewEventInfo, EventsController eventsController){
+//        ArrayList<String> eventInfoList = eventsController.getEventInfo(eventID);
+//        output.printPrompt(viewEventInfo.getEventInfo(eventInfoList));
+//    }
 
     public static void viewAllFriends(ArrayList<String> friends,ViewFriendList viewFriendList){
         output.printPrompt(viewFriendList.getFriendList(friends));
