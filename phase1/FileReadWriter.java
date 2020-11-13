@@ -9,18 +9,18 @@ import java.io.File;  // Import the File class
 import java.io.FileNotFoundException;  // Import this class to handle errors
 import java.util.Scanner;
 
-//class FileReadWriter {
-//
-//    public void UserReader() throws FileNotFoundException {
-//        try {
-//            File UserFile = new File("Users.txt");
-//            Scanner myReader = new Scanner(UserFile);
-//            UserFile.readall
-//        } catch (FileNotFoundException e) {
-//            System.out.println("User File Not Found");
-//        }
-//    }
-//}
+class FileReadWriter {
+
+    public void UserReader() throws FileNotFoundException {
+        try {
+            File UserFile = new File("Users.txt");
+            Scanner myReader = new Scanner(UserFile);
+            UserFile.readall
+        } catch (FileNotFoundException e) {
+            System.out.println("User File Not Found");
+        }
+    }
+}
 ////    public EventManager readFromEventFile(String path) throws ClassNotFoundException {
 ////        try {
 ////            InputStream file = new FileInputStream(path); // String path should be "fileName.ser"
