@@ -3,6 +3,6 @@ ATTENDEE steve@123.com Steve 12345678 89dfhy32
 SPEAKER hardy@123.com Hardy 12345678 og12jd3a
 ORGANIZER tony@123.com Tony 12345678 933n23fd
 ATTENDEE maggie@123.com Maggie 12345678 xmo0r1e1
-ORGANIZER nacy@123.com Nancy 12345678 cm2is19d
+ORGANIZER nancy@123.com Nancy 12345678 cm2is19d
 SPEAKER bruce@123.com Bruce 12345678 djn120da
 ATTENDEE jenny@123.com Jenny 12345678 ril93as1
