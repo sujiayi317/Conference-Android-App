@@ -1,7 +1,6 @@
 package controllers;
 
 import entities.Event;
-import entities.Speaker;
 import entities.Room;
 import use_cases.EventManager;
 import use_cases.RoomManager;
@@ -67,7 +66,7 @@ public class EventsController{
         return info;
     }
 
-    public ArrayList<String> getAllAvailableSpeaker(int time){
+    public List<Event> getAllAvailableSpeaker(int time){
         return this.speakerManager.getAllAvailableSpeaker(time, eventManager);
     }
 }

@@ -29,7 +29,7 @@ public class OrganizerController extends AttendeeController{
 
     public void run(EventsController eventsController, ViewAllExistingEvents viewAllExistingEvents,
                     ViewAllAvailableRoom viewAllAvailableRoom , ViewAllAttendeeEvents viewAllAttendeeEvents,
-                    AttendeeManager attendeeManager,ViewEventInfo viewEventInfo,
+                    AttendeeManager attendeeManager,ViewEventInfo viewEventInfo, ViewAllAvailableSpeaker viewAllAvailableSpeaker,
                     OrganizerManager organizerManager, SpeakerManager speakerManager, UserManager userManager, String userID) {
         //connect to Attendee Presenter - Menu options
         boolean quit = false;
@@ -77,8 +77,12 @@ public class OrganizerController extends AttendeeController{
                         if (eventsController.getAvailableRoom(startTime).size() == 0){
                             output.printPrompt("sorry there is no available room yet, please go to create one first!");
                         }
+                        if (eventsController.getAllAvailableSpeaker(startTime).size() == 0){
+                            output.printPrompt("sorry there is no available speaker yet, please go to create one first!")
+                        }
                         else {
                             getAllAvailableRoomInfo(startTime, viewAllAvailableRoom, eventsController);
+                            getAllAvailableSpeaker(startTime,eventsController,viewAllAvailableSpeaker);
                             String title = input.getInputString("Please enter your event's title\n");
                             String roomID = input.getInputString("Please enter your room ID\n");
                             String speaker = input.getInputString("Please set your speaker\n");
@@ -108,7 +112,8 @@ public class OrganizerController extends AttendeeController{
         viewAllAvailableRoom.printAllAvailableRoom(eventsController.getAvailableRoom(time));
     }
 
-    private void getAllAvailableSpeaker(int time, ){
+    private void getAllAvailableSpeaker(int time, EventsController eventsController, ViewAllAvailableSpeaker viewAllAvailableSpeaker){
+        viewAllAvailableSpeaker.printAllAvailableSpeaker(eventsController.getAllAvailableSpeaker(time));
 
     }
     private void createEvent(String title, String roomID,String speaker,int startTime, EventsController eventsController){
