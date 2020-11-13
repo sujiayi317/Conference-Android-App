@@ -22,7 +22,7 @@ public class Login{
         while (true) {
             output.printPrompt("\n*** Welcome to login page of conference sign up center! ***\n*** Please enter '1' " +
                     "or '2' to Login or create account, ***\n***      or enter 'EXIT' to save and exit program." +
-                    "      ***\n");
+                    "      ***\n\n");
             String CurrentAction = input.getInputString("1. Sign in \n2. Create an account\n");
             if (CurrentAction.equals("1")) {
                 if (signIn(usermanager)){
