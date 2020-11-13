@@ -28,7 +28,7 @@ class FileReadWriter {
     public void UserReader() {
         ArrayList<String> lines = new ArrayList();
         try {
-            File UserFile = new File("Users.txt");
+            File UserFile = new File("./phase1/Users.txt");
             Scanner myReader = new Scanner(UserFile);
             while (myReader.hasNextLine()) {
                 while (myReader.hasNextLine()) {
@@ -42,14 +42,15 @@ class FileReadWriter {
         for (int i = 0; i < lines.size(); i++) {
             ArrayList<String> wordList = new ArrayList<String>();
             for (String word : lines.get(i).split(" ")) {
-                if (wordList.get(0).equals("SPEAKER")) {
-                    speakermanager.createSpeaker(wordList.get(1), wordList.get(2), wordList.get(3));
-                } else if (wordList.get(0).equals("ATTENDEE")) {
-                    attendeeManager.createAttendee(wordList.get(1), wordList.get(2), wordList.get(3));
-                } else if (wordList.get(0).equals("ORGANIZER")) {
-                    organizerManager.createOrganizer(wordList.get(1), wordList.get(2), wordList.get(3));
-                }
+                wordList.add(word);
 
+            }
+            if (wordList.get(0).equals("SPEAKER")) {
+                speakermanager.createSpeaker(wordList.get(1), wordList.get(2), wordList.get(3));
+            } else if (wordList.get(0).equals("ATTENDEE")) {
+                attendeeManager.createAttendee(wordList.get(1), wordList.get(2), wordList.get(3));
+            } else if (wordList.get(0).equals("ORGANIZER")) {
+                organizerManager.createOrganizer(wordList.get(1), wordList.get(2), wordList.get(3));
             }
         }
     }
