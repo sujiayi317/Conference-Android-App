@@ -5,13 +5,17 @@ import use_cases.*;
 import javax.swing.*;
 
 public class Login{
-    private static InputManager input = new InputManager();
-    private static OutputManager output = new OutputManager();
-    private static CreateAccount createAccount = new CreateAccount();
+    private static InputManager input;
+    private static OutputManager output;
+    private static CreateAccount createAccount;
     private static String ID;
     private static String type;
 
-
+    public Login(){
+        input = new InputManager();
+        output = new OutputManager();
+        createAccount = new CreateAccount();
+    }
     public void run(AttendeeManager attendeeManager, OrganizerManager organizerManager, SpeakerManager speakerManager,
                     UserManager usermanager) {
         while (true) {
