@@ -71,4 +71,8 @@ public class EventsController{
     public ArrayList<String> getAllAvailableSpeaker(int time){
         return this.speakerManager.getAllAvailableSpeaker(time, eventManager);
     }
+
+    public ArrayList<String> getAttendeesFromEvent(String eventID){
+        return eventManager.getAttendeesFromEvent(eventID);
+    }
 }
