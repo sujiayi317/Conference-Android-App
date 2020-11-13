@@ -33,7 +33,7 @@ public class ConversationManager implements Serializable{
 
 
     /**
-     * To check if the Conversation between two users has been created.
+     * Check if the Conversation between two users has been created.
      *
      * @param talkersList the Hashset of two users.
      * @return true iff the Conversation between two users from talkersList has been created.
@@ -47,10 +47,9 @@ public class ConversationManager implements Serializable{
 
 
     /**
-     * To check if the Conversation between two users has been created.
+     * Set the current conversation to be the conversation between the two users of talkersList.
      *
      * @param talkersList the Hashset of two users.
-     * @return true iff the Conversation between two users from talkersList has been created.
      */
     public void currentConversationSetter(HashSet<String> talkersList){
         this.currentConversation = conversations.get(talkersList);
@@ -59,13 +58,13 @@ public class ConversationManager implements Serializable{
 
 
     /**
-     * The method to send a message to another user
+     * Send a message to another user
+     *
+     * @param senderId the id of the user we want to send out message to.
+     * @param text the content of message we want to send
      */
-    public boolean sendMessage(String senderId, String text){
-//        HashSet<String> userIds = new HashSet<String>();
-//        userIds.add(senderId);
-//        userIds.add(receiverId)；
-        return currentConversation.addMessage(senderId, text);
+    public void sendMessage(String senderId, String text){
+        currentConversation.addMessage(senderId, text);
     }
 
     /**
@@ -81,11 +80,5 @@ public class ConversationManager implements Serializable{
         }
         return UserConversations;
     }
-
-
-    public void announcement(){
-
-    }
-
 
 }

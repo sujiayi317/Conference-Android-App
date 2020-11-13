@@ -47,7 +47,11 @@ public class Conversation implements Serializable {
     }
 
 
-
+    /**
+     * Get the userIds of the current conversation.
+     *
+     * @return the cloned Hashset of userIds
+     */
     public HashSet<String> getUserIds(){
         HashSet<String> cloneSet = new HashSet<String>();
         cloneSet = (HashSet<String>)userIds.clone();
