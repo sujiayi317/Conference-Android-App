@@ -44,6 +44,7 @@ public class OrganizerController extends AttendeeController{
                 switch (choice) {
                     case 0:
                         quit = true;
+                        break;
                     case 1:
                         //connect to CreateAccount Controller to create new speaker
                         if (create.CreateNewAccount(attendeeManager, organizerManager, eventsController.getSpeakerManager(), userManager, "SPEAKER")) {
