@@ -28,8 +28,7 @@ public class AttendeeController {
     public void run(String userID, EventsController eventsController, ViewAllExistingEvents viewAllExistingEvents,
                     ViewAllAttendeeEvents viewAllAttendeeEvents, ViewEventInfo viewEventInfo,
                     AttendeeManager attendeeManager, ViewFriendList viewFriendList,
-                    ConversationController conversationController, ViewMessagesOfAConversation
-                            viewMessagesOfAConversation, ConversationManager conversationManager, UserManager userManager,
+                    ConversationController conversationController, ConversationManager conversationManager, UserManager userManager,
                     ViewMessageList viewMessageList) {
         //connect to Attendee Presenter - Menu options
         boolean quit = false;
