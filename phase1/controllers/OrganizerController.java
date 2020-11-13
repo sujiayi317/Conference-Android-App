@@ -119,6 +119,9 @@ public class OrganizerController extends AttendeeController{
                             output.printPrompt("room" +" " +roomNum+ " "+"is created successfully\n");
                         }
                         break;
+                    case 9:
+                        //add friend
+                        break;
 
                 }
             }
