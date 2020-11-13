@@ -1,9 +1,7 @@
 package Presenter;
 
-import entities.Event;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class ViewAllAvailableSpeaker {
     public ViewAllAvailableSpeaker(){}

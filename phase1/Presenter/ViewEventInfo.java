@@ -1,6 +1,5 @@
 package Presenter;
 
-import controllers.OutputManager;
 
 import java.util.ArrayList;
 

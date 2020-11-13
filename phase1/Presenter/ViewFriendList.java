@@ -1,6 +1,5 @@
 package Presenter;
 
-import use_cases.AttendeeManager;
 import java.util.ArrayList;
 
 public class ViewFriendList {
