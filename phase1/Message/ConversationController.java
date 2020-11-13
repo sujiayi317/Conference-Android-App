@@ -104,7 +104,8 @@ public class ConversationController {
         return conversationManager.getUserConversations(userId);
     }
 
-    public static void viewMessagesOfAConversation(ArrayList<String> messages, ViewMessagesOfAConversation viewMessagesOfAConversation){
+    public static void viewMessagesOfAConversation(ArrayList<String> messages,
+                                                   ViewMessagesOfAConversation viewMessagesOfAConversation){
         output.printPrompt(viewMessagesOfAConversation.printMessages(messages));
     }
 
