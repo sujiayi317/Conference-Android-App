@@ -31,10 +31,9 @@ public class InputManager {
      *     The integer user enter.
      */
     public int getInputInt(String msg) {
-            out.printPrompt(msg);
-            String choice = input.nextLine(); //nextInt does not process the ENTER key
+        out.printPrompt(msg);
+        String choice = input.nextLine(); //nextInt does not process the ENTER key
         if ("1234567890".contains(choice)) {
-            input.nextLine(); //without this the user won't be able to enter next line
             return Integer.parseInt(choice);
         } else {
             return 666;
