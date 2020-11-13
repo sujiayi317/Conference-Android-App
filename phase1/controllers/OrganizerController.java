@@ -23,6 +23,7 @@ public class OrganizerController extends AttendeeController{
     private final OrganizerMenu organizerMenu;
     private final CreateANewEvent createANewEvent;
     private final createANewRoom createANewRoom;
+    private final CreateNewSpeaker createNewSpeaker;
     private final ViewAllAvailableRoom viewAllAvailableRoom;
     private final ViewFriendList viewFriendList;
     private final ViewAllAvailableSpeaker viewAllAvailableSpeaker;
@@ -32,6 +33,7 @@ public class OrganizerController extends AttendeeController{
         input = new InputManager();
         output = new OutputManager();
         this.create = new CreateAccount();
+        createNewSpeaker = new CreateNewSpeaker();
         createANewEvent = new CreateANewEvent();
         createANewRoom = new createANewRoom();
         this.viewAllAvailableRoom = new ViewAllAvailableRoom();
@@ -55,11 +57,13 @@ public class OrganizerController extends AttendeeController{
                         break;
                     case 1:
                         //connect to CreateAccount Controller to create new speaker
-                        if (create.CreateNewAccount(attendeeManager, organizerManager, eventsController.getSpeakerManager(), userManager, "SPEAKER")) {
-                            output.printPrompt("New speaker account successfully created.\n");
-                        } else {
-                            output.printPrompt("Create speaker action cancelled.\n");
-                        }
+//                        if (create.CreateNewAccount(attendeeManager, organizerManager, eventsController.getSpeakerManager(), userManager, "SPEAKER")) {
+//                            output.printPrompt("New speaker account successfully created.\n");
+//                        } else {
+//                            output.printPrompt("Create speaker action cancelled.\n");
+//                        }
+                        createNewSpeaker.createNewSpeaker(create, attendeeManager,organizerManager,
+                                eventsController,userManager);
                         break;
                     case 2:
                         //view all existing events

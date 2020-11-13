@@ -14,9 +14,9 @@ public class CreateANewEvent {
                                      ViewAllAvailableSpeaker viewAllAvailableSpeaker ){
         String time = "-1";
         while (Integer.parseInt(time) < 0 || Integer.parseInt(time) > 24) {
-            int startTime = input.getInputInt("Please enter your event time between 0-24\n PRESS -1 back to Menu\n");
+            int startTime = input.getInputInt("Please enter your event time between 0-24 OR PRESS -1 back to Menu\n");
             if (startTime == -1){
-                time = "0";
+                break;
             }
             if (eventsController.getAvailableRoom(startTime).size() == 0) {
                 output.printPrompt("sorry there is no available room yet, please go to create one first!\n");
