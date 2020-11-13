@@ -77,11 +77,11 @@ public class ConversationManager implements Serializable{
      * Get the list of conversations of a certain user
      * 待定
      */
-    public List<String> getUserConversations(String userId){
-        ArrayList<Conversation> UserConversations = new ArrayList<Conversation>();
+    public ArrayList<String[]> getUserConversations(String userId){
+        ArrayList<String[]> UserConversations = new ArrayList<String[]>();
         for (HashSet<String> key: conversations.keySet()){
             if (key.contains(userId)){
-                UserConversations.add(conversations.get(key).getMessages());
+                UserConversations.add(conversations.get(key).getLastMessage());
             }
         }
         return UserConversations;

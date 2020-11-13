@@ -45,6 +45,11 @@ public class Conversation implements Serializable {
         return messages;
     }
 
+    public String[] getLastMessage(){
+        int lastIndex = messages.size()-1;
+        return messages.get(lastIndex);
+    }
+
 
     /**
      * Get the userIds of the current conversation.
