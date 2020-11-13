@@ -27,7 +27,7 @@ public class CreateANewEvent {
                 String speaker = input.getInputString("Please set your speaker\n");
                 if (createEvent(title, eventsController.getRoomManager().changeNumTOID(roomNUm), speaker, startTime, eventsController)){
                 output.printPrompt("The new Event named "+title+" at "
-                        +roomNUm+"\n"+" taught by "
+                        +roomNUm+" taught by "
                         +speaker+" will start at "+startTime);
                 break;}
             }
