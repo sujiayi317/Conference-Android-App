@@ -56,4 +56,10 @@ public class ConversationController {
         }
     }
 
+
+    public ArrayList<String> getMessagesOfOneConversation(String userId){
+        enterConversation(userId);
+
+        return
+    }
 }

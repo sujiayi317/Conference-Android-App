@@ -14,21 +14,21 @@ public class Conversation implements Serializable {
         userIds.add(userId2);
     }
 
-    /**
-     * Get the length of the list of messages, i.e., number of messages sent by the two users.
-     *
-     * @return the length of messages
-     */
-    public int getMessagesLength(){
-        return messages.size();
-    }
+//    /**
+//     * Get the length of the list of messages, i.e., number of messages sent by the two users.
+//     *
+//     * @return the length of messages.
+//     */
+//    public int getMessagesLength(){
+//        return messages.size();
+//    }
 
     /**
      * Add the sender's message to the list of messages.
      *
-     * @param userId the user id of the sender of the message
-     * @param text the String of text the sender sends
-     * @return true iff the message is successfully added to the list of messages
+     * @param userId the user id of the sender of the message.
+     * @param text the String of text the sender sends.
+     * @return true iff the message is successfully added to the list of messages.
      */
     public boolean addMessage(String userId, String text){
         String[] message = {userId, text};
@@ -37,20 +37,19 @@ public class Conversation implements Serializable {
     }
 
     /**
-     * Get the message and User information in the specific index position
+     * Get the messages of this conversation.
      *
-     * @param index the index of message we want to get
-     * @return the Array at position index in messages
+     * @return the whole messages list of this conversation.
      */
-    public String[] getMessage(int index){
-        return messages.get(index).clone(); //return a clone of the index's String[] in messages
+    public ArrayList<String[]> getMessages(){
+        return messages; //return a clone of the index's String[] in messages
     }
 
 
     /**
      * Get the userIds of the current conversation.
      *
-     * @return the cloned Hashset of userIds
+     * @return the cloned Hashset of userIds.
      */
     public HashSet<String> getUserIds(){
         HashSet<String> cloneSet = new HashSet<String>();

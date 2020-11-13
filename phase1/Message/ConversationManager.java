@@ -67,6 +67,16 @@ public class ConversationManager implements Serializable{
         currentConversation.addMessage(senderId, text);
     }
 
+    public ArrayList<String> getMessagesOfCurrentConversation(){
+        ArrayList<String> stringOfMessages = new ArrayList<>();
+        for(int i = 0; i < currentConversation.getMessagesLength(); i++){
+            stringOfMessages.add();
+        }
+    }
+
+
+
+
     /**
      * Get the list of conversations of a certain user
      * 待定
