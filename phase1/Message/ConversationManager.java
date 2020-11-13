@@ -16,6 +16,7 @@ public class ConversationManager implements Serializable{
 
     public ConversationManager(){
         HashMap<HashSet<String>, Conversation> conversations = new HashMap<>();
+        createConversation("386d97fa", "89dfhy32");//test，待删
     }
 
     /**
