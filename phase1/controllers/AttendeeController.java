@@ -25,6 +25,7 @@ public class AttendeeController {
     public final ViewEventInfo viewEventInfo;
     private final ViewFriendList viewFriendList;
     private final SeeAllFriend seeAllFriend;
+    private final SeeAllMessage seeAllMessage;
 
     public AttendeeController(){
         input = new InputManager();
@@ -32,6 +33,7 @@ public class AttendeeController {
         seeALLExistingEvents = new SeeALLExistingEvents();
         seeALLMyEvents = new SeeALLMyEvents();
         seeAllFriend = new SeeAllFriend();
+        seeAllMessage = new SeeAllMessage();
         this.attendeeMenu = new AttendeeMenu();
         this.viewAllAttendeeEvents = new ViewAllAttendeeEvents();
         this.viewAllExistingEvents = new ViewAllExistingEvents();
@@ -106,28 +108,29 @@ public class AttendeeController {
                         break;
                     case 4:
                         //view all my message
-                        ArrayList<String[]> messageList = conversationController.getUserAllConversation(userID);
-
-                        ArrayList<String[]> userNameWithLastMessage = new ArrayList<>();
-                        for (String[] s: messageList){
-                            String[] msg = {userManager.getUserName(s[2]), s[3]};
-                            userNameWithLastMessage.add(msg);
-                        }//有问题
-                        boolean check4 = false;
-                        while (!check4){
-                            viewMessageList(userNameWithLastMessage, viewMessageList);
-                            int chooseConversation = input.getInputInt("Choose a message to start the conversation\n");
-                            if (0 <= chooseConversation && chooseConversation <= messageList.size()-1){
-                                if (messageList.get(chooseConversation)[0].equals(userID)){
-                                    conversationController.enterConversation(messageList.get(chooseConversation)[1]);
-                                }else{
-                                    conversationController.enterConversation(messageList.get(chooseConversation)[0]);
-                                }
-                                check4 = true;
-                            }else if (chooseConversation == 88){
-                                check4 =true;
-                            }
-                        }
+//                        ArrayList<String[]> messageList = conversationController.getUserAllConversation(userID);
+//
+//                        ArrayList<String[]> userNameWithLastMessage = new ArrayList<>();
+//                        for (String[] s: messageList){
+//                            String[] msg = {userManager.getUserName(s[2]), s[3]};
+//                            userNameWithLastMessage.add(msg);
+//                        }//有问题
+//                        boolean check4 = false;
+//                        while (!check4){
+//                            viewMessageList(userNameWithLastMessage, viewMessageList);
+//                            int chooseConversation = input.getInputInt("Choose a message to start the conversation\n");
+//                            if (0 <= chooseConversation && chooseConversation <= messageList.size()-1){
+//                                if (messageList.get(chooseConversation)[0].equals(userID)){
+//                                    conversationController.enterConversation(messageList.get(chooseConversation)[1]);
+//                                }else{
+//                                    conversationController.enterConversation(messageList.get(chooseConversation)[0]);
+//                                }
+//                                check4 = true;
+//                            }else if (chooseConversation == 88){
+//                                check4 =true;
+//                            }
+//                        }
+                        seeAllMessage.getToSeeAllMessage(userID, userManager, conversationController, viewMessageList);
                         break;
                     case 5:
                         //add friend
@@ -170,8 +173,8 @@ public class AttendeeController {
 //        output.printPrompt(viewFriendList.getFriendList(friends));
 //    }
 
-    public static void viewMessageList(ArrayList<String[]> conversations, ViewMessageList viewMessageList){
-        output.printPrompt(viewMessageList.getMessageList(conversations));
-    }
+//    public static void viewMessageList(ArrayList<String[]> conversations, ViewMessageList viewMessageList){
+//        output.printPrompt(viewMessageList.getMessageList(conversations));
+//    }
 
 }
