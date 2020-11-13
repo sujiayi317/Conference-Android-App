@@ -19,7 +19,7 @@ public class RoomManager implements Serializable {
 
     private List<String> events;
 
-    private final Map<String, List<String>> eventsMap;
+    private final Map<String, List<String>> eventsMap;  // Map from roomID to events
 
     /**
      * Creates an empty room manager
@@ -46,6 +46,11 @@ public class RoomManager implements Serializable {
         return true;
     }
 
+    /**
+     * Input roomID, output its room number
+     * @param roomID roomID
+     * @return roomNum
+     */
     public String changeIdTONum(String roomID){
         for (Room room: rooms){
             if (room.getRoomID().equals(roomID)){
@@ -54,6 +59,12 @@ public class RoomManager implements Serializable {
         }
         return "NULL";
     }
+
+    /**
+     * Input room number, output its ID
+     * @param roomNum roomNum
+     * @return roomID
+     */
     public String changeNumTOID(String roomNum){
         for (Room room: rooms){
             if (room.getRoomNum().equals(roomNum)){
@@ -78,6 +89,11 @@ public class RoomManager implements Serializable {
         eventsMap.put(roomID, events);
     }
 
+    /**
+     * Search through the list of rooms, return room given its ID
+     * @param roomID
+     * @return
+     */
     public Room getRoomBasedOnItsID(String roomID){
         for (Room room: rooms) {
             if (room.getRoomID().equals(roomID)){

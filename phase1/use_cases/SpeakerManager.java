@@ -66,11 +66,18 @@ public class SpeakerManager extends UserManager implements Serializable {
         return true;
     }
 
-    public String validLogIn(String account, String password){
+
+    /**
+     * Check email and password, return its userID (or "NULL")
+     * @param email email
+     * @param password password
+     * @return userID or "NULL"
+     */
+    public String validLogIn(String email, String password){
         for (Speaker speaker : speakers){
-            if (speaker.getEmail().equals(account) && speaker.getPassword().equals(password)){
+            if (speaker.getEmail().equals(email) && speaker.getPassword().equals(password)){
                 return speaker.getUserID();
-            } else if (speaker.getEmail().equals(account)){
+            } else if (speaker.getEmail().equals(email)){
                 return "NULL";
             }
         }
