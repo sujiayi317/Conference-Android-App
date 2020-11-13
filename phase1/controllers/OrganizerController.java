@@ -86,7 +86,8 @@ public class OrganizerController extends AttendeeController{
 
                     case 3:
                         // view all his/her events
-                        viewAllAttendeeEvents(userID, viewAllAttendeeEvents, eventsController);
+//                        viewAllAttendeeEvents(userID, viewAllAttendeeEvents, eventsController);
+                        seeALLMyEvents.getToSeeAllMyEvents(viewAllAttendeeEvents, eventsController, userID);
                         break;
 
                     case 4:
