@@ -1,5 +1,6 @@
 package controllers;
 
+import Message.Conversation;
 import Message.ConversationController;
 import Message.ConversationManager;
 import Presenter.*;
@@ -76,6 +77,7 @@ public class AttendeeController {
                         }
                         break;
                     case 4:
+                        ArrayList<String> messageList =
                         //View all my message
                         break;
                     case 5:

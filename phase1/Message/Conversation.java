@@ -42,7 +42,7 @@ public class Conversation implements Serializable {
      * @return the whole messages list of this conversation.
      */
     public ArrayList<String[]> getMessages(){
-        return messages; //return a clone of the index's String[] in messages
+        return messages;
     }
 
 
