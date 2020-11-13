@@ -24,17 +24,20 @@ public class SeeALLExistingEvents {
         while (check != 1 && eventsController.getAllExistingEvents().size() != 0) {
             viewAllEvents(viewAllExistingEvents, eventsController);
             String eventNum = input.getInputString("Please choose an Event_Num and see the details OR press enter to back\n");
-            String eventTitle = eventsController.getAllExistingEvents().get(Integer.parseInt(eventNum)).getTitle();
-            if (!eventTitle.equals("")) {
-                String eventID = eventsController.getEventManager().changeEventTitleIntoEventID(eventTitle);
-                viewOneEventInfo(eventID, viewEventInfo, eventsController);
-                String decision = input.getInputString("Yes=sign up OR No\n");
-                if (decision.equals("Yes")) {
-                    if (attendeeManager.signUp(eventsController.getEventManager(), userID, eventID,
-                            eventsController.getRoomManager())){
-                    output.printPrompt("You're successfully in " + eventTitle + "\n");
-                    check += 1;}
-                    output.printPrompt("You're already in " + eventTitle + "\n");
+            if (!eventNum.equals("")) {
+                String eventTitle = eventsController.getAllExistingEvents().get(Integer.parseInt(eventNum)).getTitle();
+                if (!eventTitle.equals("")) {
+                    String eventID = eventsController.getEventManager().changeEventTitleIntoEventID(eventTitle);
+                    viewOneEventInfo(eventID, viewEventInfo, eventsController);
+                    String decision = input.getInputString("Press: Yes to sign up OR No to back menu\n");
+                    if (decision.equals("Yes")) {
+                        if (attendeeManager.signUp(eventsController.getEventManager(), userID, eventID,
+                                eventsController.getRoomManager())) {
+                            output.printPrompt("You're successfully in " + eventTitle + "\n");
+                            check += 1;
+                        }
+                        output.printPrompt("You're already in " + eventTitle + "\n");
+                    }
                 }
             }
             else{
