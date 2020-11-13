@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserManager {
-    public static  List<User> users;
+    public static List<User> users;
 
     public UserManager(){
         users = new ArrayList<>();
