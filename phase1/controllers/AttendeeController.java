@@ -1,5 +1,6 @@
 package controllers;
 
+import Message.Conversation;
 import Message.ConversationController;
 import Message.ConversationManager;
 import Presenter.*;
@@ -26,7 +27,7 @@ public class AttendeeController {
                     ViewAllAttendeeEvents viewAllAttendeeEvents, ViewEventInfo viewEventInfo,
                     AttendeeManager attendeeManager, ViewFriendList viewFriendList,
                     ConversationController conversationController, ViewMessagesOfAConversation
-                            viewMessagesOfAConversation) {
+                            viewMessagesOfAConversation, ConversationManager conversationManager) {
         //connect to Attendee Presenter - Menu options
         boolean quit = false;
         while (! quit ) {
@@ -76,6 +77,7 @@ public class AttendeeController {
                         }
                         break;
                     case 4:
+                        ArrayList<String[]> messageList = conversationManager.getUserConversations(userID);
                         //View all my message
                         break;
                     case 5:
