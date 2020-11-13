@@ -33,6 +33,7 @@ public class SeeALLExistingEvents {
                             eventsController.getRoomManager())){
                     output.printPrompt("You're successfully in " + eventTitle + "\n");
                     check += 1;}
+                    output.printPrompt("You're already in " + eventTitle + "\n");
                 }
             }
             else{
