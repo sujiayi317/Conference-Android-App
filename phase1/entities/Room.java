@@ -15,7 +15,7 @@ public class Room implements Serializable{
     private String roomNum;
     /**
      * Constructor  
-     * @param roomID unique identification of the room
+     * @param roomNum unique identification of the room
      */
     public Room(String roomNum) {
         this.roomNum = roomNum;

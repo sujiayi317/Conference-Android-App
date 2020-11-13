@@ -84,7 +84,7 @@ public class Conference {
                 break;
             case "ORGANIZER":
                 new OrganizerController().run(eventsController, viewAllExistingEvents, viewAllAvailableRoom,
-                        viewAllAttendeeEvents, attendeeManager, organizerManager, speakerManager, userID);
+                        viewAllAttendeeEvents, attendeeManager,viewEventInfo, organizerManager, speakerManager, userID);
         }
     }
 
