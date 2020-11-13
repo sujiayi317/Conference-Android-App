@@ -19,15 +19,17 @@ public class Login{
             if (CurrentAction == 1) {
                 if (signIn(attendeeManager, organizerManager, speakerManager)){
                     break;
-                };
+                } else {
+                    output.printPrompt("Sign in failed, directing back to main page now...");
+                }
             } else if (CurrentAction == 2) {
                 if (createAccount(attendeeManager, organizerManager, speakerManager)){
                     output.printPrompt("New account successfully created! Directing back to main page now...\n");
                 } else {
-                    output.printPrompt("Account creation cancelled, directing back to main page now...");
+                    output.printPrompt("Account creation cancelled, directing back to main page now...\n");
                 }
             } else {
-                output.printPrompt("Invalid action, directing back to main page.");
+                output.printPrompt("Invalid action entered, directing back to main page now...\n");
             }
         }
     }
