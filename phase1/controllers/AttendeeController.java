@@ -78,7 +78,11 @@ public class AttendeeController {
                         break;
                     case 3:
                         //View all my friend
-                        ArrayList<String> friendList = attendeeManager.friendListGetter(userID);
+                        ArrayList<String> friendList = new ArrayList<>();
+                        for(String id:attendeeManager.friendListGetter(userID)){
+                            friendList.add(userManager.getUserName(id));
+                        } // get list of friends' usernames
+
                         boolean check3 = false;
                         while (!check3) {
                             viewAllFriends(friendList, viewFriendList); //output StringBuilder of the Friend list
