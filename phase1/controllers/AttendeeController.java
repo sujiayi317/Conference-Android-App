@@ -24,12 +24,14 @@ public class AttendeeController {
     public final ViewAllExistingEvents viewAllExistingEvents;
     public final ViewEventInfo viewEventInfo;
     private final ViewFriendList viewFriendList;
+    private final SeeAllFriend seeAllFriend;
 
     public AttendeeController(){
         input = new InputManager();
         output = new OutputManager();
         seeALLExistingEvents = new SeeALLExistingEvents();
         seeALLMyEvents = new SeeALLMyEvents();
+        seeAllFriend = new SeeAllFriend();
         this.attendeeMenu = new AttendeeMenu();
         this.viewAllAttendeeEvents = new ViewAllAttendeeEvents();
         this.viewAllExistingEvents = new ViewAllExistingEvents();
@@ -79,26 +81,28 @@ public class AttendeeController {
                         break;
                     case 3:
                         //View all my friend
-                        ArrayList<String> friendList = new ArrayList<>();
-                        for(String id:attendeeManager.friendListGetter(userID)){
-                            friendList.add(userManager.getUserName(id));
-                        } // get list of friends' usernames
-
-                        boolean check3 = false;
-                        while (!check3) {
-                            viewAllFriends(friendList, viewFriendList); //output StringBuilder of the Friend list
-                            int chooseFriend = input.getInputInt("Choose a friend to start the conversation, or" +
-                                    " \"0\" to quit:\n") - 1;
-                            if (0 <= chooseFriend && chooseFriend <= friendList.size()-1) {
-                                String friendId = friendList.get(chooseFriend);
-                                conversationController.enterConversation(friendId);
-                                check3 = true;
-                            }else if (chooseFriend == -1){
-                                check3 = true;
-                            }else{
-                                System.out.println("Friend not found.");
-                            }
-                        }
+//                        ArrayList<String> friendList = new ArrayList<>();
+//                        for(String id:attendeeManager.friendListGetter(userID)){
+//                            friendList.add(userManager.getUserName(id));
+//                        } // get list of friends' usernames
+//
+//                        boolean check3 = false;
+//                        while (!check3) {
+//                            viewAllFriends(friendList, viewFriendList); //output StringBuilder of the Friend list
+//                            int chooseFriend = input.getInputInt("Choose a friend to start the conversation, or" +
+//                                    " \"0\" to quit:\n") - 1;
+//                            if (0 <= chooseFriend && chooseFriend <= friendList.size()-1) {
+//                                String friendId = friendList.get(chooseFriend);
+//                                conversationController.enterConversation(friendId);
+//                                check3 = true;
+//                            }else if (chooseFriend == -1){
+//                                check3 = true;
+//                            }else{
+//                                System.out.println("Friend not found.");
+//                            }
+//                        }
+                        seeAllFriend.getToSeeAllFriend(userID, viewFriendList, attendeeManager, userManager,
+                                conversationController);
                         break;
                     case 4:
                         //view all my message
@@ -162,9 +166,9 @@ public class AttendeeController {
 //        output.printPrompt(viewEventInfo.getEventInfo(eventInfoList));
 //    }
 
-    public static void viewAllFriends(ArrayList<String> friends,ViewFriendList viewFriendList){
-        output.printPrompt(viewFriendList.getFriendList(friends));
-    }
+//    public static void viewAllFriends(ArrayList<String> friends,ViewFriendList viewFriendList){
+//        output.printPrompt(viewFriendList.getFriendList(friends));
+//    }
 
     public static void viewMessageList(ArrayList<String[]> conversations, ViewMessageList viewMessageList){
         output.printPrompt(viewMessageList.getMessageList(conversations));
