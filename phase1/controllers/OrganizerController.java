@@ -1,5 +1,6 @@
 package controllers;
 
+import Presenter.*;
 import Presenter.ViewAllAttendeeEvents;
 import Presenter.ViewAllAvailableRoom;
 import Presenter.ViewAllExistingEvents;
@@ -13,16 +14,23 @@ import use_cases.*;
  */
 public class OrganizerController {
 
-    private static InputManager input = new InputManager();
+    private static InputManager input;
     private static OutputManager output = new OutputManager();
     private CreateAccount create = new CreateAccount();
+    private final OrganizerMenu organizerMenu;
+
+    public OrganizerController(){
+        this.organizerMenu = new OrganizerMenu();
+        input = new InputManager();
+        output = new = new OutputManager()
+    }
 
 
     public void run(EventsController eventsController, ViewAllExistingEvents viewAllExistingEvents, ViewAllAvailableRoom viewAllAvailableRoom , ViewAllAttendeeEvents viewAllAttendeeEvents, AttendeeManager attendeeManager,
-                    OrganizerManager organizerManager, SpeakerManager speakerManager, String userID) {
+                    OrganizerManager organizerManager, SpeakerManager speakerManager, String userID, ) {
         //connect to Attendee Presenter - Menu options
 
-        int choice = input.getInputInt("Please choose from the following options:");
+        int choice = input.getInputInt("Please choose from the following options:\n");
         if (choice != 0) {
             switch (choice) {
                 case 1:
@@ -35,15 +43,15 @@ public class OrganizerController {
                     break;
                 case 2:
                     //get all available room info
-                    int time = input.getInputInt("Please enter your event time");
+                    int time = input.getInputInt("Please enter your event time\n");
                     getAllAvailableRoomInfo(time, viewAllAvailableRoom, eventsController);
                 case 3:
                     //create a new event
                     //String title, String roomID, Speaker speaker, int startTime
-                    String title = input.getInputString("Please enter your event's title");
-                    String roomID = input.getInputString("Please enter your room ID");
-                    String speaker = input.getInputString("Please set your speaker");
-                    int startTime = input.getInputInt("Please enter your event time");
+                    String title = input.getInputString("Please enter your event's title\n");
+                    String roomID = input.getInputString("Please enter your room ID\n");
+                    String speaker = input.getInputString("Please set your speaker\n");
+                    int startTime = input.getInputInt("Please enter your event time\n");
                     createEvent(title,roomID,speaker,startTime, eventsController);
                 case 4:
                     // view all events
