@@ -104,10 +104,10 @@ public class OrganizerController extends AttendeeController{
                             }
                         }
                     case 5:
-                        // view all events
+                        //View all my fiends
                         break;
                     case 6:
-                        // view all attended events
+                        // view all my message
                         break;
 
                     case 7:
