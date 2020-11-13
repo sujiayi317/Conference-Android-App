@@ -5,6 +5,7 @@ import Message.ConversationController;
 import Message.ConversationManager;
 import Presenter.*;
 import use_cases.AttendeeManager;
+import use_cases.UserManager;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -27,11 +28,11 @@ public class AttendeeController {
                     ViewAllAttendeeEvents viewAllAttendeeEvents, ViewEventInfo viewEventInfo,
                     AttendeeManager attendeeManager, ViewFriendList viewFriendList,
                     ConversationController conversationController, ViewMessagesOfAConversation
-                            viewMessagesOfAConversation, ConversationManager conversationManager) {
+                            viewMessagesOfAConversation, ConversationManager conversationManager, UserManager userManager) {
         //connect to Attendee Presenter - Menu options
         boolean quit = false;
         while (! quit ) {
-            attendeeMenu.printAttendeeMenu(userID);
+            attendeeMenu.printAttendeeMenu(userManager.getUserName(userID));
             int choice = input.getInputInt("Please choose from the above options:\n");
             if (0<=choice && choice<=5) {
                 switch (choice) {

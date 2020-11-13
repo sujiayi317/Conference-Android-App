@@ -91,7 +91,7 @@ public class Conference {
             case "ATTENDEE":
                 new AttendeeController().run(userID, eventsController, viewAllExistingEvents, viewAllAttendeeEvents,
                         viewEventInfo, attendeeManager, viewFriendList, conversationController,
-                        viewMessagesOfAConversation,conversationManager);
+                        viewMessagesOfAConversation,conversationManager, userManager);
                 break;
             case "SPEAKER":
                 new SpeakerController().run();
