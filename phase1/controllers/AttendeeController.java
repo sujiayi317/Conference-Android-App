@@ -22,7 +22,7 @@ public class AttendeeController {
                     ViewAllAttendeeEvents viewAllAttendeeEvents, ViewEventInfo viewEventInfo, AttendeeManager attendeeManager) {
         //connect to Attendee Presenter - Menu options
         attendeeMenu.printAttendeeMenu(userID);
-        int choice = input.getInputInt("Please choose from the following options:");
+        int choice = input.getInputInt("Please choose from the above options:\n");
         if (choice != 0) {
             switch (choice) {
                 case 1:
@@ -30,10 +30,10 @@ public class AttendeeController {
                     int check = 0;
                     while (check != 1) {
                         viewAllEvents(viewAllExistingEvents, eventsController);
-                        String eventID = input.getInputString("Please choose an event and see the details or press enter");
+                        String eventID = input.getInputString("Please choose an event and see the details or press enter\n");
                         if (!eventID.equals("")) {
                             viewOneEventInfo(eventID, viewEventInfo, eventsController);
-                            String decision = input.getInputString("Yes=sign up OR No");
+                            String decision = input.getInputString("Yes=sign up OR No\n");
                             if (decision.equals("Yes")) {
                                 attendeeManager.signUp(eventsController.getEventManager(), userID, eventID,
                                         eventsController.getRoomManager());
