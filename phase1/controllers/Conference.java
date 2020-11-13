@@ -27,9 +27,8 @@ public class Conference {
     private final ViewFriendList viewFriendList;
     private final ViewAllAvailableSpeaker viewAllAvailableSpeaker;
     private final ConversationManager conversationManager;
-    private final ViewMessagesOfAConversation viewMessagesOfAConversation;
-    private final ViewMessageList viewMessageList;
-
+    private ViewMessagesOfAConversation viewMessagesOfAConversation;
+    private ConversationController conversationController;
     /**
      * This is where our conference system starts.
      */
@@ -48,7 +47,6 @@ public class Conference {
         this.viewAllAvailableSpeaker = new ViewAllAvailableSpeaker();
         this.viewMessagesOfAConversation = new ViewMessagesOfAConversation();
         this.conversationManager = new ConversationManager();
-        this.viewMessageList = new ViewMessageList();
     }
     public void run(){
         try {
@@ -87,13 +85,13 @@ public class Conference {
     private void iteration() {
         String userType = new Login().getUserType();
         String userID = new Login().getUserID();
-        ConversationController conversationController = new ConversationController(userID);
+        this.conversationController = new ConversationController(userID);
 
         switch(userType) {
             case "ATTENDEE":
                 new AttendeeController().run(userID, eventsController, viewAllExistingEvents, viewAllAttendeeEvents,
                         viewEventInfo, attendeeManager, viewFriendList, conversationController,
-                        viewMessagesOfAConversation,conversationManager, viewMessageList);
+                        viewMessagesOfAConversation,conversationManager, userManager);
                 break;
             case "SPEAKER":
                 new SpeakerController().run();
@@ -101,7 +99,7 @@ public class Conference {
             case "ORGANIZER":
                 new OrganizerController().run(eventsController, viewAllExistingEvents, viewAllAvailableRoom,
                         viewAllAttendeeEvents, attendeeManager,viewEventInfo, viewAllAvailableSpeaker,
-                        organizerManager, userManager, userID);
+                        organizerManager, userManager, conversationController, userID);
         }
     }
 

@@ -5,6 +5,7 @@ import Message.ConversationController;
 import Message.ConversationManager;
 import Presenter.*;
 import use_cases.AttendeeManager;
+import use_cases.UserManager;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -27,11 +28,11 @@ public class AttendeeController {
                     ViewAllAttendeeEvents viewAllAttendeeEvents, ViewEventInfo viewEventInfo,
                     AttendeeManager attendeeManager, ViewFriendList viewFriendList,
                     ConversationController conversationController, ViewMessagesOfAConversation
-                            viewMessagesOfAConversation, ConversationManager conversationManager, ViewMessageList viewMessageList) {
+                            viewMessagesOfAConversation, ConversationManager conversationManager, UserManager userManager) {
         //connect to Attendee Presenter - Menu options
         boolean quit = false;
         while (! quit ) {
-            attendeeMenu.printAttendeeMenu(userID);
+            attendeeMenu.printAttendeeMenu(userManager.getUserName(userID));
             int choice = input.getInputInt("Please choose from the above options:\n");
             if (0<=choice && choice<=5) {
                 switch (choice) {
@@ -78,21 +79,6 @@ public class AttendeeController {
                         break;
                     case 4:
                         ArrayList<String[]> messageList = conversationManager.getUserConversations(userID);
-                        boolean check4 = false;
-                        while (!check4){
-                            viewMessageList(messageList, viewMessageList);
-                            int chooseConversation = input.getInputInt("Choose a message to start the conversation\n");
-                            if (0 <= chooseConversation && chooseConversation <= messageList.size()-1){
-                                if (messageList.get(chooseConversation)[0].equals(userID)){
-                                    conversationController.enterConversation(messageList.get(chooseConversation)[1]);
-                                    viewMessagesOfAConversation.printMessages(conversationController.getMessagesOfOneConversation(messageList.get(chooseConversation)[1]));
-                                }else{
-                                    conversationController.enterConversation(messageList.get(chooseConversation)[0]);
-                                    viewMessagesOfAConversation.printMessages(conversationController.getMessagesOfOneConversation(messageList.get(chooseConversation)[0]));
-                                }
-                                check4 = true;
-                            }
-                        }
                         //View all my message
                         break;
                     case 5:
@@ -119,10 +105,6 @@ public class AttendeeController {
 
     public static void viewAllFriends(ArrayList<String> friends,ViewFriendList viewFriendList){
         output.printPrompt(viewFriendList.getFriendList(friends));
-    }
-
-    public static void viewMessageList(ArrayList<String[]> conversations, ViewMessageList viewMessageList){
-        output.printPrompt(viewMessageList.getMessageList(conversations));
     }
 
 }
