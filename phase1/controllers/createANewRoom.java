@@ -14,8 +14,12 @@ public class createANewRoom {
     public void getToCreateANewRoom(EventsController eventsController){
         RoomManager roomManager = eventsController.getRoomManager();
         String roomNum = "-1";
-        while (Integer.parseInt(roomNum)>100 || Integer.parseInt(roomNum)<0)
+        while (Integer.parseInt(roomNum)>100 || Integer.parseInt(roomNum)<0){
             roomNum = input.getInputString("Please enter your room Number between 0-100\n");
+            if (Integer.parseInt(roomNum)>100 || Integer.parseInt(roomNum)<0){
+                output.printPrompt("The RoomNum you chose is out of the bound please enter the correct number\n");
+            }
+        }
         if (roomManager.createRoom(roomNum)){
             output.printPrompt("room" +" " +roomNum+ " "+"is created successfully\n");
         }
