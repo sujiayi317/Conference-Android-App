@@ -12,7 +12,8 @@ public class Room implements Serializable{
     private final String roomID = UUID.randomUUID().toString().split("-")[0];
     private final int capacity = 2;
     private int currentNum = 0;
-    private String roomNum;
+    private final String roomNum;
+
     /**
      * Constructor  
      * @param roomNum unique identification of the room
@@ -21,15 +22,13 @@ public class Room implements Serializable{
         this.roomNum = roomNum;
     }
 
+    /**
+     * Get the room number for this room
+     *
+     * @return the room Number in String format
+     */
     public String getRoomNum(){
         return roomNum;
-    }
-    /**
-     * Constructor  
-     * @param roomID unique identification of the room
-     */
-    public Room(Integer roomID) {
-        this(roomID.toString());
     }
 
     /**
@@ -41,28 +40,43 @@ public class Room implements Serializable{
         return roomID;
     }
 
-
-    @Override
-    public String toString() {
-        return "entities.Room Number " + roomID;
-
-    }
-
+    /**
+     * Get current number of people in this room
+     *
+     * @return current number
+     */
     public int getCurrentNum(){
         return this.currentNum;
     }
 
+    /**
+     * Get the capacity for this room
+     *
+     * @return capacity
+     */
     public int getCapacity(){
         return this.capacity;
     }
 
+    /**
+     * Increase the number of people in this room
+     */
     public void increaseCurrentNum(){
         if (this.currentNum < this.capacity){
             this.currentNum +=1;}
     }
 
+    /**
+     * Decrease the number of people in this room
+     */
     public void decreaseCurrentNum(){
         if (this.currentNum > 0){
             this.currentNum -=1;}
+    }
+
+    @Override
+    public String toString() {
+        return "entities.Room Number " + roomID;
+
     }
 }
