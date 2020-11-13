@@ -102,10 +102,9 @@ public class ConversationController {
     }
 
     public ArrayList<String[]> getUserAllConversation(String userId){
-
-        ArrayList<String[]> userNameWithLastMessage;
-        for (String[] str: conversationManager.getUserExistConversations(userId)){
-            String[] msg = {userManager.getUserName(str[0]), str[1]};
+        ArrayList<String[]> userNameWithLastMessage = new ArrayList<>();
+        for (String[] s: conversationManager.getUserConversations(userId)){
+            String[] msg = {userManager.getUserName(s[0]), s[1]};
             userNameWithLastMessage.add(msg);
         }
         return userNameWithLastMessage;
