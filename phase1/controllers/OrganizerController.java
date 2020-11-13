@@ -62,7 +62,7 @@ public class OrganizerController extends AttendeeController{
                                 if (decision.equals("Yes")) {
                                     attendeeManager.signUp(eventsController.getEventManager(), userID, eventID,
                                             eventsController.getRoomManager());
-                                    output.printPrompt("you're successfully in" + eventID);
+                                    output.printPrompt("you're successfully in " + eventID + "\n");
                                     check += 1;
                                 }
                             }
@@ -79,10 +79,9 @@ public class OrganizerController extends AttendeeController{
                         //String title, String roomID, Speaker speaker, int startTime
                         int startTime = input.getInputInt("Please enter your event time\n");
                         if (eventsController.getAvailableRoom(startTime).size() == 0){
-                            output.printPrompt("sorry there is no available room yet, please go to create one first!");
-                        }
-                        if (eventsController.getAllAvailableSpeaker(startTime).size() == 0){
-                            output.printPrompt("sorry there is no available speaker yet, please go to create one first!");
+                            output.printPrompt("sorry there is no available room yet, please go to create one first!\n");
+                        } else if (eventsController.getAllAvailableSpeaker(startTime).size() == 0){
+                            output.printPrompt("sorry there is no available speaker yet, please go to create one first!\n");
                         }
                         else {
                             getAllAvailableRoomInfo(startTime, viewAllAvailableRoom, eventsController);
@@ -112,7 +111,7 @@ public class OrganizerController extends AttendeeController{
                         RoomManager roomManager = eventsController.getRoomManager();
                         String roomNum = input.getInputString("Please enter your room Number between 0-100\n");
                         if (roomManager.createRoom(roomNum)){
-                            output.printPrompt("room"+roomNum+"is created successfully");
+                            output.printPrompt("room"+roomNum+"is created successfully\n");
                         }
                         break;
 
