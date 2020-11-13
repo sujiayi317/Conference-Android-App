@@ -94,11 +94,11 @@ public class AttendeeController {
                         break;
                     case 5:
                         //add friend
-                        ArrayList<String> friendList2 = attendeeManager.friendListGetter(userID);
+                        ArrayList<String> userList = userManager.userListGetter();
                         boolean check5 = false;
                         while (!check5){
                             String friendId = input.getInputString("Please enter the userId, or 0 to quit:\n");
-                            if (friendList2.contains(friendId)){
+                            if (userList.contains(friendId)){
                                 userManager.addFriend(userID, friendId);
                                 check5 = true;
                             }else if (friendId.equals("0")){
