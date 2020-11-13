@@ -16,7 +16,12 @@ public class ConversationController {
     }
 
 
-    //这个method结束，用户就进入了和这个人的聊天室
+
+    /**
+     * Get into the conversation between current user and the other user.
+     *
+     * @param secondUserId the User Id of user we want to send message to
+     */
     public void enterConversation(String secondUserId){
         HashSet<String> setOfTalkersNow = new HashSet<String>();
         setOfTalkersNow.add(currentUserId);
@@ -28,12 +33,22 @@ public class ConversationController {
         conversationManager.currentConversationSetter(setOfTalkersNow);
     }
 
-
+    /**
+     * Send message to one individual user.
+     *
+     * @param messageContent the content of message we want to send.
+     */
     public void sendToIndividualUser(String messageContent){
         conversationManager.sendMessage(currentUserId, messageContent);
     }
 
 
+    /**
+     * Send message to multiple users.
+     *
+     * @param messageContent the content of message we want to send.
+     * @param listOfUsers the list of users we want to send message to.
+     */
     public void sendToMultipleUsers(String messageContent, ArrayList<String> listOfUsers){
         for(String userId: listOfUsers){
             enterConversation(userId);
