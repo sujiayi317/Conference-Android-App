@@ -100,7 +100,10 @@ public class AttendeeController {
                                     conversationController.enterConversation(messageList.get(chooseConversation)[0]);
                                 }
                                 check4 = true;
-                            }else
+                            }else if(chooseConversation == 88){
+                                check4 = true;
+                            }
+
                         }
                         break;
                     case 5:
