@@ -34,10 +34,15 @@ public class RoomManager implements Serializable {
      * Creates a new room (helper method for addEventToRoom method)
      * @param roomNum the room to create and add
      */
-    private Room createRoom(String roomNum) {
+    private boolean createRoom(String roomNum) {
+        for (Room room : this.rooms) {
+            if (room.getRoomNum() == roomNum){
+                return false;
+            }
+        }
         Room room = new Room(roomNum);
         this.rooms.add(room);
-        return room;
+        return true;
     }
 
 

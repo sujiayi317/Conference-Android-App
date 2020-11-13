@@ -21,6 +21,9 @@ public class Room implements Serializable{
         this.roomNum = roomNum;
     }
 
+    public String getRoomNum(){
+        return roomNum;
+    }
     /**
      * Constructor  
      * @param roomID unique identification of the room
