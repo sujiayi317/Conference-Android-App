@@ -19,7 +19,7 @@ public class Login{
     public void run(AttendeeManager attendeeManager, OrganizerManager organizerManager, SpeakerManager speakerManager,
                     UserManager usermanager) {
         while (true) {
-            output.printPrompt("** Welcome to login page of conference sign up center! Please enter a number **\n");
+            output.printPrompt("\n** Welcome to login page of conference sign up center! Please enter a number **\n");
             String CurrentAction = input.getInputString("1. Sign in \n2. Create an account\n");
             if (CurrentAction.equals("1")) {
                 if (signIn(usermanager)){
@@ -34,7 +34,7 @@ public class Login{
                     output.printPrompt("Account creation cancelled, directing back to main page now...\n");
                 }
             } else {
-                output.printPrompt("Invalid action entered, directing back to main page now...\n");
+                output.printPrompt("Invalid action entered  :(  directing back to main page now...\n");
             }
         }
     }
@@ -43,11 +43,6 @@ public class Login{
         while (true) {
             String account = input.getInputString("Please enter your email:\n");
             String password = input.getInputString("Please enter your password:\n");
-//            if (attendeeManager.validLogIn(account, password).equals("NULL") &&
-//                    speakerManager.validLogIn(account, password).equals("NULL") &&
-//                    organizerManager.validLogIn(account, password).equals("NULL")){
-//
-//            }
             if (!userManager.validLogIn(account, password).equals("NULL")){
                 ID = userManager.validLogIn(account, password);
                 type = userManager.getUserType(account, password);
