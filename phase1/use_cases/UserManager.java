@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserManager {
-    protected List<User> users;
+    protected List<User> users = new ArrayList<>();
 
     public boolean validNewName(String name){
         for (User user : users){
@@ -31,10 +31,9 @@ public class UserManager {
         for (User user : users){
             if (user.getEmail().equals(account) && user.getPassword().equals(password)){
                 return user.getUserID();
-            } else if (user.getEmail().equals(account)){
-                return "NULL";
             }
         }
+        System.out.println(users.get(0));
         return "NULL";
     }
 

@@ -31,14 +31,4 @@ public class OrganizerManager extends UserManager implements Serializable{
         super.users.add(organizer);
         return organizer;
     }
-
-    public boolean validNewOrganizerEmail(String email){
-        for (Organizer organizer : organizers){
-            if (organizer.getEmail().equals(email)){
-                return false;
-            }
-        }
-        return true;
-    }
-
 }
