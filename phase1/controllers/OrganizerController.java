@@ -15,22 +15,23 @@ import use_cases.*;
 public class OrganizerController {
 
     private static InputManager input;
-    private static OutputManager output = new OutputManager();
-    private CreateAccount create = new CreateAccount();
+    private static OutputManager output;
+    private CreateAccount create;
     private final OrganizerMenu organizerMenu;
 
     public OrganizerController(){
         this.organizerMenu = new OrganizerMenu();
         input = new InputManager();
-        output = new = new OutputManager()
+        output = new OutputManager();
+        this.create = new CreateAccount();
     }
 
 
     public void run(EventsController eventsController, ViewAllExistingEvents viewAllExistingEvents, ViewAllAvailableRoom viewAllAvailableRoom , ViewAllAttendeeEvents viewAllAttendeeEvents, AttendeeManager attendeeManager,
-                    OrganizerManager organizerManager, SpeakerManager speakerManager, String userID, ) {
+                    OrganizerManager organizerManager, SpeakerManager speakerManager, String userID) {
         //connect to Attendee Presenter - Menu options
-
-        int choice = input.getInputInt("Please choose from the following options:\n");
+        organizerMenu.printOrganizerMenu(userID);
+        int choice = input.getInputInt("Please choose from the above options:\n");
         if (choice != 0) {
             switch (choice) {
                 case 1:
