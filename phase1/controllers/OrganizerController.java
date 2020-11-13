@@ -113,7 +113,7 @@ public class OrganizerController extends AttendeeController{
                         RoomManager roomManager = eventsController.getRoomManager();
                         String roomNum = input.getInputString("Please enter your room Number between 0-100\n");
                         if (roomManager.createRoom(roomNum)){
-                            output.printPrompt("room" +" "+roomNum+"is created successfully\n");
+                            output.printPrompt("room" +" " +roomNum+ " "+"is created successfully\n");
                         }
                         break;
 
