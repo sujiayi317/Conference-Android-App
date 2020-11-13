@@ -4,17 +4,18 @@ import entities.Attendee;
 import use_cases.AttendeeManager;
 import use_cases.OrganizerManager;
 import use_cases.SpeakerManager;
+import use_cases.UserManager;
 
 public class CreateAccount {
     private static InputManager input = new InputManager();
 
     public boolean CreateNewAccount(AttendeeManager attendeeManager, OrganizerManager organizerManager,
-                              SpeakerManager speakerManager, String type) {
+                                    SpeakerManager speakerManager, UserManager userManager, String type) {
         String email = input.getInputString("Please enter the email for new speaker: (ex. 12345@abc.com), or enter 'cancel' at any point to exit account creation\n");
         while (true) {
             if (email.equals("cancel")){
                 return false;
-            } else if (isValidEmail(email, attendeeManager, organizerManager, speakerManager)) {
+            } else if (isValidEmail(email, userManager)) {
                 break;
             } else {
                 email = input.getInputString("Invalid email, please enter another one, or enter 'cancel' at any point to exit account creation\n");
@@ -25,7 +26,7 @@ public class CreateAccount {
         while (true) {
             if (user.equals("cancel")){
                 return false;
-            } else if (isValidUserName(user, attendeeManager, organizerManager, speakerManager)) {
+            } else if (isValidUserName(user, userManager)) {
                 break;
             } else {
                 user = input.getInputString("User name already used, please enter another username, or enter 'cancel' at any point to exit account creation\n");
@@ -52,19 +53,15 @@ public class CreateAccount {
         return true;
     }
 
-    public boolean isValidEmail(String email, AttendeeManager attendeeManager, OrganizerManager organizerManager,
-                                SpeakerManager speakerManager){
+    public boolean isValidEmail(String email, UserManager userManager){
         return email.length() >= 6 && email.contains("@") && email.charAt(0) != '@' && email.contains(".") &&
                 email.charAt(email.length() - 1) != '.' && email.length() - email.replace(".", "").length() == 1 &&
                 email.length() - email.replace("@", "").length() == 1 && email.indexOf('@') < email.indexOf('.') &&
-                email.indexOf('@') != email.indexOf('.') - 1 && attendeeManager.validNewAttendeeEmail(email) &&
-                organizerManager.validNewOrganizerEmail(email) && speakerManager.validNewSpeakerName(email);
+                email.indexOf('@') != email.indexOf('.') - 1 && userManager.validNewEmail(email);
     }
 
-    public boolean isValidUserName(String user, AttendeeManager attendeeManager, OrganizerManager organizerManager,
-                                   SpeakerManager speakerManager){
-        return user.length() >= 2 && speakerManager.validNewSpeakerEmail(user) &&
-                organizerManager.validNewOrganizerName(user) && attendeeManager.validNewAttendeeName(user);
+    public boolean isValidUserName(String user, UserManager userManager){
+        return user.length() >= 2 && userManager.validNewName(user);
     }
 
 

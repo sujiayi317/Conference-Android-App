@@ -6,6 +6,7 @@ import Presenter.ViewAllExistingEvents;
 import Presenter.ViewEventInfo;
 import entities.Attendee;
 import entities.Organizer;
+import entities.User;
 import use_cases.*;
 
 import java.util.InputMismatchException;
@@ -14,7 +15,7 @@ import java.util.InputMismatchException;
  * This is the main controller that will manage all other controllers (parts of the conference).
  */
 public class Conference {
-
+    private final UserManager userManager;
     private final EventsController eventsController;
     private final AttendeeManager attendeeManager;
     private final SpeakerManager speakerManager;
@@ -35,6 +36,7 @@ public class Conference {
         this.viewAllExistingEvents = new ViewAllExistingEvents();
         this.viewEventInfo = new ViewEventInfo();
         this.eventsController = new EventsController();
+        this.userManager = new UserManager();
     }
     public void run(){
         try {
@@ -84,7 +86,8 @@ public class Conference {
                 break;
             case "ORGANIZER":
                 new OrganizerController().run(eventsController, viewAllExistingEvents, viewAllAvailableRoom,
-                        viewAllAttendeeEvents, attendeeManager,viewEventInfo, organizerManager, speakerManager, userID);
+                        viewAllAttendeeEvents, attendeeManager,viewEventInfo, organizerManager, speakerManager,
+                        userManager, userID);
         }
     }
 

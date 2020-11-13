@@ -11,7 +11,7 @@ import java.util.List;
  * The use_cases.AttendeeManager class, this is the use case class to manage the Attendees for this conference.
  *
  */
-public class AttendeeManager implements Serializable {
+public class AttendeeManager extends UserManager implements Serializable {
     //private List<String> events;
     private List<Attendee> attendees;
 
@@ -38,23 +38,16 @@ public class AttendeeManager implements Serializable {
         return attendee;
     }
 
-
     public List<Attendee> getAttendees() {
         return attendees;
     }
 
-//    public void addEventToAttendee(String event, entities.Attendee attendee) {
-//        events = eventsMap.get(attendee.getUserName());
-//        events.add(event);
-//        eventsMap.put(attendee.getUserName(), events);
-//    }
 
-
-    /**
-     * Sign an entities.Attendee up for an event.
-     * @param userID,eventID user id of user and event id of event
-     * @return true iff signed up successfully
-     */
+//    /**
+//     * Sign an entities.Attendee up for an event.
+//     * @param userID,eventID user id of user and event id of event
+//     * @return true iff signed up successfully
+//     */
     public boolean signUp(EventManager eventManager, String userID, String eventID, RoomManager roomManager) {
         return eventManager.addAttendeeToEvent(userID, eventID, roomManager);
     }
@@ -63,63 +56,4 @@ public class AttendeeManager implements Serializable {
         return eventManager.removeAttendeeFromEvent(userID, eventID, roomManager);
     }
 
-    public boolean validNewAttendeeName(String name){
-        for (Attendee attendee : attendees){
-            if (attendee.getUserName().equals(name)){
-                return false;
-            }
-        }
-        return true;
-    }
-
-    public boolean validNewAttendeeEmail(String email){
-        for (Attendee attendee : attendees){
-            if (attendee.getEmail().equals(email)){
-                return false;
-            }
-        }
-        return true;
-    }
-
-    public String validLogIn(String account, String password){
-        for (Attendee attendee : attendees){
-            if (attendee.getEmail().equals(account) && attendee.getPassword().equals(password)){
-                return attendee.getUserID();
-            } else if (attendee.getEmail().equals(account)){
-                return "NULL";
-            }
-        }
-        return "NULL";
-    }
-
-    public List<String> attendeeIdsGetter(){
-        ArrayList<String> attendeeIds = new ArrayList<>();
-        for (Attendee attendee : attendees){
-            attendeeIds.add(attendee.getUserID());
-        }
-        return attendeeIds;
-    }
-    public boolean addFriend(String currId1, String userId2) {
-        List<String> IdList = attendeeIdsGetter();
-        if (IdList.contains(currId1) && IdList.contains(userId2)) {
-            for (Attendee attendee : attendees) {
-                if (attendee.getUserID() == currId1) {
-                    attendee.friendListSetter(userId2);
-                } else {
-                    attendee.friendListSetter(currId1);
-                }
-            }
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    public List<String> friendListGetter(String userId) {
-        for (Attendee attendee : attendees){
-            if (attendee.getUserID() == userId){
-                return attendee.friendListGetter();
-            }
-        }return null;
-    }
 }

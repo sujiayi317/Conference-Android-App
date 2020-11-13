@@ -13,7 +13,7 @@ import java.util.List;
  *
  */
 
-public class OrganizerManager implements Serializable{
+public class OrganizerManager extends UserManager implements Serializable{
 
     private List<Organizer> organizers;
 
@@ -38,26 +38,6 @@ public class OrganizerManager implements Serializable{
             }
         }
         return true;
-    }
-
-    public boolean validNewOrganizerName(String name){
-        for (Organizer organizer : organizers){
-            if (organizer.getUserName().equals(name)){
-                return false;
-            }
-        }
-        return true;
-    }
-
-    public String validLogIn(String account, String password){
-        for (Organizer organizer : organizers){
-            if (organizer.getEmail().equals(account) && organizer.getPassword().equals(password)){
-                return organizer.getUserID();
-            } else if (organizer.getEmail().equals(account)){
-                return "NULL";
-            }
-        }
-        return "NULL";
     }
 
 }
