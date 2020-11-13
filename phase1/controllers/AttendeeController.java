@@ -67,8 +67,6 @@ public class AttendeeController {
                             check3 = true;
                         }
                     }
-                case 4:
-                    //View all my message
             }
         }
     }
