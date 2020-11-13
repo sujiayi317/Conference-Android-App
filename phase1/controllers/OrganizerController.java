@@ -71,7 +71,7 @@ public class OrganizerController extends AttendeeController{
                     case 3:
                         // view all his/her events
                         viewAllAttendeeEvents(userID, viewAllAttendeeEvents, eventsController);
-                        break;;
+                        break;
 
                     case 4:
                         //create a new event
