@@ -1,9 +1,6 @@
 package controllers;
 
-import Presenter.ViewAllAttendeeEvents;
-import Presenter.ViewAllAvailableRoom;
-import Presenter.ViewAllExistingEvents;
-import Presenter.ViewEventInfo;
+import Presenter.*;
 import entities.Attendee;
 import entities.Organizer;
 import entities.User;
@@ -24,6 +21,7 @@ public class Conference {
     private final ViewAllAttendeeEvents viewAllAttendeeEvents;
     private final ViewAllExistingEvents viewAllExistingEvents;
     private final ViewEventInfo viewEventInfo;
+    private final ViewFriendList viewFriendList;
     /**
      * This is where our conference system starts.
      */
@@ -37,6 +35,8 @@ public class Conference {
         this.viewEventInfo = new ViewEventInfo();
         this.eventsController = new EventsController();
         this.userManager = new UserManager();
+        this.viewFriendList = new ViewFriendList();
+
     }
     public void run(){
         try {
@@ -79,7 +79,7 @@ public class Conference {
         switch(userType) {
             case "ATTENDEE":
                 new AttendeeController().run(userID, eventsController, viewAllExistingEvents, viewAllAttendeeEvents,
-                        viewEventInfo, attendeeManager);
+                        viewEventInfo, attendeeManager, viewFriendList);
                 break;
             case "SPEAKER":
                 new SpeakerController().run();
