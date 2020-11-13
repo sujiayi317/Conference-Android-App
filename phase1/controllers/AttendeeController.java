@@ -60,6 +60,7 @@ public class AttendeeController {
                         if (0<= chooseFriend && chooseFriend<= friendList.size()){
                             String friendId = friendList.get(chooseFriend);
                             conversationController.enterConversation(friendId);
+                            check3 = true;
                         }
                     }
                 case 4:
