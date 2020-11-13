@@ -77,6 +77,10 @@ public class AttendeeController {
                         break;
                     case 4:
                         //View all my message
+                        break;
+                    case 5:
+                        //
+                        break;
                 }
             }
         }
