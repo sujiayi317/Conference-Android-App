@@ -30,4 +30,10 @@ public class OrganizerManager extends UserManager implements Serializable{
         this.organizers.add(organizer);
         UserManager.users.add(organizer);
     }
+
+    public void loadOrganizer(String userName, String email, String password, String ID) {
+        Organizer organizer = new Organizer(userName, email, password, ID);
+        this.organizers.add(organizer);
+        UserManager.users.add(organizer);
+    }
 }

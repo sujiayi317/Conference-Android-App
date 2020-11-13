@@ -46,11 +46,11 @@ class FileReadWriter {
 
             }
             if (wordList.get(0).equals("SPEAKER")) {
-                speakermanager.createSpeaker(wordList.get(1), wordList.get(2), wordList.get(3));
+                speakermanager.loadSpeaker(wordList.get(1), wordList.get(2), wordList.get(3), wordList.get(4));
             } else if (wordList.get(0).equals("ATTENDEE")) {
-                attendeeManager.createAttendee(wordList.get(1), wordList.get(2), wordList.get(3));
+                attendeeManager.loadAttendee(wordList.get(1), wordList.get(2), wordList.get(3), wordList.get(4));
             } else if (wordList.get(0).equals("ORGANIZER")) {
-                organizerManager.createOrganizer(wordList.get(1), wordList.get(2), wordList.get(3));
+                organizerManager.loadOrganizer(wordList.get(1), wordList.get(2), wordList.get(3), wordList.get(4));
             }
         }
     }

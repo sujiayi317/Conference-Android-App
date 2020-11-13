@@ -39,6 +39,13 @@ public class AttendeeManager extends UserManager implements Serializable {
         UserManager.users.add(attendee);
     }
 
+    public void loadAttendee(String userName, String email, String password, String ID) {
+        Attendee attendee = new Attendee(userName, email, password, ID);
+        //attendeeMap.put(attendee.getUserName(), attendee);
+        this.attendees.add(attendee);
+        UserManager.users.add(attendee);
+    }
+
 
     public List<Attendee> getAttendees() {
         return attendees;
