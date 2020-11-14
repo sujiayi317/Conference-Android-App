@@ -2,17 +2,31 @@ package Message;
 
 //package serialization;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.util.ArrayList;
 
 public class SaveConversation {
-    public static final String FILE_PATH = "file.ser";
+
+    public static final String CONVERSATION_PATH = "conversation.ser";
 
     public void save(Conversation conversation){
         File file;
-        Read
+        ReadConversation readData = new ReadConversation();
+
+        file = new File(CONVERSATION_PATH);
+        ArrayList<Conversation> itemsToAdd = readData.readConversation();
+        if(itemsToAdd == null || itemsToAdd.size() == 0){
+            itemsToAdd = new ArrayList<>();
+        }
+        itemsToAdd.add(conversation);
+        try{
+            FileOutputStream fileOutputStream = new FileOutputStream(file);
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
+            objectOutputStream.writeObject(itemsToAdd);
+            fileOutputStream.close();
+            objectOutputStream.close();
+        }catch (IOException e){
+            e.printStackTrace();
+        }
     }
 }
