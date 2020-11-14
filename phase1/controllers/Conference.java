@@ -92,9 +92,7 @@ public class Conference {
         ReadConversation readConversation = new ReadConversation();
         for (Conversation conversation: readConversation.readFile()){
             conversationController.addConversation(conversationController.getUserIds(conversation), conversation);
-            System.out.println(conversation.getUserIds());
         };//load
-        System.out.println(readConversation.readFile());
 
 
         switch(userType) {
