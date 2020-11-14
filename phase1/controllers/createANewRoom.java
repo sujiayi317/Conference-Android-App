@@ -13,18 +13,18 @@ public class createANewRoom {
 
     public void getToCreateANewRoom(EventsController eventsController){
         RoomManager roomManager = eventsController.getRoomManager();
-        String roomNum = "-1";
-        while (Integer.parseInt(roomNum)>100 || Integer.parseInt(roomNum)<0){
-            roomNum = input.getInputString("Please enter your room Number between 0-100\n");
-            if (Integer.parseInt(roomNum)>100 || Integer.parseInt(roomNum)<0){
-                output.printPrompt("The RoomNum you chose is out of the bound please enter the correct number\n");
+        Integer roomNum = 101;
+        while (roomNum > 100 || roomNum < 0){
+            roomNum = input.getInputInt("Please enter your room Number between 0-100\n");
+            if (roomNum > 100 || roomNum < 0){
+                output.printPrompt("The room number you entered is invalid! Please enter a number between 0 and 100\n");
             }
         }
-        if (roomManager.createRoom(roomNum)){
-            output.printPrompt("room" +" " +roomNum+ " "+"is created successfully\n");
+        if (roomManager.createRoom(roomNum.toString())){
+            output.printPrompt("room" +" " +roomNum.toString()+ " "+"is created successfully\n");
         }
         else {
-            output.printPrompt("room" +" " +roomNum+ " "+"has been already existing\n");
+            output.printPrompt("room" +" " +roomNum.toString()+ " "+"has been already existing\n");
         }
     }
 }
