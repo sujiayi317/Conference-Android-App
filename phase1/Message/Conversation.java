@@ -29,15 +29,14 @@ public class Conversation implements Serializable {
      * @param text the String of text the sender sends.
      * @return true iff the message is successfully added to the list of messages.
      */
-    public boolean addMessage(String userId, String text){
+    public void addMessage(String userId, String text){
         String[] message = {userId, text};
         messages.add(message);
-        return true;
     }
 
-    public void loadAllMessage(ArrayList<String[]> messages){
-        this.messages = messages;
-    }
+//    public void loadAllMessage(ArrayList<String[]> messages){
+//        this.messages = messages;
+//    }
 
     /**
      * Get the messages of this conversation.

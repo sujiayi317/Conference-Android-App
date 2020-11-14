@@ -19,8 +19,10 @@ public class SeeAllFriend {
     public void getToSeeAllFriend(String userID, ViewFriendList viewFriendList, AttendeeManager attendeeManager,
                                   UserManager userManager, ConversationController conversationController){
         ArrayList<String> friendList = new ArrayList<>();
+        ArrayList<String> friendIdList = new ArrayList<>();
         for(String id:attendeeManager.friendListGetter(userID)){
             friendList.add(userManager.getUserName(id));
+            friendIdList.add(id);
         } // get list of friends' usernames
 
         boolean check3 = false;
@@ -29,7 +31,7 @@ public class SeeAllFriend {
             int chooseFriend = input.getInputInt("Choose a friend to start the conversation, or" +
                     " \"0\" to quit:\n") - 1;
             if (0 <= chooseFriend && chooseFriend <= friendList.size()-1) {
-                String friendId = friendList.get(chooseFriend);
+                String friendId = friendIdList.get(chooseFriend);
                 conversationController.enterConversation(friendId);
                 check3 = true;
             }else if (chooseFriend == -1){

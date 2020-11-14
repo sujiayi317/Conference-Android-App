@@ -19,8 +19,10 @@ public class ReadConversation {
             bis.close();
             ois.close();
 
-        }catch (IOException | ClassNotFoundException e){
+        }catch (ClassNotFoundException e){
             e.printStackTrace();
+        }catch (IOException e){
+            //e.printStackTrace();
         }
         return this.conversationsList;
     }

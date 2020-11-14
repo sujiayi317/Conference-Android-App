@@ -10,14 +10,9 @@ public class ConversationManager implements Serializable{
 
     private HashMap<HashSet<String>, Conversation> conversations;
     private Conversation currentConversation;
-//    private SaveConversation saveConversation;
-//    private ReadConversation readConversation;
 
     public ConversationManager(){
         conversations = new HashMap<>();
-//        saveConversation = new SaveConversation();
-//        readConversation = new ReadConversation();
-//        readConversation.readConversation();
     }
 
     /**
@@ -64,6 +59,7 @@ public class ConversationManager implements Serializable{
      */
     public void sendMessage(String senderId, String text){
         currentConversation.addMessage(senderId, text);
+//        conversations.replace(getUserIds(currentConversation), currentConversation);
     }
 
 
