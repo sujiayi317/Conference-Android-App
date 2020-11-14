@@ -39,12 +39,14 @@ class FileReadWriter {
             System.out.println("User File Not Found");
         }
         SpeakerManager speakermanager = eventsController.getSpeakerManager();
+        ArrayList<ArrayList> LineList = new ArrayList();
         for (int i = 0; i < lines.size(); i++) {
             ArrayList<String> wordList = new ArrayList<String>();
             for (String word : lines.get(i).split(" ")) {
                 wordList.add(word);
 
             }
+
             if (wordList.get(0).equals("SPEAKER")) {
                 speakermanager.loadSpeaker(wordList.get(1), wordList.get(2), wordList.get(3), wordList.get(4));
             } else if (wordList.get(0).equals("ATTENDEE")) {
@@ -52,10 +54,12 @@ class FileReadWriter {
             } else if (wordList.get(0).equals("ORGANIZER")) {
                 organizerManager.loadOrganizer(wordList.get(1), wordList.get(2), wordList.get(3), wordList.get(4));
             }
+            LineList.add(wordList);
+        }
+        for (ArrayList<String> wordList : LineList){
             if (wordList.size() > 5){
                 for (int index = 5; index < wordList.size(); index++){
                     userManager.addFriend(wordList.get(4), wordList.get(index));
-                    System.out.println("HAHA");
                 }
             }
         }
