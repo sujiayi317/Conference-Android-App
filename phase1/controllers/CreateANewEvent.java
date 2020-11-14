@@ -2,7 +2,6 @@ package controllers;
 
 import Presenter.ViewAllAvailableRoom;
 import Presenter.ViewAllAvailableSpeaker;
-import com.sun.tools.javac.util.StringUtils;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -25,9 +24,9 @@ public class CreateANewEvent {
                     "for example, enter '2020/12/09/14:30' to host the event at 2020/Dec/9th at 2:30pm\n" +
                     "enter 'cancel' to go back to main menu\n");
             if (!(checkValidTimeFormat(timeInput))){
-                output.printPrompt("Your input does not follow the yyyy/MM/dd/HH:mm format! Try again...\n");
+                output.printPrompt("Your input does not follow the yyyy/MM/dd/HH:mm format! Try again...\n\n");
             } else if (!(checkValidFutureTime(timeInput))){
-                output.printPrompt("You can not create new events in the past! Please choose a time in the future...\n");
+                output.printPrompt("You can not create new events in the past! Please choose another time in the future...\n\n");
             }
         }
         if (!timeInput.equals("cancel")) {
@@ -87,6 +86,8 @@ public class CreateANewEvent {
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy/HH:mm");
         Date date = new Date();
         String[] currentTime = (formatter.format(date).split("[/:]+"));
+        System.out.println(formatter.format(date));
+        System.out.println(time);
         for (int index = 0; index < 5; index++){
             if (Integer.parseInt(currentTime[index]) >= Integer.parseInt(eventTime[index])){
                 return false;

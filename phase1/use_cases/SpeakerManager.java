@@ -90,7 +90,7 @@ public class SpeakerManager extends UserManager implements Serializable {
         for (Speaker speaker : speakers){
             availableSpeaker.add(speaker.getUserName());
             for (Event event : events){
-                if (event.getSpeakers().equals(speaker.getUserName()) && time == event.getStartTime()){
+                if (event.getSpeakers().equals(speaker.getUserName()) && Integer.toString(time) == event.getStartTime()){
                     availableSpeaker.remove(speaker.getUserName());
                 }
             }
