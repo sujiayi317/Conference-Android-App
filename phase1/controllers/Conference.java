@@ -90,14 +90,17 @@ public class Conference {
         ConversationController conversationController = new ConversationController(userID);
 
         ReadConversation readConversation = new ReadConversation();
-        for (Conversation conversation: readConversation.readConversation()){
+        for (Conversation conversation: readConversation.readFile()){
             conversationController.addConversation(conversationController.getUserIds(conversation), conversation);
-        };
+        };//load
 
         switch(userType) {
             case "ATTENDEE":
                 new AttendeeController().run(userID, eventsController, attendeeManager,
                         conversationController, userManager);
+                for(HashSet<String> key: conversationController.conversationsGetter().keySet()){
+                    saveConversation.save(conversationController.conversationsGetter().get(key));
+                }//save
                 break;
             case "SPEAKER":
                 new SpeakerController().run(userID, eventsController,
@@ -108,9 +111,7 @@ public class Conference {
                         organizerManager, userManager, conversationController, userID);
         }
 
-        for(HashSet<String> key: conversationController.conversationsGetter().keySet()){
-            saveConversation.save(conversationController.conversationsGetter().get(key));
-        }//save
+
     }
 
     private void finish() {
