@@ -37,15 +37,15 @@ public class SeeALLExistingEvents {
                             check += 1;
                         }
                         else if (eventsController.getRoomManager().isFull(eventsController.getEventManager().getEventFromID(eventID).getRoomID())){
-                            output.printPrompt("Sorry, the current room is full");
+                            output.printPrompt("Sorry, the current room is full\n");
                         }
                         else {
                         output.printPrompt("You're already in " + eventTitle + "\n");}
                     }
                 }
             }
-            else if (Integer.parseInt(eventNum) >= eventsController.getAllExistingEvents().size() || Integer.parseInt(eventNum) < 0){
-                output.printPrompt("The Event_Num is out of bound please enter the correct one");
+            else if ((!eventNum.equals("") && (Integer.parseInt(eventNum) >= eventsController.getAllExistingEvents().size() || Integer.parseInt(eventNum) < 0))){
+                output.printPrompt("The Event_Num is out of bound please enter the correct one\n");
             }
             else {check +=1;}
         }
