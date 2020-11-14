@@ -3,6 +3,7 @@ package controllers;
 import Message.Conversation;
 import Message.ConversationController;
 import Message.ConversationManager;
+import Message.SaveConversation;
 import Presenter.*;
 import entities.Attendee;
 import entities.Organizer;
@@ -10,6 +11,7 @@ import entities.User;
 import use_cases.*;
 
 import java.io.FileReader;
+import java.util.HashSet;
 import java.util.InputMismatchException;
 
 /**
@@ -20,6 +22,7 @@ public class Conference {
     private final EventsController eventsController;
     private final AttendeeManager attendeeManager;
     private final OrganizerManager organizerManager;
+    private SaveConversation saveConversation;
 //    private final ViewAllAttendeeEvents viewAllAttendeeEvents;
 //    private final ViewAllExistingEvents viewAllExistingEvents;
 //    private final ViewAllSpeakerEvents viewAllSpeakerEvents;
@@ -38,6 +41,7 @@ public class Conference {
         this.attendeeManager = attendeeManager;
         this.organizerManager = organizerManager;
         this.eventsController = eventsController;
+        this.saveConversation = new SaveConversation();//待定
 //        this.viewAllAttendeeEvents = new ViewAllAttendeeEvents();
 //        this.viewAllExistingEvents = new ViewAllExistingEvents();
 //        this.viewAllSpeakerEvents = new ViewAllSpeakerEvents();
@@ -101,6 +105,10 @@ public class Conference {
                 new OrganizerController().run(eventsController, attendeeManager,
                         organizerManager, userManager, conversationController, userID);
         }
+
+        for(HashSet<String> key: conversationController.conversationsGetter().keySet()){
+            saveConversation.save(conversationController.conversationsGetter().get(key));
+        }//save
     }
 
     private void finish() {

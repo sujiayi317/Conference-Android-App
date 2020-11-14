@@ -10,9 +10,14 @@ public class ConversationManager implements Serializable{
 
     private HashMap<HashSet<String>, Conversation> conversations;
     private Conversation currentConversation;
+//    private SaveConversation saveConversation;
+//    private ReadConversation readConversation;
 
     public ConversationManager(){
         conversations = new HashMap<>();
+//        saveConversation = new SaveConversation();
+//        readConversation = new ReadConversation();
+//        readConversation.readConversation();
     }
 
     /**
@@ -91,4 +96,7 @@ public class ConversationManager implements Serializable{
         conversations.put(users,addConversation);
     }
 
+    public HashMap<HashSet<String>, Conversation> conversationsGetter(){
+        return conversations;
+    }
 }

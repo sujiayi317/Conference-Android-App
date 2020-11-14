@@ -6,6 +6,7 @@ import controllers.*;
 
 import java.lang.reflect.Array;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.ArrayList;
 
@@ -115,4 +116,8 @@ public class ConversationController {
         output.printPrompt(viewMessagesOfAConversation.printMessages(messages));
     }
 
+
+    public HashMap<HashSet<String>, Conversation> conversationsGetter(){
+        return conversationManager.conversationsGetter();
+    }
 }
