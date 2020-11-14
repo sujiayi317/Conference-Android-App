@@ -44,9 +44,6 @@ public class SeeALLExistingEvents {
                     }
                 }
             }
-            else if (eventsController.getAllExistingEvents().size() != 0){
-                output.printPrompt("Your enter is out of the bound please choose the correct Number of Event\n");
-            }
             else {check +=1;}
         }
     }
