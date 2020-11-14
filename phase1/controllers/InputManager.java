@@ -33,11 +33,12 @@ public class InputManager {
     public int getInputInt(String msg) {
         out.printPrompt(msg);
         String choice = input.nextLine(); //nextInt does not process the ENTER key
-        if ("1234567890".contains(choice)) {
-            return Integer.parseInt(choice);
-        } else {
-            return 666;
+        for (int i = 0; i < choice.length(); i++){
+            if (!("1234567890".contains(choice.substring(i)))){
+                return 666;
+            }
         }
+        return Integer.parseInt(choice);
     }
 
     /**

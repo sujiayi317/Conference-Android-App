@@ -55,6 +55,7 @@ class FileReadWriter {
             if (wordList.size() > 5){
                 for (int index = 5; index < wordList.size(); index++){
                     userManager.addFriend(wordList.get(4), wordList.get(index));
+                    System.out.println("HAHA");
                 }
             }
         }
