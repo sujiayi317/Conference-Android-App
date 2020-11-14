@@ -74,7 +74,6 @@ public class AttendeeController {
                         break;
                     case 5:
                         //add friend
-                        //记得不能加管理员（还没写
                         ArrayList<String> userList = userManager.userListGetter();
                         boolean check5 = false;
                         while (!check5){
