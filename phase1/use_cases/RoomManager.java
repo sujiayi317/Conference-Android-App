@@ -46,6 +46,12 @@ public class RoomManager implements Serializable {
         return true;
     }
 
+    public boolean isFull(String roomNum){
+        String id = changeNumTOID(roomNum);
+        Room room = getRoomBasedOnItsID(id);
+        return room.getCurrentNum() < room.getCapacity();
+    }
+
     /**
      * Input roomID, output its room number
      * @param roomID roomID
