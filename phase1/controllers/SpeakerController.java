@@ -57,6 +57,7 @@ public class SpeakerController {
                                 switch (eventAction) {
                                     case 0:
                                         quit = true;
+                                        output.printPrompt("You have signed out.\n");
                                         break;
                                     case 1:
                                         ArrayList<String> receivers = new ArrayList<>(
@@ -78,12 +79,6 @@ public class SpeakerController {
                                 }
                             }
                         break;
-                    //case 2:
-                        //connect to Announcements Controller
-                        //break;
-                    //case 3:
-                        //connect to Contacts Controller
-                        //break;
                 }
             }
         }
