@@ -92,16 +92,31 @@ public class ConversationManager implements Serializable{
 //        conversations.put(users,addConversation);
 //    }
 
+    /**
+     * the getter of all conversations and their associated users
+     * @return Hash map of the users (key) and the conversation between them.
+     */
     public HashMap<HashSet<String>, Conversation> conversationsGetter(){
         return conversations;
     }
 
 
+    /**
+     * given a conversation, to find which users this conversation belongs to.
+     * @param conversation a given conversation.
+     * @return the hashset of strings which is 2 userids.
+     */
     public HashSet<String> getUserIds(Conversation conversation){
         return conversation.getUserIds();
     }
 
     //用来load数据库里的conversation
+
+    /**
+     * Load conversation from the file.
+     * @param key hashset with two elements, each of the element is an userid.
+     * @param conversation the entity with store all messages between two users.
+     */
     public void addConversation(HashSet<String> key,Conversation conversation){
         conversations.put(key, conversation);
     }

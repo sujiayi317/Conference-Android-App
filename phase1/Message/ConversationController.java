@@ -19,6 +19,10 @@ public class ConversationController {
     private final UserManager userManager;
     private final ViewMessagesOfAConversation viewMessagesOfAConversation;
 
+    /**
+     * the constructor of conversation controller
+     * @param currentUserId the user who is currently in the "chat room"
+     */
     public ConversationController(String currentUserId){
         input = new InputManager();
         output = new OutputManager();
@@ -92,6 +96,10 @@ public class ConversationController {
 //        return FinalTextsList;
 //    }
 
+    /**
+     * Get all the chatting/message history of the conversation happening right now
+     * @return the arraylist of messages.
+     */
     public ArrayList<String> getMessagesOfCurrentConversation(){
         ArrayList<String> FinalTextsList = new ArrayList<>();
         for(String[] oneMessage: conversationManager.getMessagesOfCurrentConversation()){
