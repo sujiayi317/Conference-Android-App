@@ -70,7 +70,7 @@ class FileReadWriter {
 
     }
 
-    public void UserWriter(UserManager userManager, ViewFriendList viewFriendList){
+    public void UserWriter(UserManager userManager){
         try {
             PrintWriter pw = new PrintWriter("filepath.txt");
             for (String userID : userManager.UsersIdsGetter()){
