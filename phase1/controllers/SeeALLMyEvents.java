@@ -9,6 +9,6 @@ public class SeeALLMyEvents {
     }
     public void getToSeeAllMyEvents(ViewAllAttendeeEvents viewAllAttendeeEvents,
                                     EventsController eventsController, String userID){
-        output.printPrompt(viewAllAttendeeEvents.printAllAttendeeEvents(eventsController.getALLAttendeeEvents(userID)));
+        output.printPrompt(viewAllAttendeeEvents.printAllAttendeeEvents(eventsController.getALLAttendeeEvents(userID), eventsController));
     }
 }
