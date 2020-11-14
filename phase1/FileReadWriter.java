@@ -72,7 +72,7 @@ class FileReadWriter {
 
     public void UserWriter(UserManager userManager){
         try {
-            PrintWriter pw = new PrintWriter("filepath.txt");
+            PrintWriter pw = new PrintWriter("./phase1/Users.txt");
             for (String userID : userManager.UsersIdsGetter()){
                 String line = userManager.getUserType(userID) + " " + userManager.getUserEmail(userID) + " " +
                         userManager.getUserName(userID) + " "+ userManager.getUserPassword(userID) + " " + userID;
@@ -80,6 +80,7 @@ class FileReadWriter {
                 for (String friendID : userManager.friendListGetter(userID)){
                     line += " " + friendID;
                 }
+                line += "\n";
                 pw.write(line);
             }
 
