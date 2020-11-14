@@ -109,6 +109,12 @@ public class ConversationController {
         return FinalTextsList;
     }
 
+    /**
+     * Get all conversations of a given user.
+     * @param userId the user we want to find.
+     * @return ArrayList of string arrays which contains the information need to find a conversation. [user1, user2, who
+     * send the message, the last sentence of the conversation]
+     */
     public ArrayList<String[]> getUserAllConversation(String userId){
 //        ArrayList<String[]> userNameWithLastMessage = new ArrayList<>();
 //        for (String[] s: conversationManager.getUserConversations(userId)){
