@@ -48,10 +48,15 @@ public class Conversation implements Serializable {
     }
 
     public String[] getLastMessage(){
-        int lastIndex = messages.size() - 1;
-        Object [] userInfo = userIds.toArray();
-        String [] messageInfo = messages.get(lastIndex);
-        return new String[]{(String)userInfo[0], (String)userInfo[1], messageInfo[0], messageInfo[1]};
+        if (messages.size() > 0) {
+            int lastIndex = messages.size() - 1;
+            Object [] userInfo = userIds.toArray();
+            String [] messageInfo = messages.get(lastIndex);
+            return new String[]{(String)userInfo[0], (String)userInfo[1], messageInfo[0], messageInfo[1]};
+        }else{
+            Object [] userInfo = userIds.toArray();
+            return new String[]{(String)userInfo[0], (String)userInfo[1], "", ""};
+        }
     }
 
     /**
