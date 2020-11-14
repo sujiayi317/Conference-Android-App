@@ -1,7 +1,7 @@
-ATTENDEE shawn@123.com Shawn 12345678 386d97fa
-ATTENDEE steve@123.com Steve 12345678 89dfhy32 xmo0r1e1
-SPEAKER hardy@123.com Hardy 12345678 og12jd3a djn120da
-ORGANIZER tony@123.com Tony 12345678 933n23fd ril93as1
+ATTENDEE shawn@123.com Shawn 12345678 386d97fa 89dfhy32
+ATTENDEE steve@123.com Steve 12345678 89dfhy32 386d97fa
+SPEAKER hardy@123.com Hardy 12345678 og12jd3a
+ORGANIZER tony@123.com Tony 12345678 933n23fd
 ATTENDEE maggie@123.com Maggie 12345678 xmo0r1e1
 ORGANIZER nancy@123.com Nancy 12345678 cm2is19d
 SPEAKER bruce@123.com Bruce 12345678 djn120da

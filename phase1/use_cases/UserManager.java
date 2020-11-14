@@ -88,9 +88,13 @@ public class UserManager {
         if (idList.contains(currId1) && idList.contains(userId2)) {
             for (User user : users) {
                 if (user.getUserID().equals(currId1)) {
-                    user.friendListSetter(userId2);
+                    if (!user.friendListGetter().contains(userId2)){
+                        user.friendListSetter(userId2);
+                    }
                 } else if(user.getUserID().equals(userId2)){
-                    user.friendListSetter(currId1);
+                    if (!user.friendListGetter().contains(currId1)){
+                        user.friendListSetter(currId1);
+                    }
                 }
             }
             return true;
