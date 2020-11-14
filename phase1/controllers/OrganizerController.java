@@ -27,6 +27,8 @@ public class OrganizerController extends AttendeeController{
     private final ViewAllAvailableRoom viewAllAvailableRoom;
     private final ViewFriendList viewFriendList;
     private final ViewAllAvailableSpeaker viewAllAvailableSpeaker;
+    private final SeeAllFriend seeAllFriend;
+    private final SeeAllMessage seeAllMessage;
 
     public OrganizerController(){
         this.organizerMenu = new OrganizerMenu();
@@ -36,6 +38,8 @@ public class OrganizerController extends AttendeeController{
         createNewSpeaker = new CreateNewSpeaker();
         createANewEvent = new CreateANewEvent();
         createANewRoom = new createANewRoom();
+        seeAllFriend = new SeeAllFriend();
+        seeAllMessage = new SeeAllMessage();
         this.viewAllAvailableRoom = new ViewAllAvailableRoom();
         this.viewAllAvailableSpeaker = new ViewAllAvailableSpeaker();
         this.viewFriendList = new ViewFriendList();
@@ -75,8 +79,10 @@ public class OrganizerController extends AttendeeController{
 
                     case 5:
                         //View all my fiends
+                        seeAllFriend.getToSeeAllFriend(userID,viewFriendList,attendeeManager,userManager,conversationController);
                         break;
                     case 6:
+                        seeAllMessage.getToSeeAllMessage(userID, userManager, conversationController, viewMessageList);
                         // view all my message
                         break;
 
