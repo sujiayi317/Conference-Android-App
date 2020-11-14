@@ -48,6 +48,32 @@ public class UserManager {
         return "NULL";
     }
 
+    public String getUserType(String UserID){
+        for (User user : users){
+            if (user.getUserID().equals(UserID)) {
+                return user.getType();
+            }
+        }
+        return "NULL";
+    }
+
+    public String getUserEmail(String UserID) {
+        for (User user : users) {
+            if (user.getUserID().equals(UserID)) {
+                return user.getEmail();
+            }
+        }
+        return "NULL";
+    }
+
+    public String getUserPassword(String UserID) {
+        for (User user : users) {
+            if (user.getUserID().equals(UserID)) {
+                return user.getPassword();
+            }
+        }
+        return "NULL";
+    }
 
     public List<String> UsersIdsGetter(){
         ArrayList<String> UserIds = new ArrayList<>();

@@ -1,3 +1,4 @@
+import Presenter.ViewFriendList;
 import controllers.EventsController;
 import entities.Event;
 import entities.User;
@@ -69,6 +70,26 @@ class FileReadWriter {
 
     }
 
+    public void UserWriter(UserManager userManager){
+        try {
+            PrintWriter pw = new PrintWriter("./phase1/Users.txt");
+            for (String userID : userManager.UsersIdsGetter()){
+                String line = userManager.getUserType(userID) + " " + userManager.getUserEmail(userID) + " " +
+                        userManager.getUserName(userID) + " "+ userManager.getUserPassword(userID) + " " + userID;
+
+                for (String friendID : userManager.friendListGetter(userID)){
+                    line += " " + friendID;
+                }
+                line += "\n";
+                pw.write(line);
+            }
+
+            pw.close();
+        } catch (FileNotFoundException e){
+            System.out.println("User File Not Found.");
+        }
+
+    }
 
     public EventsController GetEventsController(){
         return eventsController;

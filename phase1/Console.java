@@ -25,5 +25,6 @@ public class Console {
         Conference conference = new Conference(reader.GetEventsController(), reader.GetAttendeeManager(),
                 reader.GetOrganizerManager(), reader.GetUserManager());
         conference.run();
+        reader.UserWriter(reader.GetUserManager());
     }
 }
