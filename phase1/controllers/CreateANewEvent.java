@@ -27,37 +27,42 @@ public class CreateANewEvent {
                 output.printPrompt("Your input does not follow the yyyy/MM/dd/HH:mm format! Try again...\n\n");
             } else if (!(checkValidFutureTime(timeInput))){
                 output.printPrompt("You can not create new events in the past! Please choose another time in the future...\n\n");
+            } else if (timeInput.equals("cancel")){
+                break;
             }
         }
         if (!timeInput.equals("cancel")) {
-                    if (eventsController.getAvailableRoom(Integer.parseInt(timeInput)).size() == 0) {
+            timeInput = timeInput.replace("/", "");
+            timeInput = timeInput.replace(":", "");
+            System.out.println(timeInput);
+                    if (eventsController.getAvailableRoom(timeInput).size() == 0) {
                         output.printPrompt("sorry there is no available room yet, please go to create one first!\n");
-                    } else if (eventsController.getAllAvailableSpeaker(Integer.parseInt(timeInput)).size() == 0) {
+                    } else if (eventsController.getAllAvailableSpeaker(timeInput).size() == 0) {
                         output.printPrompt("sorry there is no available speaker yet, please go to create one first!\n");
                     } else {
-                        getAllAvailableRoomInfo(Integer.parseInt(timeInput), viewAllAvailableRoom, eventsController);
-                        getAllAvailableSpeaker(Integer.parseInt(timeInput), eventsController, viewAllAvailableSpeaker);
+                        getAllAvailableRoomInfo(timeInput, viewAllAvailableRoom, eventsController);
+                        getAllAvailableSpeaker(timeInput, eventsController, viewAllAvailableSpeaker);
                         String title = input.getInputString("Please enter your event's title\n");
                         String roomNUm = "-1";
-                        while (0> Integer.parseInt(roomNUm) || Integer.parseInt(roomNUm)>= eventsController.getAvailableRoom(Integer.parseInt(timeInput)).size()){
+                        while (0> Integer.parseInt(roomNUm) || Integer.parseInt(roomNUm)>= eventsController.getAvailableRoom(timeInput).size()){
                             roomNUm = input.getInputString("Please enter the roomNum of the room you want to use\n");
-                            if (0> Integer.parseInt(roomNUm) || Integer.parseInt(roomNUm)>= eventsController.getAvailableRoom(Integer.parseInt(timeInput)).size()){
+                            if (0> Integer.parseInt(roomNUm) || Integer.parseInt(roomNUm)>= eventsController.getAvailableRoom(timeInput).size()){
                                 output.printPrompt("The roomNum you chose is out of the bound please enter the correct number\n");
                             }
                         }
                         String speakerNum = "-1";
-                        while (0> Integer.parseInt(speakerNum) || Integer.parseInt(speakerNum)>= eventsController.getAllAvailableSpeaker(Integer.parseInt(timeInput)).size()){
+                        while (0> Integer.parseInt(speakerNum) || Integer.parseInt(speakerNum)>= eventsController.getAllAvailableSpeaker(timeInput).size()){
                             speakerNum = input.getInputString("Please set the SpeakerNum of your speaker\n");
-                            if (0> Integer.parseInt(speakerNum) || Integer.parseInt(speakerNum)>= eventsController.getAllAvailableSpeaker(Integer.parseInt(timeInput)).size()){
+                            if (0> Integer.parseInt(speakerNum) || Integer.parseInt(speakerNum)>= eventsController.getAllAvailableSpeaker(timeInput).size()){
                                 output.printPrompt("The speakerNum you chose is out of the bound please enter the correct number\n");
                             }
                         }
-                        String room = eventsController.getAvailableRoom(Integer.parseInt(timeInput)).get(Integer.parseInt(roomNUm));
-                        String speaker = eventsController.getAllAvailableSpeaker(Integer.parseInt(timeInput)).get(Integer.parseInt(speakerNum));
+                        String room = eventsController.getAvailableRoom(timeInput).get(Integer.parseInt(roomNUm));
+                        String speaker = eventsController.getAllAvailableSpeaker(timeInput).get(Integer.parseInt(speakerNum));
                         if (createEvent(title, eventsController.getRoomManager().changeNumTOID(room), speaker, timeInput, eventsController)) {
                             output.printPrompt("The new Event named " + title + " at Room "
-                                    + room + " taught by "
-                                    + speaker + " will start at " + Integer.parseInt(timeInput));
+                                    + room + " taught by " + speaker + " will start at " +
+                                    eventsController.getEventManager().generateFormattedStartTime(timeInput));
                         }
                     }
         }
@@ -83,24 +88,22 @@ public class CreateANewEvent {
 
     private boolean checkValidFutureTime(String time){
         String[] eventTime = time.split("[/:]+");
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy/HH:mm");
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd/HH:mm");
         Date date = new Date();
-        String[] currentTime = (formatter.format(date).split("[/:]+"));
-        System.out.println(formatter.format(date));
-        System.out.println(time);
+        String[] currentTime = formatter.format(date).split("[/:]+");
         for (int index = 0; index < 5; index++){
-            if (Integer.parseInt(currentTime[index]) >= Integer.parseInt(eventTime[index])){
-                return false;
+            if (Integer.parseInt(currentTime[index]) < Integer.parseInt(eventTime[index])){
+                return true;
             }
         }
-        return true;
+        return false;
     }
 
-    private void getAllAvailableRoomInfo ( int time, ViewAllAvailableRoom viewAllAvailableRoom, EventsController
+    private void getAllAvailableRoomInfo ( String time, ViewAllAvailableRoom viewAllAvailableRoom, EventsController
             eventsController){
         viewAllAvailableRoom.printAllAvailableRoom(eventsController.getAvailableRoom(time));
     }
-    private void getAllAvailableSpeaker ( int time, EventsController eventsController, ViewAllAvailableSpeaker
+    private void getAllAvailableSpeaker ( String time, EventsController eventsController, ViewAllAvailableSpeaker
             viewAllAvailableSpeaker){
         output.printPrompt(viewAllAvailableSpeaker.printAllAvailableSpeaker(eventsController.getAllAvailableSpeaker(time)));
 

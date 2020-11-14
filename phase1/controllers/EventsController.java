@@ -46,7 +46,7 @@ public class EventsController{
         return this.eventManager.removeAttendeeFromEvent(userID,eventID, this.roomManager);
     }
 
-    public ArrayList<String> getAvailableRoom(int time){
+    public ArrayList<String> getAvailableRoom(String time){
         return this.roomManager.getAvailableRoom(time, this.eventManager);
     }
 
@@ -72,7 +72,7 @@ public class EventsController{
         return info;
     }
 
-    public ArrayList<String> getAllAvailableSpeaker(int time){
+    public ArrayList<String> getAllAvailableSpeaker(String time){
         return this.speakerManager.getAllAvailableSpeaker(time, eventManager);
     }
 

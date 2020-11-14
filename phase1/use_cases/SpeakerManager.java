@@ -84,13 +84,13 @@ public class SpeakerManager extends UserManager implements Serializable {
         return "NULL";
     }
 
-    public ArrayList<String> getAllAvailableSpeaker(int time, EventManager eventManager){
+    public ArrayList<String> getAllAvailableSpeaker(String time, EventManager eventManager){
         ArrayList<String> availableSpeaker = new ArrayList<>();
         List<Event> events = eventManager.getAllEvent();
         for (Speaker speaker : speakers){
             availableSpeaker.add(speaker.getUserName());
             for (Event event : events){
-                if (event.getSpeakers().equals(speaker.getUserName()) && Integer.toString(time) == event.getStartTime()){
+                if (event.getSpeakers().equals(speaker.getUserName()) && time.equals(event.getStartTime())){
                     availableSpeaker.remove(speaker.getUserName());
                 }
             }

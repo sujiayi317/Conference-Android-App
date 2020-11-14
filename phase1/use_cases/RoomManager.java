@@ -108,7 +108,7 @@ public class RoomManager implements Serializable {
         return null;
     }
 
-    public ArrayList<String> getAvailableRoom(int time, EventManager eventManager){
+    public ArrayList<String> getAvailableRoom(String time, EventManager eventManager){
         ArrayList<String> roomList = new ArrayList<>();
         for (Room room : rooms){
             roomList.add(changeIdTONum(room.getRoomID()));
@@ -116,7 +116,7 @@ public class RoomManager implements Serializable {
         for (String roomID : eventsMap.keySet()){
             for (String eventID :eventsMap.get(roomID)){
                 Event event = eventManager.getEventFromID(eventID);
-                if (event.getStartTime() == Integer.toString(time)){
+                if (event.getStartTime().equals(time)){
                     roomList.remove(changeIdTONum(roomID));
                 }
             }
