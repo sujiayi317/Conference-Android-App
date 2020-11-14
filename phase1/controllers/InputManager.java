@@ -34,7 +34,8 @@ public class InputManager {
         out.printPrompt(msg);
         String choice = input.nextLine(); //nextInt does not process the ENTER key
         for (int i = 0; i < choice.length(); i++){
-            if (!("1234567890".contains(choice.substring(i)))){
+            if (!("1234567890".contains(String.valueOf(choice.charAt(i))))){
+                System.out.println("OK");
                 return 666;
             }
         }
