@@ -22,13 +22,13 @@ public class SeeAllMessage {
 
         ArrayList<String[]> userNameWithLastMessage = new ArrayList<>();
         for (String[] s: messageList){
-            String[] msg = {userManager.getUserName(s[2]), s[3]};
+            String[] msg = {userManager.getUserName(s[2]), s[3], s[0],s[1]};
             userNameWithLastMessage.add(msg);
         }//有问题
         boolean check4 = false;
         while (!check4){
             viewMessageList(userNameWithLastMessage, viewMessageList);
-            int chooseConversation = input.getInputInt("Choose a message to start the conversation\n") - 1;
+            int chooseConversation = input.getInputInt("Choose a message to start the conversation, or type 0 to quit\n") - 1;
             if (0 <= chooseConversation && chooseConversation <= messageList.size()-1){
                 if (messageList.get(chooseConversation)[0].equals(userID)){
                     conversationController.enterConversation(messageList.get(chooseConversation)[1]);
