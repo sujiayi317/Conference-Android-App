@@ -28,7 +28,7 @@ public class SeeAllMessage {
         boolean check4 = false;
         while (!check4){
             viewMessageList(userNameWithLastMessage, viewMessageList);
-            int chooseConversation = input.getInputInt("Choose a message to start the conversation\n");
+            int chooseConversation = input.getInputInt("Choose a message to start the conversation\n") - 1;
             if (0 <= chooseConversation && chooseConversation <= messageList.size()-1){
                 if (messageList.get(chooseConversation)[0].equals(userID)){
                     conversationController.enterConversation(messageList.get(chooseConversation)[1]);
@@ -36,7 +36,7 @@ public class SeeAllMessage {
                     conversationController.enterConversation(messageList.get(chooseConversation)[0]);
                 }
                 check4 = true;
-            }else if (chooseConversation == 88){
+            }else if (chooseConversation == -1){
                 check4 =true;
             }
         }
