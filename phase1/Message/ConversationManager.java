@@ -81,7 +81,10 @@ public class ConversationManager implements Serializable{
         return UserConversations;
     }
 
-    public void loadConversation(HashSet<String> users, ArrayList<String[]> messageHistory){
+    public void loadConversation(String userId1, String userId2, ArrayList<String[]> messageHistory){
+        HashSet<String> users = new HashSet<>();
+        users.add(userId1);
+        users.add(userId2);
         Iterator value = users.iterator();
         Conversation addConversation = new Conversation((String)value.next(),(String)value.next());
         addConversation.loadAllMessage(messageHistory);

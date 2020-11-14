@@ -1,7 +1,7 @@
 package controllers;
 
 import use_cases.RoomManager;
-
+import java.lang.String.*;
 public class createANewRoom {
     private static OutputManager output;
     private static InputManager input;
