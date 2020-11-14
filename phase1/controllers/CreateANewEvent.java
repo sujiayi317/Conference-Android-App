@@ -20,12 +20,14 @@ public class CreateANewEvent {
     public void getToCreateANewEvent(EventsController eventsController, ViewAllAvailableRoom viewAllAvailableRoom,
                                      ViewAllAvailableSpeaker viewAllAvailableSpeaker) {
         String timeInput = "666";
-        while (!(checkValidTimeFormat(timeInput))) {
+        while (!(checkValidTimeFormat(timeInput) && checkValidFutureTime(timeInput))) {
             timeInput = input.getInputString("Please enter your event time in the format of yyyy/MM/dd/HH:mm (years/month/date/hour(0 - 24):minute)\n" +
                     "for example, enter '2020/12/09/14:30' to host the event at 2020/Dec/9th at 2:30pm\n" +
                     "enter 'cancel' to go back to main menu\n");
-            if ((Integer.parseInt(timeInput) < 0 || Integer.parseInt(timeInput) > 24)&& Integer.parseInt(timeInput) != -1){
-                output.printPrompt("The time you chose is not out of bound please enter the correct number\n");
+            if (!(checkValidTimeFormat(timeInput))){
+                output.printPrompt("Your input does not follow the yyyy/MM/dd/HH:mm format! Try again...\n");
+            } else if (!(checkValidFutureTime(timeInput))){
+                output.printPrompt("You can not create new events in the past! Please choose a time in the future...\n");
             }
         }
         if (!timeInput.equals("cancel")) {
@@ -75,14 +77,21 @@ public class CreateANewEvent {
             } catch (NumberFormatException e){
                 return false;
             }
+            return true;
         }
         return false;
     }
 
     private boolean checkValidFutureTime(String time){
+        String[] eventTime = time.split("[/:]+");
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy/HH:mm");
         Date date = new Date();
-        System.out.println(formatter.format(date));
+        String[] currentTime = (formatter.format(date).split("[/:]+"));
+        for (int index = 0; index < 5; index++){
+            if (Integer.parseInt(currentTime[index]) >= Integer.parseInt(eventTime[index])){
+                return false;
+            }
+        }
         return true;
     }
 
