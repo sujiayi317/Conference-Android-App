@@ -28,6 +28,7 @@ public class ReadConversation {
     }
 
     public ArrayList<Conversation> readConversation(){
+        conversationsList = readFile();
         return this.conversationsList;
     }
 
