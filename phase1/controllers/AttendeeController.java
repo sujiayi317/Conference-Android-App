@@ -58,6 +58,7 @@ public class AttendeeController {
                         output.printPrompt("You have signed out.\n");
                         break;
                     case 1:
+                        //view all existing events
                         seeALLExistingEvents.getToSeeAllExistingEvents(eventsController, attendeeManager,
                                 viewAllExistingEvents, userID, viewEventInfo);
                         break;
@@ -66,15 +67,16 @@ public class AttendeeController {
                         seeALLMyEvents.getToSeeAllMyEvents(viewAllAttendeeEvents, eventsController, userID);
                         break;
                     case 3:
+                        //View all my fiends
                         seeAllFriend.getToSeeAllFriend(userID, viewFriendList, attendeeManager, userManager,
                                 conversationController);
                         break;
                     case 4:
+                        //view all my message
                         seeAllMessage.getToSeeAllMessage(userID, userManager, conversationController, viewMessageList);
                         break;
                     case 5:
                         //add friend
-                        //记得不能加管理员（还没写
                         ArrayList<String> userList = userManager.userListGetter();
                         boolean check5 = false;
                         while (!check5){
