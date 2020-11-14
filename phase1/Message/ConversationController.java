@@ -120,4 +120,12 @@ public class ConversationController {
     public HashMap<HashSet<String>, Conversation> conversationsGetter(){
         return conversationManager.conversationsGetter();
     }
+
+    public HashSet<String> getUserIds(Conversation conversation){
+        return conversationManager.getUserIds(conversation);
+    }
+
+    public void addConversation(HashSet<String> key,Conversation conversation){
+        conversationManager.addConversation(key, conversation);
+    }
 }

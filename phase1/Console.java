@@ -17,9 +17,11 @@ public class Console {
      */
     public static void main(String[] args) {
         FileReadWriter reader = new FileReadWriter();
-        ReadConversation readConversation = new ReadConversation();
+
         reader.UserReader();
-        readConversation.readConversation();
+//        ReadConversation readConversation = new ReadConversation();
+//        readConversation.readConversation();
+
         Conference conference = new Conference(reader.GetEventsController(), reader.GetAttendeeManager(),
                 reader.GetOrganizerManager(), reader.GetUserManager());
         conference.run();

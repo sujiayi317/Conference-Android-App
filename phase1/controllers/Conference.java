@@ -1,9 +1,6 @@
 package controllers;
 
-import Message.Conversation;
-import Message.ConversationController;
-import Message.ConversationManager;
-import Message.SaveConversation;
+import Message.*;
 import Presenter.*;
 import entities.Attendee;
 import entities.Organizer;
@@ -91,6 +88,11 @@ public class Conference {
         String userType = new Login().getUserType();
         String userID = new Login().getUserID();
         ConversationController conversationController = new ConversationController(userID);
+
+        ReadConversation readConversation = new ReadConversation();
+        for (Conversation conversation: readConversation.readConversation()){
+            conversationController.addConversation(conversationController.getUserIds(conversation), conversation);
+        };
 
         switch(userType) {
             case "ATTENDEE":

@@ -86,17 +86,27 @@ public class ConversationManager implements Serializable{
         return UserConversations;
     }
 
-    public void loadConversation(String userId1, String userId2, ArrayList<String[]> messageHistory){
-        HashSet<String> users = new HashSet<>();
-        users.add(userId1);
-        users.add(userId2);
-        Iterator value = users.iterator();
-        Conversation addConversation = new Conversation((String)value.next(),(String)value.next());
-        addConversation.loadAllMessage(messageHistory);
-        conversations.put(users,addConversation);
-    }
+//    public void loadConversation(String userId1, String userId2, ArrayList<String[]> messageHistory){
+//        HashSet<String> users = new HashSet<>();
+//        users.add(userId1);
+//        users.add(userId2);
+//        Iterator value = users.iterator();
+//        Conversation addConversation = new Conversation((String)value.next(),(String)value.next());
+//        addConversation.loadAllMessage(messageHistory);
+//        conversations.put(users,addConversation);
+//    }
 
     public HashMap<HashSet<String>, Conversation> conversationsGetter(){
         return conversations;
+    }
+
+
+    public HashSet<String> getUserIds(Conversation conversation){
+        return conversation.getUserIds();
+    }
+
+    //用来load数据库里的conversation
+    public void addConversation(HashSet<String> key,Conversation conversation){
+        conversations.put(key, conversation);
     }
 }
