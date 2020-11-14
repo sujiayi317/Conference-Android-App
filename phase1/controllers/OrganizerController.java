@@ -61,19 +61,23 @@ public class OrganizerController extends AttendeeController{
                         output.printPrompt("You have signed out.\n");
                         break;
                     case 1:
+                        //Create a new speaker
                         createNewSpeaker.createNewSpeaker(create, attendeeManager,organizerManager,
                                 eventsController,userManager);
                         break;
                     case 2:
+                        // View all events
                         seeALLExistingEvents.getToSeeAllExistingEvents(eventsController, attendeeManager,
                                 viewAllExistingEvents, userID, viewEventInfo);
                         break;
 
                     case 3:
+                        //View all my events
                         seeALLMyEvents.getToSeeAllMyEvents(viewAllAttendeeEvents, eventsController, userID);
                         break;
 
                     case 4:
+                        //Add a new Event
                         createANewEvent.getToCreateANewEvent(eventsController, viewAllAvailableRoom, viewAllAvailableSpeaker);
                         break;
 
@@ -104,6 +108,7 @@ public class OrganizerController extends AttendeeController{
                         break;
 
                     case 8:
+                        //Create a new room
                         createANewRoom.getToCreateANewRoom(eventsController);
                         break;
                     case 9:
