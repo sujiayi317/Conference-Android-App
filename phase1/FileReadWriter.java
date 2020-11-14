@@ -91,6 +91,10 @@ class FileReadWriter {
 
     }
 
+    public void eventReader(){
+
+    }
+
     public EventsController GetEventsController(){
         return eventsController;
     }

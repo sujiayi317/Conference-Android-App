@@ -46,7 +46,7 @@ public class CreateANewEvent {
                         }
                         String room = eventsController.getAvailableRoom(Integer.parseInt(timeInput)).get(Integer.parseInt(roomNUm));
                         String speaker = eventsController.getAllAvailableSpeaker(Integer.parseInt(timeInput)).get(Integer.parseInt(speakerNum));
-                        if (createEvent(title, eventsController.getRoomManager().changeNumTOID(room), speaker, Integer.parseInt(timeInput), eventsController)) {
+                        if (createEvent(title, eventsController.getRoomManager().changeNumTOID(room), speaker, timeInput, eventsController)) {
                             output.printPrompt("The new Event named " + title + " at Room "
                                     + room + " taught by "
                                     + speaker + " will start at " + Integer.parseInt(timeInput));
@@ -63,7 +63,7 @@ public class CreateANewEvent {
             output.printPrompt(viewAllAvailableSpeaker.printAllAvailableSpeaker(eventsController.getAllAvailableSpeaker(time)));
 
         }
-        private boolean createEvent (String title, String roomID, String speaker,int startTime, EventsController
+        private boolean createEvent (String title, String roomID, String speaker,String startTime, EventsController
         eventsController){
             return eventsController.createEvent(title, roomID, speaker, startTime);
         }

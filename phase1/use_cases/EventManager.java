@@ -29,7 +29,7 @@ public class EventManager implements Serializable {
     /**
      * Creates a new event
      */
-    public Event createEvent(String title, String roomID, String speakerID, int startTime) {
+    public Event createEvent(String title, String roomID, String speakerID, String startTime) {
         for (Event event : this.events) {
             if ((event.getSpeakers().contains(speakerID) || roomID.equals(event.getRoomID())) && event.getStartTime() == startTime){
                 return null;}

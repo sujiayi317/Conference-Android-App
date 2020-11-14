@@ -50,7 +50,7 @@ public class EventsController{
         return this.roomManager.getAvailableRoom(time, this.eventManager);
     }
 
-    public boolean createEvent(String title, String roomID, String speakerID, int startTime){
+    public boolean createEvent(String title, String roomID, String speakerID, String startTime){
 
         Event newEvent = this.eventManager.createEvent(title, roomID, speakerID, startTime);
         if (newEvent == null){

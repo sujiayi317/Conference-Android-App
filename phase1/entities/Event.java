@@ -14,10 +14,10 @@ public class Event implements Serializable {
     private final String roomID;
     private ArrayList<String> userIDs;
     private ArrayList<String> speakers;
-    private int startTime;
+    private String startTime;
     private int duration = 1;
 
-    public Event(String title, String roomID, String speakerID, int startTime) {
+    public Event(String title, String roomID, String speakerID, String startTime) {
         this.title = title;
         this.eventID = UUID.randomUUID().toString().split("-")[0];
         this.roomID = roomID;
@@ -27,7 +27,7 @@ public class Event implements Serializable {
         this.startTime = startTime;
     }
 
-    public Event(String title, String roomID, String speakerID, int startTime, int duration) {
+    public Event(String title, String roomID, String speakerID, String startTime, int duration) {
         this.title = title;
         this.eventID = title;
         this.roomID = roomID;
@@ -44,7 +44,7 @@ public class Event implements Serializable {
      *
      * @return the value of timeSlot
      */
-    public int getStartTime() {
+    public String getStartTime() {
         return startTime;
     }
 
@@ -159,10 +159,10 @@ public class Event implements Serializable {
      * @return String of the time formated nicely
      */
     public String getFormattedStartTime() {
-        int tempTime;
-        tempTime = startTime % 12;
-        if (startTime == 12) tempTime = 12;
-        return String.format("%s:00 %s", tempTime, ((startTime < 9) || (startTime == 12) ? "PM" : "AM"));
+        int HourTime = Integer.parseInt(startTime.substring(8, 10));
+        String Ending = String.format("%s", (HourTime >= 12) ? "PM" : "AM");
+        return String.format("%s/%s/%s/%s:%s%s", startTime.substring(0, 4), startTime.substring(4, 6),
+                startTime.substring(6, 8), startTime.substring(8, 10), startTime.substring(10, 11), Ending);
     }
 
     @Override
