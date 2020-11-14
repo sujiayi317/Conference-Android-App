@@ -94,6 +94,8 @@ public class Conference {
             conversationController.addConversation(conversationController.getUserIds(conversation), conversation);
             System.out.println(conversation.getUserIds());
         };//load
+        System.out.println(readConversation.readFile());
+
 
         switch(userType) {
             case "ATTENDEE":
