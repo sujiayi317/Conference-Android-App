@@ -56,6 +56,11 @@ public abstract class User implements Serializable {
         return type;
     }
 
+    /**
+     * Abstract method to get this user's ID, all subclasses should implement this method
+     *
+     * @return userID for this user
+     */
     public abstract String getUserID();
 
     /**
