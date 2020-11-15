@@ -101,10 +101,9 @@ class FileReadWriter {
             System.out.println("room File Not Found");
         }
 
-        ArrayList<ArrayList<String>> LineList = new ArrayList<>();
         for (String line : lines) {
             ArrayList<String> wordList = new ArrayList<String>(Arrays.asList(line.split(" ")));
-            eventsController.getEventManager().loadEvent(wordList.get(0), wordList.get(1), wordList.get(2),
+            eventsController.getEventManager().loadEvent(wordList.get(0).replace("_", " "), wordList.get(1), wordList.get(2),
                     wordList.get(3), wordList.get(4));
         }
     }
@@ -114,7 +113,7 @@ class FileReadWriter {
         try {
             PrintWriter pw = new PrintWriter("./phase1/Events.txt");
             for (int index = 0; index < EventList.size(); index++){
-                String line = EventList.get(index).getTitle() + " " + EventList.get(index).getRoomID() + " " +
+                String line = EventList.get(index).getTitle().replace(" ", "_") + " " + EventList.get(index).getRoomID() + " " +
                         EventList.get(index).getSpeakers() + " " + EventList.get(index).getStartTime() + " " +
                         EventList.get(index).getEventID();
                 line += "\n";
