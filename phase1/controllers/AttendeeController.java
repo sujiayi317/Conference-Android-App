@@ -1,15 +1,11 @@
 package controllers;
 
-import Message.Conversation;
 import Message.ConversationController;
-import Message.ConversationManager;
-import Presenter.*;
+import presenters.*;
 import use_cases.AttendeeManager;
 import use_cases.UserManager;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * This is the main controller for Attendee.
@@ -51,7 +47,7 @@ public class AttendeeController {
      * This method will run when an attendee login. It will display the function menu for the user to choose. there are
      * in total 6 choices for attendees: sign out, view all existing events, view all attended events, view all the user's
      * friends, view all the message the user has.
-     * @param userID The user's unique id, which is been created when user creates the account.
+     * @param userID The user's unique id, which is created when the user creates an account.
      * @param eventsController The controller for events.
      * @param attendeeManager The use case class for attendee, which contains methods like login and sign up.
      * @param conversationController The controller for conversation.

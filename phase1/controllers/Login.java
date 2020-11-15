@@ -20,6 +20,7 @@ public class Login{
         output = new OutputManager();
         createAccount = new CreateAccount();
     }
+
     public void run(AttendeeManager attendeeManager, OrganizerManager organizerManager, SpeakerManager speakerManager,
                     UserManager usermanager) {
         while (true) {
@@ -39,7 +40,7 @@ public class Login{
                 } else {
                     output.printPrompt("Account creation cancelled, directing back to main page now...\n");
                 }
-            } else if (CurrentAction.equals("EXIT")){
+            } else if (CurrentAction.equalsIgnoreCase("EXIT")){
                 EXIT = true;
                 break;
             } else {

@@ -1,7 +1,6 @@
-package Presenter;
+package presenters;
 
 import controllers.OutputManager;
-import entities.Attendee;
 
 public class AttendeeMenu {
     private static OutputManager output;

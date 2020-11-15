@@ -1,13 +1,9 @@
 package controllers;
 
 import Message.*;
-import Presenter.*;
-import entities.Attendee;
-import entities.Organizer;
-import entities.User;
 import use_cases.*;
+import gateway.FileReadWriter;
 
-import java.io.FileReader;
 import java.util.HashSet;
 import java.util.InputMismatchException;
 
@@ -15,10 +11,14 @@ import java.util.InputMismatchException;
  * This is the main controller that will manage all other controllers (parts of the conference).
  */
 public class Conference {
-    private final UserManager userManager;
-    private final EventsController eventsController;
-    private final AttendeeManager attendeeManager;
-    private final OrganizerManager organizerManager;
+//    private final UserManager userManager;
+//    private final EventsController eventsController;
+//    private final AttendeeManager attendeeManager;
+//    private final OrganizerManager organizerManager;
+    private UserManager userManager;
+    private EventsController eventsController;
+    private AttendeeManager attendeeManager;
+    private OrganizerManager organizerManager;
     private SaveConversation saveConversation;
 //    private final ViewAllAttendeeEvents viewAllAttendeeEvents;
 //    private final ViewAllExistingEvents viewAllExistingEvents;
@@ -31,22 +31,27 @@ public class Conference {
     /**
      * This is where our conference system starts.
      */
-    public Conference(EventsController eventsController, AttendeeManager attendeeManager,
-                      OrganizerManager organizerManager, UserManager userManager){
+//    public Conference(EventsController eventsController, AttendeeManager attendeeManager,
+//                      OrganizerManager organizerManager, UserManager userManager){
+//
+////        this.userManager = userManager;
+////        this.attendeeManager = attendeeManager;
+////        this.organizerManager = organizerManager;
+////        this.eventsController = eventsController;
+////        this.saveConversation = new SaveConversation();//待定
+////        this.viewAllAttendeeEvents = new ViewAllAttendeeEvents();
+////        this.viewAllExistingEvents = new ViewAllExistingEvents();
+////        this.viewAllSpeakerEvents = new ViewAllSpeakerEvents();
+////        this.viewEventInfo = new ViewEventInfo();
+////        this.viewFriendList = new ViewFriendList();
+////        this.viewMessageList = new ViewMessageList();
+////        this.viewAllEventAttendees = new ViewAllEventAttendees();
+//    }
 
-        this.userManager = userManager;
-        this.attendeeManager = attendeeManager;
-        this.organizerManager = organizerManager;
-        this.eventsController = eventsController;
-        this.saveConversation = new SaveConversation();//待定
-//        this.viewAllAttendeeEvents = new ViewAllAttendeeEvents();
-//        this.viewAllExistingEvents = new ViewAllExistingEvents();
-//        this.viewAllSpeakerEvents = new ViewAllSpeakerEvents();
-//        this.viewEventInfo = new ViewEventInfo();
-//        this.viewFriendList = new ViewFriendList();
-//        this.viewMessageList = new ViewMessageList();
-//        this.viewAllEventAttendees = new ViewAllEventAttendees();
+    public Conference(){
+
     }
+
     public void run(){
         try {
             //Initialize all managers, NO FILE FOUND AT THIS POINT, CREATE NEW MANAGERS
@@ -60,8 +65,8 @@ public class Conference {
      * The main program flow-of-control.
      */
     private void conferenceSystem() {
+        start();
         while (!new Login().getEXITStatus()) {
-            start();
             if (!(new Login().getEXITStatus())){
             iteration();
             }
@@ -75,31 +80,42 @@ public class Conference {
      */
     private void start() {
         //connect to Gateway: set up database
+        FileReadWriter newFileReadWriter = new FileReadWriter();
+        newFileReadWriter.connectReaders();
+        this.userManager = newFileReadWriter.GetUserManager();
+        this.attendeeManager = newFileReadWriter.GetAttendeeManager();
+        this.organizerManager = newFileReadWriter.GetOrganizerManager();
+        this.eventsController = newFileReadWriter.GetEventsController();
+        this.saveConversation = new SaveConversation();//待定
+        newFileReadWriter.connectWriters();
+
         //connect to Login Controller - log User in
-        new Login().run(attendeeManager, organizerManager, eventsController.getSpeakerManager(), userManager);
-
-
+        //new Login().run(attendeeManager, organizerManager, eventsController.getSpeakerManager(), userManager);
     }
 
     /**
      * Connect to one of the three types of User Controllers.
      */
     private void iteration() {
-        String userType = new Login().getUserType();
-        String userID = new Login().getUserID();
-        ConversationController conversationController = new ConversationController(userID);
+        //connect to Login Controller - log User in
+        Login newLogin = new Login();
+        newLogin.run(attendeeManager, organizerManager, eventsController.getSpeakerManager(), userManager);
+        String userType = newLogin.getUserType();
+        String userID = newLogin.getUserID();
 
+        //load conversations of this user
+        ConversationController conversationController = new ConversationController(userID);
         ReadConversation readConversation = new ReadConversation();
-        for (Conversation conversation: readConversation.readFile()){
-            conversationController.addConversation(conversationController.getUserIds(conversation), conversation);
-        };//load
+        readConversation.loadConversations(conversationController);
+//        for (Conversation conversation: readConversation.readFile()){
+//            conversationController.addConversation(conversationController.getUserIds(conversation), conversation);
+//        };//load
 
 
         switch(userType) {
             case "ATTENDEE":
                 new AttendeeController().run(userID, eventsController, attendeeManager,
                         conversationController, userManager);
-
                 break;
             case "SPEAKER":
                 new SpeakerController().run(userID, eventsController,

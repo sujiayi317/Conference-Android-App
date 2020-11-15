@@ -1,10 +1,10 @@
 package controllers;
 
 import Message.ConversationController;
-import Presenter.*;
-import Presenter.ViewAllAttendeeEvents;
-import Presenter.ViewAllAvailableRoom;
-import Presenter.ViewAllExistingEvents;
+import presenters.*;
+//import Presenter.ViewAllAttendeeEvents;
+//import Presenter.ViewAllAvailableRoom;
+//import Presenter.ViewAllExistingEvents;
 //import com.sun.org.apache.xpath.internal.operations.Bool;
 import entities.Organizer;
 import entities.Speaker;

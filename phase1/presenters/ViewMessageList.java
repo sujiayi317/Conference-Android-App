@@ -1,7 +1,6 @@
-package Presenter;
+package presenters;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class ViewMessageList {
     public ViewMessageList(){}
