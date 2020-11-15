@@ -66,10 +66,6 @@ class FileReadWriter {
         }
     }
 
-    public void ConversationReader(){
-
-    }
-
     public void UserWriter(UserManager userManager){
         try {
             PrintWriter pw = new PrintWriter("./phase1/Users.txt");
@@ -93,6 +89,46 @@ class FileReadWriter {
 
     public void eventReader(){
 
+    }
+
+    public void RoomReader(EventsController eventsController){
+        ArrayList<String> lines = new ArrayList();
+        try {
+            File UserFile = new File("./phase1/rooms.txt");
+            Scanner myReader = new Scanner(UserFile);
+            while (myReader.hasNextLine()) {
+                while (myReader.hasNextLine()) {
+                    lines.add(myReader.nextLine());
+                }
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("room File Not Found");
+        }
+        SpeakerManager speakermanager = eventsController.getSpeakerManager();
+        ArrayList<ArrayList> LineList = new ArrayList();
+        for (int i = 0; i < lines.size(); i++) {
+            ArrayList<String> wordList = new ArrayList<String>();
+            for (String word : lines.get(i).split(" ")) {
+                wordList.add(word);
+            }
+            eventsController.getRoomManager().loadRoom(wordList.get(0), wordList.get(1));
+        }
+    }
+
+    public void RoomWriter(EventsController eventsController){
+        ArrayList<String> NumList = eventsController.getRoomManager().getAllRoomNum();
+        ArrayList<String> IDList = eventsController.getRoomManager().getAllRoomID();
+        try {
+            PrintWriter pw = new PrintWriter("./phase1/Users.txt");
+            for (int index = 0; index < NumList.size(); index++){
+                String line = NumList.get(index) + " " + IDList.get(index);
+                line += "\n";
+                pw.write(line);
+            }
+            pw.close();
+        } catch (FileNotFoundException e){
+            System.out.println("room File Not Found.");
+        }
     }
 
     public EventsController GetEventsController(){

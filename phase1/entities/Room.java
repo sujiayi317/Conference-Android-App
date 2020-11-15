@@ -9,7 +9,7 @@ import java.util.UUID;
  */
 public class Room implements Serializable{
 
-    private final String roomID = UUID.randomUUID().toString().split("-")[0];
+    private final String roomID;
     private final int capacity = 2;
     private int currentNum = 0;
     private final String roomNum;
@@ -20,6 +20,12 @@ public class Room implements Serializable{
      */
     public Room(String roomNum) {
         this.roomNum = roomNum;
+        this.roomID = UUID.randomUUID().toString().split("-")[0];
+    }
+
+    public Room(String roomNum, String roomID) {
+        this.roomNum = roomNum;
+        this.roomID = roomID;
     }
 
     /**
