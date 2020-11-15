@@ -161,8 +161,8 @@ public class Event implements Serializable {
     public String getFormattedStartTime() {
         int HourTime = Integer.parseInt(startTime.substring(8, 10));
         String Ending = String.format("%s", (HourTime >= 12) ? "PM" : "AM");
-        return String.format("%s/%s/%s/%s:%s%s", startTime.substring(0, 4), startTime.substring(4, 6),
-                startTime.substring(6, 8), startTime.substring(8, 10), startTime.substring(10, 11), Ending);
+        return String.format("%s/%s/%s/%s%s", startTime.substring(0, 4), startTime.substring(4, 6),
+                startTime.substring(6, 8), startTime.substring(8, 10), Ending);
     }
 
     @Override

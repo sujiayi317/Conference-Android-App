@@ -20,11 +20,11 @@ public class CreateANewEvent {
                                      ViewAllAvailableSpeaker viewAllAvailableSpeaker) {
         String timeInput = "666";
         while (!(checkValidTimeFormat(timeInput) && checkValidFutureTime(timeInput))) {
-            timeInput = input.getInputString("Please enter your event time in the format of yyyy/mm/dd/hh:mm (years/month/date/hour(00 - 23):minute)\n" +
-                    "for example, enter '2020/12/09/14:30' to host the event on 2020/Dec/9th at 2:30pm\n" +
+            timeInput = input.getInputString("Please enter your event time in the format of yyyy/mm/dd/hh:mm (years/month/date/hour)\n" +
+                    "for example, enter '2020/12/09/14' to host the event on 2020/Dec/9th at 2pm\n" +
                     "enter 'cancel' to go back to main menu\n");
             if (!(checkValidTimeFormat(timeInput))){
-                output.printPrompt("Your input date does not exist, or does not follow the yyyy/mm/dd/hh:mm format! Try again...\n\n");
+                output.printPrompt("Your input date does not exist, or does not follow the yyyy/mm/dd/hh format! Try again...\n\n");
             } else if (!(checkValidFutureTime(timeInput))){
                 output.printPrompt("You can not create new events in the past! Please choose another time in the future...\n\n");
             } else if (timeInput.equals("cancel")){
@@ -68,16 +68,14 @@ public class CreateANewEvent {
     }
 
     private boolean checkValidTimeFormat(String time){
-        if (time.length() == 16 && time.charAt(4) == '/' && time.charAt(7) == '/' && time.charAt(10) == '/'
-                && time.charAt(13) == ':') {
+        if (time.length() == 13 && time.charAt(4) == '/' && time.charAt(7) == '/' && time.charAt(10) == '/') {
             String[] timeList = time.split("[/:]+");
             try{
                 int year = Integer.parseInt(timeList[0]);
                 int month = Integer.parseInt(timeList[1]);
                 int date = Integer.parseInt(timeList[2]);
                 int hour = Integer.parseInt(timeList[3]);
-                int minute = Integer.parseInt(timeList[4]);
-                if (hour < 9 || hour > 16 || month > 12 || month < 1 || date < 1 || date > 31 || minute < 0 || minute >59) {
+                if (hour < 9 || hour > 16 || month > 12 || month < 1 || date < 1 || date > 31) {
                     return false;
                 }
                 switch (month){
@@ -85,7 +83,6 @@ public class CreateANewEvent {
                         return date <= 28;
                     case 4: case 6: case 9: case 11:
                         return date < 30;
-
                 }
             } catch (NumberFormatException e){
                 return false;
@@ -96,11 +93,11 @@ public class CreateANewEvent {
     }
 
     private boolean checkValidFutureTime(String time){
-        String[] eventTime = time.split("[/:]+");
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd/HH:mm");
+        String[] eventTime = time.split("/");
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd/HH");
         Date date = new Date();
-        String[] currentTime = formatter.format(date).split("[/:]+");
-        for (int index = 0; index < 5; index++){
+        String[] currentTime = formatter.format(date).split("/");
+        for (int index = 0; index < 4; index++){
             if (Integer.parseInt(currentTime[index]) < Integer.parseInt(eventTime[index])){
                 return true;
             }
