@@ -2,15 +2,19 @@ package presenters;
 
 import controllers.OutputManager;
 
+/**
+ * The presenter for viewing all menu options for an attendee
+ */
 public class AttendeeMenu {
     private static OutputManager output;
 
-    /**
-     * The presenter for attendee's menu
-     */
     public AttendeeMenu(){
         output = new OutputManager();
     }
+
+    /**
+     * Print attendee's menu
+     */
     public void printAttendeeMenu(String userName){
         StringBuilder returnString = new StringBuilder("\nWelcome Attendee: ");
         returnString.append(userName).append("\n");

@@ -2,16 +2,21 @@ package presenters;
 
 import controllers.OutputManager;
 
+/**
+ * The presenter for organizer's menu.
+ */
 public class OrganizerMenu {
     private static OutputManager output;
 
-    /**
-     * The presenter for organizer's menu.
-     */
-    public OrganizerMenu(){
+
+    public OrganizerMenu() {
         output = new OutputManager();
     }
-    public void printOrganizerMenu(String userName){
+
+    /**
+     * Print organizer's menu
+     */
+    public void printOrganizerMenu(String userName) {
         StringBuilder returnString = new StringBuilder("\nWelcome Organizer: ");
         returnString.append(userName).append("\n");
         returnString.append(" 1) create a new speaker\n 2) view all existing events\n 3) view all my events\n " +
