@@ -9,7 +9,7 @@ public class ViewAllExistingEvents {
 
     public ViewAllExistingEvents(){}
     public StringBuilder printAllExistingEvents(List<Event> AllExistingEvents){
-        StringBuilder returnString = new StringBuilder("There are all existing events you may attend:\n");
+        StringBuilder returnString = new StringBuilder("\nThese are all the events you may attend:\n");
         for (int i =0 ; i < AllExistingEvents.size();i++){
             returnString.append(i).append(") ").append(AllExistingEvents.get(i).getTitle()).append("\n");
         }
