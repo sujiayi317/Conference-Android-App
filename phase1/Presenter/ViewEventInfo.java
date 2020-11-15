@@ -14,6 +14,12 @@ public class ViewEventInfo {
         this.infoPattern.add("Current_Capacity");
 
     }
+
+    /**
+     * the presenter of an event, which will display the event information for users.
+     * @param eventInfo An array list of event information.
+     * @return The string which can present the information.
+     */
     public StringBuilder getEventInfo(ArrayList<String> eventInfo){
         StringBuilder returnString = new StringBuilder("There is the detail for "+ eventInfo.get(0)+" you can view:\n");
         for (int i =0 ; i < eventInfo.size()-2;i++){

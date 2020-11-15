@@ -43,6 +43,17 @@ public class AttendeeController {
         this.viewMessageList = new ViewMessageList();
 
     }
+
+    /**
+     * This method will run when an attendee login. It will display the function menu for the user to choose. there are
+     * in total 6 choices for attendees: sign out, view all existing events, view all attended events, view all the user's
+     * friends, view all the message the user has.
+     * @param userID The user's unique id, which is been created when user creates the account.
+     * @param eventsController The controller for events.
+     * @param attendeeManager The use case class for attendee, which contains methods like login and sign up.
+     * @param conversationController The controller for conversation.
+     * @param userManager The use case class for user.
+     */
     public void run(String userID, EventsController eventsController,
                     AttendeeManager attendeeManager,
                     ConversationController conversationController, UserManager userManager) {
