@@ -33,22 +33,22 @@ public class TextUI {
             width = str.length() + 8;
         }
 
-        return Math.max(width, 50);
+        return Math.max(width, 60);
 
     }
 
     private int setHeight(String[] message) {
-        return message.length + 8;
+        return message.length + 3;
     }
 
     private void placeBorderAndFill() {
-        Fill blank = new Fill(2, height-3, width-3, 2, ' ');
+        Fill blank = new Fill(2, height-2, width-3, 2, ' ');
         blank.setParent(ui);
         blank.draw();
     }
 
     private void placeMessage(String[] message) {
-        int y = height - 5;
+        int y = height - 2;
         for (String str : message) {
             centrePlace(ui, str, y--);
         }
