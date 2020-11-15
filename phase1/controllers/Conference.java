@@ -20,6 +20,7 @@ public class Conference {
     private AttendeeManager attendeeManager;
     private OrganizerManager organizerManager;
     private SaveConversation saveConversation;
+    private FileReadWriter fileReadWriter = new FileReadWriter();
 //    private final ViewAllAttendeeEvents viewAllAttendeeEvents;
 //    private final ViewAllExistingEvents viewAllExistingEvents;
 //    private final ViewAllSpeakerEvents viewAllSpeakerEvents;
@@ -48,7 +49,8 @@ public class Conference {
 ////        this.viewAllEventAttendees = new ViewAllEventAttendees();
 //    }
 
-    public Conference(){}
+    public Conference(){
+    }
 
     public void run(){
         try {
@@ -77,14 +79,12 @@ public class Conference {
      */
     private void start() {
         //connect to Gateway: set up database
-        FileReadWriter newFileReadWriter = new FileReadWriter();
-        newFileReadWriter.connectReaders();
-        this.userManager = newFileReadWriter.GetUserManager();
-        this.attendeeManager = newFileReadWriter.GetAttendeeManager();
-        this.organizerManager = newFileReadWriter.GetOrganizerManager();
-        this.eventsController = newFileReadWriter.GetEventsController();
+        fileReadWriter.connectReaders();
+        this.userManager = fileReadWriter.GetUserManager();
+        this.attendeeManager = fileReadWriter.GetAttendeeManager();
+        this.organizerManager = fileReadWriter.GetOrganizerManager();
+        this.eventsController = fileReadWriter.GetEventsController();
         this.saveConversation = new SaveConversation();//待定
-        newFileReadWriter.connectWriters();
         Login newLogin = new Login();
         newLogin.run(attendeeManager, organizerManager, eventsController.getSpeakerManager(), userManager);
 
@@ -108,24 +108,25 @@ public class Conference {
 //            conversationController.addConversation(conversationController.getUserIds(conversation), conversation);
 //        };//load
 
-        if (!newLogin.getEXITStatus()) {
-            switch (userType) {
-                case "ATTENDEE":
-                    new AttendeeController().run(userID, eventsController, attendeeManager,
-                            conversationController, userManager);
-                    break;
-                case "SPEAKER":
-                    new SpeakerController().run(userID, eventsController,
-                            conversationController, userManager);
-                    break;
-                case "ORGANIZER":
-                    new OrganizerController().run(eventsController, attendeeManager,
-                            organizerManager, userManager, conversationController, userID);
-            }
+
+        switch(userType) {
+            case "ATTENDEE":
+                new AttendeeController().run(userID, eventsController, attendeeManager,
+                        conversationController, userManager);
+                break;
+            case "SPEAKER":
+                new SpeakerController().run(userID, eventsController,
+                        conversationController, userManager);
+                break;
+            case "ORGANIZER":
+                new OrganizerController().run(eventsController, attendeeManager,
+                        organizerManager, userManager, conversationController, userID);
         }
+
         for(HashSet<String> key: conversationController.conversationsGetter().keySet()){
             saveConversation.save(conversationController.conversationsGetter().get(key));
         }//save
+        fileReadWriter.connectWriters();
     }
 
     private void finish() {
