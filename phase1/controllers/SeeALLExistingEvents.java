@@ -23,8 +23,11 @@ public class SeeALLExistingEvents {
         int check = 0;
         while (check != 1 && eventsController.getAllExistingEvents().size() != 0) {
             viewAllEvents(viewAllExistingEvents, eventsController);
-            String eventNum = Integer.toString(input.getInputInt("Please choose an Event_Num and see the details OR press enter to back\n"));
-            if ((!eventNum.equals("")) && eventsController.getAllExistingEvents().size() > Integer.parseInt(eventNum) && Integer.parseInt(eventNum) >= 0) {
+            String eventNum = Integer.toString(input.getInputInt("Please enter an number to see the details, " +
+                    "(for example, enter 0 to check details of first event if there is any event)\nOr, press enter to" +
+                    " go back to main menu\n"));
+            if ((!eventNum.equals("666")) && eventsController.getAllExistingEvents().size() > Integer.parseInt(eventNum)
+                    && Integer.parseInt(eventNum) >= 0) {
                 String eventTitle = eventsController.getAllExistingEvents().get(Integer.parseInt(eventNum)).getTitle();
                 if (!eventTitle.equals("")) {
                     String eventID = eventsController.getEventManager().changeEventTitleIntoEventID(eventTitle);
@@ -44,8 +47,8 @@ public class SeeALLExistingEvents {
                     }
                 }
             }
-            else if ((!eventNum.equals("") && (Integer.parseInt(eventNum) >= eventsController.getAllExistingEvents().size() || Integer.parseInt(eventNum) < 0))){
-                output.printPrompt("The Event_Num is out of bound please enter the correct one\n");
+            else if ((!eventNum.equals("666") && (Integer.parseInt(eventNum) >= eventsController.getAllExistingEvents().size() || Integer.parseInt(eventNum) < 0))){
+                output.printPrompt("The Event Number entered is out of bound please enter the correct one\n");
             }
             else {check +=1;}
         }
