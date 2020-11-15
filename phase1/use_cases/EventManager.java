@@ -2,7 +2,6 @@ package use_cases;
 
 import entities.Event;
 import entities.Room;
-import entities.Speaker;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -10,43 +9,66 @@ import java.util.List;
 
 /**
  * The use_cases.EventManager class, this is the use case class to manage all events.
- *
  */
 public class EventManager implements Serializable {
 
     private List<Event> events;
-
 
     /**
      * Creates an empty event manager
      */
     public EventManager() {
         events = new ArrayList<>();
-
     }
-
 
     /**
      * Creates a new event
+     *
+     * @param title title of the event
+     * @param roomID roomID of the event
+     * @param speakerID speakerID of the event
+     * @param  startTime startTime of the event
+     * @return the newly created event or null
      */
     public Event createEvent(String title, String roomID, String speakerID, String startTime) {
         for (Event event : this.events) {
-            if ((event.getSpeakers().contains(speakerID) || roomID.equals(event.getRoomID())) && event.getStartTime().equals(startTime)){
-                return null;}
+            if ((event.getSpeakers().contains(speakerID) || roomID.equals(event.getRoomID())) &&
+                    event.getStartTime().equals(startTime)) {
+                return null;
+            }
         }
-        if (title.length() <= 3){
+        if (title.length() <= 3) {
             return null;
         }
+        // create this new event:
         Event newEvent = new Event(title, roomID, speakerID, startTime);
+        // update the events list:
         events.add(newEvent);
+
         return newEvent;
     }
 
+    /**
+     * Create a new event (full version)
+     *
+     * @param title title
+     * @param roomID roomID
+     * @param speakerID speakerID
+     * @param startTime startTime
+     * @param eventID eventID
+     * @param attendeeID attendeeID
+     * @param roomManager roomManager
+     * @return  the newly created event
+     */
     public Event loadEvent(String title, String roomID, String speakerID, String startTime, String eventID,
                            ArrayList<String> attendeeID, RoomManager roomManager) {
+        // create this new event:
         Event newEvent = new Event(title, roomID, speakerID, startTime, eventID);
+        // update the events list:
         events.add(newEvent);
-        for (String ID : attendeeID){
+
+        // add attendee's IDs to this event
+        for (String ID : attendeeID) {
             addAttendeeToEvent(ID, eventID, roomManager);
         }
         return newEvent;
@@ -54,6 +76,8 @@ public class EventManager implements Serializable {
 
     /**
      * Return a list of all events.
+     *
+     * @return a list of all events
      */
     public List<Event> getAllEvent() {
         return events;
@@ -67,16 +91,25 @@ public class EventManager implements Serializable {
 //        return eventList;
 //    }
 
+
     /**
-     * Adds an attendee to the eventsMap  (Piazza question @652)
+     * Adds an attendee to the event
+     *
+     * Hint (Piazza question @652):
      * "When the user says they want to sign up for an event, they have a username and they know the event name.
-     * So the controller method calls the use_cases.EventManager method with two String parameters: userName and eventName.
-     * The the use_cases.EventManager, looks through the list of entities.Event objects and finds the one with the correct name and
-     * calls addUser(userName).
-     * <p>
-     * Note: This would add a String with the username to a list of Strings inside the entities.Event, not the entities.User object
-     * itself. If you want to add the Even to the entities.User, the Controller would send only the String eventName to the
+     * So the controller method calls the use_cases.EventManager method with two String parameters:
+     * userName and eventName.
+     * The the use_cases.EventManager, looks through the list of entities.Event objects and finds the one with the
+     * correct name and calls addUser(userName).
+     * Note: This would add a String with the username to a list of Strings inside the entities.Event, not the
+     * entities.User object itself.
+     * If you want to add the Even to the entities.User, the Controller would send only the String eventName to the
      * UserManager, to store the entities.Event's name in a list of Strings inside the entities.User object."
+     *
+     * @param userID userID
+     * @param eventID eventID
+     * @param roomManager a RoomManager object
+     * @return true iff the user has been successfully added to this event
      */
     public boolean addAttendeeToEvent(String userID, String eventID, RoomManager roomManager) {
         Event event = getEventFromID(eventID);
@@ -94,19 +127,22 @@ public class EventManager implements Serializable {
 
     /**
      * Return a list all Attendees from event with eventID. If event not found, return empty array list.
+     *
      * @param eventID String object
      * @return arraylist of attendees' ID from given event, return empty arraylist if event not found.
      */
     public ArrayList<String> getAttendeesFromEvent(String eventID) {
         Event event = getEventFromID(eventID);
-        if (event != null){ return event.getAttendees();}
+        if (event != null) {
+            return event.getAttendees();
+        }
         return new ArrayList<>();
     }
 
     /**
      * return an event based on its ID
      *
-     * @param eventID String
+     * @param eventID eventID String object
      * @return event if eventID existed in events otherwise return null
      */
     public Event getEventFromID(String eventID) {
@@ -120,8 +156,11 @@ public class EventManager implements Serializable {
 
     /**
      * Return true if we remove the attendee from a event.
-     * @param eventID,userID String object,
-     * @return boolean
+     *
+     * @param userID userID String object
+     * @param eventID eventID String object
+     * @param roomManager roomManager
+     * @return true  iff the user has been successfully removed from this event
      */
     public boolean removeAttendeeFromEvent(String userID, String eventID, RoomManager roomManager) {
         Event event = getEventFromID(eventID);
@@ -132,54 +171,68 @@ public class EventManager implements Serializable {
         }
         return false;
     }
+
     /**
-     * Return ArrayList contains all events that attendee has.
+     * Return ArrayList contains all events that attendee has signed up.
+     *
      * @param userID String object,
-     * @return ArrayList<String>
+     * @return ArrayList<String> contains all events that attendee has
      */
-    public ArrayList<String> getAllEventForTheAttendee(String userID){
+    public ArrayList<String> getAllEventForTheAttendee(String userID) {
         ArrayList<String> eventList = new ArrayList<>();
-        for (Event event: events){
-            if (event.getAttendees().contains(userID)){
-                eventList.add(event.getEventID());
-            }
-        }
-        return eventList;
-    }
-    /**
-     * Return ArrayList contains all events that attendee has.
-     * @param userID String object,
-     * @return ArrayList<String>
-     */
-    public ArrayList<String> getAllEventForTheSpeaker(String userID){
-        ArrayList<String> eventList = new ArrayList<>();
-        for (Event event: events){
-            if (event.getSpeakers().contains(userID)){
+        for (Event event : events) {
+            if (event.getAttendees().contains(userID)) {
                 eventList.add(event.getEventID());
             }
         }
         return eventList;
     }
 
-    public String changeEventIDIntoEventTile(String eventID){
-        for (Event event: events){
-            if (event.getEventID().equals(eventID)){
+    /**
+     * Return ArrayList contains all events that attendee has.
+     *
+     * @param userID String object,
+     * @return ArrayList<String>
+     */
+    public ArrayList<String> getAllEventForTheSpeaker(String userID) {
+        ArrayList<String> eventList = new ArrayList<>();
+        for (Event event : events) {
+            if (event.getSpeakers().contains(userID)) {
+                eventList.add(event.getEventID());
+            }
+        }
+        return eventList;
+    }
+
+    public String changeEventIDIntoEventTitle(String eventID) {
+        for (Event event : events) {
+            if (event.getEventID().equals(eventID)) {
                 return event.getTitle();
             }
         }
         return "NULL";
     }
 
-    public String changeEventTitleIntoEventID(String eventTitle){
-        for (Event event: events){
-            if (event.getTitle().equals(eventTitle)){
+    /**
+     * Given a String representing the title of this event, return the ID of this event, or "NULL"
+     * @param eventTitle title String of an event
+     * @return event ID
+     */
+    public String changeEventTitleIntoEventID(String eventTitle) {
+        for (Event event : events) {
+            if (event.getTitle().equals(eventTitle)) {
                 return event.getEventID();
             }
         }
         return "NULL";
     }
 
-    public String generateFormattedStartTime(String startTime){
+    /**
+     * Generate a formatted string representation of the start time String.
+     * @param startTime startTime String
+     * @return a formatted string representation
+     */
+    public String generateFormattedStartTime(String startTime) {
         int HourTime = Integer.parseInt(startTime.substring(8, 10));
         String Ending = String.format("%s", (HourTime >= 12) ? "PM" : "AM");
         return String.format("%s/%s/%s/%s%s", startTime.substring(0, 4), startTime.substring(4, 6),
