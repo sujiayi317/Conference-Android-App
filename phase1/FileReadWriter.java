@@ -103,8 +103,14 @@ class FileReadWriter {
 
         for (String line : lines) {
             ArrayList<String> wordList = new ArrayList<String>(Arrays.asList(line.split(" ")));
-            eventsController.getEventManager().loadEvent(wordList.get(0).replace("_", " "), wordList.get(1), wordList.get(2),
-                    wordList.get(3), wordList.get(4));
+            ArrayList<String> Attendees = new ArrayList<>();
+            if (wordList.size() > 5){
+                for (int index = 5; index < wordList.size(); index++){
+                    Attendees.add(wordList.get(index));
+                }
+            }
+            eventsController.getEventManager().loadEvent(wordList.get(0).replace("_", " "),
+                    wordList.get(1), wordList.get(2), wordList.get(3), wordList.get(4), Attendees);
         }
     }
 
@@ -112,10 +118,13 @@ class FileReadWriter {
         List<Event> EventList = eventsController.getEventManager().getAllEvent();
         try {
             PrintWriter pw = new PrintWriter("./phase1/Events.txt");
-            for (int index = 0; index < EventList.size(); index++){
-                String line = EventList.get(index).getTitle().replace(" ", "_") + " " + EventList.get(index).getRoomID() + " " +
-                        EventList.get(index).getSpeakers() + " " + EventList.get(index).getStartTime() + " " +
-                        EventList.get(index).getEventID();
+            for (Event event : EventList) {
+                String line = event.getTitle().replace(" ", "_") + " " + event.getRoomID() + " " +
+                        event.getSpeakers() + " " + event.getStartTime() + " " +
+                        event.getEventID();
+                for (String attendee : event.getAttendees()) {
+                    line += " " + attendee;
+                }
                 line += "\n";
                 pw.write(line);
             }
