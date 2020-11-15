@@ -12,6 +12,9 @@ public class Login{
     private static String type;
     private static boolean EXIT = false;
 
+    /**
+     * The constructor of login class
+     */
     public Login(){
         input = new InputManager();
         output = new OutputManager();

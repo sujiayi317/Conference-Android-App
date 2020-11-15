@@ -6,6 +6,10 @@ import use_cases.UserManager;
 
 public class CreateNewSpeaker {
     private static OutputManager output;
+
+    /**
+     * This class is made for creating new speaker.
+     */
     public CreateNewSpeaker(){
         output = new OutputManager();
     }

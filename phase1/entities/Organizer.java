@@ -15,6 +15,12 @@ public class Organizer extends User implements Serializable {
     private ArrayList<String> events;
     private final String userID;
 
+    /**
+     * The constructor for an organizer
+     * @param userName organizer name
+     * @param email organizer email
+     * @param password organizer password
+     */
     public Organizer(String userName, String email, String password) {
         super(userName, email, password);
         setType("ORGANIZER");
@@ -27,6 +33,10 @@ public class Organizer extends User implements Serializable {
         this.userID = ID;
     }
 
+    /**
+     * Getter for the organizer user id
+     * @return String of the user id.
+     */
     public String getUserID() {
         return this.userID;
     }

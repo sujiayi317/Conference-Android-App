@@ -11,11 +11,20 @@ public class CreateANewEvent {
     private static OutputManager output;
     private static InputManager input;
 
+    /**
+     * The constructor of CreateANewEvent class. This class is made for creating new events.
+     */
     public CreateANewEvent() {
         output = new OutputManager();
         input = new InputManager();
     }
 
+    /**
+     * The method to create an new event.
+     * @param eventsController events controller class
+     * @param viewAllAvailableRoom valid room presenter to show all valid rooms for organizer.
+     * @param viewAllAvailableSpeaker available speaker presenter to show all available speakers for organizer.
+     */
     public void getToCreateANewEvent(EventsController eventsController, ViewAllAvailableRoom viewAllAvailableRoom,
                                      ViewAllAvailableSpeaker viewAllAvailableSpeaker) {
         String timeInput = "666";
@@ -89,6 +98,11 @@ public class CreateANewEvent {
         }
     }
 
+    /**
+     * To check if a time format is valid.
+     * @param time given time string
+     * @return true iff the time format is correct
+     */
     private boolean checkValidTimeFormat(String time) {
         if (time.length() == 13 && time.charAt(4) == '/' && time.charAt(7) == '/' && time.charAt(10) == '/') {
             String[] timeList = time.split("/");
@@ -117,6 +131,11 @@ public class CreateANewEvent {
         return false;
     }
 
+    /**
+     * To check if a given event time can be added.
+     * @param time given time
+     * @return true iff the time slot is available
+     */
     private boolean checkValidFutureTime(String time) {
         String eventTime = time.replace("/", "");
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd/HH");
@@ -125,6 +144,12 @@ public class CreateANewEvent {
         return Long.parseLong(eventTime) > Long.parseLong(currentTime);
     }
 
+    /**
+     * The getter to get all available room information.
+     * @param time given time
+     * @param viewAllAvailableRoom presenter of all available rooms
+     * @param eventsController event controller class
+     */
     private void getAllAvailableRoomInfo(String time, ViewAllAvailableRoom viewAllAvailableRoom, EventsController
             eventsController) {
         viewAllAvailableRoom.printAllAvailableRoom(eventsController.getAvailableRoom(time));

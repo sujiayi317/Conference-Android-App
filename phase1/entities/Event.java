@@ -17,6 +17,13 @@ public class Event implements Serializable {
     private String startTime;
     private int duration = 1;
 
+    /**
+     * The constructor for an event
+     * @param title event title
+     * @param roomID which room the event will be
+     * @param speakerID the speaker id for the event
+     * @param startTime event starting time
+     */
     public Event(String title, String roomID, String speakerID, String startTime) {
         this.title = title;
         this.eventID = UUID.randomUUID().toString().split("-")[0];

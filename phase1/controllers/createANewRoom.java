@@ -6,11 +6,18 @@ public class createANewRoom {
     private static OutputManager output;
     private static InputManager input;
 
+    /**
+     * constructor of createANewRoom class. This class is made for creating rooms.
+     */
     public createANewRoom(){
         output = new OutputManager();
         input = new InputManager();
     }
 
+    /**
+     * The method to create a new room.
+     * @param eventsController event controller class.
+     */
     public void getToCreateANewRoom(EventsController eventsController){
         RoomManager roomManager = eventsController.getRoomManager();
         int roomNum = 101;

@@ -11,6 +11,12 @@ public class Attendee extends User  implements Serializable {
 
     private final String userID;
 
+    /**
+     * The constructor of attendee
+     * @param userName user name
+     * @param email user email
+     * @param password user password.
+     */
     public Attendee(String userName, String email, String password) {
         super(userName, email, password);
         setType("ATTENDEE");
