@@ -17,9 +17,10 @@ public class SpeakerController {
     private final SpeakerMenu speakermenu;
     private final ViewAllSpeakerEvents viewAllSpeakerEvents;
     private final ViewEventInfo viewEventInfo;
-    private final ViewAllEventAttendees viewAllAttendeeEvents;
+    private final ViewAllAttendeeEvents viewAllAttendeeEvents;
+    private final ViewAllEventAttendees viewAllEventAttendees;
     private final SpeakerEventMenu speakerEventMenu;
-    private final SeeSpeakerEventInfo seeSpeakerEventInfo;
+    //private final SeeSpeakerEventInfo seeSpeakerEventInfo;
     private final SeeAllSpeakerEvents seeAllSpeakerEvents;
 
 
@@ -28,11 +29,12 @@ public class SpeakerController {
         input = new InputManager();
         output = new OutputManager();
         speakermenu = new SpeakerMenu();
-        viewAllAttendeeEvents = new ViewAllEventAttendees();
+        viewAllEventAttendees = new ViewAllEventAttendees();
+        viewAllAttendeeEvents = new ViewAllAttendeeEvents();
         viewEventInfo = new ViewEventInfo();
         viewAllSpeakerEvents = new ViewAllSpeakerEvents();
         speakerEventMenu = new SpeakerEventMenu();
-        seeSpeakerEventInfo = new SeeSpeakerEventInfo();
+        //seeSpeakerEventInfo = new SeeSpeakerEventInfo();
         seeAllSpeakerEvents = new SeeAllSpeakerEvents();
     }
     public void run(String userID, EventsController eventsController, ConversationController conversationController,
@@ -50,42 +52,43 @@ public class SpeakerController {
                         break;
                     case 1:
                         //connect to MyEvent Controller
-                        seeAllSpeakerEvents.getToSeeAllSpeakerEvents(viewAllSpeakerEvents, eventsController, userID);
-                        EventManager eventManager = eventsController.getEventManager();
-                        ArrayList<String> eventList = eventManager.getAllEventForTheSpeaker(userID);
-                        int chooseEvent = input.getInputInt("Choose an event to view:\n");
-                        if (0<= chooseEvent && chooseEvent<=eventList.size()){
-                            String eventId = eventList.get(chooseEvent);
+                        seeAllSpeakerEvents.getToSeeAllSpeakerEvents(viewAllSpeakerEvents, eventsController, userID,
+                                speakerEventMenu, viewEventInfo, conversationController, viewAllEventAttendees);
+                        //EventManager eventManager = eventsController.getEventManager();
+                        //ArrayList<String> eventList = eventManager.getAllEventForTheSpeaker(userID);
+                        //int chooseEvent = input.getInputInt("Choose an event to view:\n");
+                        //if (0<= chooseEvent && chooseEvent<=eventList.size()){
+                            //String eventId = eventList.get(chooseEvent);
                             //display event info
-                            seeSpeakerEventInfo.getToSeeEventInfo(speakerEventMenu, viewEventInfo, eventsController,
-                                    eventId);
+                            //seeSpeakerEventInfo.getToSeeEventInfo(speakerEventMenu, viewEventInfo, eventsController,
+                                    //eventId);
                             //options: make an announcement for the event, message individual attendee
-                            int eventAction = input.getInputInt("Please select one of the above actions:\n");
-                            if (0<=eventAction && eventAction <=2) {
-                                switch (eventAction) {
-                                    case 0:
-                                        quit = true;
-                                        output.printPrompt("You have signed out.\n");
-                                        break;
-                                    case 1:
-                                        ArrayList<String> receivers = new ArrayList<>(
-                                                eventsController.getAttendeesFromEvent(eventId));
-                                        String message = input.getInputString("Please enter the message of " +
-                                                "the announcement:\n");
-                                        conversationController.sendToMultipleUsers(message, receivers);
-                                    case 2:
+                            //int eventAction = input.getInputInt("Please select one of the above actions:\n");
+                            //if (0<=eventAction && eventAction <=2) {
+                              //  switch (eventAction) {
+                                //    case 0:
+                                  //      quit = true;
+                                    //    output.printPrompt("You have signed out.\n");
+                                      //  break;
+                                    //case 1:
+                                      //  ArrayList<String> receivers = new ArrayList<>(
+                                        //        eventsController.getAttendeesFromEvent(eventId));
+                                        //String message = input.getInputString("Please enter the message of " +
+                                          //      "the announcement:\n");
+                                        //conversationController.sendToMultipleUsers(message, receivers);
+                                    //case 2:
                                         //message individual attendee: display list of attendees of the event:
-                                        viewAllEventAttendees(eventId, viewAllAttendeeEvents, eventsController);
+                                        //viewAllEventAttendees(eventId, viewAllAttendeeEvents, eventsController);
                                         //choose an attendee to message
-                                        int chooseAttendee = input.getInputInt("Choose an attendee to message:\n");
-                                        ArrayList<String> attendeeList = eventManager.getAttendeesFromEvent(eventId);
-                                        if (0 <= chooseAttendee && chooseAttendee <= attendeeList.size()) {
-                                            String attendeeId = attendeeList.get(chooseAttendee);
-                                            conversationController.enterConversation(attendeeId);
-                                        }
-                                    }
-                                }
-                            }
+                                        //int chooseAttendee = input.getInputInt("Choose an attendee to message:\n");
+                                        //ArrayList<String> attendeeList = eventManager.getAttendeesFromEvent(eventId);
+                                        //if (0 <= chooseAttendee && chooseAttendee <= attendeeList.size()) {
+                                          //  String attendeeId = attendeeList.get(chooseAttendee);
+                                            //conversationController.enterConversation(attendeeId);
+                                        //}
+                                    //}
+                                //}
+                            //}
                         break;
                     case 2:
                         //view all my conversations
@@ -97,7 +100,7 @@ public class SpeakerController {
 
     }
 
-
+}
 
     //public static void viewAllSpeakerEvents(String userID, ViewAllSpeakerEvents viewAllSpeakerEvents,
       //                                      EventsController eventsController){
@@ -113,11 +116,11 @@ public class SpeakerController {
         //output.printPrompt(returnString);
     //}
 
-    public static void viewAllEventAttendees(String eventID, ViewAllEventAttendees viewAllEventAttendees,
-                                             EventsController eventsController){
-        output.printPrompt(viewAllEventAttendees.printAllEventAttendees(
-                eventsController.getAttendeesFromEvent(eventID)));
+    //public static void viewAllEventAttendees(String eventID, ViewAllEventAttendees viewAllEventAttendees,
+      //                                       EventsController eventsController){
+        //output.printPrompt(viewAllEventAttendees.printAllEventAttendees(
+          //      eventsController.getAttendeesFromEvent(eventID)));
 
-    }
+    //}
 
-}
+
