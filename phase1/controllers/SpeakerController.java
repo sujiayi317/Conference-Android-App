@@ -62,7 +62,7 @@ public class SpeakerController {
                         break;
                     case 2:
                         //view all my conversations
-                        // if no convo then return "you do not have any conversations yet."
+
                         // otherwise display the convo (use viewmsglist then viewmsgofaconvo and seeallmsg)
                 }
             }
