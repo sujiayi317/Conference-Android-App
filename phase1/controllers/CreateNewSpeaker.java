@@ -4,6 +4,9 @@ import use_cases.AttendeeManager;
 import use_cases.OrganizerManager;
 import use_cases.UserManager;
 
+/**
+ * This is the class for Creating a New speaker
+ */
 public class CreateNewSpeaker {
     private static OutputManager output;
 

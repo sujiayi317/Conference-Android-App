@@ -22,7 +22,7 @@ public class OrganizerController extends AttendeeController{
     private final CreateAccount create;
     private final OrganizerMenu organizerMenu;
     private final CreateANewEvent createANewEvent;
-    private final createANewRoom createANewRoom;
+    private final CreateANewRoom createANewRoom;
     private final CreateNewSpeaker createNewSpeaker;
     private final ViewAllAvailableRoom viewAllAvailableRoom;
     private final ViewFriendList viewFriendList;
@@ -37,7 +37,7 @@ public class OrganizerController extends AttendeeController{
         this.create = new CreateAccount();
         createNewSpeaker = new CreateNewSpeaker();
         createANewEvent = new CreateANewEvent();
-        createANewRoom = new createANewRoom();
+        createANewRoom = new CreateANewRoom();
         seeAllFriend = new SeeAllFriend();
         seeAllMessage = new SeeAllMessage();
         this.viewAllAvailableRoom = new ViewAllAvailableRoom();
