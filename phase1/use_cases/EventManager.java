@@ -43,11 +43,11 @@ public class EventManager implements Serializable {
     }
 
     public Event loadEvent(String title, String roomID, String speakerID, String startTime, String eventID,
-                           ArrayList<String> attendeeID) {
+                           ArrayList<String> attendeeID, RoomManager roomManager) {
         Event newEvent = new Event(title, roomID, speakerID, startTime, eventID);
         events.add(newEvent);
         for (String ID : attendeeID){
-            newEvent.addAttendee(ID, this.events);
+            addAttendeeToEvent(ID, eventID, roomManager);
         }
         return newEvent;
     }
@@ -83,7 +83,6 @@ public class EventManager implements Serializable {
         if (event != null) {
             Room room = roomManager.getRoomBasedOnItsID(event.getRoomID());
             if (room.getCurrentNum() < room.getCapacity()) {
-
                 if (event.addAttendee(userID, events)) {
                     room.increaseCurrentNum();
                     return true;
