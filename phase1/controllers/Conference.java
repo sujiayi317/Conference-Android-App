@@ -48,9 +48,7 @@ public class Conference {
 ////        this.viewAllEventAttendees = new ViewAllEventAttendees();
 //    }
 
-    public Conference(){
-
-    }
+    public Conference(){}
 
     public void run(){
         try {
@@ -111,21 +109,21 @@ public class Conference {
 //            conversationController.addConversation(conversationController.getUserIds(conversation), conversation);
 //        };//load
 
-
-        switch(userType) {
-            case "ATTENDEE":
-                new AttendeeController().run(userID, eventsController, attendeeManager,
-                        conversationController, userManager);
-                break;
-            case "SPEAKER":
-                new SpeakerController().run(userID, eventsController,
-                        conversationController, userManager);
-                break;
-            case "ORGANIZER":
-                new OrganizerController().run(eventsController, attendeeManager,
-                        organizerManager, userManager, conversationController, userID);
+        if (!newLogin.getEXITStatus()) {
+            switch (userType) {
+                case "ATTENDEE":
+                    new AttendeeController().run(userID, eventsController, attendeeManager,
+                            conversationController, userManager);
+                    break;
+                case "SPEAKER":
+                    new SpeakerController().run(userID, eventsController,
+                            conversationController, userManager);
+                    break;
+                case "ORGANIZER":
+                    new OrganizerController().run(eventsController, attendeeManager,
+                            organizerManager, userManager, conversationController, userID);
+            }
         }
-
         for(HashSet<String> key: conversationController.conversationsGetter().keySet()){
             saveConversation.save(conversationController.conversationsGetter().get(key));
         }//save
