@@ -6,6 +6,9 @@ import entities.Attendee;
 public class AttendeeMenu {
     private static OutputManager output;
 
+    /**
+     * The presenter for attendee's menu
+     */
     public AttendeeMenu(){
         output = new OutputManager();
     }

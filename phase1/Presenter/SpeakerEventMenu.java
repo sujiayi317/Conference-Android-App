@@ -9,6 +9,12 @@ public class SpeakerEventMenu {
 
     public SpeakerEventMenu(){}
 
+    /**
+     * The presenter for speaker's menu.
+     * @param AllEvents
+     * @param viewEventInfo
+     * @return
+     */
     public StringBuilder printEventMenu(ArrayList<String> AllEvents, ViewEventInfo viewEventInfo) {
         if (AllEvents.size() == 0){
             return new StringBuilder("You are not assigned any events yet\n");

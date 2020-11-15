@@ -5,6 +5,9 @@ import controllers.OutputManager;
 public class OrganizerMenu {
     private static OutputManager output;
 
+    /**
+     * The presenter for organizer's menu.
+     */
     public OrganizerMenu(){
         output = new OutputManager();
     }
