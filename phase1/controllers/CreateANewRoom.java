@@ -2,14 +2,18 @@ package controllers;
 
 import use_cases.RoomManager;
 import java.lang.String.*;
-public class createANewRoom {
+
+/**
+ * This is the class for Creating a New room
+ */
+public class CreateANewRoom {
     private static OutputManager output;
     private static InputManager input;
 
     /**
      * constructor of createANewRoom class. This class is made for creating rooms.
      */
-    public createANewRoom(){
+    public CreateANewRoom(){
         output = new OutputManager();
         input = new InputManager();
     }

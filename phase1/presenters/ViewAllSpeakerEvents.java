@@ -4,10 +4,19 @@ import controllers.EventsController;
 
 import java.util.ArrayList;
 
+/**
+ * The presenter for viewing all the speaker's events
+ */
 public class ViewAllSpeakerEvents {
 
     public ViewAllSpeakerEvents(){}
 
+    /**
+     * Printing to the screen all the speaker's events
+     * @param AllSpeakerEvents AllSpeakerEvents
+     * @param eventsController eventsController
+     * @return
+     */
     public StringBuilder printAllSpeakerEvents(ArrayList<String> AllSpeakerEvents, EventsController eventsController) {
         if (AllSpeakerEvents.size() == 0) {
             return new StringBuilder("You have not been assigned any events yet.\n");

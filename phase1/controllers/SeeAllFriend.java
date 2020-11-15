@@ -7,6 +7,9 @@ import use_cases.UserManager;
 
 import java.util.ArrayList;
 
+/**
+ * This is the class for viewing all friends
+ */
 public class SeeAllFriend {
     private static OutputManager output;
     private static InputManager input;
@@ -16,6 +19,15 @@ public class SeeAllFriend {
         input = new InputManager();
     }
 
+    /**
+     *
+     *
+     * @param userID userID
+     * @param viewFriendList viewFriendList
+     * @param attendeeManager attendeeManager
+     * @param userManager userManager
+     * @param conversationController conversationController
+     */
     public void getToSeeAllFriend(String userID, ViewFriendList viewFriendList, AttendeeManager attendeeManager,
                                   UserManager userManager, ConversationController conversationController){
         ArrayList<String> friendList = new ArrayList<>();
@@ -43,6 +55,12 @@ public class SeeAllFriend {
 
     }
 
+    /**
+     *
+     *
+     * @param friends friends
+     * @param viewFriendList viewFriendList
+     */
     public static void viewAllFriends(ArrayList<String> friends,ViewFriendList viewFriendList){
         output.printPrompt(viewFriendList.getFriendList(friends));
     }
