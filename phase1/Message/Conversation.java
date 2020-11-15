@@ -13,15 +13,6 @@ public class Conversation implements Serializable {
         userIds.add(userId2);
     }
 
-//    /**
-//     * Get the length of the list of messages, i.e., number of messages sent by the two users.
-//     *
-//     * @return the length of messages.
-//     */
-//    public int getMessagesLength(){
-//        return messages.size();
-//    }
-
     /**
      * Add the sender's message to the list of messages.
      *
@@ -34,10 +25,6 @@ public class Conversation implements Serializable {
         messages.add(message);
     }
 
-//    public void loadAllMessage(ArrayList<String[]> messages){
-//        this.messages = messages;
-//    }
-
     /**
      * Get the messages of this conversation.
      *
@@ -47,6 +34,12 @@ public class Conversation implements Serializable {
         return messages;
     }
 
+
+    /**   没写完
+     * Get the last messages of this conversation.
+     *
+     * @return the whole messages list of this conversation.
+     */
     public String[] getLastMessage(){
         if (messages.size() > 0) {
             int lastIndex = messages.size() - 1;

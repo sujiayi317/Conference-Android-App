@@ -28,7 +28,6 @@ public class ConversationManager implements Serializable{
         conversations.put(newConversationId, newConversation);
     };
 
-
     /**
      * Check if the Conversation between two users has been created.
      *
@@ -39,7 +38,6 @@ public class ConversationManager implements Serializable{
         return conversations.containsKey(talkersList);
     }
 
-
     /**
      * Set the current conversation to be the conversation between the two users of talkersList.
      *
@@ -48,8 +46,6 @@ public class ConversationManager implements Serializable{
     public void currentConversationSetter(HashSet<String> talkersList){
         this.currentConversation = conversations.get(talkersList);
     }
-
-
 
     /**
      * Send a message to another user
@@ -62,11 +58,14 @@ public class ConversationManager implements Serializable{
 //        conversations.replace(getUserIds(currentConversation), currentConversation);
     }
 
-
+    /**
+     * Get all the messages from the current conversation.
+     *
+     * @return the whole messages list of the currentConversation.
+     */
     public ArrayList<String[]> getMessagesOfCurrentConversation(){
         return currentConversation.getMessages();
     }
-
 
     /**
      * Get the list of conversations of a certain user
@@ -93,8 +92,9 @@ public class ConversationManager implements Serializable{
 //    }
 
     /**
-     * the getter of all conversations and their associated users
-     * @return Hash map of the users (key) and the conversation between them.
+     * The getter of all conversations and their associated users
+     *
+     * @return Hash map of the users (key) and the conversation between them(content).
      */
     public HashMap<HashSet<String>, Conversation> conversationsGetter(){
         return conversations;
@@ -102,19 +102,19 @@ public class ConversationManager implements Serializable{
 
 
     /**
-     * given a conversation, to find which users this conversation belongs to.
+     * Given a conversation, to find which users this conversation belongs to.
+     *
      * @param conversation a given conversation.
-     * @return the hashset of strings which is 2 userids.
+     * @return the hashset of strings which are 2 user ids.
      */
     public HashSet<String> getUserIds(Conversation conversation){
         return conversation.getUserIds();
     }
 
-    //用来load数据库里的conversation
-
     /**
-     * Load conversation from the file.
-     * @param key hashset with two elements, each of the element is an userid.
+     * Put a conversation into our conversations Hushmap.
+     *
+     * @param key hashset with two elements, each of the element are an userid.
      * @param conversation the entity with store all messages between two users.
      */
     public void addConversation(HashSet<String> key,Conversation conversation){
