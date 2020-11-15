@@ -99,4 +99,13 @@ public class SpeakerManager extends UserManager implements Serializable {
         }
         return "NULL";
     }
+
+    public String getSpeakerNameFromID(String speakerId){
+        for (Speaker speaker : speakers){
+            if (speaker.getUserID().equals(speakerId)){
+                return speaker.getUserName();
+            }
+        }
+        return "NULL";
+    }
 }
