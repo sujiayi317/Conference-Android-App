@@ -112,7 +112,7 @@ public class ConversationManager implements Serializable{
     }
 
     /**
-     * Put a conversation into our conversations Hushmap.
+     * Put a conversation into our conversations Hashmap.
      *
      * @param key hashset with two elements, each of the element are an userid.
      * @param conversation the entity with store all messages between two users.

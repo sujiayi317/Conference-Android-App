@@ -32,10 +32,8 @@ public class ConversationController {
         this.viewMessagesOfAConversation = new ViewMessagesOfAConversation();
     }
 
-
-
     /**
-     * Get into the conversation between current user and the other user.
+     * Get into the conversation between current user and the other user, and send message to the other user.
      *
      * @param secondUserId the User Id of user we want to send message to
      */
@@ -111,6 +109,7 @@ public class ConversationController {
 
     /**
      * Get all conversations of a given user.
+     *
      * @param userId the user we want to find.
      * @return ArrayList of string arrays which contains the information need to find a conversation. [user1, user2, who
      * send the message, the last sentence of the conversation]
@@ -130,15 +129,31 @@ public class ConversationController {
         output.printPrompt(viewMessagesOfAConversation.printMessages(messages));
     }
 
-
+    /**
+     * Get all conversations.
+     *
+     * @return Hash map of the users (key) and the conversation between them(content).
+     */
     public HashMap<HashSet<String>, Conversation> conversationsGetter(){
         return conversationManager.conversationsGetter();
     }
 
+    /**
+     * Given a conversation, to find which users this conversation belongs to.
+     *
+     * @param conversation a given conversation.
+     * @return the hashset of strings which are 2 user ids.
+     */
     public HashSet<String> getUserIds(Conversation conversation){
         return conversationManager.getUserIds(conversation);
     }
 
+    /**
+     * Put a conversation into our conversations Hashmap in conversationManager.
+     *
+     * @param key hashset with two elements, each of the element are an userid.
+     * @param conversation the entity with store all messages between two users.
+     */
     public void addConversation(HashSet<String> key,Conversation conversation){
         conversationManager.addConversation(key, conversation);
     }
