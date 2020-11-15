@@ -46,7 +46,7 @@ public class SeeAllSpeakerEvents {
                         //message individual attendee: display list of attendees of the event:
                         viewAllEventAttendees(eventID, viewAllEventAttendees, eventsController);
                         //choose an attendee to message
-                        int chooseAttendee = input.getInputInt("Choose an attendee to message OR type 666 to" +
+                        int chooseAttendee = input.getInputInt("Choose an attendee to message OR press Enter to" +
                                 " go back to events menu:\n");
                         if (chooseAttendee == 666){
                             check += 1;
