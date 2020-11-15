@@ -63,13 +63,12 @@ public class Conference {
      * The main program flow-of-control.
      */
     private void conferenceSystem() {
-        start();
         while (!new Login().getEXITStatus()) {
+            start();
             if (!(new Login().getEXITStatus())){
             iteration();
             }
         }
-
         finish();
     }
 
@@ -86,6 +85,8 @@ public class Conference {
         this.eventsController = newFileReadWriter.GetEventsController();
         this.saveConversation = new SaveConversation();//待定
         newFileReadWriter.connectWriters();
+        Login newLogin = new Login();
+        newLogin.run(attendeeManager, organizerManager, eventsController.getSpeakerManager(), userManager);
 
         //connect to Login Controller - log User in
         //new Login().run(attendeeManager, organizerManager, eventsController.getSpeakerManager(), userManager);
@@ -96,10 +97,8 @@ public class Conference {
      */
     private void iteration() {
         //connect to Login Controller - log User in
-        Login newLogin = new Login();
-        newLogin.run(attendeeManager, organizerManager, eventsController.getSpeakerManager(), userManager);
-        String userType = newLogin.getUserType();
-        String userID = newLogin.getUserID();
+        String userType = new Login().getUserType();
+        String userID = new Login().getUserID();
 
         //load conversations of this user
         ConversationController conversationController = new ConversationController(userID);
