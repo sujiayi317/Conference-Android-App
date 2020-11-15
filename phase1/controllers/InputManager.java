@@ -33,6 +33,9 @@ public class InputManager {
     public int getInputInt(String msg) {
         out.printPrompt(msg);
         String choice = input.nextLine(); //nextInt does not process the ENTER key
+        if (choice.equals("")){
+            return 666;
+        }
         for (int i = 0; i < choice.length(); i++){
             if (!("1234567890".contains(String.valueOf(choice.charAt(i))))){
                 System.out.println("OK");

@@ -21,10 +21,11 @@ public class Console {
         reader.UserReader();
 //        ReadConversation readConversation = new ReadConversation();
 //        readConversation.readConversation();
-
+        reader.RoomReader(reader.GetEventsController());
         Conference conference = new Conference(reader.GetEventsController(), reader.GetAttendeeManager(),
                 reader.GetOrganizerManager(), reader.GetUserManager());
         conference.run();
         reader.UserWriter(reader.GetUserManager());
+        reader.RoomWriter(reader.GetEventsController());
     }
 }

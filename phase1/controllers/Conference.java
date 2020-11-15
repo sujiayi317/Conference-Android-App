@@ -117,7 +117,7 @@ public class Conference {
     }
 
     private void finish() {
-        System.out.print("Program exited.");
+        System.out.print("Progress saved...");
     }
 
 }

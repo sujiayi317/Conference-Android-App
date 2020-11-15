@@ -44,14 +44,14 @@ public class CreateANewEvent {
                         String title = input.getInputString("Please enter your event's title\n");
                         String roomNUm = "-1";
                         while (0> Integer.parseInt(roomNUm) || Integer.parseInt(roomNUm)>= eventsController.getAvailableRoom(timeInput).size()){
-                            roomNUm = input.getInputString("Please enter the roomNum of the room you want to use\n");
+                            roomNUm = Integer.toString(input.getInputInt("Please enter the roomNum of the room you want to use\n"));
                             if (0> Integer.parseInt(roomNUm) || Integer.parseInt(roomNUm)>= eventsController.getAvailableRoom(timeInput).size()){
                                 output.printPrompt("The roomNum you chose is out of the bound please enter the correct number\n");
                             }
                         }
                         String speakerNum = "-1";
                         while (0> Integer.parseInt(speakerNum) || Integer.parseInt(speakerNum)>= eventsController.getAllAvailableSpeaker(timeInput).size()){
-                            speakerNum = input.getInputString("Please set the SpeakerNum of your speaker\n");
+                            speakerNum = Integer.toString(input.getInputInt("Please set the SpeakerNum of your speaker\n"));
                             if (0> Integer.parseInt(speakerNum) || Integer.parseInt(speakerNum)>= eventsController.getAllAvailableSpeaker(timeInput).size()){
                                 output.printPrompt("The speakerNum you chose is out of the bound please enter the correct number\n");
                             }
