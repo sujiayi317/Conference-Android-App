@@ -8,6 +8,11 @@ public class Conversation implements Serializable {
     private HashSet<String> userIds = new HashSet<String>(); //Store uerIds of the two users
     private ArrayList<String[]> messages = new ArrayList<String[]>();
 
+    /**
+     * The constructor of the conversation class
+     * @param userId1 first user id
+     * @param userId2 second user id.
+     */
     public Conversation(String userId1, String userId2){
         userIds.add(userId1);
         userIds.add(userId2);
@@ -18,7 +23,6 @@ public class Conversation implements Serializable {
      *
      * @param userId the user id of the sender of the message.
      * @param text the String of text the sender sends.
-     * @return true iff the message is successfully added to the list of messages.
      */
     public void addMessage(String userId, String text){
         String[] message = {userId, text};
