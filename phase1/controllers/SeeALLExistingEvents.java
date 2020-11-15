@@ -18,12 +18,12 @@ public class SeeALLExistingEvents {
     public void getToSeeAllExistingEvents(EventsController eventsController, AttendeeManager attendeeManager,
                                           ViewAllExistingEvents viewAllExistingEvents, String userID, ViewEventInfo viewEventInfo){
         if (eventsController.getAllExistingEvents().size() == 0){
-            output.printPrompt("There is no event yet!\nPlease go back to main menu to create one if you're the Organizer");
+            output.printPrompt("There is no event yet!\nPlease go back to main menu to create one if you're an Organizer");
         }
         int check = 0;
         while (check != 1 && eventsController.getAllExistingEvents().size() != 0) {
             viewAllEvents(viewAllExistingEvents, eventsController);
-            String eventNum = Integer.toString(input.getInputInt("Please enter an number to see the details, " +
+            String eventNum = Integer.toString(input.getInputInt("Please enter a number to see the details, " +
                     "(for example, enter 0 to check details of first event if there is any event)\nOr, press enter to" +
                     " go back to main menu\n"));
             if ((!eventNum.equals("666")) && eventsController.getAllExistingEvents().size() > Integer.parseInt(eventNum)
@@ -32,7 +32,7 @@ public class SeeALLExistingEvents {
                 if (!eventTitle.equals("")) {
                     String eventID = eventsController.getEventManager().changeEventTitleIntoEventID(eventTitle);
                     viewOneEventInfo(eventID, viewEventInfo, eventsController);
-                    String decision = input.getInputString("Press: Yes to sign up OR No to back menu\n");
+                    String decision = input.getInputString("Press: Yes to sign up OR No to back to menu\n");
                     if (decision.equals("Yes")) {
                         if (attendeeManager.signUp(eventsController.getEventManager(), userID, eventID,
                                 eventsController.getRoomManager())) {
