@@ -1,7 +1,6 @@
 package entities;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.UUID;
 
 /**
@@ -15,14 +14,21 @@ public class Room implements Serializable{
     private final String roomNum;
 
     /**
-     * Constructor  
-     * @param roomNum unique identification of the room
+     * Constructor No.1 for Room
+     *
+     * @param roomNum unique identification roomNum of the room
      */
     public Room(String roomNum) {
         this.roomNum = roomNum;
         this.roomID = UUID.randomUUID().toString().split("-")[0];
     }
 
+    /**
+     * Constructor No.2 for Room
+     *
+     * @param roomNum unique identification roomNum of the room
+     * @param roomID unique identification roomID of the room
+     */
     public Room(String roomNum, String roomID) {
         this.roomNum = roomNum;
         this.roomID = roomID;
@@ -65,7 +71,7 @@ public class Room implements Serializable{
     }
 
     /**
-     * Increase the number of people in this room
+     * Increase the number of people by 1 in this room
      */
     public void increaseCurrentNum(){
         if (this.currentNum < this.capacity){
@@ -73,16 +79,20 @@ public class Room implements Serializable{
     }
 
     /**
-     * Decrease the number of people in this room
+     * Decrease the number of people by 1 in this room
      */
     public void decreaseCurrentNum(){
         if (this.currentNum > 0){
             this.currentNum -=1;}
     }
 
+    /**
+     * Returns a formatted string of this room with roomNum (and roomID)
+     *
+     * @return a formatted string
+     */
     @Override
     public String toString() {
-        return "entities.Room Number " + roomID;
-
+        return "entities.Room Number " + roomNum + " ( room ID: " + roomID + ")";
     }
 }
