@@ -87,6 +87,40 @@ class FileReadWriter {
 
     }
 
+    public void RoomReader(){
+        ArrayList<String> lines = new ArrayList<>();
+        try {
+            File UserFile = new File("./phase1/rooms.txt");
+            Scanner myReader = new Scanner(UserFile);
+            while (myReader.hasNextLine()) {
+                while (myReader.hasNextLine()) {
+                    lines.add(myReader.nextLine());
+                }
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("room File Not Found");
+        }
+        for (String line : lines) {
+            ArrayList<String> wordList = new ArrayList<String>(Arrays.asList(line.split(" ")));
+            eventsController.getRoomManager().loadRoom(wordList.get(0), wordList.get(1));
+        }
+    }
+
+    public void RoomWriter(){
+        ArrayList<String> NumList = eventsController.getRoomManager().getAllRoomNum();
+        ArrayList<String> IDList = eventsController.getRoomManager().getAllRoomID();
+        try {
+            PrintWriter pw = new PrintWriter("./phase1/rooms.txt");
+            for (int index = 0; index < NumList.size(); index++){
+                String line = NumList.get(index) + " " + IDList.get(index);
+                line += "\n";
+                pw.write(line);
+            }
+            pw.close();
+        } catch (FileNotFoundException e){
+            System.out.println("room File Not Found.");
+        }
+    }
     public void EventReader(){
         ArrayList<String> lines = new ArrayList<>();
         try {
@@ -109,8 +143,10 @@ class FileReadWriter {
                     Attendees.add(wordList.get(index));
                 }
             }
+            eventsController.getRoomManager().addEventToRoom(wordList.get(4), wordList.get(1));
             eventsController.getEventManager().loadEvent(wordList.get(0).replace("_", " "),
-                    wordList.get(1), wordList.get(2), wordList.get(3), wordList.get(4), Attendees);
+                    wordList.get(1), wordList.get(2), wordList.get(3), wordList.get(4), Attendees,
+                    GetEventsController().getRoomManager());
         }
     }
 
@@ -125,43 +161,6 @@ class FileReadWriter {
                 for (String attendee : event.getAttendees()) {
                     line += " " + attendee;
                 }
-                line += "\n";
-                pw.write(line);
-            }
-            pw.close();
-        } catch (FileNotFoundException e){
-            System.out.println("room File Not Found.");
-        }
-    }
-
-    public void RoomReader(){
-        ArrayList<String> lines = new ArrayList<>();
-        try {
-            File UserFile = new File("./phase1/rooms.txt");
-            Scanner myReader = new Scanner(UserFile);
-            while (myReader.hasNextLine()) {
-                while (myReader.hasNextLine()) {
-                    lines.add(myReader.nextLine());
-                }
-            }
-        } catch (FileNotFoundException e) {
-            System.out.println("room File Not Found");
-        }
-
-        ArrayList<ArrayList<String>> LineList = new ArrayList<>();
-        for (String line : lines) {
-            ArrayList<String> wordList = new ArrayList<String>(Arrays.asList(line.split(" ")));
-            eventsController.getRoomManager().loadRoom(wordList.get(0), wordList.get(1));
-        }
-    }
-
-    public void RoomWriter(){
-        ArrayList<String> NumList = eventsController.getRoomManager().getAllRoomNum();
-        ArrayList<String> IDList = eventsController.getRoomManager().getAllRoomID();
-        try {
-            PrintWriter pw = new PrintWriter("./phase1/rooms.txt");
-            for (int index = 0; index < NumList.size(); index++){
-                String line = NumList.get(index) + " " + IDList.get(index);
                 line += "\n";
                 pw.write(line);
             }
