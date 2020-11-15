@@ -27,6 +27,16 @@ public class Event implements Serializable {
         this.startTime = startTime;
     }
 
+    public Event(String title, String roomID, String speakerID, String startTime, String eventID) {
+        this.title = title;
+        this.eventID = eventID;
+        this.roomID = roomID;
+        this.userIDs = new ArrayList<>();
+        this.speakers = new ArrayList<>(1);
+        this.speakers.add(speakerID);
+        this.startTime = startTime;
+    }
+
     public Event(String title, String roomID, String speakerID, String startTime, int duration) {
         this.title = title;
         this.eventID = title;
