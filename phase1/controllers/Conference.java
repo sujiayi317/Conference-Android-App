@@ -112,7 +112,6 @@ public class Conference {
 
         for(HashSet<String> key: conversationController.conversationsGetter().keySet()){
             saveConversation.save(conversationController.conversationsGetter().get(key));
-            System.out.println(key);
         }//save
     }
 
