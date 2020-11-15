@@ -9,6 +9,11 @@ public class SaveConversation {
 
     public static final String CONVERSATION_PATH = "conversation.ser";
 
+    /**
+     * Save an entity to our ser file.
+     *
+     * @param conversation the conversation entity we want to save
+     */
     public void save(Conversation conversation){
         File file;
         ReadConversation readData = new ReadConversation();

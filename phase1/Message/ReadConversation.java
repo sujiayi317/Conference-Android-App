@@ -33,9 +33,9 @@ public class ReadConversation {
     }
 
     /**
-     * Read our ser file and get the conversation entities.
+     * Read our ser file and return the existing conversation list.
      *
-     * @return the list of conversations from our ser file.
+     * @return the existing list of conversations from our ser file.
      */
     public ArrayList<Conversation> readConversation(){
         readFile();
