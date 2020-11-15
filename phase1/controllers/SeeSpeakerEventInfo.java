@@ -10,8 +10,7 @@ public class SeeSpeakerEventInfo {
     public SeeSpeakerEventInfo() {output = new OutputManager();}
     public void getToSeeEventInfo(SpeakerEventMenu speakerEventMenu, ViewEventInfo viewEventInfo,
                                   EventsController eventsController, String eventID){
-        output.printPrompt(speakerEventMenu.printEventMenu(eventsController.getAllEventsForTheSpeaker(eventID),
-                viewEventInfo));
+        output.printPrompt(speakerEventMenu.printEventMenu(eventID, viewEventInfo, eventsController));
     }
 
 }

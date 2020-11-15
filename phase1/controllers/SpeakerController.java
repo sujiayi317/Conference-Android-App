@@ -20,6 +20,7 @@ public class SpeakerController {
     private final ViewAllEventAttendees viewAllAttendeeEvents;
     private final SpeakerEventMenu speakerEventMenu;
     private final SeeSpeakerEventInfo seeSpeakerEventInfo;
+    private final SeeAllSpeakerEvents seeAllSpeakerEvents;
 
 
 
@@ -32,6 +33,7 @@ public class SpeakerController {
         viewAllSpeakerEvents = new ViewAllSpeakerEvents();
         speakerEventMenu = new SpeakerEventMenu();
         seeSpeakerEventInfo = new SeeSpeakerEventInfo();
+        seeAllSpeakerEvents = new SeeAllSpeakerEvents();
     }
     public void run(String userID, EventsController eventsController, ConversationController conversationController,
                     UserManager userManager) {
@@ -39,7 +41,7 @@ public class SpeakerController {
         boolean quit = false;
         while (!quit ) {
             speakermenu.printSpeakerMenu(userManager.getUserName(userID));
-            int choice = input.getInputInt("Please choose from the following options:");
+            int choice = input.getInputInt("Please choose from the above options:\n");
             if (0<=choice && choice<=1) {
                 switch (choice) {
                     case 0:
@@ -48,10 +50,10 @@ public class SpeakerController {
                         break;
                     case 1:
                         //connect to MyEvent Controller
-                        viewAllSpeakerEvents(userID, viewAllSpeakerEvents, eventsController);
+                        seeAllSpeakerEvents.getToSeeAllSpeakerEvents(viewAllSpeakerEvents, eventsController, userID);
                         EventManager eventManager = eventsController.getEventManager();
                         ArrayList<String> eventList = eventManager.getAllEventForTheSpeaker(userID);
-                        int chooseEvent = input.getInputInt("Choose an event to view\n");
+                        int chooseEvent = input.getInputInt("Choose an event to view:\n");
                         if (0<= chooseEvent && chooseEvent<=eventList.size()){
                             String eventId = eventList.get(chooseEvent);
                             //display event info
@@ -85,6 +87,10 @@ public class SpeakerController {
                                 }
                             }
                         break;
+                    case 2:
+                        //view all my conversations
+                        // if no convo then return "you do not have any conversations yet."
+                        // otherwise display the convo (use viewmsglist then viewmsgofaconvo and seeallmsg)
                 }
             }
         }
@@ -93,11 +99,11 @@ public class SpeakerController {
 
 
 
-    public static void viewAllSpeakerEvents(String userID, ViewAllSpeakerEvents viewAllSpeakerEvents,
-                                            EventsController eventsController){
-        output.printPrompt(viewAllSpeakerEvents.printAllSpeakerEvents(
-                eventsController.getAllEventsForTheSpeaker(userID)));
-    }
+    //public static void viewAllSpeakerEvents(String userID, ViewAllSpeakerEvents viewAllSpeakerEvents,
+      //                                      EventsController eventsController){
+        //output.printPrompt(viewAllSpeakerEvents.printAllSpeakerEvents(
+          //      eventsController.getAllEventsForTheSpeaker(userID)));
+    //}
 
     //public static void viewSelectedEventInfo(String eventID, ViewEventInfo viewEventInfo,
                                              //EventsController eventsController){
