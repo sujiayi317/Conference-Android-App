@@ -11,6 +11,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.io.File;  // Import the File class
 import java.io.FileNotFoundException;  // Import this class to handle errors
+import java.util.Arrays;
 import java.util.Scanner;
 
 class FileReadWriter {
@@ -66,10 +67,6 @@ class FileReadWriter {
         }
     }
 
-    public void ConversationReader(){
-
-    }
-
     public void UserWriter(UserManager userManager){
         try {
             PrintWriter pw = new PrintWriter("./phase1/Users.txt");
@@ -89,6 +86,47 @@ class FileReadWriter {
             System.out.println("User File Not Found.");
         }
 
+    }
+
+    public void eventReader(){
+
+    }
+
+    public void RoomReader(EventsController eventsController){
+        ArrayList<String> lines = new ArrayList<>();
+        try {
+            File UserFile = new File("./phase1/rooms.txt");
+            Scanner myReader = new Scanner(UserFile);
+            while (myReader.hasNextLine()) {
+                while (myReader.hasNextLine()) {
+                    lines.add(myReader.nextLine());
+                }
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("room File Not Found");
+        }
+
+        ArrayList<ArrayList<String>> LineList = new ArrayList<>();
+        for (String line : lines) {
+            ArrayList<String> wordList = new ArrayList<String>(Arrays.asList(line.split(" ")));
+            eventsController.getRoomManager().loadRoom(wordList.get(0), wordList.get(1));
+        }
+    }
+
+    public void RoomWriter(EventsController eventsController){
+        ArrayList<String> NumList = eventsController.getRoomManager().getAllRoomNum();
+        ArrayList<String> IDList = eventsController.getRoomManager().getAllRoomID();
+        try {
+            PrintWriter pw = new PrintWriter("./phase1/rooms.txt");
+            for (int index = 0; index < NumList.size(); index++){
+                String line = NumList.get(index) + " " + IDList.get(index);
+                line += "\n";
+                pw.write(line);
+            }
+            pw.close();
+        } catch (FileNotFoundException e){
+            System.out.println("room File Not Found.");
+        }
     }
 
     public EventsController GetEventsController(){

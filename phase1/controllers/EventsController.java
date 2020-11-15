@@ -46,11 +46,11 @@ public class EventsController{
         return this.eventManager.removeAttendeeFromEvent(userID,eventID, this.roomManager);
     }
 
-    public ArrayList<String> getAvailableRoom(int time){
+    public ArrayList<String> getAvailableRoom(String time){
         return this.roomManager.getAvailableRoom(time, this.eventManager);
     }
 
-    public boolean createEvent(String title, String roomID, String speakerID, int startTime){
+    public boolean createEvent(String title, String roomID, String speakerID, String startTime){
 
         Event newEvent = this.eventManager.createEvent(title, roomID, speakerID, startTime);
         if (newEvent == null){
@@ -65,14 +65,14 @@ public class EventsController{
         Event event = this.eventManager.getEventFromID(eventID);
         Room room = this.roomManager.getRoomBasedOnItsID(event.getRoomID());
         info.add(event.getTitle());
-        info.add(Integer.toString(event.getStartTime()));
+        info.add(event.getStartTime());
         info.add(event.getSpeakers());
         info.add(Integer.toString(room.getCurrentNum()));
         info.add(Integer.toString(room.getCapacity()));
         return info;
     }
 
-    public ArrayList<String> getAllAvailableSpeaker(int time){
+    public ArrayList<String> getAllAvailableSpeaker(String time){
         return this.speakerManager.getAllAvailableSpeaker(time, eventManager);
     }
 

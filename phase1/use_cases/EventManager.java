@@ -29,7 +29,7 @@ public class EventManager implements Serializable {
     /**
      * Creates a new event
      */
-    public Event createEvent(String title, String roomID, String speakerID, int startTime) {
+    public Event createEvent(String title, String roomID, String speakerID, String startTime) {
         for (Event event : this.events) {
             if ((event.getSpeakers().contains(speakerID) || roomID.equals(event.getRoomID())) && event.getStartTime() == startTime){
                 return null;}
@@ -165,6 +165,13 @@ public class EventManager implements Serializable {
             }
         }
         return "NULL";
+    }
+
+    public String generateFormattedStartTime(String startTime){
+        int HourTime = Integer.parseInt(startTime.substring(8, 10));
+        String Ending = String.format("%s", (HourTime >= 12) ? "PM" : "AM");
+        return String.format("%s/%s/%s/%s%s", startTime.substring(0, 4), startTime.substring(4, 6),
+                startTime.substring(6, 8), startTime.substring(8, 10), Ending);
     }
 
 }

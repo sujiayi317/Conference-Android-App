@@ -46,6 +46,27 @@ public class RoomManager implements Serializable {
         return true;
     }
 
+    public void loadRoom(String roomNum, String roomID) {
+        Room room = new Room(roomNum, roomID);
+        this.rooms.add(room);
+    }
+
+    public ArrayList<String> getAllRoomNum(){
+        ArrayList<String> roomNum = new ArrayList<>();
+        for (Room room : this.rooms){
+            roomNum.add(room.getRoomNum());
+        }
+        return roomNum;
+    }
+
+    public ArrayList<String> getAllRoomID(){
+        ArrayList<String> roomID = new ArrayList<>();
+        for (Room room : this.rooms){
+            roomID.add(room.getRoomID());
+        }
+        return roomID;
+    }
+
     public boolean isFull(String roomID){
         Room room = getRoomBasedOnItsID(roomID);
         return room.getCurrentNum() == room.getCapacity();
@@ -108,7 +129,7 @@ public class RoomManager implements Serializable {
         return null;
     }
 
-    public ArrayList<String> getAvailableRoom(int time, EventManager eventManager){
+    public ArrayList<String> getAvailableRoom(String time, EventManager eventManager){
         ArrayList<String> roomList = new ArrayList<>();
         for (Room room : rooms){
             roomList.add(changeIdTONum(room.getRoomID()));
@@ -116,7 +137,7 @@ public class RoomManager implements Serializable {
         for (String roomID : eventsMap.keySet()){
             for (String eventID :eventsMap.get(roomID)){
                 Event event = eventManager.getEventFromID(eventID);
-                if (event.getStartTime() == time){
+                if (event.getStartTime().equals(time)){
                     roomList.remove(changeIdTONum(roomID));
                 }
             }
