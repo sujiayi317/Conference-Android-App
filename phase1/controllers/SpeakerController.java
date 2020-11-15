@@ -37,6 +37,15 @@ public class SpeakerController {
         //seeSpeakerEventInfo = new SeeSpeakerEventInfo();
         seeAllSpeakerEvents = new SeeAllSpeakerEvents();
     }
+
+    /**
+     * This method will run when a speaker login. It will display the function menu for the user. There are 3 options
+     * for speakers in total: sign out, view my events, and view my conversations.
+     * @param userID the user's unique id, which is created when the user creates an account.
+     * @param eventsController The controller for events.
+     * @param conversationController The controller for conservation.
+     * @param userManager The use case class for user.
+     */
     public void run(String userID, EventsController eventsController, ConversationController conversationController,
                     UserManager userManager) {
         //connect to Speaker Presenter - Menu options
@@ -66,25 +75,5 @@ public class SpeakerController {
 
 }
 
-    //public static void viewAllSpeakerEvents(String userID, ViewAllSpeakerEvents viewAllSpeakerEvents,
-      //                                      EventsController eventsController){
-        //output.printPrompt(viewAllSpeakerEvents.printAllSpeakerEvents(
-          //      eventsController.getAllEventsForTheSpeaker(userID)));
-    //}
-
-    //public static void viewSelectedEventInfo(String eventID, ViewEventInfo viewEventInfo,
-                                             //EventsController eventsController){
-        //ArrayList<String> eventInfoList = eventsController.getEventInfo(eventID);
-        //StringBuilder returnString = viewEventInfo.getEventInfo(eventInfoList);
-        //returnString.append("\n 1) make an announcement for the event\n 2) message individual attendee\n 0) Quit\n");
-        //output.printPrompt(returnString);
-    //}
-
-    //public static void viewAllEventAttendees(String eventID, ViewAllEventAttendees viewAllEventAttendees,
-      //                                       EventsController eventsController){
-        //output.printPrompt(viewAllEventAttendees.printAllEventAttendees(
-          //      eventsController.getAttendeesFromEvent(eventID)));
-
-    //}
 
 
