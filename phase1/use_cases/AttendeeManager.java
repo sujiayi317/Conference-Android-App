@@ -39,6 +39,13 @@ public class AttendeeManager extends UserManager implements Serializable {
         UserManager.users.add(attendee);
     }
 
+    /**
+     * Creates an attendee and adds it to the map and list. But this is for loading the file.
+     * @param userName The user name of the attendee
+     * @param email The email of the attendee
+     * @param password The password of the attendee
+     * @param ID The unique id of the attendee
+     */
     public void loadAttendee(String userName, String email, String password, String ID) {
         Attendee attendee = new Attendee(userName, email, password, ID);
         //attendeeMap.put(attendee.getUserName(), attendee);
