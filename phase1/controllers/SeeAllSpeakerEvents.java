@@ -48,9 +48,6 @@ public class SeeAllSpeakerEvents {
                         //choose an attendee to message
                         int chooseAttendee = input.getInputInt("Choose an attendee to message OR press Enter to" +
                                 " go back to events menu:\n");
-                        if (chooseAttendee == 666){
-                            check += 1;
-                        }
                         EventManager eventManager = eventsController.getEventManager();
                         ArrayList<String> attendeeList = eventManager.getAttendeesFromEvent(eventID);
                         if (0 <= chooseAttendee && chooseAttendee <= attendeeList.size()) {
