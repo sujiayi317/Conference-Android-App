@@ -2,7 +2,6 @@ package entities;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.UUID;
 
 /**
  * The entities.User class, this is used as a superclass for Attendees, Speakers and Organizers.
@@ -10,27 +9,40 @@ import java.util.UUID;
  */
 public abstract class User implements Serializable {
 
-    //private String firstName;
-    //private String lastName;
     private String userName;
     private String email;
     private String password;
     private String type;
     private ArrayList<String> friendList;
 
+    /**
+     * Constructor for the user
+     *
+     * @param email    the email of the user
+     * @param userName the userName of the user
+     * @param password the password of the user
+     */
     public User(String email, String userName, String password) {
-        //this.firstName = firstName;
-        //this.lastName = lastName;
         this.email = email;
         this.userName = userName;
         this.password = password;
         this.friendList = new ArrayList<String>();
     }
 
+    /**
+     * Getter method for this user's friendList
+     *
+     * @return A copy of the friendList of this user
+     */
     public ArrayList<String> friendListGetter() {
         return (ArrayList) friendList.clone();
     }
 
+    /**
+     * Add a friend to this user's friendList
+     *
+     * @param userId the userID of the new friend to add
+     */
     public void friendListSetter(String userId) {
         friendList.add(userId);
     }
@@ -88,13 +100,6 @@ public abstract class User implements Serializable {
         this.email = email;
     }
 
-
-    /**
-     * Get the userID of this user
-     *
-     * @return the value of userID
-     */
-
     /**
      * Get the password of this user
      *
@@ -104,6 +109,11 @@ public abstract class User implements Serializable {
         return this.password;
     }
 
+    /**
+     * Override the toString method
+     *
+     * @return String representation of this user
+     */
     @Override
     public String toString() {
         return String.format("entities.User: %s", this.userName);
