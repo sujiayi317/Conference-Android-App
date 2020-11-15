@@ -42,4 +42,15 @@ public class ReadConversation {
         return this.conversationsList;
     }
 
+    /**
+     * Load all conversations into conversationController.
+     *
+     * @param conversationController controller to be loaded into
+     */
+    public void loadConversations(ConversationController conversationController) {
+        for (Conversation conversation: readFile()){
+            conversationController.addConversation(conversationController.getUserIds(conversation), conversation);
+        };//load
+    }
+
 }

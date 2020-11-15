@@ -1,3 +1,5 @@
+package gateway;
+
 import controllers.EventsController;
 import entities.Event;
 import use_cases.SpeakerManager;
@@ -11,7 +13,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
-class FileReadWriter {
+public class FileReadWriter {
     private EventsController eventsController;
     private AttendeeManager attendeeManager;
     private OrganizerManager organizerManager;
@@ -177,6 +179,18 @@ class FileReadWriter {
     }
     public UserManager GetUserManager(){
         return userManager;
+    }
+
+    public void connectReaders() {
+        UserReader();
+        RoomReader();
+        EventReader();
+    }
+
+    public void connectWriters() {
+        UserWriter();
+        RoomWriter();
+        EventWriter();
     }
 }
 //    public EventManager readFromEventFile(String path) throws ClassNotFoundException {

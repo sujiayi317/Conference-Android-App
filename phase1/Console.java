@@ -1,7 +1,5 @@
-import Message.ReadConversation;
 import controllers.Conference;
-
-import java.io.FileNotFoundException;
+import gateway.FileReadWriter;
 
 /**
  * This is the only class in the top-level src folder for executing our program.
@@ -16,18 +14,20 @@ public class Console {
      *      An array of Strings that we can use to pass data into our program when it runs.
      */
     public static void main(String[] args) {
-        FileReadWriter reader = new FileReadWriter();
-
-        reader.UserReader();
-//        ReadConversation readConversation = new ReadConversation();
-//        readConversation.readConversation();
-        reader.RoomReader();
-        reader.EventReader();
-        Conference conference = new Conference(reader.GetEventsController(), reader.GetAttendeeManager(),
-                reader.GetOrganizerManager(), reader.GetUserManager());
+//        FileReadWriter reader = new FileReadWriter();
+//
+//        reader.UserReader();
+////        ReadConversation readConversation = new ReadConversation();
+////        readConversation.readConversation();
+//        reader.RoomReader();
+//        reader.EventReader();
+//        Conference conference = new Conference(reader.GetEventsController(), reader.GetAttendeeManager(),
+//                reader.GetOrganizerManager(), reader.GetUserManager());
+//        conference.run();
+//        reader.UserWriter();
+//        reader.RoomWriter();
+//        reader.EventWriter();
+        Conference conference = new Conference();
         conference.run();
-        reader.UserWriter();
-        reader.RoomWriter();
-        reader.EventWriter();
     }
 }
