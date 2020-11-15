@@ -28,7 +28,6 @@ public class ConversationManager implements Serializable{
         conversations.put(newConversationId, newConversation);
     };
 
-
     /**
      * Check if the Conversation between two users has been created.
      *
@@ -39,7 +38,6 @@ public class ConversationManager implements Serializable{
         return conversations.containsKey(talkersList);
     }
 
-
     /**
      * Set the current conversation to be the conversation between the two users of talkersList.
      *
@@ -48,8 +46,6 @@ public class ConversationManager implements Serializable{
     public void currentConversationSetter(HashSet<String> talkersList){
         this.currentConversation = conversations.get(talkersList);
     }
-
-
 
     /**
      * Send a message to another user
@@ -62,11 +58,14 @@ public class ConversationManager implements Serializable{
 //        conversations.replace(getUserIds(currentConversation), currentConversation);
     }
 
-
+    /**
+     * Get all the messages from the current conversation.
+     *
+     * @return the whole messages list of the currentConversation.
+     */
     public ArrayList<String[]> getMessagesOfCurrentConversation(){
         return currentConversation.getMessages();
     }
-
 
     /**
      * Get the list of conversations of a certain user
