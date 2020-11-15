@@ -1,13 +1,8 @@
 package controllers;
 
 import Message.*;
-import Presenter.*;
-import entities.Attendee;
-import entities.Organizer;
-import entities.User;
 import use_cases.*;
 
-import java.io.FileReader;
 import java.util.HashSet;
 import java.util.InputMismatchException;
 

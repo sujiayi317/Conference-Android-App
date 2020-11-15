@@ -1,15 +1,11 @@
 package controllers;
 
-import Message.Conversation;
 import Message.ConversationController;
-import Message.ConversationManager;
-import Presenter.*;
+import presenters.*;
 import use_cases.AttendeeManager;
 import use_cases.UserManager;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * This is the main controller for Attendee.

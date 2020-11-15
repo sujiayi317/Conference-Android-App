@@ -1,6 +1,5 @@
-package Presenter;
+package presenters;
 
-import controllers.OutputManager;
 import entities.Event;
 
 import java.util.List;

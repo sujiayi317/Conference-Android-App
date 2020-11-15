@@ -1,7 +1,7 @@
 package controllers;
 
-import Presenter.ViewAllExistingEvents;
-import Presenter.ViewEventInfo;
+import presenters.ViewAllExistingEvents;
+import presenters.ViewEventInfo;
 import use_cases.AttendeeManager;
 
 import java.util.ArrayList;

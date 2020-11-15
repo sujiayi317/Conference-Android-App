@@ -1,7 +1,6 @@
-package Presenter;
+package presenters;
 
 import controllers.EventsController;
-import Presenter.ViewEventInfo;
 
 import java.util.ArrayList;
 

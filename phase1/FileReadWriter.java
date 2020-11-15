@@ -1,9 +1,5 @@
-import Presenter.ViewFriendList;
 import controllers.EventsController;
 import entities.Event;
-import entities.User;
-import use_cases.EventManager;
-import use_cases.RoomManager;
 import use_cases.SpeakerManager;
 import use_cases.*;
 
