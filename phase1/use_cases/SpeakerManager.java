@@ -98,6 +98,15 @@ public class SpeakerManager extends UserManager implements Serializable {
         return availableSpeaker;
     }
 
+    public String getIdFromName(String name){
+        for (Speaker speaker : speakers){
+            if (speaker.getUserName().equals(name)){
+                return speaker.getUserID();
+            }
+        }
+        return "NULL";
+    }
+
 //    public void addEventToSpeaker(String event, entities.Speaker speaker) {
 //        events = eventsMap.get(speaker.getUserName());
 //        events.add(event);

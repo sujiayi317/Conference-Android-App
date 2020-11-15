@@ -84,12 +84,14 @@ public class CreateANewEvent {
                         output.printPrompt("The speakerNum you chose is out of the bound please enter the correct number\n");
                     }
                 }
-                String room = eventsController.getAvailableRoom(timeInput).get(Integer.parseInt(roomNUm));
-                String speaker = eventsController.getAllAvailableSpeaker(timeInput).get(Integer.parseInt(speakerNum));
-                if (createEvent(title, eventsController.getRoomManager().changeNumTOID(room), speaker, timeInput, eventsController)) {
-                    output.printPrompt("The new Event named " + title + " at Room "
-                            + room + " taught by " + speaker + " will start at " +
-                            eventsController.getEventManager().generateFormattedStartTime(timeInput));
+                if (!canceled){
+                    String room = eventsController.getAvailableRoom(timeInput).get(Integer.parseInt(roomNUm));
+                    String speaker = eventsController.getAllAvailableSpeaker(timeInput).get(Integer.parseInt(speakerNum));
+                    if (createEvent(title, eventsController.getRoomManager().changeNumTOID(room), speaker, timeInput, eventsController)) {
+                        output.printPrompt("The new Event named " + title + " at Room "
+                                + room + " taught by " + speaker + " will start at " +
+                                eventsController.getEventManager().generateFormattedStartTime(timeInput));
+                    }
                 }
             }
         }
