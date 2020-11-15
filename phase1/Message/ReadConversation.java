@@ -7,6 +7,11 @@ public class ReadConversation {
 
     public ArrayList<Conversation> conversationsList = new ArrayList<>();
 
+    /**
+     * Read our ser file and get the conversation entities.
+     *
+     * @return the list of conversations from our ser file.
+     */
     public ArrayList<Conversation> readFile(){
         String filename = SaveConversation.CONVERSATION_PATH;
         try{
@@ -27,8 +32,13 @@ public class ReadConversation {
         return this.conversationsList;
     }
 
+    /**
+     * Read our ser file and return the existing conversation list.
+     *
+     * @return the existing list of conversations from our ser file.
+     */
     public ArrayList<Conversation> readConversation(){
-        conversationsList = readFile();
+        readFile();
         return this.conversationsList;
     }
 

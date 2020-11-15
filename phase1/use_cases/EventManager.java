@@ -42,9 +42,13 @@ public class EventManager implements Serializable {
         return newEvent;
     }
 
-    public Event loadEvent(String title, String roomID, String speakerID, String startTime, String eventID) {
+    public Event loadEvent(String title, String roomID, String speakerID, String startTime, String eventID,
+                           ArrayList<String> attendeeID) {
         Event newEvent = new Event(title, roomID, speakerID, startTime, eventID);
         events.add(newEvent);
+        for (String ID : attendeeID){
+            newEvent.addAttendee(ID, this.events);
+        }
         return newEvent;
     }
 
