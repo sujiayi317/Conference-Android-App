@@ -18,9 +18,10 @@ public class SpeakerController {
     private final ViewAllSpeakerEvents viewAllSpeakerEvents;
     private final ViewEventInfo viewEventInfo;
     private final ViewAllEventAttendees viewAllEventAttendees;
+    private final ViewMessageList viewMessageList;
     private final SpeakerEventMenu speakerEventMenu;
     private final SeeAllSpeakerEvents seeAllSpeakerEvents;
-
+    private final SeeAllMessage seeAllMessage;
 
 
     public SpeakerController(){
@@ -30,8 +31,10 @@ public class SpeakerController {
         viewAllEventAttendees = new ViewAllEventAttendees();
         viewEventInfo = new ViewEventInfo();
         viewAllSpeakerEvents = new ViewAllSpeakerEvents();
+        viewMessageList = new ViewMessageList();
         speakerEventMenu = new SpeakerEventMenu();
         seeAllSpeakerEvents = new SeeAllSpeakerEvents();
+        seeAllMessage = new SeeAllMessage();
     }
 
     /**
@@ -49,7 +52,7 @@ public class SpeakerController {
         while (!quit ) {
             speakermenu.printSpeakerMenu(userManager.getUserName(userID));
             int choice = input.getInputInt("Please choose from the above options:\n");
-            if (0<=choice && choice<=1) {
+            if (0<=choice && choice<=2) {
                 switch (choice) {
                     case 0:
                         quit = true;
@@ -62,8 +65,7 @@ public class SpeakerController {
                         break;
                     case 2:
                         //view all my conversations
-
-                        // otherwise display the convo (use viewmsglist then viewmsgofaconvo and seeallmsg)
+                        seeAllMessage.getToSeeAllMessage(userID, userManager, conversationController, viewMessageList);
                 }
             }
         }
