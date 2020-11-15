@@ -28,6 +28,9 @@ public class AttendeeController {
     private final SeeAllFriend seeAllFriend;
     private final SeeAllMessage seeAllMessage;
 
+    /**
+     * The constructor of the attendee controller.
+     */
     public AttendeeController(){
         input = new InputManager();
         output = new OutputManager();

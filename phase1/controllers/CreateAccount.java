@@ -9,6 +9,15 @@ import use_cases.UserManager;
 public class CreateAccount {
     private static InputManager input = new InputManager();
 
+    /**
+     * The method of creating an new account.
+     * @param attendeeManager attendee manager class
+     * @param organizerManager organizer manager class
+     * @param speakerManager speaker manager class
+     * @param userManager user manager class
+     * @param type the type of account the user wants to create.
+     * @return true iff the account is successfully created.
+     */
     public boolean CreateNewAccount(AttendeeManager attendeeManager, OrganizerManager organizerManager,
                                     SpeakerManager speakerManager, UserManager userManager, String type) {
         String email = input.getInputString("Please enter the email for new speaker: (ex. 12345@abc.com), or enter 'cancel' at any point to exit account creation\n");
@@ -52,6 +61,12 @@ public class CreateAccount {
         return true;
     }
 
+    /**
+     * The method to check if a given email is in valid form, or already existed in the system.
+     * @param email The given email.
+     * @param userManager user manager class.
+     * @return true iff the email is valid.
+     */
     public boolean isValidEmail(String email, UserManager userManager){
         if (!userManager.validNewEmail(email)){
             new OutputManager().printPrompt("Email already exists in the system...\n");
@@ -67,6 +82,12 @@ public class CreateAccount {
         }
     }
 
+    /**
+     * The check if the user name is valid.
+     * @param user the user name.
+     * @param userManager user manager class.
+     * @return true iff the name is valid.
+     */
     public boolean isValidUserName(String user, UserManager userManager){
         return user.length() >= 2 && userManager.validNewName(user);
     }
