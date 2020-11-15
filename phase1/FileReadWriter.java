@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.io.File;  // Import the File class
 import java.io.FileNotFoundException;  // Import this class to handle errors
 import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 class FileReadWriter {
@@ -67,20 +68,18 @@ class FileReadWriter {
         }
     }
 
-    public void UserWriter(UserManager userManager){
+    public void UserWriter(){
         try {
             PrintWriter pw = new PrintWriter("./phase1/Users.txt");
             for (String userID : userManager.UsersIdsGetter()){
                 String line = userManager.getUserType(userID) + " " + userManager.getUserEmail(userID) + " " +
                         userManager.getUserName(userID) + " "+ userManager.getUserPassword(userID) + " " + userID;
-
                 for (String friendID : userManager.friendListGetter(userID)){
                     line += " " + friendID;
                 }
                 line += "\n";
                 pw.write(line);
             }
-
             pw.close();
         } catch (FileNotFoundException e){
             System.out.println("User File Not Found.");
@@ -88,11 +87,46 @@ class FileReadWriter {
 
     }
 
-    public void eventReader(){
+    public void EventReader(){
+        ArrayList<String> lines = new ArrayList<>();
+        try {
+            File UserFile = new File("./phase1/Events.txt");
+            Scanner myReader = new Scanner(UserFile);
+            while (myReader.hasNextLine()) {
+                while (myReader.hasNextLine()) {
+                    lines.add(myReader.nextLine());
+                }
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("room File Not Found");
+        }
 
+        ArrayList<ArrayList<String>> LineList = new ArrayList<>();
+        for (String line : lines) {
+            ArrayList<String> wordList = new ArrayList<String>(Arrays.asList(line.split(" ")));
+            eventsController.getEventManager().loadEvent(wordList.get(0), wordList.get(1), wordList.get(2),
+                    wordList.get(3), wordList.get(4));
+        }
     }
 
-    public void RoomReader(EventsController eventsController){
+    public void EventWriter(){
+        List<Event> EventList = eventsController.getEventManager().getAllEvent();
+        try {
+            PrintWriter pw = new PrintWriter("./phase1/Events.txt");
+            for (int index = 0; index < EventList.size(); index++){
+                String line = EventList.get(index).getTitle() + " " + EventList.get(index).getRoomID() + " " +
+                        EventList.get(index).getSpeakers() + " " + EventList.get(index).getStartTime() + " " +
+                        EventList.get(index).getEventID();
+                line += "\n";
+                pw.write(line);
+            }
+            pw.close();
+        } catch (FileNotFoundException e){
+            System.out.println("room File Not Found.");
+        }
+    }
+
+    public void RoomReader(){
         ArrayList<String> lines = new ArrayList<>();
         try {
             File UserFile = new File("./phase1/rooms.txt");
@@ -113,7 +147,7 @@ class FileReadWriter {
         }
     }
 
-    public void RoomWriter(EventsController eventsController){
+    public void RoomWriter(){
         ArrayList<String> NumList = eventsController.getRoomManager().getAllRoomNum();
         ArrayList<String> IDList = eventsController.getRoomManager().getAllRoomID();
         try {
