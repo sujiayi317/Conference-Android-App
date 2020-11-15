@@ -82,7 +82,10 @@ public class ConversationController {
         }
     }
 
-
+    /**
+     * The getter of a
+     * @return
+     */
 
 //    public ArrayList<String> getMessagesOfOneConversation(String userId){
 //        enterConversation(userId);
@@ -124,6 +127,11 @@ public class ConversationController {
         return conversationManager.getUserConversations(userId);
     }
 
+    /**
+     * Presenter of a given conversation.
+     * @param messages The list of messages.
+     * @param viewMessagesOfAConversation The presenter class.
+     */
     public static void viewMessagesOfAConversation(ArrayList<String> messages,
                                                    ViewMessagesOfAConversation viewMessagesOfAConversation){
         output.printPrompt(viewMessagesOfAConversation.printMessages(messages));

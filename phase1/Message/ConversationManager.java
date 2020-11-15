@@ -69,7 +69,7 @@ public class ConversationManager implements Serializable{
 
     /**
      * Get the list of conversations of a certain user
-     * 待定
+     * @return Arraylist of array of conversation informations.
      */
     public ArrayList<String[]> getUserConversations(String userId){
         ArrayList<String[]> UserConversations = new ArrayList<String[]>();
