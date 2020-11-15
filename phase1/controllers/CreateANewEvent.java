@@ -1,10 +1,9 @@
 package controllers;
 
-import Presenter.ViewAllAvailableRoom;
-import Presenter.ViewAllAvailableSpeaker;
+import presenters.ViewAllAvailableRoom;
+import presenters.ViewAllAvailableSpeaker;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 
 public class CreateANewEvent {

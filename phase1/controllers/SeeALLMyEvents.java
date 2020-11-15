@@ -1,6 +1,6 @@
 package controllers;
 
-import Presenter.ViewAllAttendeeEvents;
+import presenters.ViewAllAttendeeEvents;
 
 public class SeeALLMyEvents {
     private static OutputManager output;

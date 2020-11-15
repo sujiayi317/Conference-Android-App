@@ -1,8 +1,7 @@
 package controllers;
 
 import Message.ConversationController;
-import Presenter.*;
-import use_cases.AttendeeManager;
+import presenters.*;
 import use_cases.UserManager;
 
 import java.util.ArrayList;

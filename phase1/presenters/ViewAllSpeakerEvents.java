@@ -1,7 +1,6 @@
-package Presenter;
+package presenters;
 
 import controllers.EventsController;
-import controllers.OutputManager;
 
 import java.util.ArrayList;
 
