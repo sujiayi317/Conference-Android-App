@@ -38,7 +38,7 @@ public class InputManager {
         }
         for (int i = 0; i < choice.length(); i++){
             if (!("1234567890".contains(String.valueOf(choice.charAt(i))))){
-                System.out.println("OK");
+//                System.out.println("OK");
                 return 666;
             }
         }
