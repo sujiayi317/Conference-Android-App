@@ -95,16 +95,25 @@ public class OrganizerController extends AttendeeController{
 
                         ArrayList<String> receivers = new ArrayList<>();
 
-//                        ArrayList<Event> events = eventsController.getAllExistingEvents();
+                        ArrayList<ArrayList<String>> idAndNames = eventsController.getAllIDAndName();
+
+                        StringBuilder eventNames = new StringBuilder();
+                        for (int i = 0; i < idAndNames.get(1).size(); i++){
+                            eventNames.append( (i+1) + ". " + idAndNames.get(1).get(i) + "\n");
+                        }
+                        outputManager.printPrompt(eventNames);
 
                         boolean check7 = true;
                         while(check7) {
-                            String eventId = input.getInputString("Please enter the event ID one by one, and " +
-                                    "enter \"done\" to finish:\n");
-                            if(eventId.equals("done")){
+                            int eventChoose = input.getInputInt("Please enter the number one by one to choose" +
+                                    " the events, and enter \"0\" to finish:\n");
+                            if(eventChoose == 0){
                                 check7 = false;
-                            }else{
-                                receivers.addAll(eventsController.getAttendeesFromEvent(eventId));
+                            }else if(eventChoose == 666 || eventChoose > idAndNames.get(1).size() || eventChoose < 0){
+                                outputManager.printPrompt("Please enter another number.");
+                            } else{
+                                receivers.addAll(eventsController.getAttendeesFromEvent(idAndNames.get(0).
+                                        get(eventChoose - 1)));
                             }
                         }
                         String message = input.getInputString("Please enter the message you want to send:\n");
