@@ -13,8 +13,8 @@ public class ViewMessagesOfAConversation {
      * @param listOfStrings listOfStrings
      * @return
      */
-    public StringBuilder printMessages(ArrayList<String> listOfStrings){
-        StringBuilder returnString = new StringBuilder();
+    public StringBuilder printMessages(ArrayList<String> listOfStrings, String userName){
+        StringBuilder returnString = new StringBuilder("Here is your Conversation with " + userName +"\n");
         for(String str: listOfStrings){
             returnString.append(str);
             returnString.append("\n");

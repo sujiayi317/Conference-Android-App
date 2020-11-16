@@ -43,7 +43,7 @@ public class SeeALLExistingEvents {
                 if (!eventTitle.equals("")) {
                     String eventID = eventsController.getEventManager().changeEventTitleIntoEventID(eventTitle);
                     viewOneEventInfo(eventID, viewEventInfo, eventsController);
-                    String decision = input.getInputString("Enter Yes to sign up OR No to back to menu\n");
+                    String decision = input.getInputString("Type Yes to sign up OR No to back to menu\n");
                     if (decision.equals("Yes")) {
                         if (attendeeManager.signUp(eventsController.getEventManager(), userID, eventID,
                                 eventsController.getRoomManager())) {

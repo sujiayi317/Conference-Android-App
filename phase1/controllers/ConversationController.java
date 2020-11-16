@@ -48,7 +48,7 @@ public class ConversationController {
         boolean keepSending = true;
         while (keepSending){
             ArrayList<String> messageList = getMessagesOfCurrentConversation();
-            viewMessagesOfAConversation(messageList, viewMessagesOfAConversation);
+            viewMessagesOfAConversation(messageList, viewMessagesOfAConversation, secondUserId);
             String message = input.getInputString("Enter \"quit\" to quit, other messages to send:\n");
             if (message.equals("quit")){
                 keepSending = false;
@@ -138,9 +138,10 @@ public class ConversationController {
      * @param messages The list of messages.
      * @param viewMessagesOfAConversation The presenter class.
      */
-    public static void viewMessagesOfAConversation(ArrayList<String> messages,
-                                                   ViewMessagesOfAConversation viewMessagesOfAConversation){
-        output.printPrompt(viewMessagesOfAConversation.printMessages(messages));
+    public void viewMessagesOfAConversation(ArrayList<String> messages,
+                                                   ViewMessagesOfAConversation viewMessagesOfAConversation, String userId){
+        String userName = this.userManager.getUserName(userId);
+        output.printPrompt(viewMessagesOfAConversation.printMessages(messages, userName));
     }
 
     /**
