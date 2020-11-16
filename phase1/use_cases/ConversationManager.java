@@ -1,10 +1,12 @@
-package Message;
+package use_cases;
+
+import entities.Conversation;
 
 import java.io.Serializable;
 import java.util.*;
 
 /**
- * The Message.Conversation Manager class, is a use case class to manage conversations.
+ * The entities.Conversation Manager class, is a use case class to manage conversations.
  */
 public class ConversationManager implements Serializable{
 

@@ -1,6 +1,5 @@
 package controllers;
 
-import Message.ConversationController;
 import presenters.*;
 import use_cases.EventManager;
 

@@ -1,11 +1,7 @@
 package controllers;
 
-import Message.ConversationController;
 import presenters.*;
-import use_cases.EventManager;
 import use_cases.UserManager;
-
-import java.util.ArrayList;
 
 /**
  * This is the main controller for Speaker.
