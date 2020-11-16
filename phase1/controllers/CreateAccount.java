@@ -21,7 +21,8 @@ public class CreateAccount {
      */
     public boolean CreateNewAccount(AttendeeManager attendeeManager, OrganizerManager organizerManager,
                                     SpeakerManager speakerManager, UserManager userManager, String type) {
-        String email = input.getInputString("Please enter the email for new speaker: (ex. 12345@abc.com), or enter 'cancel' at any point to exit account creation\n");
+        String email = input.getInputString("Please enter the email for new account: (ex. 12345@abc.com), or " +
+                "enter 'cancel' at any point to exit account creation\n");
         if (email.contains(" ")) {
             return false;
         }
