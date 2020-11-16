@@ -60,6 +60,7 @@ back in with `.txt` file and `.ser` file.
 
 
 ## Following are general guidelines:
-1. The Console is the main class, please run the Console class to run the program.
-2.
-3.
+1. The Console is the main class, please mark phase1 folder as "Source root" and run the Console class to run the program.
+2. The UML designs for each package are named "design-[package-name]" in the phase1 folder.
+The "design-project-phase1.pdf" file contains the UML design for the whole project.
+3. Read all messages ...
