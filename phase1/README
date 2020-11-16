@@ -63,4 +63,6 @@ back in with `.txt` file and `.ser` file.
 1. The Console is the main class, please mark phase1 folder as "Source root" and run the Console class to run the program.
 2. The UML designs for each package are named "design-[package-name]" in the phase1 folder.
 The "design-project-phase1.pdf" file contains the UML design for the whole project.
-3. Read all messages ...
+3. Read all my messages: After selecting view all my message from the menu, only the last message in each conversation
+will be displayed, user need to select the certain conversation from there to see the full messages history. But this
+is not a phase 1 requirement, so we just made it in prepare of phase 2.
