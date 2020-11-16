@@ -45,8 +45,7 @@ for an event that is already full.
 
 ### Messaging System
 
-**Speakers** are able to send a message that automatically goes to all Attendees of their talk or multiple talks that
-they gave.
+**Speakers** are able to send a message to individual or all Attendees of a talk they are giving.
 
 **Organizers** are able to send a message to all speakers, one specific speaker, all Attendees, or one specific
 Attendee.
