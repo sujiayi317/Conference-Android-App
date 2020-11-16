@@ -109,10 +109,8 @@ public class OrganizerController extends AttendeeController{
                                     " the events, and enter \"0\" to finish:\n");
                             if(eventChoose == 0){
                                 check7 = false;
-                            }else if(eventChoose == 666){
-                                outputManager.printPrompt("Please enter a number.");
-                            } else if(eventChoose > idAndNames.get(1).size() || eventChoose < 0){
-                                outputManager.printPrompt("Number not shown on the list.");
+                            }else if(eventChoose == 666 || eventChoose > idAndNames.get(1).size() || eventChoose < 0){
+                                outputManager.printPrompt("Please enter another number.");
                             } else{
                                 receivers.addAll(eventsController.getAttendeesFromEvent(idAndNames.get(0).
                                         get(eventChoose - 1)));
