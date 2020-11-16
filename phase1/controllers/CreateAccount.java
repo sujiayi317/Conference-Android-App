@@ -32,11 +32,13 @@ public class CreateAccount {
             } else if (isValidEmail(email, userManager)) {
                 break;
             } else {
-                email = input.getInputString("Please enter another one, or enter 'cancel' at any point to exit account creation\n");
+                email = input.getInputString("Please enter another one, or enter 'cancel' at any point to exit" +
+                        " account creation\n");
             }
         }
 
-        String user = input.getInputString("Please enter a user name for new account: (must have length of at least 2), or enter 'cancel' at any point to exit account creation\n");
+        String user = input.getInputString("Please enter a user name for new account: (must have length of at " +
+                "least 2 and does NOT contain space), or enter 'cancel' at any point to exit account creation\n");
         if (user.contains(" ")){
             return false;
         };
@@ -46,7 +48,8 @@ public class CreateAccount {
             } else if (isValidUserName(user, userManager)) {
                 break;
             } else {
-                user = input.getInputString("Invalid User name or user name already used, please enter another one, or enter 'cancel' at any point to exit account creation\n");
+                user = input.getInputString("Invalid User name or user name already used, please enter another " +
+                        "one, or enter 'cancel' at any point to exit account creation\n");
             }
         }
         String password = input.getInputString("Please enter a password for " + user + ":\n");
@@ -59,7 +62,8 @@ public class CreateAccount {
             } else if (password.length() >= 8) {
                 break;
             } else {
-                password = input.getInputString("Password must be at least length 8, please try again, or enter 'cancel' at any point to exit account creation\n");
+                password = input.getInputString("Password must be at least length 8, please try again, or enter " +
+                        "'cancel' at any point to exit account creation\n");
             }
         }
         if (type.equals("SPEAKER")) {
