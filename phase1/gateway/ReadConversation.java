@@ -1,4 +1,7 @@
-package Message;
+package gateway;
+
+import entities.Conversation;
+import controllers.ConversationController;
 
 import java.io.*;
 import java.util.ArrayList;

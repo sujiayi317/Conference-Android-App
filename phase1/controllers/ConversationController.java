@@ -1,8 +1,9 @@
-package Message;
+package controllers;
 
+import entities.Conversation;
+import use_cases.ConversationManager;
 import presenters.*;
 import use_cases.UserManager;
-import controllers.*;
 
 import java.util.HashMap;
 import java.util.HashSet;

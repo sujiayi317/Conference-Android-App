@@ -1,6 +1,8 @@
-package Message;
+package gateway;
 
 //package serialization;
+
+import entities.Conversation;
 
 import java.io.*;
 import java.util.ArrayList;

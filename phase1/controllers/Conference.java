@@ -1,6 +1,7 @@
 package controllers;
 
-import Message.*;
+import gateway.ReadConversation;
+import gateway.SaveConversation;
 import use_cases.*;
 import gateway.FileReadWriter;
 
