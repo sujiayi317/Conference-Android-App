@@ -22,6 +22,7 @@ public class AttendeeController {
     private final ViewFriendList viewFriendList;
     private final SeeAllFriend seeAllFriend;
     private final SeeAllMessage seeAllMessage;
+    private final OutputManager outputManager;
 
     /**
      * The constructor of the attendee controller.
@@ -39,7 +40,7 @@ public class AttendeeController {
         this.viewEventInfo = new ViewEventInfo();
         this.viewFriendList = new ViewFriendList();
         this.viewMessageList = new ViewMessageList();
-
+        this.outputManager = new OutputManager();
     }
 
     /**
@@ -89,16 +90,18 @@ public class AttendeeController {
                         ArrayList<String> userList = userManager.userListGetter();
                         boolean check5 = false;
                         while (!check5){
-                            String friendId = input.getInputString("Please enter the userId, or 0 to quit:\n");
+                            String friendName = input.getInputString("Please enter the User Name to add friend," +
+                                    " or \"quit\" to quit:\n");
+                            String friendId = userManager.getUserIdFromName(friendName);
                             if (userManager.friendListGetter(userID).contains(friendId)){
-                                System.out.println("Friend already in your friend list.");
+                                outputManager.printPrompt("Friend already in your friend list.");
                             }else if(userList.contains(friendId)){
                                 userManager.addFriend(userID, friendId);
                                 check5 = true;
-                            }else if (friendId.equals("0")){
+                            }else if (friendName.equals("quit")){
                                 check5 = true;
                             }else{
-                                System.out.println("Can't find the user.");
+                                outputManager.printPrompt("Can't find the user.");
                             }
                         }
                         break;

@@ -35,7 +35,7 @@ public class SeeAllSpeakerEvents {
         int check = 0;
         while (check != 1) {
             viewAllSpeakerEvents(viewAllSpeakerEvents, eventsController, userID);
-            int eventNum = input.getInputInt("Choose an event to view by entering the number of" +
+            int eventNum = input.getInputInt("Choose an event to view by entering the number of " +
                     "the event OR press enter to go back to the main menu\n");
             if ((eventNum != 666) && (eventsController.getAllEventsForTheSpeaker(userID).size() > eventNum)
                     && eventNum >= 0) {

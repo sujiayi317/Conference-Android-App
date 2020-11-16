@@ -33,7 +33,7 @@ public class SeeAllMessage {
         for (String[] s : messageList) {
             String[] msg = {userManager.getUserName(s[2]), s[3], s[0], s[1]};
             userNameWithLastMessage.add(msg);
-        }//有问题
+        }//有问题？
         boolean check4 = false;
         while (!check4) {
             viewMessageList(userNameWithLastMessage, viewMessageList);
