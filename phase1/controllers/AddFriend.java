@@ -23,11 +23,12 @@ public class AddFriend {
                 output.printPrompt("Friend already in your friend list.");
             }else if(userList.contains(friendId)){
                 userManager.addFriend(userID, friendId);
+                output.printPrompt(friendName+ " is successfully added to your Friend-List\n");
                 check5 = true;
             }else if (friendName.equals("quit")){
                 check5 = true;
             }else{
-                output.printPrompt("Can't find the user.");
+                output.printPrompt("Can't find the user.\n");
             }
         }
     }
