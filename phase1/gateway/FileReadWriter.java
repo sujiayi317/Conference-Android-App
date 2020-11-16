@@ -25,6 +25,12 @@ public class FileReadWriter {
         attendeeManager = new AttendeeManager();
         organizerManager = new OrganizerManager();
     }
+    public void reset(){
+        this.userManager = new UserManager();
+        this.eventsController = new EventsController();
+        this.attendeeManager = new AttendeeManager();
+        this.organizerManager = new OrganizerManager();
+    }
 
     public void UserReader() {
         ArrayList<String> lines = new ArrayList();
