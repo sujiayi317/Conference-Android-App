@@ -79,6 +79,7 @@ public class Conference {
      */
     private void start() {
         //connect to Gateway: set up database
+        fileReadWriter.reset();
         fileReadWriter.connectReaders();
         this.userManager = fileReadWriter.GetUserManager();
         this.attendeeManager = fileReadWriter.GetAttendeeManager();
