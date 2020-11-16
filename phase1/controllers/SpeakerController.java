@@ -59,7 +59,7 @@ public class SpeakerController {
                         output.printPrompt("You have signed out.\n");
                         break;
                     case 1:
-                        //connect to MyEvent Controller
+                        //view all my events
                         seeAllSpeakerEvents.getToSeeAllSpeakerEvents(viewAllSpeakerEvents, eventsController, userID,
                                 speakerEventMenu, viewEventInfo, conversationController, viewAllEventAttendees);
                         break;
