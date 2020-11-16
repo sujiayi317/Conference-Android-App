@@ -252,4 +252,15 @@ public class EventManager implements Serializable {
         return arrayList;
     }
 
+    public String generateFormattedEventInfo(String eventID){
+        for (Event event : events){
+            if (event.getEventID() == eventID){
+                return event.getTitle().replace(" ", "_") + " " + event.getRoomID() + " " +
+                        event.getSpeakers() + " " + event.getStartTime() + " " +
+                        event.getEventID();
+            }
+        }
+        return "NULL";
+    }
+
 }
