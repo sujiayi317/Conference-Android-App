@@ -128,14 +128,15 @@ public class OrganizerController extends AttendeeController{
                         ArrayList<String> userList = userManager.userListGetter();
                         boolean check5 = false;
                         while (!check5){
-                            String friendId = input.getInputString("Please enter the userId to add friend," +
-                                    " or \"0\" to quit:\n");
+                            String friendName = input.getInputString("Please enter the User Name to add friend," +
+                                    " or \"quit\" to quit:\n");
+                            String friendId = userManager.getUserIdFromName(friendName);
                             if (userManager.friendListGetter(userID).contains(friendId)){
                                 outputManager.printPrompt("Friend already in your friend list.");
                             }else if(userList.contains(friendId)){
                                 userManager.addFriend(userID, friendId);
                                 check5 = true;
-                            }else if (friendId.equals("0")){
+                            }else if (friendName.equals("quit")){
                                 check5 = true;
                             }else{
                                 outputManager.printPrompt("Can't find the user.");

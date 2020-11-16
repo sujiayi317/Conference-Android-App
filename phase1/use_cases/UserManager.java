@@ -202,4 +202,17 @@ public class UserManager {
         return null;
     }
 
+    /**
+     * Given a user name, return the corresponding user id
+     * @param userName the user Name
+     * @return the corresponding user id
+     */
+    public String getUserIdFromName(String userName) {
+        for (User user : users) {
+            if (user.getUserName().equals(userName)) {
+                return user.getUserID();
+            }
+        }
+        return null;
+    }
 }
