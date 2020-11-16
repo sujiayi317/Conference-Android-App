@@ -239,4 +239,28 @@ public class EventManager implements Serializable {
                 startTime.substring(6, 8), startTime.substring(8, 10), Ending);
     }
 
+    public ArrayList<ArrayList<String>> getAllIDAndName(){
+        ArrayList<String> IDs = new ArrayList<>();
+        ArrayList<String> Names = new ArrayList<>();
+        for (Event event : events) {
+            IDs.add(event.getEventID());
+            Names.add(event.getTitle());
+            }
+        ArrayList<ArrayList<String>> arrayList = new ArrayList<>();
+        arrayList.add(IDs);
+        arrayList.add(Names);
+        return arrayList;
+    }
+
+    public String generateFormattedEventInfo(String eventID){
+        for (Event event : events){
+            if (event.getEventID() == eventID){
+                return event.getTitle().replace(" ", "_") + " " + event.getRoomID() + " " +
+                        event.getSpeakers() + " " + event.getStartTime() + " " +
+                        event.getEventID();
+            }
+        }
+        return "NULL";
+    }
+
 }

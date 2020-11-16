@@ -25,6 +25,10 @@ public class UserManager {
         return true;
     }
 
+    public void reset(){
+        users = new ArrayList<>();
+    }
+
     /**
      * Check if the given String is a valid new email
      * @param email String email to be checked

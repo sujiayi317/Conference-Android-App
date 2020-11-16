@@ -75,7 +75,14 @@ public class ConversationController {
      */
     public void sendToMultipleUsers(String messageContent, ArrayList<String> listOfUsers){
         for(String userId: listOfUsers){
-            enterConversation(userId);
+//            enterConversation(userId);
+            HashSet<String> setOfTalkersNow = new HashSet<String>();
+            setOfTalkersNow.add(currentUserId);
+            setOfTalkersNow.add(userId);
+            if (!conversationManager.existConversation(setOfTalkersNow)){
+                conversationManager.createConversation(currentUserId, userId);
+            }
+            conversationManager.currentConversationSetter(setOfTalkersNow);
             sendToIndividualUser(messageContent);
         }
     }

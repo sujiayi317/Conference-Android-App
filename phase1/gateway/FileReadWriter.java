@@ -17,13 +17,19 @@ public class FileReadWriter {
     private EventsController eventsController;
     private AttendeeManager attendeeManager;
     private OrganizerManager organizerManager;
-    private UserManager userManager;
+    private final UserManager userManager;
 
     public FileReadWriter() {
         userManager = new UserManager();
         eventsController = new EventsController();
         attendeeManager = new AttendeeManager();
         organizerManager = new OrganizerManager();
+    }
+    public void reset(){
+        this.userManager.reset();
+        this.eventsController = new EventsController();
+        this.attendeeManager = new AttendeeManager();
+        this.organizerManager = new OrganizerManager();
     }
 
     public void UserReader() {
@@ -149,14 +155,12 @@ public class FileReadWriter {
     }
 
     public void EventWriter(){
-        List<Event> EventList = eventsController.getEventManager().getAllEvent();
+        List<String> IDList = eventsController.getEventManager().getAllIDAndName().get(0);
         try {
             PrintWriter pw = new PrintWriter("./phase1/Events.txt");
-            for (Event event : EventList) {
-                String line = event.getTitle().replace(" ", "_") + " " + event.getRoomID() + " " +
-                        event.getSpeakers() + " " + event.getStartTime() + " " +
-                        event.getEventID();
-                for (String attendee : event.getAttendees()) {
+            for (String ID : IDList) {
+                String line = eventsController.getEventManager().generateFormattedEventInfo(ID);
+                for (String attendee : eventsController.getEventManager().getAttendeesFromEvent(ID)) {
                     line += " " + attendee;
                 }
                 line += "\n";

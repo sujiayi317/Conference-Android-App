@@ -158,4 +158,8 @@ public class EventsController {
     public ArrayList<String> getAttendeesFromEvent(String eventID) {
         return eventManager.getAttendeesFromEvent(eventID);
     }
+
+    public ArrayList<ArrayList<String>> getAllIDAndName(){
+        return eventManager.getAllIDAndName();
+    }
 }
