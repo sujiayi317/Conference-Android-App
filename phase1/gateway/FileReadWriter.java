@@ -17,7 +17,7 @@ public class FileReadWriter {
     private EventsController eventsController;
     private AttendeeManager attendeeManager;
     private OrganizerManager organizerManager;
-    private UserManager userManager;
+    private final UserManager userManager;
 
     public FileReadWriter() {
         userManager = new UserManager();
@@ -26,7 +26,7 @@ public class FileReadWriter {
         organizerManager = new OrganizerManager();
     }
     public void reset(){
-        this.userManager = new UserManager();
+        this.userManager.reset();
         this.eventsController = new EventsController();
         this.attendeeManager = new AttendeeManager();
         this.organizerManager = new OrganizerManager();
