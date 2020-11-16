@@ -29,6 +29,7 @@ public class OrganizerController extends AttendeeController{
     private final ViewAllAvailableSpeaker viewAllAvailableSpeaker;
     private final SeeAllFriend seeAllFriend;
     private final SeeAllMessage seeAllMessage;
+    private final OutputManager outputManager;
 
     public OrganizerController(){
         this.organizerMenu = new OrganizerMenu();
@@ -43,6 +44,7 @@ public class OrganizerController extends AttendeeController{
         this.viewAllAvailableRoom = new ViewAllAvailableRoom();
         this.viewAllAvailableSpeaker = new ViewAllAvailableSpeaker();
         this.viewFriendList = new ViewFriendList();
+        this.outputManager = new OutputManager();
     }
 
 
@@ -92,7 +94,11 @@ public class OrganizerController extends AttendeeController{
 
                     case 7:
                         //send to all attendees of an event/events
+
                         ArrayList<String> receivers = new ArrayList<>();
+
+//                        ArrayList<Event> events = eventsController.getAllExistingEvents();
+
                         boolean check7 = true;
                         while(check7) {
                             String eventId = input.getInputString("Please enter the event ID one by one, and " +
@@ -119,14 +125,16 @@ public class OrganizerController extends AttendeeController{
                             String friendId = input.getInputString("Please enter the userId to add friend," +
                                     " or \"0\" to quit:\n");
                             if (userManager.friendListGetter(userID).contains(friendId)){
-                                System.out.println("Friend already in your friend list.");
+//                                System.out.println("Friend already in your friend list.");
+                                outputManager.printPrompt("Friend already in your friend list.");
                             }else if(userList.contains(friendId)){
                                 userManager.addFriend(userID, friendId);
                                 check5 = true;
                             }else if (friendId.equals("0")){
                                 check5 = true;
                             }else{
-                                System.out.println("Can't find the user.");
+//                                System.out.println("Can't find the user.");
+                                outputManager.printPrompt("Can't find the user.");
                             }
                         }
                         break;
