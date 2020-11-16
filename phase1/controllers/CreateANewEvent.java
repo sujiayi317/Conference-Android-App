@@ -29,29 +29,29 @@ public class CreateANewEvent {
         String timeInput = "666";
         boolean canceled = false;
         while (!(checkValidTimeFormat(timeInput) && checkValidFutureTime(timeInput))) {
-            timeInput = input.getInputString("Please enter your event time in the format of yyyy/mm/dd/hh:mm (years/month/date/hour)\n" +
-                    "for example, enter '2020/12/09/14' to host the event on 2020/Dec/9th at 2pm\n" +
+            timeInput = input.getInputString("Please enter your event time in the format as below\n yyyy/mm/dd/hh:mm (years/month/date/hour)\n" +
+                    "e.g enter '2020/12/09/14' \nto host the event on 2020/Dec/9th at 2pm\n" +
                     "Or, enter 'cancel' to go back to main menu\n");
             if (timeInput.equals("cancel")) {
                 canceled = true;
                 break;
             }
             if (!(checkValidTimeFormat(timeInput))) {
-                output.printPrompt("Your input date is invalid! Please check and ensure that:\n (i)   The starting " +
+                output.printPrompt("Your input date is invalid!\n Please check and ensure that:\n (i)   The starting " +
                         "time is from 9am to 4pm;\n (ii)  It follows the yyyy/mm/dd/hh format;\n (iii) The date " +
-                        "actually exits, for example, don't even try to host an event on 30th of February.\n Try enter " +
+                        "actually exits,\n e.g, don't even try to host an event on 30th of February.\n Try enter " +
                         "another date...\n\n");
             } else if (!(checkValidFutureTime(timeInput))) {
-                output.printPrompt("You can not create new events in the past! Please choose another time in the future...\n\n");
+                output.printPrompt("You can not create new events in the past!\n Please choose another time in the future...\n\n");
             }
         }
         if (!timeInput.equals("cancel")) {
             timeInput = timeInput.replace("/", "");
             timeInput = timeInput.replace(":", "");
             if (eventsController.getAvailableRoom(timeInput).size() == 0) {
-                output.printPrompt("sorry there is no available room yet, please go to create one first!\n");
+                output.printPrompt("sorry there is no available room yet,\n please go to create one first!\n");
             } else if (eventsController.getAllAvailableSpeaker(timeInput).size() == 0) {
-                output.printPrompt("sorry there is no available speaker yet, please go to create one first!\n");
+                output.printPrompt("sorry there is no available speaker yet,\n please go to create one first!\n");
             } else {
                 getAllAvailableRoomInfo(timeInput, viewAllAvailableRoom, eventsController);
                 getAllAvailableSpeaker(timeInput, eventsController, viewAllAvailableSpeaker);

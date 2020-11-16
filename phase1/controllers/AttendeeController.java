@@ -19,10 +19,10 @@ public class AttendeeController {
     public final ViewAllExistingEvents viewAllExistingEvents;
     public final ViewMessageList viewMessageList;
     public final ViewEventInfo viewEventInfo;
+    public final AddFriend addFriend;
     private final ViewFriendList viewFriendList;
     private final SeeAllFriend seeAllFriend;
     private final SeeAllMessage seeAllMessage;
-    private final OutputManager outputManager;
 
     /**
      * The constructor of the attendee controller.
@@ -34,13 +34,13 @@ public class AttendeeController {
         seeALLMyEvents = new SeeALLMyEvents();
         seeAllFriend = new SeeAllFriend();
         seeAllMessage = new SeeAllMessage();
+        addFriend = new AddFriend();
         this.attendeeMenu = new AttendeeMenu();
         this.viewAllAttendeeEvents = new ViewAllAttendeeEvents();
         this.viewAllExistingEvents = new ViewAllExistingEvents();
         this.viewEventInfo = new ViewEventInfo();
         this.viewFriendList = new ViewFriendList();
         this.viewMessageList = new ViewMessageList();
-        this.outputManager = new OutputManager();
     }
 
     /**
@@ -87,23 +87,7 @@ public class AttendeeController {
                         break;
                     case 5:
                         //add friend
-                        ArrayList<String> userList = userManager.userListGetter();
-                        boolean check5 = false;
-                        while (!check5){
-                            String friendName = input.getInputString("Please enter the User Name to add friend," +
-                                    " or \"quit\" to quit:\n");
-                            String friendId = userManager.getUserIdFromName(friendName);
-                            if (userManager.friendListGetter(userID).contains(friendId)){
-                                outputManager.printPrompt("Friend already in your friend list.");
-                            }else if(userList.contains(friendId)){
-                                userManager.addFriend(userID, friendId);
-                                check5 = true;
-                            }else if (friendName.equals("quit")){
-                                check5 = true;
-                            }else{
-                                outputManager.printPrompt("Can't find the user.");
-                            }
-                        }
+                        addFriend.toAddFriend(userManager, userID);
                         break;
                 }
             }

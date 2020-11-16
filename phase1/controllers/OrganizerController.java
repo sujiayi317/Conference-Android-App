@@ -26,8 +26,7 @@ public class OrganizerController extends AttendeeController{
     private final ViewAllAvailableSpeaker viewAllAvailableSpeaker;
     private final SeeAllFriend seeAllFriend;
     private final SeeAllMessage seeAllMessage;
-    private final OutputManager outputManager;
-
+    private final SendToAllAttendees sendToAllAttendees;
     public OrganizerController(){
         this.organizerMenu = new OrganizerMenu();
         input = new InputManager();
@@ -38,10 +37,10 @@ public class OrganizerController extends AttendeeController{
         createANewRoom = new CreateANewRoom();
         seeAllFriend = new SeeAllFriend();
         seeAllMessage = new SeeAllMessage();
+        sendToAllAttendees = new SendToAllAttendees();
         this.viewAllAvailableRoom = new ViewAllAvailableRoom();
         this.viewAllAvailableSpeaker = new ViewAllAvailableSpeaker();
         this.viewFriendList = new ViewFriendList();
-        this.outputManager = new OutputManager();
     }
 
 
@@ -91,32 +90,7 @@ public class OrganizerController extends AttendeeController{
 
                     case 7:
                         //send to all attendees of an event/events
-
-                        ArrayList<String> receivers = new ArrayList<>();
-
-                        ArrayList<ArrayList<String>> idAndNames = eventsController.getAllIDAndName();
-
-                        StringBuilder eventNames = new StringBuilder();
-                        for (int i = 0; i < idAndNames.get(1).size(); i++){
-                            eventNames.append( (i+1) + ". " + idAndNames.get(1).get(i) + "\n");
-                        }
-                        outputManager.printPrompt(eventNames);
-
-                        boolean check7 = true;
-                        while(check7) {
-                            int eventChoose = input.getInputInt("Please enter the number one by one to choose" +
-                                    " the events, and enter \"0\" to finish:\n");
-                            if(eventChoose == 0){
-                                check7 = false;
-                            }else if(eventChoose == 666 || eventChoose > idAndNames.get(1).size() || eventChoose < 0){
-                                outputManager.printPrompt("Please enter another number.");
-                            } else{
-                                receivers.addAll(eventsController.getAttendeesFromEvent(idAndNames.get(0).
-                                        get(eventChoose - 1)));
-                            }
-                        }
-                        String message = input.getInputString("Please enter the message you want to send:\n");
-                        conversationController.sendToMultipleUsers(message, receivers);
+                        sendToAllAttendees.toSendToAllAttendees(eventsController, conversationController);
                         break;
 
                     case 8:
@@ -125,23 +99,7 @@ public class OrganizerController extends AttendeeController{
                         break;
                     case 9:
                         //add friend
-                        ArrayList<String> userList = userManager.userListGetter();
-                        boolean check5 = false;
-                        while (!check5){
-                            String friendName = input.getInputString("Please enter the User Name to add friend," +
-                                    " or \"quit\" to quit:\n");
-                            String friendId = userManager.getUserIdFromName(friendName);
-                            if (userManager.friendListGetter(userID).contains(friendId)){
-                                outputManager.printPrompt("Friend already in your friend list.");
-                            }else if(userList.contains(friendId)){
-                                userManager.addFriend(userID, friendId);
-                                check5 = true;
-                            }else if (friendName.equals("quit")){
-                                check5 = true;
-                            }else{
-                                outputManager.printPrompt("Can't find the user.");
-                            }
-                        }
+                        addFriend.toAddFriend(userManager, userID);
                         break;
 
                 }
