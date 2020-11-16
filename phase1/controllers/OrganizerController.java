@@ -6,8 +6,6 @@ import presenters.*;
 //import Presenter.ViewAllAvailableRoom;
 //import Presenter.ViewAllExistingEvents;
 //import com.sun.org.apache.xpath.internal.operations.Bool;
-import entities.Organizer;
-import entities.Speaker;
 import use_cases.*;
 
 import java.util.ArrayList;
@@ -125,7 +123,6 @@ public class OrganizerController extends AttendeeController{
                             String friendId = input.getInputString("Please enter the userId to add friend," +
                                     " or \"0\" to quit:\n");
                             if (userManager.friendListGetter(userID).contains(friendId)){
-//                                System.out.println("Friend already in your friend list.");
                                 outputManager.printPrompt("Friend already in your friend list.");
                             }else if(userList.contains(friendId)){
                                 userManager.addFriend(userID, friendId);
@@ -133,7 +130,6 @@ public class OrganizerController extends AttendeeController{
                             }else if (friendId.equals("0")){
                                 check5 = true;
                             }else{
-//                                System.out.println("Can't find the user.");
                                 outputManager.printPrompt("Can't find the user.");
                             }
                         }
