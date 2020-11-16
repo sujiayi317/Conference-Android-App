@@ -88,6 +88,7 @@ public class Conference {
         this.saveConversation = new SaveConversation();//待定
         Login newLogin = new Login();
         newLogin.run(attendeeManager, organizerManager, eventsController.getSpeakerManager(), userManager);
+        fileReadWriter.connectWriters();
 
         //connect to Login Controller - log User in
         //new Login().run(attendeeManager, organizerManager, eventsController.getSpeakerManager(), userManager);

@@ -33,8 +33,9 @@ public class UIPanel {
     }
 
     public void set(int x, int y, char c) {
-        if (0 <= x && x < width && 0 <= y && y < height)
+        if (0 <= x && x < width && 0 <= y && y < height) {
             panel[y][x] = c;
+        }
     }
 
     public void display(int width, int height) {

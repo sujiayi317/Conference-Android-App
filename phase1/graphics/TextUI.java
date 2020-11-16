@@ -1,7 +1,7 @@
 package graphics;
 
 public class TextUI {
-    private static UIPanel ui = new UIPanel(100,50);
+    private static UIPanel ui = new UIPanel(200,100);
     private int width;
     private int height;
 
