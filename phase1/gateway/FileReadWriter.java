@@ -13,6 +13,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Reads and saves data to and from txt files
+ */
 public class FileReadWriter {
     private EventsController eventsController;
     private AttendeeManager attendeeManager;
@@ -26,6 +29,10 @@ public class FileReadWriter {
         organizerManager = new OrganizerManager();
     }
 
+    /**
+     * Method reads User.txt file and loads in any Users stored in said file. Each line in the file represent one user
+     * and the type of user is identified with a title of "SPEAKER", "ATTENDEE", or "ORGANIZER".
+     */
     public void UserReader() {
         ArrayList<String> lines = new ArrayList();
         try {
@@ -37,7 +44,7 @@ public class FileReadWriter {
                 }
             }
         } catch (FileNotFoundException e) {
-            System.out.println("User File Not Found");
+            System.out.println("Users.txt File Not Found");
         }
         SpeakerManager speakermanager = eventsController.getSpeakerManager();
         ArrayList<ArrayList> LineList = new ArrayList();
@@ -66,6 +73,10 @@ public class FileReadWriter {
         }
     }
 
+    /**
+     * Saves a user's all relevant data to Users.txt. User info can be extracted using the UserReader() method if
+     * needed.
+     */
     public void UserWriter(){
         try {
             PrintWriter pw = new PrintWriter("./phase1/Users.txt");
@@ -80,11 +91,14 @@ public class FileReadWriter {
             }
             pw.close();
         } catch (FileNotFoundException e){
-            System.out.println("User File Not Found.");
+            System.out.println("Users.txt File Not Found.");
         }
 
     }
 
+    /**
+     * Reads rooms.txt file and loads saved rooms.
+     */
     public void RoomReader(){
         ArrayList<String> lines = new ArrayList<>();
         try {
@@ -96,7 +110,7 @@ public class FileReadWriter {
                 }
             }
         } catch (FileNotFoundException e) {
-            System.out.println("room File Not Found");
+            System.out.println("rooms.txt File Not Found");
         }
         for (String line : lines) {
             ArrayList<String> wordList = new ArrayList<String>(Arrays.asList(line.split(" ")));
@@ -104,6 +118,9 @@ public class FileReadWriter {
         }
     }
 
+    /**
+     * Saves created room/rooms to rooms.txt file.
+     */
     public void RoomWriter(){
         ArrayList<String> NumList = eventsController.getRoomManager().getAllRoomNum();
         ArrayList<String> IDList = eventsController.getRoomManager().getAllRoomID();
@@ -116,9 +133,13 @@ public class FileReadWriter {
             }
             pw.close();
         } catch (FileNotFoundException e){
-            System.out.println("room File Not Found.");
+            System.out.println("rooms.txt File Not Found.");
         }
     }
+
+    /**
+     * Reads Events.txt and loads saved events.
+     */
     public void EventReader(){
         ArrayList<String> lines = new ArrayList<>();
         try {
@@ -130,7 +151,7 @@ public class FileReadWriter {
                 }
             }
         } catch (FileNotFoundException e) {
-            System.out.println("room File Not Found");
+            System.out.println("Events.txt File Not Found");
         }
 
         for (String line : lines) {
@@ -148,6 +169,9 @@ public class FileReadWriter {
         }
     }
 
+    /**
+     * Saves created events to Events.txt.
+     */
     public void EventWriter(){
         List<String> IDList = eventsController.getEventManager().getAllIDAndName().get(0);
         try {
@@ -162,10 +186,13 @@ public class FileReadWriter {
             }
             pw.close();
         } catch (FileNotFoundException e){
-            System.out.println("room File Not Found.");
+            System.out.println("Events.txt File Not Found.");
         }
     }
 
+    /**
+     * Getters that return EventsController, OrganizerManager, AttendeeManager and UserManager.
+     */
     public EventsController GetEventsController(){
         return eventsController;
     }
@@ -191,6 +218,7 @@ public class FileReadWriter {
         EventWriter();
     }
 }
+//    [Old] Methods:
 //    public EventManager readFromEventFile(String path) throws ClassNotFoundException {
 //        try {
 //            InputStream file = new FileInputStream(path); // String path should be "fileName.ser"
