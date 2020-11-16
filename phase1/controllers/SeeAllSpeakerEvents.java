@@ -11,16 +11,14 @@ import java.util.ArrayList;
 public class SeeAllSpeakerEvents {
     private static OutputManager output;
     private static InputManager input;
-    //private final SeeSpeakerEventInfo seeSpeakerEventInfo;
 
     public SeeAllSpeakerEvents() {
         output = new OutputManager();
         input = new InputManager();
-        //seeSpeakerEventInfo = new SeeSpeakerEventInfo();
     }
 
     /**
-     *
+     * Displays all the events of the speaker and actions for the events.
      *
      * @param viewAllSpeakerEvents viewAllSpeakerEvents
      * @param eventsController eventsController
@@ -57,9 +55,7 @@ public class SeeAllSpeakerEvents {
                         }
                         conversationController.sendToMultipleUsers(message, receivers);
                     } else {
-                        //message individual attendee: display list of attendees of the event:
                         viewAllEventAttendees(eventID, viewAllEventAttendees, eventsController);
-                        //choose an attendee to message
                         int chooseAttendee = input.getInputInt("Choose an attendee to message OR press Enter to" +
                                 " go back to events menu:\n");
                         EventManager eventManager = eventsController.getEventManager();
@@ -76,7 +72,7 @@ public class SeeAllSpeakerEvents {
     }
 
     /**
-     *
+     * View all the events of the speaker.
      *
      * @param viewAllSpeakerEvents viewAllSpeakerEvents
      * @param eventsController eventsController
@@ -89,7 +85,7 @@ public class SeeAllSpeakerEvents {
     }
 
     /**
-     *
+     * View the information of an event of the speaker and the options for messaging the event attendees.
      *
      * @param speakerEventMenu speakerEventMenu
      * @param eventID eventID
@@ -102,7 +98,7 @@ public class SeeAllSpeakerEvents {
     }
 
     /**
-     *
+     * View all the attendees of an event.
      *
      * @param eventID eventID
      * @param viewAllEventAttendees viewAllEventAttendees
