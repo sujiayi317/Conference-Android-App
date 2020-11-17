@@ -15,7 +15,7 @@ public class ViewAllSpeakerEvents {
      * Printing to the screen all the speaker's events
      * @param AllSpeakerEvents AllSpeakerEvents
      * @param eventsController eventsController
-     * @return
+     * @return A StringBuilder will list of events.
      */
     public StringBuilder printAllSpeakerEvents(ArrayList<String> AllSpeakerEvents, EventsController eventsController) {
         if (AllSpeakerEvents.size() == 0) {
