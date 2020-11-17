@@ -2,6 +2,7 @@ package controllers;
 
 import presenters.*;
 import use_cases.EventManager;
+import use_cases.UserManager;
 
 import java.util.ArrayList;
 
@@ -31,7 +32,7 @@ public class SeeAllSpeakerEvents {
     public void getToSeeAllSpeakerEvents(ViewAllSpeakerEvents viewAllSpeakerEvents, EventsController eventsController,
                                          String userID, SpeakerEventMenu speakerEventMenu,
                                          ViewEventInfo viewEventInfo, ConversationController conversationController,
-                                         ViewAllEventAttendees viewAllEventAttendees) {
+                                         ViewAllEventAttendees viewAllEventAttendees, UserManager userManager) {
         int check = 0;
         while (check != 1) {
             viewAllSpeakerEvents(viewAllSpeakerEvents, eventsController, userID);
@@ -55,7 +56,7 @@ public class SeeAllSpeakerEvents {
                         }
                         conversationController.sendToMultipleUsers(message, receivers);
                     } else {
-                        viewAllEventAttendees(eventID, viewAllEventAttendees, eventsController);
+                        viewAllEventAttendees(eventID, viewAllEventAttendees, eventsController, userManager);
                         int chooseAttendee = input.getInputInt("Choose an attendee to message OR press Enter to" +
                                 " go back to events menu:\n");
                         EventManager eventManager = eventsController.getEventManager();
@@ -105,9 +106,11 @@ public class SeeAllSpeakerEvents {
      * @param eventsController eventsController
      */
     public static void viewAllEventAttendees(String eventID, ViewAllEventAttendees viewAllEventAttendees,
-                                             EventsController eventsController) {
-        output.printPrompt(viewAllEventAttendees.printAllEventAttendees(
-                eventsController.getAttendeesFromEvent(eventID)));
-
+                                             EventsController eventsController, UserManager userManager) {
+        ArrayList<String> Names = new ArrayList<>();
+        for (String userID : eventsController.getAttendeesFromEvent(eventID)){
+            Names.add(userManager.getUserNameFromID(userID));
+        }
+        output.printPrompt(viewAllEventAttendees.printAllEventAttendees(Names));
     }
 }
