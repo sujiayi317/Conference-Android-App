@@ -83,15 +83,6 @@ public class EventManager implements Serializable {
         return events;
     }
 
-//    public ArrayList<String> getAllEventID(){
-//        ArrayList<String> eventList = new ArrayList<>();
-//        for (Event event: events){
-//            eventList.add(event.getEventID());
-//        }
-//        return eventList;
-//    }
-
-
     /**
      * Adds an attendee to the event
      *
@@ -204,14 +195,14 @@ public class EventManager implements Serializable {
         return eventList;
     }
 
-    public String changeEventIDIntoEventTitle(String eventID) {
-        for (Event event : events) {
-            if (event.getEventID().equals(eventID)) {
-                return event.getTitle();
-            }
-        }
-        return "NULL";
-    }
+//    public String changeEventIDIntoEventTitle(String eventID) {
+//        for (Event event : events) {
+//            if (event.getEventID().equals(eventID)) {
+//                return event.getTitle();
+//            }
+//        }
+//        return "NULL";
+//    }
 
     /**
      * Given a String representing the title of this event, return the ID of this event, or "NULL"
@@ -239,6 +230,11 @@ public class EventManager implements Serializable {
                 startTime.substring(6, 8), startTime.substring(8, 10), Ending);
     }
 
+
+    /**
+     * Return all Attendees' ids and user names.
+     * @return a list of two list containing user ids and user names respectively.
+     */
     public ArrayList<ArrayList<String>> getAllIDAndName(){
         ArrayList<String> IDs = new ArrayList<>();
         ArrayList<String> Names = new ArrayList<>();
@@ -252,6 +248,11 @@ public class EventManager implements Serializable {
         return arrayList;
     }
 
+    /**
+     * Generate the formatted event's information.
+     * @param eventID the id of an event.
+     * @return a string of formatted event's information.
+     */
     public String generateFormattedEventInfo(String eventID){
         for (Event event : events){
             if (event.getEventID() == eventID){

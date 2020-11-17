@@ -159,6 +159,10 @@ public class EventsController {
         return eventManager.getAttendeesFromEvent(eventID);
     }
 
+    /**
+     * Return all Attendees' ids and user names.
+     * @return a list of two list containing user ids and user names respectively.
+     */
     public ArrayList<ArrayList<String>> getAllIDAndName(){
         return eventManager.getAllIDAndName();
     }
