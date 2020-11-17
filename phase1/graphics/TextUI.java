@@ -1,5 +1,8 @@
 package graphics;
 
+/**
+ * This class is the text user interface
+ */
 public class TextUI {
     private static UIPanel ui = new UIPanel(200,100);
     private int width;
@@ -27,6 +30,11 @@ public class TextUI {
         ui.clear();
     }
 
+    /**
+     * set Width
+     * @param message message
+     * @return width
+     */
     private int setWidth(String[] message) {
         int width = 0;
         for (String str : message) {
@@ -37,16 +45,28 @@ public class TextUI {
 
     }
 
+    /**
+     * set Height
+     * @param message message
+     * @return Height
+     */
     private int setHeight(String[] message) {
         return message.length + 3;
     }
 
+    /**
+     * place Border And Fill
+     */
     private void placeBorderAndFill() {
         Fill blank = new Fill(2, height-2, width-3, 2, ' ');
         blank.setParent(ui);
         blank.draw();
     }
 
+    /**
+     * place Message
+     * @param message String[] message
+     */
     private void placeMessage(String[] message) {
         int y = height - 2;
         for (String str : message) {
@@ -54,6 +74,13 @@ public class TextUI {
         }
     }
 
+    /**
+     * centre Place
+     *
+     * @param heading heading of the UI panel
+     * @param str string
+     * @param y y
+     */
     private void centrePlace(UIPanel heading, String str, int y) {
         int n = str.length();
         int x = (width - n) / 2;
