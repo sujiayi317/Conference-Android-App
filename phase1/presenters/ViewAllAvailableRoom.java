@@ -17,7 +17,7 @@ public class ViewAllAvailableRoom {
 
     /**
      * Printing to the screen all available rooms
-     * @param allAvailableRoom
+     * @param allAvailableRoom allAvailableRoom StringBuilder
      */
     public void printAllAvailableRoom(ArrayList<String> allAvailableRoom) {
         StringBuilder returnString = new StringBuilder("\nThese are all the available rooms at this time:\n");

@@ -6,6 +6,7 @@ import controllers.OutputManager;
  * The presenter for Speaker's menu.
  */
 public class SpeakerMenu {
+
     private static OutputManager output;
 
     public SpeakerMenu() {

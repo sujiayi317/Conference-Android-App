@@ -4,7 +4,7 @@ import controllers.EventsController;
 import java.util.ArrayList;
 
 /**
- * The presenter for Speaker's menu.
+ * The presenter for Attendee's events.
  */
 public class ViewAllAttendeeEvents {
 
@@ -12,11 +12,11 @@ public class ViewAllAttendeeEvents {
     }
 
     /**
+     * The presenter for Attendee's events.
      *
-     *
-     * @param ALLAttendeeEvents
-     * @param eventsController
-     * @return
+     * @param ALLAttendeeEvents ALLAttendeeEvents
+     * @param eventsController eventsController
+     * @return StringBuilder all the events that an Attendee is signed up
      */
     public StringBuilder printAllAttendeeEvents(ArrayList<String> ALLAttendeeEvents, EventsController eventsController) {
         if (ALLAttendeeEvents.size() == 0) {
