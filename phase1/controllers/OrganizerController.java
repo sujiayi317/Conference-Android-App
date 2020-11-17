@@ -43,7 +43,18 @@ public class OrganizerController extends AttendeeController{
         this.viewFriendList = new ViewFriendList();
     }
 
-
+    /**
+     * This method will run when an organizer login. It will display the function menu for the user to choose. there are
+     * in total 9 choices for organizer: sign out, create a new speaker, view all existing events, view all attended events,
+     * , add a new event, view all the user's friends, view all the message the user has, send to all attendees of an event/events,
+     * and add a new friend.
+     * @param userID The user's unique id, which is created when the user creates an account.
+     * @param eventsController The controller for events.
+     * @param attendeeManager The use case class for attendee, which contains methods like login and sign up.
+     * @param organizerManager The use case class for controller.
+     * @param conversationController The controller for conversation.
+     * @param userManager The use case class for user.
+     */
     public void run(EventsController eventsController, AttendeeManager attendeeManager,
                     OrganizerManager organizerManager, UserManager userManager,
                     ConversationController conversationController, String userID) {
