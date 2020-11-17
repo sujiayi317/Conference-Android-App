@@ -28,6 +28,7 @@ public class SeeAllSpeakerEvents {
      * @param viewEventInfo viewEventInfo
      * @param conversationController conversationController
      * @param viewAllEventAttendees viewAllEventAttendees
+     * @param userManager userManager
      */
     public void getToSeeAllSpeakerEvents(ViewAllSpeakerEvents viewAllSpeakerEvents, EventsController eventsController,
                                          String userID, SpeakerEventMenu speakerEventMenu,
@@ -104,6 +105,7 @@ public class SeeAllSpeakerEvents {
      * @param eventID eventID
      * @param viewAllEventAttendees viewAllEventAttendees
      * @param eventsController eventsController
+     * @param userManager userManager
      */
     public static void viewAllEventAttendees(String eventID, ViewAllEventAttendees viewAllEventAttendees,
                                              EventsController eventsController, UserManager userManager) {
