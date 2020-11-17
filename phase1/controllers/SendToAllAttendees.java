@@ -10,6 +10,12 @@ public class SendToAllAttendees {
         output = new OutputManager();
         input = new InputManager();
     }
+
+    /**
+     * This class is for sending message to all attendees of an certain event/ events.
+     * @param eventsController event controller class
+     * @param conversationController conversation controller class
+     */
     public void toSendToAllAttendees(EventsController eventsController, ConversationController conversationController) {
         ArrayList<String> receivers = new ArrayList<>();
 

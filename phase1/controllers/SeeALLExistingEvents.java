@@ -19,7 +19,7 @@ public class SeeALLExistingEvents {
     }
 
     /**
-     *
+     * This class can display all existing events and let the user to choose, view information of a chosen event.
      * @param eventsController eventsController
      * @param attendeeManager attendeeManager
      * @param viewAllExistingEvents viewAllExistingEvents
