@@ -48,7 +48,8 @@ public class SeeAllFriend {
             }else if (chooseFriend == -1){
                 check3 = true;
             }else{
-                System.out.println("Friend not found.");
+//                System.out.println("Friend not found.");
+                output.printPrompt("Friend not found. Please enter another number.");
             }
         }
 
