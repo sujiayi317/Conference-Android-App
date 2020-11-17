@@ -57,7 +57,8 @@ public class SpeakerController {
                     case 1:
                         //view all my events
                         seeAllSpeakerEvents.getToSeeAllSpeakerEvents(viewAllSpeakerEvents, eventsController, userID,
-                                speakerEventMenu, viewEventInfo, conversationController, viewAllEventAttendees);
+                                speakerEventMenu, viewEventInfo, conversationController, viewAllEventAttendees,
+                                userManager);
                         break;
                     case 2:
                         //view all my conversations
