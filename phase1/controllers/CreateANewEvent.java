@@ -29,7 +29,7 @@ public class CreateANewEvent {
         String timeInput = "666";
         boolean canceled = false;
         while (!(checkValidTimeFormat(timeInput) && checkValidFutureTime(timeInput))) {
-            timeInput = input.getInputString("Please enter your event time in the format as below\n yyyy/mm/dd/hh:mm (years/month/date/hour)\n" +
+            timeInput = input.getInputString("Please enter your event time in the format as below\n yyyy/mm/dd/hh (years/month/date/hour)\n" +
                     "e.g enter '2020/12/09/14' \nto host the event on 2020/Dec/9th at 2pm\n" +
                     "Or, enter 'cancel' to go back to main menu\n");
             if (timeInput.equals("cancel")) {
