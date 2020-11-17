@@ -12,7 +12,7 @@ public class SendToAllAttendees {
     }
 
     /**
-     * This class is for sending message to all attendees of an certain event/ events.
+     * This class is for sending message to all attendees of a certain event/ events.
      * @param eventsController event controller class
      * @param conversationController conversation controller class
      */
