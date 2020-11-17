@@ -5,5 +5,5 @@ ORGANIZER tony@123.com Tony 12345678 933n23fd ril93as1
 ATTENDEE maggie@123.com Maggie 12345678 xmo0r1e1 386d97fa 89dfhy32
 ORGANIZER nancy@123.com Nancy 12345678 cm2is19d ril93as1
 SPEAKER bruce@123.com Bruce 12345678 djn120da
-ATTENDEE jenny@123.com Jenny 12345678 ril93as1 933n23fd cm2is19d
-ORGANIZER neal@123.com neal 12345678 783aab9b 89dfhy32
+ATTENDEE jenny@123.com Jenny 12345678 ril93as1 933n23fd cm2is19d 783aab9b
+ORGANIZER neal@123.com neal 12345678 783aab9b 89dfhy32 ril93as1
