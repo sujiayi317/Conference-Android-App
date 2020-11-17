@@ -12,6 +12,12 @@ public class AddFriend {
         output = new OutputManager();
         input = new InputManager();
     }
+
+    /**
+     * Get userName from the keyboard, and add friend to one's friend list.
+     * @param userID the user id of people who want to add friends.
+     * @param userManager the userManager class instance.
+     */
     public void toAddFriend(UserManager userManager, String userID){
         ArrayList<String> userList = userManager.userListGetter();
         boolean check5 = false;
