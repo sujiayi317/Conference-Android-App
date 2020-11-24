@@ -1,5 +1,4 @@
 import controllers.Conference;
-import gateway.FileReadWriter;
 
 /**
  * This is the only class in the top-level src folder for executing our program.
