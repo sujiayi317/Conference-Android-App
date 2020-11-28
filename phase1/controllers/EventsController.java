@@ -1,5 +1,6 @@
 package controllers;
 
+import entities.Addtendable;
 import entities.Event;
 import entities.Room;
 import use_cases.EventManager;
@@ -112,9 +113,12 @@ public class EventsController {
      * @param startTime startTime
      * @return true iff this event is created successfully
      */
-    public boolean createEvent(String title, String roomID, String speakerName, String startTime) {
-        String speakerID = speakerManager.getIdFromName(speakerName);
-        Event newEvent = this.eventManager.createEvent(title, roomID, speakerID, startTime);
+    public boolean createEvent(String title, String roomID, ArrayList<String> speakerName, String startTime, String duration, String type) {
+        ArrayList<String> speakerID = new ArrayList<>();
+        for (String name: speakerName){
+            speakerID.add(speakerManager.getIdFromName(name));
+        }
+        Addtendable newEvent = this.eventManager.createEvent(title, roomID, speakerID, startTime, duration, type);
         if (newEvent == null) {
             return false;
         }
@@ -130,7 +134,7 @@ public class EventsController {
      */
     public ArrayList<String> getEventInfo(String eventID) {
         ArrayList<String> info = new ArrayList<>();
-        Event event = this.eventManager.getEventFromID(eventID);
+        Addtendable event = this.eventManager.getEventFromID(eventID);
         Room room = this.roomManager.getRoomBasedOnItsID(event.getRoomID());
         info.add(event.getTitle());
         info.add(event.getStartTime());

@@ -2,7 +2,7 @@ package use_cases;
 
 import entities.Event;
 import entities.Speaker;
-
+import entities.Addtendable;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -74,10 +74,10 @@ public class SpeakerManager extends UserManager implements Serializable {
      */
     public ArrayList<String> getAllAvailableSpeaker(String time, EventManager eventManager) {
         ArrayList<String> availableSpeaker = new ArrayList<>();
-        List<Event> events = eventManager.getAllEvent();
+        List<Addtendable> events = eventManager.getAllEvent();
         for (Speaker speaker : speakers) {
             availableSpeaker.add(speaker.getUserName());
-            for (Event event : events) {
+            for (Addtendable event : events) {
                 if (event.getSpeakers().equals(speaker.getUserName()) && time.equals(event.getStartTime())) {
                     availableSpeaker.remove(speaker.getUserName());
                 }
