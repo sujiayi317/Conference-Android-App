@@ -5,6 +5,7 @@ import controllers.Conference;
  * Note that this class cannot be accessed from any other packages/classes, even though it is public.
  */
 public class Console {
+    // Push test
 
     /**
      * Program execution starts here.
