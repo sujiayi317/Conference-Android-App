@@ -2,8 +2,10 @@ package controllers;
 
 import presenters.ViewAllAvailableRoom;
 import presenters.ViewAllAvailableSpeaker;
+import presenters.ViewAllEventType;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class CreateANewEvent {
@@ -25,7 +27,7 @@ public class CreateANewEvent {
      * @param viewAllAvailableSpeaker available speaker presenter to show all available speakers for organizer.
      */
     public void getToCreateANewEvent(EventsController eventsController, ViewAllAvailableRoom viewAllAvailableRoom,
-                                     ViewAllAvailableSpeaker viewAllAvailableSpeaker) {
+                                     ViewAllAvailableSpeaker viewAllAvailableSpeaker, ViewAllEventType viewAllEventType) {
         String timeInput = "666";
         boolean canceled = false;
         while (!(checkValidTimeFormat(timeInput) && checkValidFutureTime(timeInput))) {
@@ -55,6 +57,7 @@ public class CreateANewEvent {
             } else {
                 getAllAvailableRoomInfo(timeInput, viewAllAvailableRoom, eventsController);
                 getAllAvailableSpeaker(timeInput, eventsController, viewAllAvailableSpeaker);
+                viewAllEventType.printALlEventType();
                 String title = "";
                 while (title.length() < 3) {
                     title = input.getInputString("\nGiven all the information above, please first enter your " +
@@ -66,7 +69,14 @@ public class CreateANewEvent {
                         break;
                     }
                 }
-
+                StringBuilder allEventType = ""
+                String eventType = "-1";
+                while (! canceled && ) {
+                    durationNum = Integer.toString(input.getInputInt("Please enter the duration for the event\n (Integer between 1 and 12)\n"));
+                    if (1 > Integer.parseInt(durationNum) || Integer.parseInt(durationNum) >12) {
+                        output.printPrompt("The duration you enter is out of the bound please enter the correct integer\n");
+                    }
+                }
                 String roomNUm = "-1";
                 while (!canceled && 0 > Integer.parseInt(roomNUm) || Integer.parseInt(roomNUm) >= eventsController.getAvailableRoom(timeInput).size()) {
                     roomNUm = Integer.toString(input.getInputInt("\nPlease enter a number to choose a room you " +
@@ -83,6 +93,14 @@ public class CreateANewEvent {
                         output.printPrompt("The speakerNum you chose is out of the bound please enter the correct number\n");
                     }
                 }
+                String durationNum = "-1";
+                while (! canceled && 1 > Integer.parseInt(durationNum) || Integer.parseInt(durationNum) > 12) {
+                    durationNum = Integer.toString(input.getInputInt("Please enter the duration for the event\n (Integer between 1 and 12)\n"));
+                    if (1 > Integer.parseInt(durationNum) || Integer.parseInt(durationNum) >12) {
+                        output.printPrompt("The duration you enter is out of the bound please enter the correct integer\n");
+                    }
+                }
+
                 if (!canceled){
                     String room = eventsController.getAvailableRoom(timeInput).get(Integer.parseInt(roomNUm));
                     String speaker = eventsController.getAllAvailableSpeaker(timeInput).get(Integer.parseInt(speakerNum));

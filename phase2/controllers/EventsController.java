@@ -16,6 +16,7 @@ public class EventsController {
     private final RoomManager roomManager;
     private final SpeakerManager speakerManager;
 
+
     /**
      * the constructor for this EventsController
      */
@@ -23,6 +24,7 @@ public class EventsController {
         this.eventManager = new EventManager();
         this.roomManager = new RoomManager();
         this.speakerManager = new SpeakerManager();
+
     }
 
     /**

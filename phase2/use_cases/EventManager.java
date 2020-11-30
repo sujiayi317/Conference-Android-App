@@ -13,6 +13,8 @@ public class EventManager implements Serializable {
 
     private List<Addtendable> events;
     private EventFactory eventFactory;
+    private ArrayList<String> allEventType;
+
 
     /**
      * Creates an empty event manager
@@ -20,6 +22,10 @@ public class EventManager implements Serializable {
     public EventManager() {
         events = new ArrayList<>();
         eventFactory = new EventFactory();
+        this.allEventType = new ArrayList<>();
+        allEventType.add("TALK");
+        allEventType.add("PARTY");
+        allEventType.add("DISCUSSION");
     }
 
     /**
@@ -297,6 +303,10 @@ public class EventManager implements Serializable {
             }
         }
         return "NULL";
+    }
+
+    public ArrayList<String> getAllEventType (){
+        return this.allEventType;
     }
 
 }

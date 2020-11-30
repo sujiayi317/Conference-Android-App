@@ -1,13 +1,7 @@
 package controllers;
 
 import presenters.*;
-//import Presenter.ViewAllAttendeeEvents;
-//import Presenter.ViewAllAvailableRoom;
-//import Presenter.ViewAllExistingEvents;
-//import com.sun.org.apache.xpath.internal.operations.Bool;
 import use_cases.*;
-
-import java.util.ArrayList;
 
 /**
  * This is the main controller for Organizer.
@@ -22,11 +16,13 @@ public class OrganizerController extends AttendeeController{
     private final CreateANewRoom createANewRoom;
     private final CreateNewSpeaker createNewSpeaker;
     private final ViewAllAvailableRoom viewAllAvailableRoom;
+    private final ViewAllEventType viewAllEventType;
     private final ViewFriendList viewFriendList;
     private final ViewAllAvailableSpeaker viewAllAvailableSpeaker;
     private final SeeAllFriend seeAllFriend;
     private final SeeAllMessage seeAllMessage;
     private final SendToAllAttendees sendToAllAttendees;
+
     public OrganizerController(){
         this.organizerMenu = new OrganizerMenu();
         input = new InputManager();
@@ -41,6 +37,7 @@ public class OrganizerController extends AttendeeController{
         this.viewAllAvailableRoom = new ViewAllAvailableRoom();
         this.viewAllAvailableSpeaker = new ViewAllAvailableSpeaker();
         this.viewFriendList = new ViewFriendList();
+        this.viewAllEventType = new ViewAllEventType();
     }
 
     /**
@@ -87,7 +84,7 @@ public class OrganizerController extends AttendeeController{
 
                     case 4:
                         //Add a new Event
-                        createANewEvent.getToCreateANewEvent(eventsController, viewAllAvailableRoom, viewAllAvailableSpeaker);
+                        createANewEvent.getToCreateANewEvent(eventsController, viewAllAvailableRoom, viewAllAvailableSpeaker, viewAllEventType);
                         break;
 
                     case 5:

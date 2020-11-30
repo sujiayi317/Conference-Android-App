@@ -87,7 +87,7 @@ public class OrganizerController extends AttendeeController{
 
                     case 4:
                         //Add a new Event
-                        createANewEvent.getToCreateANewEvent(eventsController, viewAllAvailableRoom, viewAllAvailableSpeaker);
+                        createANewEvent.getToCreateANewEvent(eventsController, viewAllAvailableRoom, viewAllAvailableSpeaker, );
                         break;
 
                     case 5:

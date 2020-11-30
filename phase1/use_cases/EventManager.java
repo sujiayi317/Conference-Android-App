@@ -1,11 +1,10 @@
 package use_cases;
 
 import entities.Room;
-
+import entities.Addtendable;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import entities.Addtendable;
 
 /**
  * The use_cases.EventManager class, this is the use case class to manage all events.
@@ -14,6 +13,8 @@ public class EventManager implements Serializable {
 
     private List<Addtendable> events;
     private EventFactory eventFactory;
+    private ArrayList<String> allEventType;
+
 
     /**
      * Creates an empty event manager
@@ -21,8 +22,43 @@ public class EventManager implements Serializable {
     public EventManager() {
         events = new ArrayList<>();
         eventFactory = new EventFactory();
+        this.allEventType = new ArrayList<>();
+        allEventType.add("TALK");
+        allEventType.add("PARTY");
+        allEventType.add("DISCUSSION");
     }
 
+    /**
+     * Try to add a speaker to a list of events
+     *
+     * @param speakerID speakerID String
+     * @param events    a list of events
+     */
+    public boolean addSpeaker(String speakerID, List<Addtendable> events, Addtendable event) {
+        for (Addtendable currentEvent : events) {
+            for (String speaker : currentEvent.getSpeakers()){
+                if (speaker.equals(speakerID) && event.getStartTime().equals(currentEvent.getStartTime())) {
+                    return false;
+                }
+            }
+        }
+        event.getSpeakers().add(speakerID);
+        return true;
+    }
+
+    /**
+     * Try to remove a speaker from a list of events
+     *
+     * @param speakerID String
+     * @return boolean true if person existed in attendee list
+     */
+    public boolean removeSpeaker(String speakerID, Addtendable event) {
+        ArrayList<String> speakerList = event.getSpeakers();
+        if (speakerList.contains(speakerID)) {
+            return speakerList.remove(speakerID);
+        }
+        return false;
+    }
 
     /**
      * Creates a new event
@@ -33,11 +69,11 @@ public class EventManager implements Serializable {
      * @param  startTime startTime of the event
      * @return the newly created event or null
      */
-    public Addtendable createEvent(String title, String roomID, ArrayList<String> speakerID, String startTime,String duration, String type) {
+    public Addtendable createEvent(String title, String roomID, ArrayList<String> speakerID, String startTime, String duration, String type) {
         for (Addtendable event : this.events) {
-            for (String s : speakerID) {
-                if ((event.getSpeakers().contains(s) || roomID.equals(event.getRoomID())) &&
-                        event.getStartTime().equals(startTime)) {
+            for (String speaker: event.getSpeakers()) {
+                if ((event.getSpeakers().contains(speaker) || roomID.equals(event.getRoomID())) &&
+                        ((Integer.parseInt(event.getStartTime())<= Integer.parseInt(startTime)) && (Integer.parseInt(startTime) <= Integer.parseInt(event.getStartTime() +Integer.parseInt(duration))))) {
                     return null;
                 }
             }
@@ -46,7 +82,7 @@ public class EventManager implements Serializable {
             return null;
         }
         // create this new event:
-        Addtendable newEvent = eventFactory.createEvent(title, roomID, speakerID,startTime,duration, type);
+        Addtendable newEvent = eventFactory.createEvent(title, roomID, speakerID, startTime,duration, type);
         // update the events list:
         events.add(newEvent);
 
@@ -65,10 +101,10 @@ public class EventManager implements Serializable {
      * @param roomManager roomManager
      * @return  the newly created event
      */
-    public Addtendable loadEvent(String title, String roomID, ArrayList<String> speakerID, String startTime, String eventID,
-                           ArrayList<String> attendeeID, RoomManager roomManager, String duration, String type) {
+    public Addtendable loadEvent(String title, String roomID, ArrayList<String> speakerID, String startTime, String eventID,String duration, String type,
+                                 ArrayList<String> attendeeID, RoomManager roomManager) {
         // create this new event:
-        Addtendable newEvent = this.createEvent(title, roomID, speakerID, startTime, duration, type);
+        Addtendable newEvent = eventFactory.createEvent(title, roomID, speakerID, startTime,duration, type);
         // update the events list:
         events.add(newEvent);
 
@@ -246,7 +282,7 @@ public class EventManager implements Serializable {
         for (Addtendable event : events) {
             IDs.add(event.getEventID());
             Names.add(event.getTitle());
-            }
+        }
         ArrayList<ArrayList<String>> arrayList = new ArrayList<>();
         arrayList.add(IDs);
         arrayList.add(Names);
@@ -267,6 +303,10 @@ public class EventManager implements Serializable {
             }
         }
         return "NULL";
+    }
+
+    public ArrayList<String> getAllEventType (){
+        return this.allEventType;
     }
 
 }
