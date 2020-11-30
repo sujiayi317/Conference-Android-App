@@ -1,8 +1,7 @@
 package use_cases;
 
-import entities.Event;
 import entities.Speaker;
-import entities.Addtendable;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;

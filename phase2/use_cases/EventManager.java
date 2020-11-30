@@ -1,5 +1,6 @@
 package use_cases;
 
+import entities.Addtendable;
 import entities.Event;
 import entities.Room;
 
@@ -12,13 +13,47 @@ import java.util.List;
  */
 public class EventManager implements Serializable {
 
-    private List<Event> events;
+    private List<Addtendable> events;
+    private EventFactory eventFactory;
 
     /**
      * Creates an empty event manager
      */
     public EventManager() {
         events = new ArrayList<>();
+        eventFactory = new EventFactory();
+    }
+
+    /**
+     * Try to add a speaker to a list of events
+     *
+     * @param speakerID speakerID String
+     * @param events    a list of events
+     */
+    public boolean addSpeaker(String speakerID, List<Addtendable> events, Addtendable event) {
+        for (Addtendable currentEvent : events) {
+            for (String speaker : currentEvent.getSpeakers()){
+                if (speaker.equals(speakerID) && event.getStartTime().equals(currentEvent.getStartTime())) {
+                    return false;
+                }
+            }
+        }
+        event.getSpeakers().add(speakerID);
+        return true;
+    }
+
+    /**
+     * Try to remove a speaker from a list of events
+     *
+     * @param speakerID String
+     * @return boolean true if person existed in attendee list
+     */
+    public boolean removeSpeaker(String speakerID, Addtendable event) {
+        ArrayList<String> speakerList = event.getSpeakers();
+        if (speakerList.contains(speakerID)) {
+            return speakerList.remove(speakerID);
+        }
+        return false;
     }
 
     /**
@@ -30,18 +65,20 @@ public class EventManager implements Serializable {
      * @param  startTime startTime of the event
      * @return the newly created event or null
      */
-    public Event createEvent(String title, String roomID, String speakerID, String startTime) {
-        for (Event event : this.events) {
-            if ((event.getSpeakers().contains(speakerID) || roomID.equals(event.getRoomID())) &&
-                    event.getStartTime().equals(startTime)) {
-                return null;
+    public Addtendable createEvent(String title, String roomID, ArrayList<String> speakerID, String startTime, String duration, String type) {
+        for (Addtendable event : this.events) {
+            for (String speaker: event.getSpeakers()) {
+                if ((event.getSpeakers().contains(speaker) || roomID.equals(event.getRoomID())) &&
+                        ((Integer.parseInt(event.getStartTime())<= Integer.parseInt(startTime)) && (Integer.parseInt(startTime) <= Integer.parseInt(event.getStartTime() +Integer.parseInt(duration))))) {
+                    return null;
+                }
             }
         }
         if (title.length() <= 3) {
             return null;
         }
         // create this new event:
-        Event newEvent = new Event(title, roomID, speakerID, startTime);
+        Addtendable newEvent = eventFactory.createEvent(title, roomID, speakerID, startTime,duration, type);
         // update the events list:
         events.add(newEvent);
 
@@ -60,10 +97,10 @@ public class EventManager implements Serializable {
      * @param roomManager roomManager
      * @return  the newly created event
      */
-    public Event loadEvent(String title, String roomID, String speakerID, String startTime, String eventID,
+    public Addtendable loadEvent(String title, String roomID, ArrayList<String> speakerID, String startTime, String eventID,String duration, String type,
                            ArrayList<String> attendeeID, RoomManager roomManager) {
         // create this new event:
-        Event newEvent = new Event(title, roomID, speakerID, startTime, eventID);
+        Addtendable newEvent = eventFactory.createEvent(title, roomID, speakerID, startTime,duration, type);
         // update the events list:
         events.add(newEvent);
 
@@ -79,7 +116,7 @@ public class EventManager implements Serializable {
      *
      * @return a list of all events
      */
-    public List<Event> getAllEvent() {
+    public List<Addtendable> getAllEvent() {
         return events;
     }
 
@@ -171,7 +208,7 @@ public class EventManager implements Serializable {
      */
     public ArrayList<String> getAllEventForTheAttendee(String userID) {
         ArrayList<String> eventList = new ArrayList<>();
-        for (Event event : events) {
+        for (Addtendable event : events) {
             if (event.getAttendees().contains(userID)) {
                 eventList.add(event.getEventID());
             }
@@ -187,7 +224,7 @@ public class EventManager implements Serializable {
      */
     public ArrayList<String> getAllEventForTheSpeaker(String userID) {
         ArrayList<String> eventList = new ArrayList<>();
-        for (Event event : events) {
+        for (Addtendable event : events) {
             if (event.getSpeakers().contains(userID)) {
                 eventList.add(event.getEventID());
             }
@@ -210,7 +247,7 @@ public class EventManager implements Serializable {
      * @return event ID
      */
     public String changeEventTitleIntoEventID(String eventTitle) {
-        for (Event event : events) {
+        for (Addtendable event : events) {
             if (event.getTitle().equals(eventTitle)) {
                 return event.getEventID();
             }
@@ -238,7 +275,7 @@ public class EventManager implements Serializable {
     public ArrayList<ArrayList<String>> getAllIDAndName(){
         ArrayList<String> IDs = new ArrayList<>();
         ArrayList<String> Names = new ArrayList<>();
-        for (Event event : events) {
+        for (Addtendable event : events) {
             IDs.add(event.getEventID());
             Names.add(event.getTitle());
             }
@@ -254,7 +291,7 @@ public class EventManager implements Serializable {
      * @return a string of formatted event's information.
      */
     public String generateFormattedEventInfo(String eventID){
-        for (Event event : events){
+        for (Addtendable event : events){
             if (event.getEventID() == eventID){
                 return event.getTitle().replace(" ", "_") + " " + event.getRoomID() + " " +
                         event.getSpeakers() + " " + event.getStartTime() + " " +

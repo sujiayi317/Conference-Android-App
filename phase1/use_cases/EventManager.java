@@ -1,9 +1,7 @@
 package use_cases;
 
-import entities.Event;
-import entities.EventFactory;
 import entities.Room;
-import entities.Addtendable;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +21,7 @@ public class EventManager implements Serializable {
         events = new ArrayList<>();
         eventFactory = new EventFactory();
     }
+
 
     /**
      * Creates a new event

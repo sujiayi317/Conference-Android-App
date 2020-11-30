@@ -17,6 +17,7 @@ public class Talk extends Event implements Addtendable{
 
     @Override
     public String toFullString(){
-    return this.toString() + " in room " + this.getRoomID() + " with speaker: " + this.getSpeakers().get(0);}
+        return this.toString() + " in room " + this.getRoomID() + " with speaker: " + this.getSpeakers().get(0);}
 
 }
+

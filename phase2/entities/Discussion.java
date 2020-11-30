@@ -1,5 +1,6 @@
 package entities;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Discussion extends Event implements Addtendable{
     private ArrayList<String> speakers;

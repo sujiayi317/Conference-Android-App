@@ -1,6 +1,5 @@
 package controllers;
 
-import entities.Addtendable;
 import entities.Event;
 import entities.Room;
 import use_cases.EventManager;
