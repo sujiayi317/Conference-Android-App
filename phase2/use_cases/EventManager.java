@@ -1,9 +1,7 @@
 package use_cases;
 
-import entities.Addtendable;
-import entities.Event;
 import entities.Room;
-
+import entities.Addtendable;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -140,7 +138,7 @@ public class EventManager implements Serializable {
      * @return true iff the user has been successfully added to this event
      */
     public boolean addAttendeeToEvent(String userID, String eventID, RoomManager roomManager) {
-        Event event = getEventFromID(eventID);
+        Addtendable event = getEventFromID(eventID);
         if (event != null) {
             Room room = roomManager.getRoomBasedOnItsID(event.getRoomID());
             if (room.getCurrentNum() < room.getCapacity()) {
@@ -160,7 +158,7 @@ public class EventManager implements Serializable {
      * @return arraylist of attendees' ID from given event, return empty arraylist if event not found.
      */
     public ArrayList<String> getAttendeesFromEvent(String eventID) {
-        Event event = getEventFromID(eventID);
+        Addtendable event = getEventFromID(eventID);
         if (event != null) {
             return event.getAttendees();
         }
@@ -173,8 +171,8 @@ public class EventManager implements Serializable {
      * @param eventID eventID String object
      * @return event if eventID existed in events otherwise return null
      */
-    public Event getEventFromID(String eventID) {
-        for (Event event : events) {
+    public Addtendable getEventFromID(String eventID) {
+        for (Addtendable event : events) {
             if (event.getEventID().equals(eventID)) {
                 return event;
             }
@@ -191,7 +189,7 @@ public class EventManager implements Serializable {
      * @return true  iff the user has been successfully removed from this event
      */
     public boolean removeAttendeeFromEvent(String userID, String eventID, RoomManager roomManager) {
-        Event event = getEventFromID(eventID);
+        Addtendable event = getEventFromID(eventID);
         if (event != null) {
             Room room = roomManager.getRoomBasedOnItsID(event.getRoomID());
             room.decreaseCurrentNum();

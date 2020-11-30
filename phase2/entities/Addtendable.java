@@ -4,20 +4,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public interface Addtendable {
-    public ArrayList<String> getSpeakers();
+    ArrayList<String> getSpeakers();
 
-    public String getTitle();
+    String getTitle();
 
-    public  String getRoomID();
+    String getRoomID();
 
-    public String getStartTime();
+    String getStartTime();
 
-    public  String getEventID();
+    String getEventID();
 
-    public boolean removeAttendee(String userID);
+    boolean removeAttendee(String userID);
 
-    public ArrayList<String> getAttendees();
+    ArrayList<String> getAttendees();
 
-    public boolean addAttendee(String userID, List<Addtendable> addtendableList);
+    boolean addAttendee(String userID, List<Addtendable> addtendableList);
 
 }

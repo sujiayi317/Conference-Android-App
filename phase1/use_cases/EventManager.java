@@ -5,6 +5,7 @@ import entities.Room;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import entities.Addtendable;
 
 /**
  * The use_cases.EventManager class, this is the use case class to manage all events.

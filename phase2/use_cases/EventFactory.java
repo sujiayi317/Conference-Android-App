@@ -1,10 +1,9 @@
 package use_cases;
 
-import entities.Addtendable;
 import entities.Party;
 import entities.Talk;
 import entities.Discussion;
-
+import entities.Addtendable
 import java.util.ArrayList;
 
 public class EventFactory {

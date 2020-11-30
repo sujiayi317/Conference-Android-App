@@ -1,11 +1,10 @@
 package controllers;
 
-import entities.Event;
 import entities.Room;
+import entities.Addtendable;
 import use_cases.EventManager;
 import use_cases.RoomManager;
 import use_cases.SpeakerManager;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,7 +57,7 @@ public class EventsController {
      *
      * @return List<Event>, which is a list of all events
      */
-    public List<Event> getAllExistingEvents() {
+    public List<Addtendable> getAllExistingEvents() {
         return this.eventManager.getAllEvent();
     }
 
@@ -112,9 +111,10 @@ public class EventsController {
      * @param startTime startTime
      * @return true iff this event is created successfully
      */
-    public boolean createEvent(String title, String roomID, String speakerName, String startTime) {
-        String speakerID = speakerManager.getIdFromName(speakerName);
-        Event newEvent = this.eventManager.createEvent(title, roomID, speakerID, startTime);
+    public boolean createEvent(String title, String roomID, String speakerName, String startTime, String duration, String type) {
+        ArrayList<String> speakerID = new ArrayList<>();
+        speakerID.add(speakerManager.getIdFromName(speakerName));
+        Addtendable newEvent = this.eventManager.createEvent(title, roomID, speakerID, startTime, duration, type);
         if (newEvent == null) {
             return false;
         }
@@ -130,11 +130,13 @@ public class EventsController {
      */
     public ArrayList<String> getEventInfo(String eventID) {
         ArrayList<String> info = new ArrayList<>();
-        Event event = this.eventManager.getEventFromID(eventID);
+        Addtendable event = this.eventManager.getEventFromID(eventID);
         Room room = this.roomManager.getRoomBasedOnItsID(event.getRoomID());
         info.add(event.getTitle());
         info.add(event.getStartTime());
-        info.add(speakerManager.getSpeakerNameFromID(event.getSpeakers()));
+        for (String speaker : event.getSpeakers()){
+        info.add(speakerManager.getSpeakerNameFromID(speaker));
+        }
         info.add(Integer.toString(room.getCurrentNum()));
         info.add(Integer.toString(room.getCapacity()));
         return info;
