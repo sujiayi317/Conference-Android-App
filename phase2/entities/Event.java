@@ -50,11 +50,11 @@ public abstract class Event implements Serializable {
      * @param events     a list of events
      * @return boolean true if we add attendee to the list
      */
-    public boolean addAttendee(String attendeeID, List<Addtendable> events) {
+    public boolean addAttendee(String attendeeID, List<Event> events) {
         if (this.userIDs.contains(attendeeID)) {
             return false;
         }
-        for (Addtendable event : events) {
+        for (Event event : events) {
             if (event.getAttendees().contains(attendeeID) &&
                     !((Integer.parseInt(event.getStartTime()) + Integer.parseInt(event.getDuration()) <= Integer.parseInt(this.startTime)) ||
                     Integer.parseInt(this.startTime) + Integer.parseInt(this.duration) <= Integer.parseInt(event.getStartTime()))) {
@@ -110,6 +110,8 @@ public abstract class Event implements Serializable {
         return this.duration;
     }
 
+    public abstract ArrayList<String> getSpeakers();
+
 
     /**
      * Returns all attendees for this event
@@ -147,8 +149,6 @@ public abstract class Event implements Serializable {
      *
      * @return a formatted string with more data
      */
-    public String fullString() {
-        return this.toString() + " in room " + this.roomID;
-    }
+    public abstract String toFullString();
 }
 

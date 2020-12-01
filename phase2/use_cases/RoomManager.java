@@ -1,6 +1,5 @@
 package use_cases;
 
-import entities.Addtendable;
 import entities.Event;
 import entities.Room;
 
@@ -173,7 +172,7 @@ public class RoomManager implements Serializable {
             // Loop though the list of eventIDs of the current room's events:
             for (String eventID : eventsMap.get(roomID)) {
                 // Find the event object with this event ID
-                Addtendable event = eventManager.getEventFromID(eventID);
+                Event event = eventManager.getEventFromID(eventID);
 
                 // if the time conflicts, then the room is not available
                 if (event.getStartTime().equals(time)) {

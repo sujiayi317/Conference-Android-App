@@ -1,13 +1,11 @@
 package use_cases;
 
-import entities.Party;
-import entities.Talk;
-import entities.Discussion;
-import entities.Addtendable
+import entities.*;
+
 import java.util.ArrayList;
 
 public class EventFactory {
-        public Addtendable createEvent(String title, String roomID, ArrayList<String> speakerID, String startTime, String duration, String type){
+        public Event createEvent(String title, String roomID, ArrayList<String> speakerID, String startTime, String duration, String type){
             if (type.equals("TALK")){
                 return new Talk(title, roomID, speakerID, startTime, duration);
             }

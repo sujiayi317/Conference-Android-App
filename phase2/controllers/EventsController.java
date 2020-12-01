@@ -1,7 +1,7 @@
 package controllers;
 
+import entities.Event;
 import entities.Room;
-import entities.Addtendable;
 import use_cases.EventManager;
 import use_cases.RoomManager;
 import use_cases.SpeakerManager;
@@ -59,7 +59,7 @@ public class EventsController {
      *
      * @return List<Event>, which is a list of all events
      */
-    public List<Addtendable> getAllExistingEvents() {
+    public List<Event> getAllExistingEvents() {
         return this.eventManager.getAllEvent();
     }
 
@@ -116,7 +116,7 @@ public class EventsController {
     public boolean createEvent(String title, String roomID, String speakerName, String startTime, String duration, String type) {
         ArrayList<String> speakerID = new ArrayList<>();
         speakerID.add(speakerManager.getIdFromName(speakerName));
-        Addtendable newEvent = this.eventManager.createEvent(title, roomID, speakerID, startTime, duration, type);
+        Event newEvent = this.eventManager.createEvent(title, roomID, speakerID, startTime, duration, type);
         if (newEvent == null) {
             return false;
         }
@@ -132,7 +132,7 @@ public class EventsController {
      */
     public ArrayList<String> getEventInfo(String eventID) {
         ArrayList<String> info = new ArrayList<>();
-        Addtendable event = this.eventManager.getEventFromID(eventID);
+        Event event = this.eventManager.getEventFromID(eventID);
         Room room = this.roomManager.getRoomBasedOnItsID(event.getRoomID());
         info.add(event.getTitle());
         info.add(event.getStartTime());
@@ -172,8 +172,8 @@ public class EventsController {
     }
 
     public boolean cancelEvent(String eventID){
-        Addtendable currentEvent = eventManager.getEventFromID(eventID);
-        List<Addtendable> eventList = eventManager.getAllEvent();
+        Event currentEvent = eventManager.getEventFromID(eventID);
+        List<Event> eventList = eventManager.getAllEvent();
         eventList.remove(currentEvent);
         ArrayList<String> attendeeList = currentEvent.getAttendees();
         for (String attendee : attendeeList){

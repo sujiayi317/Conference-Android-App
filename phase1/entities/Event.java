@@ -22,7 +22,6 @@ public abstract class Event implements Serializable {
      *
      * @param title     event title
      * @param roomID    which room the event will be held in
-//     * @param speakerID the speaker id for the event
      * @param startTime event starting time
      */
     public Event(String title, String roomID, String startTime, String duration) {
@@ -34,22 +33,6 @@ public abstract class Event implements Serializable {
         this.duration = duration;
     }
 
-    /**
-     * The constructor No.2 for an event
-     *
-     * @param title     event title
-     * @param roomID    which room the event will be held in
-     * @param speakerID the speaker id for the event
-     * @param startTime event starting time
-     * @param eventID   event ID
-     */
-    public Event(String title, String roomID, ArrayList<String> speakerID, String startTime, String eventID) {
-        this.title = title;
-        this.eventID = eventID;
-        this.roomID = roomID;
-        this.userIDs = new ArrayList<>();
-        this.startTime = startTime;
-    }
 
     /**
      * Get the value of timeSlot, i.e., startTime
@@ -67,12 +50,14 @@ public abstract class Event implements Serializable {
      * @param events     a list of events
      * @return boolean true if we add attendee to the list
      */
-    public boolean addAttendee(String attendeeID, List<Addtendable> events) {
+    public boolean addAttendee(String attendeeID, List<Event> events) {
         if (this.userIDs.contains(attendeeID)) {
             return false;
         }
-        for (Addtendable event : events) {
-            if (event.getAttendees().contains(attendeeID) && event.getStartTime().equals(this.getStartTime())) {
+        for (Event event : events) {
+            if (event.getAttendees().contains(attendeeID) &&
+                    !((Integer.parseInt(event.getStartTime()) + Integer.parseInt(event.getDuration()) <= Integer.parseInt(this.startTime)) ||
+                            Integer.parseInt(this.startTime) + Integer.parseInt(this.duration) <= Integer.parseInt(event.getStartTime()))) {
                 return false;
             }
         }
@@ -93,34 +78,6 @@ public abstract class Event implements Serializable {
         return false;
     }
 
-    /**
-     * Try to add a speaker to a list of events
-     *
-     * @param speakerID speakerID String
-     * @param events    a list of events
-     */
-//    public boolean addSpeaker(String speakerID, List<Event> events) {
-//        for (Event event : events) {
-//            if (event.speakers.contains(speakerID) && event.getStartTime().equals(this.getStartTime())) {
-//                return false;
-//            }
-//        }
-//        this.speakers.add(speakerID);
-//        return true;
-//    }
-
-    /**
-     * Try to remove a speaker from a list of events
-     *
-     * @param speakerID String
-     * @return boolean true if person existed in attendee list
-     */
-//    public boolean removeSpeaker(String speakerID) {
-//        if (this.speakers.contains(speakerID)) {
-//            return this.speakers.remove(speakerID);
-//        }
-//        return false;
-    }
 
     /**
      * Return the ID String of this event
@@ -149,12 +106,12 @@ public abstract class Event implements Serializable {
         return this.roomID;
     }
 
-    /**
-     * Returns all speakers for this event
-     *
-     * @return all speakers
-     */
-    abstract ArrayList<String> getSpeakers();
+    public String getDuration(){
+        return this.duration;
+    }
+
+    public abstract ArrayList<String> getSpeakers();
+
 
     /**
      * Returns all attendees for this event
@@ -163,10 +120,6 @@ public abstract class Event implements Serializable {
      */
     public ArrayList<String> getAttendees() {
         return userIDs;
-    }
-
-    public String getDuration(){
-        return this.duration;
     }
 
     /**
@@ -186,16 +139,16 @@ public abstract class Event implements Serializable {
      *
      * @return a formatted string
      */
-   @Override
-   public String toString() {
-       return this.title + " at " + this.getFormattedStartTime();
-   }
+    @Override
+    public String toString() {
+        return this.title + " at " + this.getFormattedStartTime();
+    }
 
-   /**
-//     * Returns a formatted string with more data
-//     *
-//     * @return a formatted string with more data
-//     */
-   abstract String toFullString();
+    /**
+     * Returns a formatted string with more data
+     *
+     * @return a formatted string with more data
+     */
+    public abstract String toFullString();
 }
 

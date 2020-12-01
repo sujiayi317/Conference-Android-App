@@ -1,6 +1,6 @@
 package presenters;
 
-import entities.Addtendable;
+import entities.Event;
 
 import java.util.List;
 
@@ -16,7 +16,7 @@ public class ViewAllExistingEvents {
      * @param AllExistingEvents AllExistingEvents
      * @return StringBuilder
      */
-    public StringBuilder printAllExistingEvents(List<Addtendable> AllExistingEvents){
+    public StringBuilder printAllExistingEvents(List<Event> AllExistingEvents){
         StringBuilder returnString = new StringBuilder("\nThese are all the events you may attend:\n");
         for (int i =0 ; i < AllExistingEvents.size();i++){
             returnString.append(i).append(") ").append(AllExistingEvents.get(i).getTitle()).append("\n");

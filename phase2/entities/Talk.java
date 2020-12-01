@@ -2,7 +2,7 @@ package entities;
 
 import java.util.ArrayList;
 
-public class Talk extends Event implements Addtendable{
+public class Talk extends Event{
 
     private final ArrayList<String> speaker;
     public Talk (String title, String roomID, ArrayList<String> speakerID, String startTime, String duration){
