@@ -15,7 +15,7 @@ public abstract class Event implements Serializable {
     private final String roomID;
     private ArrayList<String> userIDs;
     private String startTime;
-    private int duration;
+    private String duration;
 
     /**
      * The constructor No.1 for an event
@@ -31,7 +31,7 @@ public abstract class Event implements Serializable {
         this.roomID = roomID;
         this.userIDs = new ArrayList<>();
         this.startTime = startTime;
-        this.duration = Integer.parseInt(duration);
+        this.duration = duration;
     }
 
     /**
@@ -163,6 +163,10 @@ public abstract class Event implements Serializable {
      */
     public ArrayList<String> getAttendees() {
         return userIDs;
+    }
+
+    public String getDuration(){
+        return this.duration;
     }
 
     /**

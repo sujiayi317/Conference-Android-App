@@ -73,7 +73,8 @@ public class EventManager implements Serializable {
         for (Addtendable event : this.events) {
             for (String speaker: event.getSpeakers()) {
                 if ((event.getSpeakers().contains(speaker) || roomID.equals(event.getRoomID())) &&
-                        ((Integer.parseInt(event.getStartTime())<= Integer.parseInt(startTime)) && (Integer.parseInt(startTime) <= Integer.parseInt(event.getStartTime() +Integer.parseInt(duration))))) {
+                        (!((Integer.parseInt(event.getStartTime()) + Integer.parseInt(event.getDuration())<= Integer.parseInt(startTime)) ||
+                                (Integer.parseInt(startTime) + Integer.parseInt(duration)<= Integer.parseInt(event.getStartTime()))))) {
                     return null;
                 }
             }

@@ -50,12 +50,14 @@ public class Event implements Serializable {
      * @param events     a list of events
      * @return boolean true if we add attendee to the list
      */
-    public boolean addAttendee(String attendeeID, List<Event> events) {
+    public boolean addAttendee(String attendeeID, List<Addtendable> events) {
         if (this.userIDs.contains(attendeeID)) {
             return false;
         }
-        for (Event event : events) {
-            if (event.getAttendees().contains(attendeeID) && event.getStartTime().equals(this.getStartTime())) {
+        for (Addtendable event : events) {
+            if (event.getAttendees().contains(attendeeID) &&
+                    !((Integer.parseInt(event.getStartTime()) + Integer.parseInt(event.getDuration()) <= Integer.parseInt(this.startTime)) ||
+                    Integer.parseInt(this.startTime) + Integer.parseInt(this.duration) <= Integer.parseInt(event.getStartTime()))) {
                 return false;
             }
         }
@@ -102,6 +104,10 @@ public class Event implements Serializable {
      */
     public String getRoomID() {
         return this.roomID;
+    }
+
+    public String getDuration(){
+        return this.duration;
     }
 
 

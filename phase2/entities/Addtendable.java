@@ -14,6 +14,8 @@ public interface Addtendable {
 
     String getEventID();
 
+    String getDuration();
+
     boolean removeAttendee(String userID);
 
     ArrayList<String> getAttendees();
