@@ -1,5 +1,6 @@
 package controllers;
 
+import entities.Addtendable;
 import entities.Event;
 import entities.Room;
 import use_cases.EventManager;
@@ -168,5 +169,16 @@ public class EventsController {
      */
     public ArrayList<ArrayList<String>> getAllIDAndName(){
         return eventManager.getAllIDAndName();
+    }
+
+    public boolean cancelEvent(String eventID){
+        Addtendable currentEvent = eventManager.getEventFromID(eventID);
+        List<Addtendable> eventList = eventManager.getAllEvent();
+        eventList.remove(currentEvent);
+        ArrayList<String> attendeeList = currentEvent.getAttendees();
+        for (String attendee : attendeeList){
+            eventManager.removeAttendeeFromEvent(attendee, eventID, roomManager);
+        }
+        return roomManager.getRoomBasedOnItsID(currentEvent.getRoomID()).getCurrentNum() == 0;
     }
 }

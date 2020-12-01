@@ -171,9 +171,14 @@ public class EventsController {
         return eventManager.getAllIDAndName();
     }
 
-    public void cancelEvent(Addtendable event){
+    public boolean cancelEvent(String eventID){
+        Addtendable currentEvent = eventManager.getEventFromID(eventID);
         List<Addtendable> eventList = eventManager.getAllEvent();
-        eventList.remove(event);
-
+        eventList.remove(currentEvent);
+        ArrayList<String> attendeeList = currentEvent.getAttendees();
+        for (String attendee : attendeeList){
+            eventManager.removeAttendeeFromEvent(attendee, eventID, roomManager);
+        }
+        return roomManager.getRoomBasedOnItsID(currentEvent.getRoomID()).getCurrentNum() == 0;
     }
 }

@@ -185,11 +185,11 @@ public class RoomManager implements Serializable {
     }
 
 
-    public void freeUpTheRoomBasedOnEvent(Addtendable event){
-        for (Room room: rooms){
-            if (room.getRoomID().equals(event.getRoomID())){
-                room.resetTheCurrentNum();
-            }
-        }
-    }
+//    public void freeUpTheRoomBasedOnEvent(Addtendable event){
+//        for (Room room: rooms){
+//            if (room.getRoomID().equals(event.getRoomID())){
+//                room.resetTheCurrentNum();
+//            }
+//        }
+//    }
 }

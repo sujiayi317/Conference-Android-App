@@ -22,6 +22,7 @@ public class OrganizerController extends AttendeeController{
     private final SeeAllFriend seeAllFriend;
     private final SeeAllMessage seeAllMessage;
     private final SendToAllAttendees sendToAllAttendees;
+    private final cancelEvent cancelEvent;
 
     public OrganizerController(){
         this.organizerMenu = new OrganizerMenu();
@@ -34,6 +35,7 @@ public class OrganizerController extends AttendeeController{
         seeAllFriend = new SeeAllFriend();
         seeAllMessage = new SeeAllMessage();
         sendToAllAttendees = new SendToAllAttendees();
+        cancelEvent = new cancelEvent();
         this.viewAllAvailableRoom = new ViewAllAvailableRoom();
         this.viewAllAvailableSpeaker = new ViewAllAvailableSpeaker();
         this.viewFriendList = new ViewFriendList();
@@ -109,6 +111,9 @@ public class OrganizerController extends AttendeeController{
                         //add friend
                         addFriend.toAddFriend(userManager, userID);
                         break;
+                    case 10:
+                        //cancel event
+                        cancelEvent.toCancelEvent(eventsController, viewAllExistingEvents);
 
                 }
             }
