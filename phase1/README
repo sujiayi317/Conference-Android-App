@@ -67,3 +67,5 @@ The "design-project-phase1.pdf" file contains the UML design for the whole proje
 3. Read all my messages: After selecting view all my message from the menu, only the last message in each conversation
 will be displayed, user need to select the certain conversation from there to see the full messages history. But this
 is not a phase 1 requirement, so we just made it in preparation of phase 2.
+
+ok
