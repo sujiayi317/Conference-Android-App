@@ -42,6 +42,7 @@ public class EventManager implements Serializable {
                 }
             }
         }
+        //Todo: implement addSpeaker for Event (do not directly change list from getSpeakers())
         event.getSpeakers().add(speakerID);
         return true;
     }
@@ -55,6 +56,7 @@ public class EventManager implements Serializable {
     public boolean removeSpeaker(String speakerID, Addtendable event) {
         ArrayList<String> speakerList = event.getSpeakers();
         if (speakerList.contains(speakerID)) {
+            //Todo: implement removeSpeaker for Event (do not directly change list from getSpeakers())
             return speakerList.remove(speakerID);
         }
         return false;
@@ -147,6 +149,8 @@ public class EventManager implements Serializable {
     public boolean addAttendeeToEvent(String userID, String eventID, RoomManager roomManager) {
         Addtendable event = getEventFromID(eventID);
         if (event != null) {
+            //Todo: update room in room manager
+            //Todo: i.e. if (roommanager.updateSuccessful(room id)) then add attendee to list
             Room room = roomManager.getRoomBasedOnItsID(event.getRoomID());
             if (room.getCurrentNum() < room.getCapacity()) {
                 if (event.addAttendee(userID, events)) {
@@ -156,20 +160,6 @@ public class EventManager implements Serializable {
             }
         }
         return false;
-    }
-
-    /**
-     * Return a list all Attendees from event with eventID. If event not found, return empty array list.
-     *
-     * @param eventID String object
-     * @return arraylist of attendees' ID from given event, return empty arraylist if event not found.
-     */
-    public ArrayList<String> getAttendeesFromEvent(String eventID) {
-        Addtendable event = getEventFromID(eventID);
-        if (event != null) {
-            return event.getAttendees();
-        }
-        return new ArrayList<>();
     }
 
     /**
@@ -185,6 +175,20 @@ public class EventManager implements Serializable {
             }
         }
         return null;
+    }
+
+    /**
+     * Return a list all Attendees from event with eventID. If event not found, return empty array list.
+     *
+     * @param eventID String object
+     * @return arraylist of attendees' ID from given event, return empty arraylist if event not found.
+     */
+    public ArrayList<String> getAttendeesFromEvent(String eventID) {
+        Addtendable event = getEventFromID(eventID);
+        if (event != null) {
+            return event.getAttendees();
+        }
+        return new ArrayList<>();
     }
 
     /**
@@ -222,7 +226,7 @@ public class EventManager implements Serializable {
     }
 
     /**
-     * Return ArrayList contains all events that attendee has.
+     * Return ArrayList contains all events that speaker has.
      *
      * @param userID String object,
      * @return ArrayList<String>
@@ -261,19 +265,6 @@ public class EventManager implements Serializable {
     }
 
     /**
-     * Generate a formatted string representation of the start time String.
-     * @param startTime startTime String
-     * @return a formatted string representation
-     */
-    public String generateFormattedStartTime(String startTime) {
-        int HourTime = Integer.parseInt(startTime.substring(8, 10));
-        String Ending = String.format("%s", (HourTime >= 12) ? "PM" : "AM");
-        return String.format("%s/%s/%s/%s%s", startTime.substring(0, 4), startTime.substring(4, 6),
-                startTime.substring(6, 8), startTime.substring(8, 10), Ending);
-    }
-
-
-    /**
      * Return all Attendees' ids and user names.
      * @return a list of two list containing user ids and user names respectively.
      */
@@ -288,6 +279,18 @@ public class EventManager implements Serializable {
         arrayList.add(IDs);
         arrayList.add(Names);
         return arrayList;
+    }
+
+    /**
+     * Generate a formatted string representation of the start time String.
+     * @param startTime startTime String
+     * @return a formatted string representation
+     */
+    public String generateFormattedStartTime(String startTime) {
+        int HourTime = Integer.parseInt(startTime.substring(8, 10));
+        String Ending = String.format("%s", (HourTime >= 12) ? "PM" : "AM");
+        return String.format("%s/%s/%s/%s%s", startTime.substring(0, 4), startTime.substring(4, 6),
+                startTime.substring(6, 8), startTime.substring(8, 10), Ending);
     }
 
     /**
