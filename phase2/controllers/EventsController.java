@@ -90,7 +90,7 @@ public class EventsController {
      * @param eventID eventID
      * @return true iff the cancellation is successful
      */
-    public boolean cancelEvent(String userID, String eventID) {
+    public boolean signOutEvent(String userID, String eventID) {
         return this.eventManager.removeAttendeeFromEvent(userID, eventID, this.roomManager);
     }
 
@@ -150,8 +150,8 @@ public class EventsController {
      * @param time time String
      * @return a list of String which is the available speakers
      */
-    public ArrayList<String> getAllAvailableSpeaker(String time) {
-        return this.speakerManager.getAllAvailableSpeaker(time, eventManager);
+    public ArrayList<String> getAllAvailableSpeaker(String time, String duration) {
+        return this.speakerManager.getAllAvailableSpeaker(time, eventManager, duration);
     }
 
     /**
