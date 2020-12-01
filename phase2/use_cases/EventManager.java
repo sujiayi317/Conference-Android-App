@@ -296,7 +296,7 @@ public class EventManager implements Serializable {
      */
     public String generateFormattedEventInfo(String eventID){
         for (Addtendable event : events){
-            if (event.getEventID() == eventID){
+            if (event.getEventID().equals(eventID)){
                 return event.getTitle().replace(" ", "_") + " " + event.getRoomID() + " " +
                         event.getSpeakers() + " " + event.getStartTime() + " " +
                         event.getEventID();

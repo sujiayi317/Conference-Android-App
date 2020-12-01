@@ -170,4 +170,10 @@ public class EventsController {
     public ArrayList<ArrayList<String>> getAllIDAndName(){
         return eventManager.getAllIDAndName();
     }
+
+    public void cancelEvent(Addtendable event){
+        List<Addtendable> eventList = eventManager.getAllEvent();
+        eventList.remove(event);
+
+    }
 }
