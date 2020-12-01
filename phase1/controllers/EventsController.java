@@ -1,12 +1,10 @@
 package controllers;
 
-import entities.Addtendable;
-import entities.Event;
 import entities.Room;
+import entities.Addtendable;
 import use_cases.EventManager;
 import use_cases.RoomManager;
 import use_cases.SpeakerManager;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,6 +16,7 @@ public class EventsController {
     private final RoomManager roomManager;
     private final SpeakerManager speakerManager;
 
+
     /**
      * the constructor for this EventsController
      */
@@ -25,6 +24,7 @@ public class EventsController {
         this.eventManager = new EventManager();
         this.roomManager = new RoomManager();
         this.speakerManager = new SpeakerManager();
+
     }
 
     /**
@@ -59,7 +59,7 @@ public class EventsController {
      *
      * @return List<Event>, which is a list of all events
      */
-    public List<Event> getAllExistingEvents() {
+    public List<Addtendable> getAllExistingEvents() {
         return this.eventManager.getAllEvent();
     }
 
@@ -113,11 +113,9 @@ public class EventsController {
      * @param startTime startTime
      * @return true iff this event is created successfully
      */
-    public boolean createEvent(String title, String roomID, ArrayList<String> speakerName, String startTime, String duration, String type) {
+    public boolean createEvent(String title, String roomID, String speakerName, String startTime, String duration, String type) {
         ArrayList<String> speakerID = new ArrayList<>();
-        for (String name: speakerName){
-            speakerID.add(speakerManager.getIdFromName(name));
-        }
+        speakerID.add(speakerManager.getIdFromName(speakerName));
         Addtendable newEvent = this.eventManager.createEvent(title, roomID, speakerID, startTime, duration, type);
         if (newEvent == null) {
             return false;
@@ -138,7 +136,9 @@ public class EventsController {
         Room room = this.roomManager.getRoomBasedOnItsID(event.getRoomID());
         info.add(event.getTitle());
         info.add(event.getStartTime());
-        info.add(speakerManager.getSpeakerNameFromID(event.getSpeakers()));
+        for (String speaker : event.getSpeakers()){
+            info.add(speakerManager.getSpeakerNameFromID(speaker));
+        }
         info.add(Integer.toString(room.getCurrentNum()));
         info.add(Integer.toString(room.getCapacity()));
         return info;
@@ -150,8 +150,8 @@ public class EventsController {
      * @param time time String
      * @return a list of String which is the available speakers
      */
-    public ArrayList<String> getAllAvailableSpeaker(String time) {
-        return this.speakerManager.getAllAvailableSpeaker(time, eventManager);
+    public ArrayList<String> getAllAvailableSpeaker(String time, String duration) {
+        return this.speakerManager.getAllAvailableSpeaker(time, eventManager, duration);
     }
 
     /**
@@ -169,5 +169,16 @@ public class EventsController {
      */
     public ArrayList<ArrayList<String>> getAllIDAndName(){
         return eventManager.getAllIDAndName();
+    }
+
+    public boolean cancelEvent(String eventID){
+        Addtendable currentEvent = eventManager.getEventFromID(eventID);
+        List<Addtendable> eventList = eventManager.getAllEvent();
+        eventList.remove(currentEvent);
+        ArrayList<String> attendeeList = currentEvent.getAttendees();
+        for (String attendee : attendeeList){
+            eventManager.removeAttendeeFromEvent(attendee, eventID, roomManager);
+        }
+        return roomManager.getRoomBasedOnItsID(currentEvent.getRoomID()).getCurrentNum() == 0;
     }
 }

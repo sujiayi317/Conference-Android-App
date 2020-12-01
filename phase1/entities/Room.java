@@ -86,6 +86,10 @@ public class Room implements Serializable{
             this.currentNum -=1;}
     }
 
+    public void resetTheCurrentNum(){
+        this.currentNum = 0;
+    }
+
     /**
      * Returns a formatted string of this room with roomNum (and roomID)
      *

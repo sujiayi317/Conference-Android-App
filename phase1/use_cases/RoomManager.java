@@ -1,8 +1,6 @@
 package use_cases;
 
-import entities.Addtendable;
-import entities.Event;
-import entities.Room;
+import entities.*;
 
 import java.io.Serializable;
 import java.util.ArrayList;
