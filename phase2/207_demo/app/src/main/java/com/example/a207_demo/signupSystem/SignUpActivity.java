@@ -86,11 +86,14 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         EditText firstName = findViewById(R.id.firstname);
         EditText lastName = findViewById(R.id.lastname);
         EditText password = findViewById(R.id.password_signUp);
+        Spinner userType = findViewById(R.id.userType);
         
 
         String userFN = firstName.getText().toString();
         String userLN = lastName.getText().toString();
         String userEM = email.getText().toString();
+        // Use getSelectedItem() to get the selected item in a spinner:
+        String userTypeStr = String.valueOf(userType.getSelectedItem());
 
 
         //Todo: initiate new Attendee object through manager
