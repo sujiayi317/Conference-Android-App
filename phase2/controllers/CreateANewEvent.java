@@ -50,13 +50,20 @@ public class CreateANewEvent {
         if (!timeInput.equals("cancel")) {
             timeInput = timeInput.replace("/", "");
             timeInput = timeInput.replace(":", "");
+            String durationNum = "-1";
+            while (1 > Integer.parseInt(durationNum) || Integer.parseInt(durationNum) > 12) {
+                durationNum = Integer.toString(input.getInputInt("Please enter the duration for the event\n (Integer between 1 and 12)\n"));
+                if (1 > Integer.parseInt(durationNum) || Integer.parseInt(durationNum) >12) {
+                    output.printPrompt("The duration you enter is out of the bound please enter the correct integer\n");
+                }
+            }
             if (eventsController.getAvailableRoom(timeInput).size() == 0) {
                 output.printPrompt("sorry there is no available room yet,\n please go to create one first!\n");
-            } else if (eventsController.getAllAvailableSpeaker(timeInput).size() == 0) {
+            } else if (eventsController.getAllAvailableSpeaker(timeInput, durationNum).size() == 0) {
                 output.printPrompt("sorry there is no available speaker yet,\n please go to create one first!\n");
             } else {
                 getAllAvailableRoomInfo(timeInput, viewAllAvailableRoom, eventsController);
-                getAllAvailableSpeaker(timeInput, eventsController, viewAllAvailableSpeaker);
+                getAllAvailableSpeaker(timeInput, eventsController, viewAllAvailableSpeaker, durationNum);
                 viewAllEventType.printALlEventType();
                 String title = "";
                 while (title.length() < 3) {
@@ -86,24 +93,17 @@ public class CreateANewEvent {
                     }
                 }
                 String speakerNum = "-1";
-                while (! canceled && 0 > Integer.parseInt(speakerNum) || Integer.parseInt(speakerNum) >= eventsController.getAllAvailableSpeaker(timeInput).size()) {
+                while (! canceled && 0 > Integer.parseInt(speakerNum) || Integer.parseInt(speakerNum) >= eventsController.getAllAvailableSpeaker(timeInput, durationNum).size()) {
                     speakerNum = Integer.toString(input.getInputInt("Please enter a number to choose Speaker to " +
                             "speak in this event: (enter '0' to choose the first speaker shown in the list above.)\n"));
-                    if (0 > Integer.parseInt(speakerNum) || Integer.parseInt(speakerNum) >= eventsController.getAllAvailableSpeaker(timeInput).size()) {
+                    if (0 > Integer.parseInt(speakerNum) || Integer.parseInt(speakerNum) >= eventsController.getAllAvailableSpeaker(timeInput, durationNum).size()) {
                         output.printPrompt("The speakerNum you chose is out of the bound please enter the correct number\n");
-                    }
-                }
-                String durationNum = "-1";
-                while (! canceled && 1 > Integer.parseInt(durationNum) || Integer.parseInt(durationNum) > 12) {
-                    durationNum = Integer.toString(input.getInputInt("Please enter the duration for the event\n (Integer between 1 and 12)\n"));
-                    if (1 > Integer.parseInt(durationNum) || Integer.parseInt(durationNum) >12) {
-                        output.printPrompt("The duration you enter is out of the bound please enter the correct integer\n");
                     }
                 }
 
                 if (!canceled){
                     String room = eventsController.getAvailableRoom(timeInput).get(Integer.parseInt(roomNUm));
-                    String speaker = eventsController.getAllAvailableSpeaker(timeInput).get(Integer.parseInt(speakerNum));
+                    String speaker = eventsController.getAllAvailableSpeaker(timeInput,durationNum).get(Integer.parseInt(speakerNum));
 //                    ArrayList<String> speakerList = new ArrayList<>();
 //                    speakerList.add(speaker);
                     if (createEvent(title, eventsController.getRoomManager().changeNumTOID(room), speaker, timeInput, eventsController, durationNum, allType.get(Integer.parseInt(eventType)))) {
@@ -177,8 +177,8 @@ public class CreateANewEvent {
     }
 
     private void getAllAvailableSpeaker(String time, EventsController eventsController, ViewAllAvailableSpeaker
-            viewAllAvailableSpeaker) {
-        output.printPrompt(viewAllAvailableSpeaker.printAllAvailableSpeaker(eventsController.getAllAvailableSpeaker(time)));
+            viewAllAvailableSpeaker, String duration) {
+        output.printPrompt(viewAllAvailableSpeaker.printAllAvailableSpeaker(eventsController.getAllAvailableSpeaker(time, duration)));
 
     }
 
@@ -187,4 +187,3 @@ public class CreateANewEvent {
         return eventsController.createEvent(title, roomID, speaker, startTime, duration, type);
     }
 }
-
