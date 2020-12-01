@@ -8,7 +8,7 @@ import java.util.UUID;
 /**
  * The entities.Event class, this is the conference scheduled by entities.Organizer for Attendees and Speakers.
  */
-public class Event implements Serializable {
+public abstract class Event implements Serializable {
 
     private final String title;
     private final String eventID;
