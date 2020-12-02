@@ -21,8 +21,7 @@ public class AnnouncementActivity extends SetUpActivity {
     }
 
     public void init(){
-        super.createActionBar();
-        super.createNavView(this, R.id.nav_announcements);
+        super.init(this, R.id.nav_view_attendee, R.id.nav_announcements);
     }
 
 }
