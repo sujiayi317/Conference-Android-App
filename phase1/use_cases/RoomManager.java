@@ -34,7 +34,7 @@ public class RoomManager implements Serializable {
      * @param roomNum the room to create and add
      * @return true iff successfully creates and adds the room
      */
-    public boolean createRoom(String roomNum, String capacity) {
+    public boolean createRoom(String roomNum, int capacity) {
         for (Room room : this.rooms) {
             if (room.getRoomNum().equals(roomNum)) {
                 return false;
@@ -51,8 +51,8 @@ public class RoomManager implements Serializable {
      * @param roomNum the room to create and add
      * @param roomID the room ID
      */
-    public void loadRoom(String roomNum, String roomID) {
-        Room room = new Room(roomNum, roomID);
+    public void loadRoom(String roomNum, String roomID, int capacity) {
+        Room room = new Room(roomNum, roomID, capacity);
         this.rooms.add(room);
     }
 
@@ -90,7 +90,7 @@ public class RoomManager implements Serializable {
      */
     public boolean isFull(String roomID) {
         Room room = getRoomBasedOnItsID(roomID);
-        return room.getCurrentNum() == Integer.parseInt(room.getCapacity());
+        return room.getCurrentNum() == room.getCapacity();
     }
 
     /**
