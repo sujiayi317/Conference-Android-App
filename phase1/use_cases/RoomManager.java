@@ -2,6 +2,7 @@ package use_cases;
 
 import entities.Event;
 import entities.Room;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -33,13 +34,13 @@ public class RoomManager implements Serializable {
      * @param roomNum the room to create and add
      * @return true iff successfully creates and adds the room
      */
-    public boolean createRoom(String roomNum) {
+    public boolean createRoom(String roomNum, String capacity) {
         for (Room room : this.rooms) {
             if (room.getRoomNum().equals(roomNum)) {
                 return false;
             }
         }
-        Room room = new Room(roomNum);
+        Room room = new Room(roomNum, capacity);
         this.rooms.add(room);
         return true;
     }
@@ -89,7 +90,7 @@ public class RoomManager implements Serializable {
      */
     public boolean isFull(String roomID) {
         Room room = getRoomBasedOnItsID(roomID);
-        return room.getCurrentNum() == room.getCapacity();
+        return room.getCurrentNum() == Integer.parseInt(room.getCapacity());
     }
 
     /**
@@ -181,4 +182,13 @@ public class RoomManager implements Serializable {
         }
         return roomList;
     }
+
+
+//    public void freeUpTheRoomBasedOnEvent(Addtendable event){
+//        for (Room room: rooms){
+//            if (room.getRoomID().equals(event.getRoomID())){
+//                room.resetTheCurrentNum();
+//            }
+//        }
+//    }
 }
