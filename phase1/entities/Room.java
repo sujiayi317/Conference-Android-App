@@ -9,7 +9,7 @@ import java.util.UUID;
 public class Room implements Serializable{
 
     private final String roomID;
-    private final int capacity = 2;
+    private String capacity;
     private int currentNum = 0;
     private final String roomNum;
 
@@ -18,9 +18,10 @@ public class Room implements Serializable{
      *
      * @param roomNum unique identification roomNum of the room
      */
-    public Room(String roomNum) {
+    public Room(String roomNum, String capacity) {
         this.roomNum = roomNum;
         this.roomID = UUID.randomUUID().toString().split("-")[0];
+        this.capacity = capacity;
     }
 
     /**
@@ -29,9 +30,10 @@ public class Room implements Serializable{
      * @param roomNum unique identification roomNum of the room
      * @param roomID unique identification roomID of the room
      */
-    public Room(String roomNum, String roomID) {
+    public Room(String roomNum, String roomID, String capacity) {
         this.roomNum = roomNum;
         this.roomID = roomID;
+        this.capacity = capacity;
     }
 
     /**
@@ -66,15 +68,18 @@ public class Room implements Serializable{
      *
      * @return capacity
      */
-    public int getCapacity(){
+    public String getCapacity(){
         return this.capacity;
     }
 
+    public void setCapacity(String capacity){
+        this.capacity = capacity;
+    }
     /**
      * Increase the number of people by 1 in this room
      */
     public void increaseCurrentNum(){
-        if (this.currentNum < this.capacity){
+        if (this.currentNum < Integer.parseInt(this.capacity)){
             this.currentNum +=1;}
     }
 
@@ -86,9 +91,9 @@ public class Room implements Serializable{
             this.currentNum -=1;}
     }
 
-    public void resetTheCurrentNum(){
-        this.currentNum = 0;
-    }
+//    public void resetTheCurrentNum(){
+//        this.currentNum = 0;
+//    }
 
     /**
      * Returns a formatted string of this room with roomNum (and roomID)
@@ -99,4 +104,3 @@ public class Room implements Serializable{
     public String toString() {
         return "entities.Room Number " + roomNum + " ( room ID: " + roomID + ")";
     }
-}

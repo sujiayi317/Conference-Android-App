@@ -72,8 +72,14 @@ public class Room implements Serializable{
         return this.capacity;
     }
 
-    public void setCapacity(String capacity){
-        this.capacity = capacity;
+
+
+    public boolean setCapacity(String capacity){
+        if (Integer.parseInt(capacity) >= this.currentNum) {
+            this.capacity = capacity;
+            return true;
+        }
+        return false;
     }
     /**
      * Increase the number of people by 1 in this room
