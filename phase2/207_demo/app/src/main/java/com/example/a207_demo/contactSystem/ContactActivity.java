@@ -1,6 +1,7 @@
 package com.example.a207_demo.contactSystem;
 
 import android.os.Bundle;
+import com.example.a207_demo.contactSystem.Contact;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
