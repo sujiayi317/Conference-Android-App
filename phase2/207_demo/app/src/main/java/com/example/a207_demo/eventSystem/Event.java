@@ -16,7 +16,7 @@ public class Event implements Serializable {
     private ArrayList<String> userIDs;
     private ArrayList<String> speakers;
     private String startTime;
-    private int duration = 1;
+    private String duration = "1";
 
     private int imageId;
 
@@ -83,7 +83,12 @@ public class Event implements Serializable {
             return false;
         }
         for (Event event : events) {
-            if (event.getAttendees().contains(attendeeID) && event.getStartTime().equals(this.getStartTime())) {
+//            if (event.getAttendees().contains(attendeeID) && event.getStartTime().equals(this.getStartTime())) {
+//                return false;
+//            }
+            if (event.getAttendees().contains(attendeeID) &&
+                    !((Integer.parseInt(event.getStartTime()) + Integer.parseInt(event.getDuration()) <= Integer.parseInt(this.startTime)) ||
+                            Integer.parseInt(this.startTime) + Integer.parseInt(this.duration) <= Integer.parseInt(event.getStartTime()))) {
                 return false;
             }
         }
@@ -178,7 +183,10 @@ public class Event implements Serializable {
         return userIDs;
     }
 
-    public int getDuration(){return duration;}
+//    public int getDuration(){return duration;}
+    public String getDuration(){
+    return this.duration;
+}
 
     /**
      * Formats and returns the time slot
