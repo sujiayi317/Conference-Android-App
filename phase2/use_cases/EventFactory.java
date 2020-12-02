@@ -5,15 +5,15 @@ import entities.*;
 import java.util.ArrayList;
 
 public class EventFactory {
-        public Event createEvent(String title, String roomID, ArrayList<String> speakerID, String startTime, String duration, String type){
-            if (type.equals("TALK")){
+    public Event createEvent(String title, String roomID, ArrayList<String> speakerID, String startTime, String duration, String type) {
+        switch (type) {
+            case "TALK":
                 return new Talk(title, roomID, speakerID, startTime, duration);
-            }
-            else if (type.equals("DISCUSSION")){
+            case "DISCUSSION":
                 return new Discussion(title, roomID, startTime, speakerID, duration);
-            }
-            else{
+            case "PARTY":
                 return new Party(title, roomID, startTime, duration);
-            }
         }
+        return null;
     }
+}
