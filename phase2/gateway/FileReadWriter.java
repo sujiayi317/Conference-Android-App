@@ -42,7 +42,7 @@ public class FileReadWriter {
     public void UserReader() {
         ArrayList<String> lines = new ArrayList();
         try {
-            File UserFile = new File("./phase1/Users.txt");
+            File UserFile = new File("./phase2/Users.txt");
             Scanner myReader = new Scanner(UserFile);
             while (myReader.hasNextLine()) {
                 while (myReader.hasNextLine()) {
@@ -85,7 +85,7 @@ public class FileReadWriter {
      */
     public void UserWriter(){
         try {
-            PrintWriter pw = new PrintWriter("./phase1/Users.txt");
+            PrintWriter pw = new PrintWriter("./phase2/Users.txt");
             for (String userID : userManager.UsersIdsGetter()){
                 String line = userManager.getUserType(userID) + " " + userManager.getUserEmail(userID) + " " +
                         userManager.getUserName(userID) + " "+ userManager.getUserPassword(userID) + " " + userID;
@@ -108,7 +108,7 @@ public class FileReadWriter {
     public void RoomReader(){
         ArrayList<String> lines = new ArrayList<>();
         try {
-            File UserFile = new File("./phase1/rooms.txt");
+            File UserFile = new File("./phase2/rooms.txt");
             Scanner myReader = new Scanner(UserFile);
             while (myReader.hasNextLine()) {
                 while (myReader.hasNextLine()) {
@@ -126,77 +126,77 @@ public class FileReadWriter {
     }
 
     /**
-     * Saves created room/rooms to rooms.txt file.
+     * Saves created room/rooms to rooms.txt file. FORMAT ISSUES! CAN"T WRITE
      */
     public void RoomWriter(){
-        ArrayList<String> NumList = eventsController.getRoomManager().getAllRoomNum();
-        ArrayList<String> IDList = eventsController.getRoomManager().getAllRoomID();
-        try {
-            PrintWriter pw = new PrintWriter("./phase1/rooms.txt");
-            for (int index = 0; index < NumList.size(); index++){
-                String line = NumList.get(index) + " " + IDList.get(index);
-                line += "\n";
-                pw.write(line);
-            }
-            pw.close();
-        } catch (FileNotFoundException e){
-            System.out.println("rooms.txt File Not Found.");
-        }
+//        ArrayList<String> NumList = eventsController.getRoomManager().getAllRoomNum();
+//        ArrayList<String> IDList = eventsController.getRoomManager().getAllRoomID();
+//        try {
+//            PrintWriter pw = new PrintWriter("./phase2/rooms.txt");
+//            for (int index = 0; index < NumList.size(); index++){
+//                String line = NumList.get(index) + " " + IDList.get(index);
+//                line += "\n";
+//                pw.write(line);
+//            }
+//            pw.close();
+//        } catch (FileNotFoundException e){
+//            System.out.println("rooms.txt File Not Found.");
+//        }
     }
 
     /**
      * Reads Events.txt and loads saved events.
      */
     public void EventReader(){
-        ArrayList<String> lines = new ArrayList<>();
-        try {
-            File UserFile = new File("./phase1/Events.txt");
-            Scanner myReader = new Scanner(UserFile);
-            while (myReader.hasNextLine()) {
-                while (myReader.hasNextLine()) {
-                    lines.add(myReader.nextLine());
-                }
-            }
-        } catch (FileNotFoundException e) {
-            System.out.println("Events.txt File Not Found");
-        }
-
-        for (String line : lines) {
-            ArrayList<String> wordList = new ArrayList<String>(Arrays.asList(line.split(" ")));
-            ArrayList<String> Attendees = new ArrayList<>();
-            if (wordList.size() > 7){
-                for (int index = 7; index < wordList.size(); index++){
-                    Attendees.add(wordList.get(index));
-                }
-            }
-            // NEED LIST OF SPEAKERS NOW PENDING CHANGE:  wordList.get(2)
-            eventsController.getRoomManager().addEventToRoom(wordList.get(4), wordList.get(1));
-            eventsController.getEventManager().loadEvent(wordList.get(0).replace("_", " "),
-                    wordList.get(1), new ArrayList(), wordList.get(3), wordList.get(4), wordList.get(5),
-                    wordList.get(6), Attendees, GetEventsController().getRoomManager());
-
-        }
+//        ArrayList<String> lines = new ArrayList<>();
+//        try {
+//            File UserFile = new File("./phase2/Events.txt");
+//            Scanner myReader = new Scanner(UserFile);
+//            while (myReader.hasNextLine()) {
+//                while (myReader.hasNextLine()) {
+//                    lines.add(myReader.nextLine());
+//                }
+//            }
+//        } catch (FileNotFoundException e) {
+//            System.out.println("Events.txt File Not Found");
+//        }
+//
+//        for (String line : lines) {
+//            ArrayList<String> wordList = new ArrayList<String>(Arrays.asList(line.split(" ")));
+//            ArrayList<String> Attendees = new ArrayList<>();
+//            if (wordList.size() > 7){
+//                for (int index = 7; index < wordList.size(); index++){
+//                    Attendees.add(wordList.get(index));
+//                }
+//            }
+//            // NEED LIST OF SPEAKERS NOW PENDING CHANGE:  wordList.get(2)
+//            eventsController.getRoomManager().addEventToRoom(wordList.get(4), wordList.get(1));
+//            eventsController.getEventManager().loadEvent(wordList.get(0).replace("_", " "),
+//                    wordList.get(1), new ArrayList(), wordList.get(3), wordList.get(4), wordList.get(5),
+//                    wordList.get(6), Attendees, GetEventsController().getRoomManager());
+//
+//        }
     }
 
     /**
-     * Saves created events to Events.txt.
+     * Saves created events to Events.txt. FORMAT ISSUES! CAN"T SAVE
      */
     public void EventWriter(){
-        List<String> IDList = eventsController.getEventManager().getAllIDAndName().get(0);
-        try {
-            PrintWriter pw = new PrintWriter("./phase1/Events.txt");
-            for (String ID : IDList) {
-                String line = eventsController.getEventManager().generateFormattedEventInfo(ID);
-                for (String attendee : eventsController.getEventManager().getAttendeesFromEvent(ID)) {
-                    line += " " + attendee;
-                }
-                line += "\n";
-                pw.write(line);
-            }
-            pw.close();
-        } catch (FileNotFoundException e){
-            System.out.println("Events.txt File Not Found.");
-        }
+//        List<String> IDList = eventsController.getEventManager().getAllIDAndName().get(0);
+//        try {
+//            PrintWriter pw = new PrintWriter("./phase2/Events.txt");
+//            for (String ID : IDList) {
+//                String line = eventsController.getEventManager().generateFormattedEventInfo(ID);
+//                for (String attendee : eventsController.getEventManager().getAttendeesFromEvent(ID)) {
+//                    line += " " + attendee;
+//                }
+//                line += "\n";
+//                pw.write(line);
+//            }
+//            pw.close();
+//        } catch (FileNotFoundException e){
+//            System.out.println("Events.txt File Not Found.");
+//        }
     }
 
     /**

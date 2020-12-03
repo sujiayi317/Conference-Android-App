@@ -31,6 +31,7 @@ public abstract class Event implements Serializable {
         this.userIDs = new ArrayList<>();
         this.startTime = startTime;
         this.duration = duration;
+        System.out.println(eventID);
     }
 
 
