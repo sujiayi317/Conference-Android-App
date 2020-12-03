@@ -8,10 +8,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
+import com.example.a207_demo.use_cases.*;
 import com.example.a207_demo.utility.ActivityCollector;
 import com.example.a207_demo.MainActivity;
 import com.example.a207_demo.R;
+
+
 
 /**
  * Activity class for user sign up.
@@ -57,6 +61,12 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             case R.id.btn_signUp:
                 if(!validEmail()){
                     //Todo: implement error message
+                    Toast.makeText(SignUpActivity.this, "Your email is invalid, please try again",
+                            Toast.LENGTH_LONG).show();
+                }else if(!validUsername()){
+                    //Todo: implement error message
+                    Toast.makeText(SignUpActivity.this, "Your name is invalid, please try again",
+                            Toast.LENGTH_LONG).show();
                 }else{
                     intent = new Intent(SignUpActivity.this, MainActivity.class);
                     setUpData();
@@ -70,123 +80,26 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         }
     }
 
+    /**
+     * Check if the email entered is valid
+     * @return boolean
+     */
     private boolean validEmail(){
         EditText email = findViewById(R.id.email_signUp);
         String userEM = email.getText().toString();
 
-//        //Todo: validate email through manager
-//        if(!validNewEmail(userEM)){
-//
-//        }
-        return true;
-    }
+        UserManager userManager = new UserManager();
 
-    private void setUpData(){
-        EditText email = findViewById(R.id.email_signUp);
-        EditText firstName = findViewById(R.id.firstname);
-        EditText lastName = findViewById(R.id.lastname);
-        EditText password = findViewById(R.id.password_signUp);
-        Spinner userType = findViewById(R.id.userType);
-        
-
-        String userFN = firstName.getText().toString();
-        String userLN = lastName.getText().toString();
-        String userEM = email.getText().toString();
-        // Use getSelectedItem() to get the selected item in a spinner:
-        String userTypeStr = String.valueOf(userType.getSelectedItem());
-
-
-        //Todo: initiate new Attendee object through manager
-        //Todo: save data into database
-//        if (userTypeStr.equals("Organizer")) {
-//            return createAccount.CreateNewAccount(attendeeManager, organizerManager, speakerManager, userManager,"ATTENDEE");
-//        } else if (CurrentAction.equals("2")) {
-//            return createAccount.CreateNewAccount(attendeeManager, organizerManager, speakerManager, userManager,"ORGANIZER");
-//        } else if(CurrentAction.equals("cancel")){
-//            return false;
-//        }
-//    }
-
-        AttendeeManager attendeeManager;
-        OrganizerManager organizerManager;
-        SpeakerManager speakerManager;
-        UserManager userManager;
-        if (userTypeStr.equals("Organizer")) {
-            return CreateNewAccount(attendeeManager, organizerManager, speakerManager, userManager,"ORGANIZER");
-        } else if (CurrentAction.equals("2")) {
-            return createAccount.CreateNewAccount(attendeeManager, organizerManager, speakerManager, userManager,"ORGANIZER");
-        } else if(CurrentAction.equals("cancel")){
-            return false;
-        }
-    }
-
-
-    public boolean CreateNewAccount(AttendeeManager attendeeManager, OrganizerManager organizerManager,
-                                    SpeakerManager speakerManager, UserManager userManager, String type) {
-        String email = input.getInputString("Please enter the email for new account: (ex. 12345@abc.com), or " +
-                "enter 'cancel' at any point to exit account creation\n");
-        if (email.contains(" ")) {
-            return false;
-        }
-        ;
-        while (true) {
-            if (email.equals("cancel")) {
-                return false;
-            } else if (isValidEmail(email, userManager)) {
-                break;
-            } else {
-                email = input.getInputString("Please enter another one, or enter 'cancel' at any point to exit" +
-                        " account creation\n");
-            }
-        }
-
-        String user = input.getInputString("Please enter a user name for new account: (must have length of at " +
-                "least 2 and does NOT contain space), or enter 'cancel' at any point to exit account creation\n");
-        if (user.contains(" ")){
-            return false;
-        };
-        while (true) {
-            if (user.equals("cancel")) {
-                return false;
-            } else if (isValidUserName(user, userManager)) {
-                break;
-            } else {
-                user = input.getInputString("Invalid User name or user name already used, please enter another " +
-                        "one, or enter 'cancel' at any point to exit account creation\n");
-            }
-        }
-        String password = input.getInputString("Please enter a password for " + user + ":\n");
-        if (password.contains(" ")){
-            return false;
-        };
-        while (true) {
-            if (password.equals("cancel")) {
-                return false;
-            } else if (password.length() >= 8) {
-                break;
-            } else {
-                password = input.getInputString("Password must be at least length 8, please try again, or enter " +
-                        "'cancel' at any point to exit account creation\n");
-            }
-        }
-        if (type.equals("SPEAKER")) {
-            speakerManager.createSpeaker(email, user, password);
-        } else if (type.equals("ORGANIZER")) {
-            organizerManager.createOrganizer(email, user, password);
-        } else {
-            attendeeManager.createAttendee(email, user, password);
-        }
-        return true;
+        return isValidEmail(userEM, userManager);
     }
 
     /**
-     * The method to check if a given email is in valid form, or already existed in the system.
-     *
-     * @param email       The given email.
-     * @param userManager user manager class.
-     * @return true iff the email is valid.
+     * Check if the email entered is valid with userManager
+     * @param email email of the user
+     * @param userManager an instance of userManager
+     * @return boolean
      */
-    public boolean isValidEmail(String email, UserManager userManager) {
+    private boolean isValidEmail(String email, UserManager userManager) {
         if (!userManager.validNewEmail(email)) {
             return false;
         } else if (email.length() >= 6 && email.contains("@") && email.charAt(0) != '@' && email.contains(".") &&
@@ -200,13 +113,75 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     /**
-     * The check if the user name is valid.
-     *
-     * @param user        the user name.
-     * @param userManager user manager class.
-     * @return true iff the name is valid.
+     * Check if the userName entered is valid
+     * @return boolean
      */
-    public boolean isValidUserName(String user, UserManager userManager) {
+    private boolean validUsername(){
+        EditText firstName = findViewById(R.id.firstname);
+        EditText lastName = findViewById(R.id.lastname);
+        String userFN = firstName.getText().toString();
+        String userLN = lastName.getText().toString();
+
+        UserManager userManager = new UserManager();
+
+        return isValidUserName(userFN + userLN, userManager);
+    }
+
+    /**
+     * Check if the userName entered is valid with userManager
+     * @param user String username
+     * @param userManager an instance of userManager
+     * @return boolean
+     */
+    private boolean isValidUserName(String user, UserManager userManager) {
         return user.length() >= 2 && userManager.validNewName(user);
     }
+
+
+    /**
+     * set up data and save data into database
+     */
+    private void setUpData(){
+        EditText email = findViewById(R.id.email_signUp);
+        EditText firstName = findViewById(R.id.firstname);
+        EditText lastName = findViewById(R.id.lastname);
+        EditText password = findViewById(R.id.password_signUp);
+        Spinner userType = findViewById(R.id.userType);
+
+        String userFN = firstName.getText().toString();
+        String userLN = lastName.getText().toString();
+        String userEM = email.getText().toString();
+        String userPW = password.getText().toString();
+        // Use getSelectedItem() to get the selected item in a spinner:
+        String userTypeStr = String.valueOf(userType.getSelectedItem());
+
+        //Todo: initiate new User object through manager
+        //Todo: save data into database
+        createNewAccount(userTypeStr, userFN + userLN, userEM, userPW);
+
+
+    }
+
+    /**
+     * create a New Account
+     * @param userType String, the type of the user
+     * @param username username
+     * @param userEmail userEmail
+     * @param userPassword userPassword
+     */
+    private void createNewAccount(String userType, String username, String userEmail, String userPassword){
+        AttendeeManager attendeeManager = new AttendeeManager();
+        OrganizerManager organizerManager = new OrganizerManager();
+        //TODO: add VipUserManager
+        //VipUserManager vipUserManager = new VipUserManager();
+
+        if(userType.equals("Attendee")){
+            attendeeManager.createAttendee(username, userEmail, userPassword);
+        }else if(userType.equals("Organizer")){
+            organizerManager.createOrganizer(username, userEmail, userPassword);
+        }else if(userType.equals("VIP User")){
+            //vipUserManger.createVipUser(username, userEmail, userPassword);
+        }
+    }
+
 }
