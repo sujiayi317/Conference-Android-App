@@ -104,8 +104,8 @@ public class EventManager implements Serializable {
      * @param roomManager roomManager
      * @return  the newly created event
      */
-    public Event loadEvent(String title, String roomID, ArrayList<String> speakerID, String startTime, String eventID,String duration, String type,
-                           ArrayList<String> attendeeID, RoomManager roomManager) {
+    public Event loadEvent(String title, String roomID, ArrayList<String> speakerID, String startTime, String eventID,
+                           String duration, String type, ArrayList<String> attendeeID, RoomManager roomManager) {
         // create this new event:
         Event newEvent = eventFactory.createEvent(title, roomID, speakerID, startTime,duration, type);
         // update the events list:

@@ -120,7 +120,8 @@ public class FileReadWriter {
         }
         for (String line : lines) {
             ArrayList<String> wordList = new ArrayList<String>(Arrays.asList(line.split(" ")));
-            eventsController.getRoomManager().loadRoom(wordList.get(0), wordList.get(1));
+            eventsController.getRoomManager().loadRoom(wordList.get(0), wordList.get(1),
+                    Integer.parseInt(wordList.get(2)));
         }
     }
 
@@ -163,15 +164,17 @@ public class FileReadWriter {
         for (String line : lines) {
             ArrayList<String> wordList = new ArrayList<String>(Arrays.asList(line.split(" ")));
             ArrayList<String> Attendees = new ArrayList<>();
-            if (wordList.size() > 5){
-                for (int index = 5; index < wordList.size(); index++){
+            if (wordList.size() > 7){
+                for (int index = 7; index < wordList.size(); index++){
                     Attendees.add(wordList.get(index));
                 }
             }
+            // NEED LIST OF SPEAKERS NOW PENDING CHANGE:  wordList.get(2)
             eventsController.getRoomManager().addEventToRoom(wordList.get(4), wordList.get(1));
             eventsController.getEventManager().loadEvent(wordList.get(0).replace("_", " "),
-                    wordList.get(1), wordList.get(2), wordList.get(3), wordList.get(4), Attendees,
-                    GetEventsController().getRoomManager());
+                    wordList.get(1), new ArrayList(), wordList.get(3), wordList.get(4), wordList.get(5),
+                    wordList.get(6), Attendees, GetEventsController().getRoomManager());
+
         }
     }
 
