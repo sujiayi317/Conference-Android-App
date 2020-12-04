@@ -15,19 +15,25 @@ import com.example.a207_demo.use_cases.*;
 import com.example.a207_demo.utility.ActivityCollector;
 import com.example.a207_demo.MainActivity;
 import com.example.a207_demo.R;
-
+import com.example.a207_demo.utility.CleanArchActivity;
 
 
 /**
  * Activity class for user sign up.
  */
-public class SignUpActivity extends AppCompatActivity implements View.OnClickListener{
+public class SignUpActivity extends CleanArchActivity implements View.OnClickListener {
 
-    private final CreateAccount accountCreater = new CreateAccount();
-    private final FileReadWriter fileReadWriter = new FileReadWriter();
+    private final CreateAccount accountCreator = new CreateAccount();
+    private FileReadWriter fileReadWriter;
+
+    private String userName;
+    private String userEmail;
+    private String userPassword;
+    private String userType;
 
     /**
      * Required function to initiate an Activity class.
+     *
      * @param savedInstanceState saved data for unexpected crush
      */
     @Override
@@ -45,7 +51,8 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     /**
      * Set up activity.
      */
-    public void init(){
+    public void init() {
+        fileReadWriter = getFileReadWriter();
         Button signUp = findViewById(R.id.btn_signUp);
         Button login = findViewById(R.id.btn_login);
 
@@ -55,21 +62,22 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
     /**
      * Button Listener for clicking events.
-     * @param v Buttom clicked
+     *
+     * @param v Button clicked
      */
     @Override
-    public void onClick(View v){
+    public void onClick(View v) {
         Intent intent;
 
-        switch(v.getId()){
+        switch (v.getId()) {
             case R.id.btn_signUp:
-                if(!validEmail()){
+                if (!validEmail()) {
                     Toast.makeText(SignUpActivity.this, "Your email is invalid, please try again",
                             Toast.LENGTH_LONG).show();
-                }else if(!validUsername()){
+                } else if (!validUsername()) {
                     Toast.makeText(SignUpActivity.this, "Your name is invalid, please try again",
                             Toast.LENGTH_LONG).show();
-                }else{
+                } else {
                     Toast.makeText(SignUpActivity.this, "You have signed up SUCCESSFULLY!",
                             Toast.LENGTH_LONG).show();
                     setUpData();
@@ -86,48 +94,41 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
     /**
      * Check if the email entered is valid
+     *
      * @return boolean
      */
-    private boolean validEmail(){
+    private boolean validEmail() {
         EditText email = findViewById(R.id.email_signUp);
-        String userEM = email.getText().toString();
+        userEmail = email.getText().toString();
 
-        return accountCreater.isValidEmail(userEM);
+        return accountCreator.isValidEmail(userEmail);
     }
 
     /**
      * Check if the userName entered is valid
+     *
      * @return boolean
      */
-    private boolean validUsername(){
+    private boolean validUsername() {
         EditText firstName = findViewById(R.id.firstname);
         EditText lastName = findViewById(R.id.lastname);
-        String userFN = firstName.getText().toString();
-        String userLN = lastName.getText().toString();
+        userName = firstName.getText().toString() + lastName.getText().toString();
 
-        return accountCreater.isValidUserName(userFN + userLN);
+        return accountCreator.isValidUserName(userName);
     }
 
     /**
      * set up data and save data into database
      */
-    private void setUpData(){
-        EditText email = findViewById(R.id.email_signUp);
-        EditText firstName = findViewById(R.id.firstname);
-        EditText lastName = findViewById(R.id.lastname);
+    private void setUpData() {
         EditText password = findViewById(R.id.password_signUp);
-        Spinner userType = findViewById(R.id.userType);
+        Spinner type = findViewById(R.id.userType);
 
-        String userFN = firstName.getText().toString();
-        String userLN = lastName.getText().toString();
-        String userEM = email.getText().toString();
-        String userPW = password.getText().toString();
-        String userTypeStr = String.valueOf(userType.getSelectedItem());
+        userPassword = password.getText().toString();
+        userType = String.valueOf(type.getSelectedItem());
 
-        //Todo: create account using CreateANewAccount (factory)
-        //Todo: save data into database
-        accountCreater.createNewAccount(userFN + userLN, userEM, userPW, userTypeStr);
-        fileReadWriter.connectWriters(this);
+        accountCreator.createNewAccount(userName, userEmail, userPassword, userType);
+        fileReadWriter.UserWriter();
     }
 
 }
