@@ -14,7 +14,6 @@ public class OrganizerController extends AttendeeController{
     private final OrganizerMenu organizerMenu;
     private final CreateANewEvent createANewEvent;
     private final CreateANewRoom createANewRoom;
-    private final CreateNewSpeaker createNewSpeaker;
     private final ViewAllAvailableRoom viewAllAvailableRoom;
     private final ViewAllEventType viewAllEventType;
     private final ViewFriendList viewFriendList;
@@ -23,21 +22,20 @@ public class OrganizerController extends AttendeeController{
     private final SeeAllMessage seeAllMessage;
     private final SendToAllAttendees sendToAllAttendees;
     private final cancelEvent cancelEvent;
-    private final CreateANewAccount createANewAccount;
+    private final CreateNewAccountForOrg createNewAccountForOrg;
 
     public OrganizerController(){
         this.organizerMenu = new OrganizerMenu();
         input = new InputManager();
         output = new OutputManager();
         this.create = new CreateAccount();
-        createNewSpeaker = new CreateNewSpeaker();
         createANewEvent = new CreateANewEvent();
         createANewRoom = new CreateANewRoom();
         seeAllFriend = new SeeAllFriend();
         seeAllMessage = new SeeAllMessage();
         sendToAllAttendees = new SendToAllAttendees();
         cancelEvent = new cancelEvent();
-        createANewAccount = new CreateANewAccount();
+        createNewAccountForOrg = new CreateNewAccountForOrg();
         this.viewAllAvailableRoom = new ViewAllAvailableRoom();
         this.viewAllAvailableSpeaker = new ViewAllAvailableSpeaker();
         this.viewFriendList = new ViewFriendList();
@@ -72,9 +70,9 @@ public class OrganizerController extends AttendeeController{
                         output.printPrompt("You have signed out.\n");
                         break;
                     case 1:
-                        //Create a new speaker
-                        createNewSpeaker.createNewSpeaker(create, attendeeManager,organizerManager,
-                                eventsController,vipUserManager, userManager);
+                        //Create a new account
+                        createNewAccountForOrg.toCreateNewAccountForOrg(create, attendeeManager,
+                                organizerManager, eventsController, vipUserManager, userManager);
                         break;
                     case 2:
                         // View all events
@@ -117,8 +115,7 @@ public class OrganizerController extends AttendeeController{
                     case 10:
                         //cancel event
                         cancelEvent.toCancelEvent(eventsController, viewAllExistingEvents);
-                    case 11:
-                        // create a new account
+
 
 
                 }

@@ -14,7 +14,6 @@ public class OrganizerController extends AttendeeController{
     private final OrganizerMenu organizerMenu;
     private final CreateANewEvent createANewEvent;
     private final CreateANewRoom createANewRoom;
-    private final CreateNewSpeaker createNewSpeaker;
     private final ViewAllAvailableRoom viewAllAvailableRoom;
     private final ViewAllEventType viewAllEventType;
     private final ViewFriendList viewFriendList;
@@ -23,23 +22,25 @@ public class OrganizerController extends AttendeeController{
     private final SeeAllMessage seeAllMessage;
     private final SendToAllAttendees sendToAllAttendees;
     private final cancelEvent cancelEvent;
+    private final CreateNewAccountForOrg createNewAccountForOrg;
 
     public OrganizerController(){
         this.organizerMenu = new OrganizerMenu();
         input = new InputManager();
         output = new OutputManager();
         this.create = new CreateAccount();
-        createNewSpeaker = new CreateNewSpeaker();
         createANewEvent = new CreateANewEvent();
         createANewRoom = new CreateANewRoom();
         seeAllFriend = new SeeAllFriend();
         seeAllMessage = new SeeAllMessage();
         sendToAllAttendees = new SendToAllAttendees();
         cancelEvent = new cancelEvent();
+        createNewAccountForOrg = new CreateNewAccountForOrg();
         this.viewAllAvailableRoom = new ViewAllAvailableRoom();
         this.viewAllAvailableSpeaker = new ViewAllAvailableSpeaker();
         this.viewFriendList = new ViewFriendList();
         this.viewAllEventType = new ViewAllEventType();
+
     }
 
     /**
@@ -55,7 +56,7 @@ public class OrganizerController extends AttendeeController{
      * @param userManager The use case class for user.
      */
     public void run(EventsController eventsController, AttendeeManager attendeeManager,
-                    OrganizerManager organizerManager, UserManager userManager,
+                    OrganizerManager organizerManager, VIPUserManager vipUserManager, UserManager userManager,
                     ConversationController conversationController, String userID) {
         //connect to Attendee Presenter - Menu options
         boolean quit = false;
@@ -69,9 +70,9 @@ public class OrganizerController extends AttendeeController{
                         output.printPrompt("You have signed out.\n");
                         break;
                     case 1:
-                        //Create a new speaker
-                        createNewSpeaker.createNewSpeaker(create, attendeeManager,organizerManager,
-                                eventsController,userManager);
+                        //Create a new account
+                        createNewAccountForOrg.toCreateNewAccountForOrg(create, attendeeManager,
+                                organizerManager, eventsController, vipUserManager, userManager);
                         break;
                     case 2:
                         // View all events
@@ -114,6 +115,8 @@ public class OrganizerController extends AttendeeController{
                     case 10:
                         //cancel event
                         cancelEvent.toCancelEvent(eventsController, viewAllExistingEvents);
+
+
 
                 }
             }

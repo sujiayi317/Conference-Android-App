@@ -104,8 +104,8 @@ public class CreateANewEvent {
                 }
                 String restriction = "";
                 while (!restriction.equals("PUBLIC") && !restriction.equals("VIP-ONLY")){
-                    restriction = input.getInputString("Please enter the restriction for the event, type" +
-                            "'PUBLIC' for a public event or 'VIP-ONLY' for a VIP-only event, or enter 'cancel' to cancel.\n");
+                    restriction = input.getInputString("Please enter the restriction for the event, type\n" +
+                            "'PUBLIC' for a public event \nor 'VIP-ONLY' for a VIP-only event\n, or enter 'cancel' to cancel.\n");
                     if (!restriction.equals("PUBLIC") && !restriction.equals("VIP-ONLY") &&!restriction.equals("cancel")){
                         output.printPrompt("The type of restriction you chose is invalid, please try again\n.");
                     } else if (restriction.equals("cancel")) {
