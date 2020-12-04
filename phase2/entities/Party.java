@@ -7,6 +7,7 @@ public class Party extends Event{
 
     public Party(String title, String roomID, String startTime, String duration, String restriction){
         super(title, roomID, startTime, duration, restriction);
+        setType("PARTY");
     }
 
     @Override

@@ -8,6 +8,7 @@ public class Discussion extends Event{
     public Discussion(String title, String roomID, String startTime, ArrayList<String> speakers, String duration,
                       String restriction){
         super(title, roomID, startTime, duration, restriction);
+        setType("DISCUSSION");
         this.speakers = speakers;
     }
 

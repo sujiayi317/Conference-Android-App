@@ -144,12 +144,12 @@ public class FileReadWriter {
     }
 
     /**
-     * Reads Events.txt and loads saved events.
+     * Reads Events and loads saved events.
      */
     public void EventReader(){
         ArrayList<String> lines = new ArrayList<>();
         try {
-            File UserFile = new File("./phase1/Events.txt");
+            File UserFile = new File("./phase1/Events");
             Scanner myReader = new Scanner(UserFile);
             while (myReader.hasNextLine()) {
                 while (myReader.hasNextLine()) {
@@ -157,7 +157,7 @@ public class FileReadWriter {
                 }
             }
         } catch (FileNotFoundException e) {
-            System.out.println("Events.txt File Not Found");
+            System.out.println("Events File Not Found");
         }
 
         for (String line : lines) {
@@ -176,12 +176,12 @@ public class FileReadWriter {
     }
 
     /**
-     * Saves created events to Events.txt.
+     * Saves created events to Events.
      */
     public void EventWriter(){
         List<String> IDList = eventsController.getEventManager().getAllIDAndName().get(0);
         try {
-            PrintWriter pw = new PrintWriter("./phase1/Events.txt");
+            PrintWriter pw = new PrintWriter("./phase1/Events");
             for (String ID : IDList) {
                 String line = eventsController.getEventManager().generateFormattedEventInfo(ID);
                 for (String attendee : eventsController.getEventManager().getAttendeesFromEvent(ID)) {
@@ -192,7 +192,7 @@ public class FileReadWriter {
             }
             pw.close();
         } catch (FileNotFoundException e){
-            System.out.println("Events.txt File Not Found.");
+            System.out.println("Events File Not Found.");
         }
     }
 
