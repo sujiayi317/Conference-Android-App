@@ -15,6 +15,7 @@ public class ViewEventInfo {
         this.infoPattern.add("Time");
         this.infoPattern.add("Speaker");
         this.infoPattern.add("Current_Capacity");
+        this.infoPattern.add("Event_Restriction");
 
     }
 
@@ -30,6 +31,7 @@ public class ViewEventInfo {
             returnString.append(this.infoPattern.get(i)).append(": ").append(eventInfo.get(i)).append("\n");
         }
         returnString.append(this.infoPattern.get(3)).append(": ").append(eventInfo.get(3)).append("/").append(eventInfo.get(4)).append("\n");
+        returnString.append(this.infoPattern.get(4)).append(": ").append(eventInfo.get(5)).append("\n");
         return returnString;
     }
 

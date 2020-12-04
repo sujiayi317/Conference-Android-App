@@ -100,16 +100,26 @@ public class CreateANewEvent {
                         output.printPrompt("The speakerNum you chose is out of the bound please enter the correct number\n");
                     }
                 }
-
+                String restriction = "";
+                while (!restriction.equals("PUBLIC") && !restriction.equals("VIP-ONLY")){
+                    restriction = input.getInputString("Please enter the restriction for the event, type" +
+                            "'PUBLIC' for a public event or 'VIP-ONLY' for a VIP-only event, or enter 'cancel' to cancel.\n");
+                    if (!restriction.equals("PUBLIC") && !restriction.equals("VIP-ONLY") &&!restriction.equals("cancel")){
+                        output.printPrompt("The type of restriction you chose is invalid, please try again\n.");
+                    } else if (restriction.equals("cancel")) {
+                        canceled = true;
+                        break;
+                    }
+                }
                 if (!canceled){
                     String room = eventsController.getAvailableRoom(timeInput).get(Integer.parseInt(roomNUm));
                     String speaker = eventsController.getAllAvailableSpeaker(timeInput,durationNum).get(Integer.parseInt(speakerNum));
 //                    ArrayList<String> speakerList = new ArrayList<>();
 //                    speakerList.add(speaker);
-                    if (createEvent(title, eventsController.getRoomManager().changeNumTOID(room), speaker, timeInput, eventsController, durationNum, allType.get(Integer.parseInt(eventType)))) {
-                        output.printPrompt("The new "+ allType.get(Integer.parseInt(eventType)) + " named " + title + " at Room "
+                    if (createEvent(title, eventsController.getRoomManager().changeNumTOID(room), speaker, timeInput, eventsController, durationNum, restriction, allType.get(Integer.parseInt(eventType)))) {
+                        output.printPrompt("The new " + restriction + " " + allType.get(Integer.parseInt(eventType)) + " named " + title + " at Room "
                                 + room + " taught by " + speaker + " will start at " +
-                                eventsController.getEventManager().generateFormattedStartTime(timeInput) + " with the duration" + durationNum + " hour/hours");
+                                eventsController.getEventManager().generateFormattedStartTime(timeInput) + " with the duration" + durationNum + " hour/hours.");
                     }
                 }
             }
@@ -183,7 +193,7 @@ public class CreateANewEvent {
     }
 
     private boolean createEvent(String title, String roomID, String speaker, String startTime, EventsController
-            eventsController, String duration, String type) {
-        return eventsController.createEvent(title, roomID, speaker, startTime, duration, type);
+            eventsController, String duration, String restriction, String type) {
+        return eventsController.createEvent(title, roomID, speaker, startTime, duration, restriction, type);
     }
 }

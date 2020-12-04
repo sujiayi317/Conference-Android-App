@@ -23,6 +23,7 @@ public class OrganizerController extends AttendeeController{
     private final SeeAllMessage seeAllMessage;
     private final SendToAllAttendees sendToAllAttendees;
     private final cancelEvent cancelEvent;
+    private final CreateANewAccount createANewAccount;
 
     public OrganizerController(){
         this.organizerMenu = new OrganizerMenu();
@@ -36,10 +37,12 @@ public class OrganizerController extends AttendeeController{
         seeAllMessage = new SeeAllMessage();
         sendToAllAttendees = new SendToAllAttendees();
         cancelEvent = new cancelEvent();
+        createANewAccount = new CreateANewAccount();
         this.viewAllAvailableRoom = new ViewAllAvailableRoom();
         this.viewAllAvailableSpeaker = new ViewAllAvailableSpeaker();
         this.viewFriendList = new ViewFriendList();
         this.viewAllEventType = new ViewAllEventType();
+
     }
 
     /**
@@ -55,7 +58,7 @@ public class OrganizerController extends AttendeeController{
      * @param userManager The use case class for user.
      */
     public void run(EventsController eventsController, AttendeeManager attendeeManager,
-                    OrganizerManager organizerManager, UserManager userManager,
+                    OrganizerManager organizerManager, VIPUserManager vipUserManager, UserManager userManager,
                     ConversationController conversationController, String userID) {
         //connect to Attendee Presenter - Menu options
         boolean quit = false;
@@ -71,7 +74,7 @@ public class OrganizerController extends AttendeeController{
                     case 1:
                         //Create a new speaker
                         createNewSpeaker.createNewSpeaker(create, attendeeManager,organizerManager,
-                                eventsController,userManager);
+                                eventsController,vipUserManager, userManager);
                         break;
                     case 2:
                         // View all events
@@ -114,6 +117,9 @@ public class OrganizerController extends AttendeeController{
                     case 10:
                         //cancel event
                         cancelEvent.toCancelEvent(eventsController, viewAllExistingEvents);
+                    case 11:
+                        // create a new account
+
 
                 }
             }

@@ -29,10 +29,11 @@ public class Login{
      * @param attendeeManager attendeeManager
      * @param organizerManager organizerManager
      * @param speakerManager speakerManager
+     * @param vipUserManager vipUserManager
      * @param userManager userManager
      */
     public void run(AttendeeManager attendeeManager, OrganizerManager organizerManager, SpeakerManager speakerManager,
-                    UserManager userManager) {
+                    VIPUserManager vipUserManager, UserManager userManager) {
         while (true) {
             output.printPrompt("\n*** Welcome to login page of conference sign up center! ***\n*** Please enter '1' " +
                     "or '2' to Login or create account, ***\n***      or enter 'EXIT' to save and exit program." +
@@ -45,7 +46,7 @@ public class Login{
                     output.printPrompt("Sign in failed, directing back to main page now...\n");
                 }
             } else if (CurrentAction.equals("2")) {
-                if (createAccount(attendeeManager, organizerManager, speakerManager, userManager)){
+                if (createAccount(attendeeManager, organizerManager, speakerManager, vipUserManager, userManager)){
                     output.printPrompt("New account successfully created! Directing back to main page now...\n");
                 } else {
                     output.printPrompt("Account creation cancelled, directing back to main page now...\n");
@@ -88,14 +89,19 @@ public class Login{
      * @return true iff the account is successfully created
      */
     public boolean createAccount(AttendeeManager attendeeManager, OrganizerManager organizerManager,
-                                 SpeakerManager speakerManager, UserManager userManager){
+                                 SpeakerManager speakerManager, VIPUserManager vipUserManager, UserManager userManager){
         while (true) {
             output.printPrompt("Select what type of account you want to create, or enter 'cancel' to exit.\n");
             String CurrentAction = input.getInputString("1. Attendee account \n2. Organizer account\n");
             if (CurrentAction.equals("1")) {
-                return createAccount.CreateNewAccount(attendeeManager, organizerManager, speakerManager, userManager,"ATTENDEE");
+                return createAccount.CreateNewAccount(attendeeManager, organizerManager, speakerManager, vipUserManager,
+                        userManager,"ATTENDEE");
             } else if (CurrentAction.equals("2")) {
-                return createAccount.CreateNewAccount(attendeeManager, organizerManager, speakerManager, userManager,"ORGANIZER");
+                return createAccount.CreateNewAccount(attendeeManager, organizerManager, speakerManager, vipUserManager,
+                        userManager, "ORGANIZER");
+            } else if (CurrentAction.equals("3")) {
+                return createAccount.CreateNewAccount(attendeeManager, organizerManager, speakerManager, vipUserManager,
+                        userManager,"VIPUser");
             } else if(CurrentAction.equals("cancel")){
                 return false;
             } else {

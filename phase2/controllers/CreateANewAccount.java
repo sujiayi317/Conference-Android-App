@@ -5,11 +5,15 @@ import use_cases.UserFactory;
 public class CreateANewAccount {
 
     private final UserFactory userFactory;
+    private static OutputManager output;
+    private static InputManager input;
 
     public CreateANewAccount(){
         this.userFactory = new UserFactory();
+        input = new InputManager();
+        output = new OutputManager();
     }
-    public void toCreateANewAccount(String email, String userName, String password, String type){
-        userFactory.createANewUser(email, userName, password, type);
+    public void toCreateANewAccount(){
+
     }
 }

@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.a207_demo.gateway.FileReadWriter;
 import com.example.a207_demo.use_cases.*;
 import com.example.a207_demo.utility.ActivityCollector;
 import com.example.a207_demo.MainActivity;
@@ -21,6 +22,9 @@ import com.example.a207_demo.R;
  * Activity class for user sign up.
  */
 public class SignUpActivity extends AppCompatActivity implements View.OnClickListener{
+
+    private final CreateAccount accountCreater = new CreateAccount();
+    private final FileReadWriter fileReadWriter = new FileReadWriter();
 
     /**
      * Required function to initiate an Activity class.
@@ -55,21 +59,21 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
      */
     @Override
     public void onClick(View v){
-        Intent intent = new Intent();
+        Intent intent;
 
         switch(v.getId()){
             case R.id.btn_signUp:
                 if(!validEmail()){
-                    //Todo: implement error message
                     Toast.makeText(SignUpActivity.this, "Your email is invalid, please try again",
                             Toast.LENGTH_LONG).show();
                 }else if(!validUsername()){
-                    //Todo: implement error message
                     Toast.makeText(SignUpActivity.this, "Your name is invalid, please try again",
                             Toast.LENGTH_LONG).show();
                 }else{
-                    intent = new Intent(SignUpActivity.this, MainActivity.class);
+                    Toast.makeText(SignUpActivity.this, "You have signed up SUCCESSFULLY!",
+                            Toast.LENGTH_LONG).show();
                     setUpData();
+                    intent = new Intent(SignUpActivity.this, MainActivity.class);
                     startActivity(intent);
                 }
                 break;
@@ -88,28 +92,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         EditText email = findViewById(R.id.email_signUp);
         String userEM = email.getText().toString();
 
-        UserManager userManager = new UserManager();
-
-        return isValidEmail(userEM, userManager);
-    }
-
-    /**
-     * Check if the email entered is valid with userManager
-     * @param email email of the user
-     * @param userManager an instance of userManager
-     * @return boolean
-     */
-    private boolean isValidEmail(String email, UserManager userManager) {
-        if (!userManager.validNewEmail(email)) {
-            return false;
-        } else if (email.length() >= 6 && email.contains("@") && email.charAt(0) != '@' && email.contains(".") &&
-                email.charAt(email.length() - 1) != '.' && email.length() - email.replace(".", "").length() == 1 &&
-                email.length() - email.replace("@", "").length() == 1 && email.indexOf('@') < email.indexOf('.') &&
-                email.indexOf('@') != email.indexOf('.') - 1 && userManager.validNewEmail(email)) {
-            return true;
-        } else {
-            return false;
-        }
+        return accountCreater.isValidEmail(userEM);
     }
 
     /**
@@ -122,21 +105,8 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         String userFN = firstName.getText().toString();
         String userLN = lastName.getText().toString();
 
-        UserManager userManager = new UserManager();
-
-        return isValidUserName(userFN + userLN, userManager);
+        return accountCreater.isValidUserName(userFN + userLN);
     }
-
-    /**
-     * Check if the userName entered is valid with userManager
-     * @param user String username
-     * @param userManager an instance of userManager
-     * @return boolean
-     */
-    private boolean isValidUserName(String user, UserManager userManager) {
-        return user.length() >= 2 && userManager.validNewName(user);
-    }
-
 
     /**
      * set up data and save data into database
@@ -152,36 +122,12 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         String userLN = lastName.getText().toString();
         String userEM = email.getText().toString();
         String userPW = password.getText().toString();
-        // Use getSelectedItem() to get the selected item in a spinner:
         String userTypeStr = String.valueOf(userType.getSelectedItem());
 
-        //Todo: initiate new User object through manager
+        //Todo: create account using CreateANewAccount (factory)
         //Todo: save data into database
-        createNewAccount(userTypeStr, userFN + userLN, userEM, userPW);
-
-
-    }
-
-    /**
-     * create a New Account
-     * @param userType String, the type of the user
-     * @param username username
-     * @param userEmail userEmail
-     * @param userPassword userPassword
-     */
-    private void createNewAccount(String userType, String username, String userEmail, String userPassword){
-        AttendeeManager attendeeManager = new AttendeeManager();
-        OrganizerManager organizerManager = new OrganizerManager();
-        //TODO: add VipUserManager
-        //VipUserManager vipUserManager = new VipUserManager();
-
-        if(userType.equals("Attendee")){
-            attendeeManager.createAttendee(username, userEmail, userPassword);
-        }else if(userType.equals("Organizer")){
-            organizerManager.createOrganizer(username, userEmail, userPassword);
-        }else if(userType.equals("VIP User")){
-            //vipUserManger.createVipUser(username, userEmail, userPassword);
-        }
+        accountCreater.createNewAccount(userFN + userLN, userEM, userPW, userTypeStr);
+        fileReadWriter.connectWriters(this);
     }
 
 }

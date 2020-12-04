@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.example.a207_demo.eventSystem.AttendeeEventActivity;
 import com.example.a207_demo.eventSystem.OrganizerEventActivity;
 import com.example.a207_demo.eventSystem.SpeakerMyEventActivity;
+import com.example.a207_demo.gateway.FileReadWriter;
 import com.example.a207_demo.signupSystem.SignUpActivity;
 import com.example.a207_demo.use_cases.UserManager;
 import com.example.a207_demo.utility.ActivityCollector;
@@ -20,6 +21,10 @@ import com.example.a207_demo.utility.ActivityCollector;
  * The top level class for running the app.
  */
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+
+    private final FileReadWriter fileReadWriter = new FileReadWriter();
+    private static String ID;
+    private static String type;
 
     /**
      * Required function to initiate an Activity class.
@@ -31,8 +36,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
         init();
-
-        ActivityCollector.addActivity(this);
 
     }
 
@@ -57,29 +60,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         switch(v.getId()){
             case R.id.btn_signUp:
+                fileReadWriter.reset();
                 intent = new Intent(MainActivity.this, SignUpActivity.class);
                 startActivity(intent);
                 break;
             case R.id.btn_login:
+                fileReadWriter.reset();
+                fileReadWriter.connectReaders(this);
+
                 if (info_matched()) {
-                    //To_do: distinguish account
-                    String type = account_type();
                     if (type.equals("ATTENDEE")) {
                         intent = new Intent(MainActivity.this, AttendeeEventActivity.class);
-                    } else if (account_type().equals("Organizer")) {
+                    } else if (type.equals("ORGANIZER")) {
                         intent = new Intent(MainActivity.this, OrganizerEventActivity.class);
                     } else {
                         intent = new Intent(MainActivity.this, SpeakerMyEventActivity.class);
                     }
+                    //Todo: too many lines written in Users.txt (FileReadWriter -> connectWrtier -> UserWriter method)
                     startActivity(intent);
                 } else{
-                    //To_do: implement error message
-                    Toast.makeText(MainActivity.this, "Account does not exist, please try again",
+                    Toast.makeText(MainActivity.this, "Your username and password do not match. Please try again.",
                             Toast.LENGTH_LONG).show();
                 }
-                //To_do: delete after above if-else implemented
-                intent = new Intent(MainActivity.this, TempActivity.class);
-                startActivity(intent);
                 break;
             default:
                 throw new IllegalStateException("Unexpected value: " + v.getId());
@@ -99,11 +101,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             return true;
         }
         return false;
-    }
-
-    private String account_type(){
-        //To_do: check type through manager
-        return type;
     }
 
 }

@@ -4,6 +4,7 @@ import entities.Attendee;
 import use_cases.AttendeeManager;
 import use_cases.OrganizerManager;
 import use_cases.SpeakerManager;
+import use_cases.VIPUserManager;
 import use_cases.UserManager;
 
 public class CreateAccount {
@@ -15,18 +16,19 @@ public class CreateAccount {
      * @param attendeeManager  attendee manager class
      * @param organizerManager organizer manager class
      * @param speakerManager   speaker manager class
+     * @param vipUserManager   vipUser manager class
      * @param userManager      user manager class
      * @param type             the type of account the user wants to create.
      * @return true iff the account is successfully created.
      */
     public boolean CreateNewAccount(AttendeeManager attendeeManager, OrganizerManager organizerManager,
-                                    SpeakerManager speakerManager, UserManager userManager, String type) {
+                                    SpeakerManager speakerManager, VIPUserManager vipUserManager,
+                                    UserManager userManager, String type) {
         String email = input.getInputString("Please enter the email for new account: (ex. 12345@abc.com), or " +
                 "enter 'cancel' at any point to exit account creation\n");
         if (email.contains(" ")) {
             return false;
         }
-        ;
         while (true) {
             if (email.equals("cancel")) {
                 return false;
@@ -42,7 +44,7 @@ public class CreateAccount {
                 "least 2 and does NOT contain space), or enter 'cancel' at any point to exit account creation\n");
         if (user.contains(" ")){
             return false;
-        };
+        }
         while (true) {
             if (user.equals("cancel")) {
                 return false;
@@ -56,7 +58,7 @@ public class CreateAccount {
         String password = input.getInputString("Please enter a password for " + user + ":\n");
         if (password.contains(" ")){
             return false;
-        };
+        }
         while (true) {
             if (password.equals("cancel")) {
                 return false;
@@ -68,11 +70,13 @@ public class CreateAccount {
             }
         }
         if (type.equals("SPEAKER")) {
-            speakerManager.createSpeaker(email, user, password);
+            speakerManager.createSpeaker(user, email, password);
         } else if (type.equals("ORGANIZER")) {
-            organizerManager.createOrganizer(email, user, password);
+            organizerManager.createOrganizer(user, email, password);
+        } else if (type.equals("VIPUser")){
+            vipUserManager.createVIPUser(user, email, password);
         } else {
-            attendeeManager.createAttendee(email, user, password);
+            attendeeManager.createAttendee(user, email, password);
         }
         return true;
     }

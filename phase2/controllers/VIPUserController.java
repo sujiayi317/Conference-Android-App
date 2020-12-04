@@ -18,7 +18,8 @@ public class VIPUserController {
     private final ViewFriendList viewFriendList;
     private final SeeAllFriend seeAllFriend;
     private final SeeAllMessage seeAllMessage;
-
+    private final SeeALLVIPEvents seeALLVIPEvents;
+    private final ViewAllVIPEvents viewAllVIPEvents;
     /**
      * The constructor of the attendee controller.
      */
@@ -29,6 +30,7 @@ public class VIPUserController {
         seeALLMyEvents = new SeeALLMyEvents();
         seeAllFriend = new SeeAllFriend();
         seeAllMessage = new SeeAllMessage();
+        seeALLVIPEvents = new SeeALLVIPEvents();
         addFriend = new AddFriend();
         this.attendeeMenu = new AttendeeMenu();
         this.viewAllAttendeeEvents = new ViewAllAttendeeEvents();
@@ -36,12 +38,14 @@ public class VIPUserController {
         this.viewEventInfo = new ViewEventInfo();
         this.viewFriendList = new ViewFriendList();
         this.viewMessageList = new ViewMessageList();
+        this.viewAllVIPEvents = new ViewAllVIPEvents();
+
     }
 
     /**
      * This method will run when an attendee login. It will display the function menu for the user to choose. there are
-     * in total 7 choices for VIPUsers: sign out, view all existing events, view all vip only events,
-     * view all attended events, view all the user's friends, view all the message the user has.
+     * in total 7 choices for VIPUsers: sign out, view all existing events, view all attended events,
+     * view all the user's friends, view all the message the user has, view all vip only events.
      * @param userID The user's unique id, which is created when the user creates an account.
      * @param eventsController The controller for events.
      * @param vipUserManager The use case class for attendee, which contains methods like login and sign up.
@@ -84,6 +88,10 @@ public class VIPUserController {
                         //add friend
                         addFriend.toAddFriend(userManager, userID);
                         break;
+                    case 6:
+                        //view VIP-only events
+                        //todo: modify the presenter to allow for viewing event info and signup
+                        seeALLVIPEvents.getToSeeAllVIPEvents(viewAllVIPEvents, eventsController);
                 }
             }
         }

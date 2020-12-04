@@ -60,8 +60,9 @@ public class AttendeeManager extends UserManager implements Serializable {
      * @param roomManager a roomManager
      * @return boolean value, return true iff signed up successfully
      */
-    public boolean signUp(EventManager eventManager, String userID, String eventID, RoomManager roomManager) {
-        return eventManager.addAttendeeToEvent(userID, eventID, roomManager);
+    public boolean signUp(EventManager eventManager, String userID, String eventID, RoomManager roomManager,
+                          AttendeeManager attendeeManager) {
+        return eventManager.addAttendeeToEvent(userID, eventID, roomManager, attendeeManager);
     }
 
     /**

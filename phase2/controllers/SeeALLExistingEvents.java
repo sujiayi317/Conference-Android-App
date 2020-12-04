@@ -46,7 +46,7 @@ public class SeeALLExistingEvents {
                     String decision = input.getInputString("Type Yes to sign up OR No to back to menu\n");
                     if (decision.equals("Yes")) {
                         if (attendeeManager.signUp(eventsController.getEventManager(), userID, eventID,
-                                eventsController.getRoomManager())) {
+                                eventsController.getRoomManager(), attendeeManager)) {
                             output.printPrompt("You're successfully in " + eventTitle + "\n");
                             check += 1;
                         } else if (eventsController.getRoomManager().isFull(eventsController.getEventManager().getEventFromID(eventID).getRoomID())) {
