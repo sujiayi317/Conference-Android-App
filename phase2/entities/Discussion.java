@@ -5,8 +5,9 @@ import java.util.List;
 public class Discussion extends Event{
     private ArrayList<String> speakers;
 
-    public Discussion(String title, String roomID, String startTime, ArrayList<String> speakers, String duration){
-        super(title, roomID, startTime, duration);
+    public Discussion(String title, String roomID, String startTime, ArrayList<String> speakers, String duration,
+                      String restriction){
+        super(title, roomID, startTime, duration, restriction);
         this.speakers = speakers;
     }
 

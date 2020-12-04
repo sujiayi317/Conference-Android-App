@@ -16,6 +16,7 @@ public abstract class Event implements Serializable {
     private ArrayList<String> userIDs;
     private String startTime;
     private String duration;
+    private String restriction;
 
     /**
      * The constructor No.1 for an event
@@ -24,13 +25,14 @@ public abstract class Event implements Serializable {
      * @param roomID    which room the event will be held in
      * @param startTime event starting time
      */
-    public Event(String title, String roomID, String startTime, String duration) {
+    public Event(String title, String roomID, String startTime, String duration, String restriction) {
         this.title = title;
         this.eventID = UUID.randomUUID().toString().split("-")[0];
         this.roomID = roomID;
         this.userIDs = new ArrayList<>();
         this.startTime = startTime;
         this.duration = duration;
+        this.restriction = restriction;
         System.out.println(eventID);
     }
 
@@ -122,6 +124,8 @@ public abstract class Event implements Serializable {
     public ArrayList<String> getAttendees() {
         return userIDs;
     }
+
+    public String getRestriction() {return restriction;}
 
     /**
      * Formats and returns the time slot

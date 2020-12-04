@@ -71,7 +71,8 @@ public class EventManager implements Serializable {
      * @param  startTime startTime of the event
      * @return the newly created event or null
      */
-    public Event createEvent(String title, String roomID, ArrayList<String> speakerID, String startTime, String duration, String type) {
+    public Event createEvent(String title, String roomID, ArrayList<String> speakerID, String startTime, String duration,
+                             String restriction, String type) {
         for (Event event : this.events) {
             for (String speaker: event.getSpeakers()) {
                 if ((event.getSpeakers().contains(speaker) || roomID.equals(event.getRoomID())) &&
@@ -85,7 +86,7 @@ public class EventManager implements Serializable {
             return null;
         }
         // create this new event:
-        Event newEvent = eventFactory.createEvent(title, roomID, speakerID, startTime,duration, type);
+        Event newEvent = eventFactory.createEvent(title, roomID, speakerID, startTime,duration, restriction, type);
         // update the events list:
         events.add(newEvent);
 
@@ -105,9 +106,10 @@ public class EventManager implements Serializable {
      * @return  the newly created event
      */
     public Event loadEvent(String title, String roomID, ArrayList<String> speakerID, String startTime, String eventID,
-                           String duration, String type, ArrayList<String> attendeeID, RoomManager roomManager) {
+                           String duration, String restriction, String type, ArrayList<String> attendeeID,
+                           RoomManager roomManager) {
         // create this new event:
-        Event newEvent = eventFactory.createEvent(title, roomID, speakerID, startTime,duration, type);
+        Event newEvent = eventFactory.createEvent(title, roomID, speakerID, startTime,duration, restriction, type);
         // update the events list:
         events.add(newEvent);
 
@@ -311,6 +313,17 @@ public class EventManager implements Serializable {
 
     public ArrayList<String> getAllEventType (){
         return this.allEventType;
+    }
+
+    public ArrayList<String> getAllVIPEvents() {
+        List<Event> allEvents = this.getAllEvent();
+        ArrayList<String> vipEvents = new ArrayList<>();
+        for (Event event : allEvents){
+            if (event.getRestriction().equals("VIP-ONLY")){
+                vipEvents.add(event.getEventID());
+            }
+        }
+        return vipEvents;
     }
 
 }

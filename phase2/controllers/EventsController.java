@@ -113,10 +113,11 @@ public class EventsController {
      * @param startTime startTime
      * @return true iff this event is created successfully
      */
-    public boolean createEvent(String title, String roomID, String speakerName, String startTime, String duration, String type) {
+    public boolean createEvent(String title, String roomID, String speakerName, String startTime, String duration,
+                               String restriction, String type) {
         ArrayList<String> speakerID = new ArrayList<>();
         speakerID.add(speakerManager.getIdFromName(speakerName));
-        Event newEvent = this.eventManager.createEvent(title, roomID, speakerID, startTime, duration, type);
+        Event newEvent = this.eventManager.createEvent(title, roomID, speakerID, startTime, duration, restriction, type);
         if (newEvent == null) {
             return false;
         }
