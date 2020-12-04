@@ -1,6 +1,5 @@
 package controllers;
 
-import presenters.ViewAllEventType;
 import presenters.ViewAllTypeOfAccount;
 import use_cases.AttendeeManager;
 import use_cases.OrganizerManager;
@@ -32,19 +31,28 @@ public class CreateNewAccountForOrg {
         if (allType.contains(type)){
             switch (type){
                 case "ORGANIZER":
-                    createAccount.CreateNewAccount(attendeeManager, organizerManager, eventsController.getSpeakerManager(),
-                            vipUserManager, userManager, "ORGANIZER");
+                    if(createAccount.CreateNewAccount(attendeeManager, organizerManager, eventsController.getSpeakerManager(),
+                            vipUserManager, userManager, "ORGANIZER")){
+                        output.printPrompt("New organizer account successfully created.\n");
+                    }
                 case "ATTENDEE":
-                    createAccount.CreateNewAccount(attendeeManager, organizerManager, eventsController.getSpeakerManager(),
-                            vipUserManager, userManager, "ATTENDEE");
+                    if (createAccount.CreateNewAccount(attendeeManager, organizerManager, eventsController.getSpeakerManager(),
+                            vipUserManager, userManager, "ATTENDEE")){
+                        output.printPrompt("New attendee account successfully created.\n");
+                    }
                 case "SPEAKER":
-                    createAccount.CreateNewAccount(attendeeManager, organizerManager, eventsController.getSpeakerManager(),
-                            vipUserManager, userManager, "SPEAKER");
+                    if (createAccount.CreateNewAccount(attendeeManager, organizerManager, eventsController.getSpeakerManager(),
+                            vipUserManager, userManager, "SPEAKER")){
+                        output.printPrompt("New speaker account successfully created.\n");
+                    }
                 case "VIP":
-                    createAccount.CreateNewAccount(attendeeManager, organizerManager, eventsController.getSpeakerManager(),
-                            vipUserManager, userManager, "VIP");
+                    if (createAccount.CreateNewAccount(attendeeManager, organizerManager, eventsController.getSpeakerManager(),
+                            vipUserManager, userManager, "VIP")){
+                        output.printPrompt("New VIP account successfully created.\n");
+                    }
 
             }
         }
+        output.printPrompt("Action is Invalid.\n");
     }
 }
