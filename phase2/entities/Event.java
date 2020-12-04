@@ -17,6 +17,7 @@ public abstract class Event implements Serializable {
     private String startTime;
     private String duration;
     private String restriction;
+    private String type;
 
     /**
      * The constructor No.1 for an event
@@ -35,6 +36,12 @@ public abstract class Event implements Serializable {
         this.restriction = restriction;
         System.out.println(eventID);
     }
+
+    public void setType(String type){
+        this.type = type;
+    }
+
+    public String getType(){return this.type;}
 
 
     /**
