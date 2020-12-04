@@ -142,7 +142,7 @@ public class CreateANewEvent {
                 int month = Integer.parseInt(timeList[1]);
                 int date = Integer.parseInt(timeList[2]);
                 int hour = Integer.parseInt(timeList[3]);
-                if (hour < 9 || hour > 16 || month > 12 || month < 1 || date < 1 || date > 31) {
+                if (hour < 9 || hour > 16 || month > 12 || month < 1 || date < 1 || date > 31 || year < 2020) {
                     return false;
                 }
                 switch (month) {
