@@ -107,7 +107,7 @@ public class EventManager implements Serializable {
      */
     public Event loadEvent(String title, String roomID, ArrayList<String> speakerID, String startTime, String eventID,
                            String duration, String restriction, String type, ArrayList<String> attendeeID,
-                           RoomManager roomManager) {
+                           RoomManager roomManager, AttendeeManager attendeeManager) {
         // create this new event:
         Event newEvent = eventFactory.createEvent(title, roomID, speakerID, startTime,duration, restriction, type);
         // update the events list:
@@ -115,7 +115,7 @@ public class EventManager implements Serializable {
 
         // add attendee's IDs to this event
         for (String ID : attendeeID) {
-            addAttendeeToEvent(ID, eventID, roomManager);
+            addAttendeeToEvent(ID, eventID, roomManager, attendeeManager);
         }
         return newEvent;
     }
@@ -148,16 +148,20 @@ public class EventManager implements Serializable {
      * @param roomManager a RoomManager object
      * @return true iff the user has been successfully added to this event
      */
-    public boolean addAttendeeToEvent(String userID, String eventID, RoomManager roomManager) {
+    public boolean addAttendeeToEvent(String userID, String eventID, RoomManager roomManager, AttendeeManager attendeeManager) {
         Event event = getEventFromID(eventID);
         if (event != null) {
-            //Todo: update room in room manager
-            //Todo: i.e. if (roommanager.updateSuccessful(room id)) then add attendee to list
-            Room room = roomManager.getRoomBasedOnItsID(event.getRoomID());
-            if (room.getCurrentNum() < room.getCapacity()) {
-                if (event.addAttendee(userID, events)) {
-                    room.increaseCurrentNum();
-                    return true;
+            String restriction = event.getRestriction();
+            String userType = attendeeManager.getUserType(userID);
+            if (!(restriction.equals("VIP-ONLY") && !userType.equals("VIPUser"))) {
+                //Todo: update room in room manager
+                //Todo: i.e. if (roommanager.updateSuccessful(room id)) then add attendee to list
+                Room room = roomManager.getRoomBasedOnItsID(event.getRoomID());
+                if (room.getCurrentNum() < room.getCapacity()) {
+                    if (event.addAttendee(userID, events)) {
+                        room.increaseCurrentNum();
+                        return true;
+                    }
                 }
             }
         }
@@ -191,6 +195,11 @@ public class EventManager implements Serializable {
             return event.getAttendees();
         }
         return new ArrayList<>();
+    }
+
+    public String getEventRestrictionWithID(String eventID) {
+        Event event = getEventFromID(eventID);
+        return event.getRestriction();
     }
 
     /**
@@ -315,6 +324,10 @@ public class EventManager implements Serializable {
         return this.allEventType;
     }
 
+    /**
+     * Return a list all the VIP-only event id's
+     * @return ArrayList<String> containing the event ID of all VIP-only events
+     */
     public ArrayList<String> getAllVIPEvents() {
         List<Event> allEvents = this.getAllEvent();
         ArrayList<String> vipEvents = new ArrayList<>();

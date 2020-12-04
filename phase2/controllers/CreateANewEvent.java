@@ -117,10 +117,9 @@ public class CreateANewEvent {
 //                    ArrayList<String> speakerList = new ArrayList<>();
 //                    speakerList.add(speaker);
                     if (createEvent(title, eventsController.getRoomManager().changeNumTOID(room), speaker, timeInput, eventsController, durationNum, restriction, allType.get(Integer.parseInt(eventType)))) {
-                        output.printPrompt("The new "+ allType.get(Integer.parseInt(eventType)) + " named " + title + " at Room "
+                        output.printPrompt("The new " + restriction + " " + allType.get(Integer.parseInt(eventType)) + " named " + title + " at Room "
                                 + room + " taught by " + speaker + " will start at " +
-                                eventsController.getEventManager().generateFormattedStartTime(timeInput) + " with the duration" + durationNum + " hour/hours" +
-                                "for" + restriction + ".");
+                                eventsController.getEventManager().generateFormattedStartTime(timeInput) + " with the duration" + durationNum + " hour/hours.");
                     }
                 }
             }

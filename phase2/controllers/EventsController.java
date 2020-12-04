@@ -142,6 +142,7 @@ public class EventsController {
         }
         info.add(Integer.toString(room.getCurrentNum()));
         info.add(Integer.toString(room.getCapacity()));
+        info.add(event.getRestriction());
         return info;
     }
 
@@ -171,6 +172,8 @@ public class EventsController {
     public ArrayList<ArrayList<String>> getAllIDAndName(){
         return eventManager.getAllIDAndName();
     }
+
+    public ArrayList<String> getAllVIPEvents() { return eventManager.getAllVIPEvents();}
 
     public boolean cancelEvent(String eventID){
         Event currentEvent = eventManager.getEventFromID(eventID);

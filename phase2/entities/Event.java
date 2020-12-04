@@ -60,7 +60,7 @@ public abstract class Event implements Serializable {
         for (Event event : events) {
             if (event.getAttendees().contains(attendeeID) &&
                     !((Integer.parseInt(event.getStartTime()) + Integer.parseInt(event.getDuration()) <= Integer.parseInt(this.startTime)) ||
-                    Integer.parseInt(this.startTime) + Integer.parseInt(this.duration) <= Integer.parseInt(event.getStartTime()))) {
+                    Integer.parseInt(this.startTime) + Integer.parseInt(this.duration) <= Integer.parseInt(event.getStartTime())) ) {
                 return false;
             }
         }
