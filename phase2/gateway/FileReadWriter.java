@@ -17,6 +17,7 @@ public class FileReadWriter {
     private EventsController eventsController;
     private AttendeeManager attendeeManager;
     private OrganizerManager organizerManager;
+    private VIPUserManager vipUserManager;
     private final UserManager userManager;
 
     /**
@@ -27,12 +28,14 @@ public class FileReadWriter {
         eventsController = new EventsController();
         attendeeManager = new AttendeeManager();
         organizerManager = new OrganizerManager();
+        vipUserManager = new VIPUserManager();
     }
     public void reset(){
         this.userManager.reset();
         this.eventsController = new EventsController();
         this.attendeeManager = new AttendeeManager();
         this.organizerManager = new OrganizerManager();
+        this.vipUserManager = new VIPUserManager();
     }
 
     /**
@@ -63,6 +66,8 @@ public class FileReadWriter {
 
             if (wordList.get(0).equals("SPEAKER")) {
                 speakermanager.loadSpeaker(wordList.get(1), wordList.get(2), wordList.get(3), wordList.get(4));
+            } else if (wordList.get(0).equals("VIPUser")) {
+                vipUserManager.loadVIPUser(wordList.get(1), wordList.get(2), wordList.get(3), wordList.get(4));
             } else if (wordList.get(0).equals("ATTENDEE")) {
                 attendeeManager.loadAttendee(wordList.get(1), wordList.get(2), wordList.get(3), wordList.get(4));
             } else if (wordList.get(0).equals("ORGANIZER")) {
@@ -211,6 +216,7 @@ public class FileReadWriter {
     public AttendeeManager GetAttendeeManager(){
         return attendeeManager;
     }
+    public VIPUserManager GetVIPUserManager() {return vipUserManager;}
     public UserManager GetUserManager(){
         return userManager;
     }

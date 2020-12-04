@@ -55,7 +55,7 @@ public class OrganizerController extends AttendeeController{
      * @param userManager The use case class for user.
      */
     public void run(EventsController eventsController, AttendeeManager attendeeManager,
-                    OrganizerManager organizerManager, UserManager userManager,
+                    OrganizerManager organizerManager, VIPUserManager vipUserManager, UserManager userManager,
                     ConversationController conversationController, String userID) {
         //connect to Attendee Presenter - Menu options
         boolean quit = false;
@@ -71,7 +71,7 @@ public class OrganizerController extends AttendeeController{
                     case 1:
                         //Create a new speaker
                         createNewSpeaker.createNewSpeaker(create, attendeeManager,organizerManager,
-                                eventsController,userManager);
+                                eventsController,vipUserManager, userManager);
                         break;
                     case 2:
                         // View all events

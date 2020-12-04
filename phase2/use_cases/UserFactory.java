@@ -7,6 +7,8 @@ public class UserFactory {
         switch (type) {
             case "ORGANIZER":
                 return new Organizer(email, userName, password);
+            case "VIPUser":
+                return new VIPUser(email, userName, password);
             case "ATTENDEE":
                 return new Attendee(email, userName, password);
             case "SPEAKER":

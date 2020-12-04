@@ -20,6 +20,7 @@ public class Conference {
     private EventsController eventsController;
     private AttendeeManager attendeeManager;
     private OrganizerManager organizerManager;
+    private VIPUserManager vipUserManager;
     private SaveConversation saveConversation;
     private FileReadWriter fileReadWriter = new FileReadWriter();
 //    private final ViewAllAttendeeEvents viewAllAttendeeEvents;
@@ -85,10 +86,11 @@ public class Conference {
         this.userManager = fileReadWriter.GetUserManager();
         this.attendeeManager = fileReadWriter.GetAttendeeManager();
         this.organizerManager = fileReadWriter.GetOrganizerManager();
+        this.vipUserManager = fileReadWriter.GetVIPUserManager();
         this.eventsController = fileReadWriter.GetEventsController();
         this.saveConversation = new SaveConversation();//待定
         Login newLogin = new Login();
-        newLogin.run(attendeeManager, organizerManager, eventsController.getSpeakerManager(), userManager);
+        newLogin.run(attendeeManager, organizerManager, eventsController.getSpeakerManager(), vipUserManager, userManager);
         fileReadWriter.connectWriters();
 
         //connect to Login Controller - log User in
@@ -123,7 +125,9 @@ public class Conference {
                 break;
             case "ORGANIZER":
                 new OrganizerController().run(eventsController, attendeeManager,
-                        organizerManager, userManager, conversationController, userID);
+                        organizerManager, vipUserManager, userManager, conversationController, userID);
+            case "VIPUser":
+                new VIPUserController().run(userID, eventsController, vipUserManager, conversationController, userManager);
         }
 
         for(HashSet<String> key: conversationController.conversationsGetter().keySet()){
