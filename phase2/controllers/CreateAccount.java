@@ -70,13 +70,13 @@ public class CreateAccount {
             }
         }
         if (type.equals("SPEAKER")) {
-            speakerManager.createSpeaker(email, user, password);
+            speakerManager.createSpeaker(user, email, password);
         } else if (type.equals("ORGANIZER")) {
-            organizerManager.createOrganizer(email, user, password);
+            organizerManager.createOrganizer(user, email, password);
         } else if (type.equals("VIPUser")){
-            vipUserManager.createVIPUser(email, user, password);
+            vipUserManager.createVIPUser(user, email, password);
         } else {
-            attendeeManager.createAttendee(email, user, password);
+            attendeeManager.createAttendee(user, email, password);
         }
         return true;
     }

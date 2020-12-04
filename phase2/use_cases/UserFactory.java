@@ -3,16 +3,25 @@ package use_cases;
 import entities.*;
 
 public class UserFactory {
+    private final AttendeeManager attendeeManager = new AttendeeManager();
+    private final VIPUserManager vipUserManager = new VIPUserManager();
+    private final OrganizerManager organizerManager = new OrganizerManager();
+    private final SpeakerManager speakerManager = new SpeakerManager();
+
     public User createANewUser(String email, String userName, String password, String type){
         switch (type) {
-            case "ORGANIZER":
-                return new Organizer(email, userName, password);
-            case "VIPUser":
-                return new VIPUser(email, userName, password);
             case "ATTENDEE":
-                return new Attendee(email, userName, password);
+                attendeeManager.createAttendee(userName, email, password);
+                break;
+            case "VIPUser":
+                vipUserManager.createVIPUser(userName, email, password);
+                break;
+            case "ORGANIZER":
+                organizerManager.createOrganizer(userName, email, password);
+                break;
             case "SPEAKER":
-                return new Speaker(email, userName, password);
+                speakerManager.createSpeaker(userName, email, password);
+                break;
         }
         return null;
     }
