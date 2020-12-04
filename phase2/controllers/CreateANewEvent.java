@@ -93,11 +93,13 @@ public class CreateANewEvent {
                     }
                 }
                 String speakerNum = "-1";
-                while (! canceled && 0 > Integer.parseInt(speakerNum) || Integer.parseInt(speakerNum) >= eventsController.getAllAvailableSpeaker(timeInput, durationNum).size()) {
-                    speakerNum = Integer.toString(input.getInputInt("Please enter a number to choose Speaker to " +
-                            "speak in this event: (enter '0' to choose the first speaker shown in the list above.)\n"));
-                    if (0 > Integer.parseInt(speakerNum) || Integer.parseInt(speakerNum) >= eventsController.getAllAvailableSpeaker(timeInput, durationNum).size()) {
-                        output.printPrompt("The speakerNum you chose is out of the bound please enter the correct number\n");
+                if (!eventType.equals("PARTY")) {
+                    while (!canceled && 0 > Integer.parseInt(speakerNum) || Integer.parseInt(speakerNum) >= eventsController.getAllAvailableSpeaker(timeInput, durationNum).size()) {
+                        speakerNum = Integer.toString(input.getInputInt("Please enter a number to choose Speaker to " +
+                                "speak in this event: (enter '0' to choose the first speaker shown in the list above.)\n"));
+                        if (0 > Integer.parseInt(speakerNum) || Integer.parseInt(speakerNum) >= eventsController.getAllAvailableSpeaker(timeInput, durationNum).size()) {
+                            output.printPrompt("The speakerNum you chose is out of the bound please enter the correct number\n");
+                        }
                     }
                 }
                 String restriction = "";
@@ -114,8 +116,6 @@ public class CreateANewEvent {
                 if (!canceled){
                     String room = eventsController.getAvailableRoom(timeInput).get(Integer.parseInt(roomNUm));
                     String speaker = eventsController.getAllAvailableSpeaker(timeInput,durationNum).get(Integer.parseInt(speakerNum));
-//                    ArrayList<String> speakerList = new ArrayList<>();
-//                    speakerList.add(speaker);
                     if (createEvent(title, eventsController.getRoomManager().changeNumTOID(room), speaker, timeInput, eventsController, durationNum, restriction, allType.get(Integer.parseInt(eventType)))) {
                         output.printPrompt("The new " + restriction + " " + allType.get(Integer.parseInt(eventType)) + " named " + title + " at Room "
                                 + room + " taught by " + speaker + " will start at " +
