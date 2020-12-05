@@ -32,6 +32,13 @@ public class Conversation implements Serializable {
     }
 
     /**
+     * Getter of the unread message list
+     * @return the unread message list
+     */
+    public ArrayList<String[]> unreadMessageGetter(){
+        return unreadMessages;
+    }
+    /**
      * Get the messages of this conversation.
      *
      * @return the whole messages list of this conversation.
@@ -40,11 +47,19 @@ public class Conversation implements Serializable {
         return messages;
     }
 
+    /**
+     * Delete a message of a given index
+     * @param index the index of the message in the messages list the user want to delete.
+     */
     public void deleteMessage(int index){
         messages.remove(index);
     }
 
-    public void addArchiveMessages(int index){
+    /**
+     * Add
+     * @param index
+     */
+    public void addArchiveMessage(int index){
         String[] archiveMessage = messages.get(index);
         archiveMessages.add(archiveMessage);
     }
