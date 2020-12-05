@@ -132,7 +132,18 @@ public class ConversationManager implements Serializable{
     }
 
     /**
+     * Add the selected messages to the archived message list.
+     *
+     * @param index the index of selected message
+     */
+    public void addArchivedMessage(int index){
+        currentConversation.addArchiveMessages(index);
+    }
+
+    /**
      * Remove the selected archived messages from the archived message list.
+     *
+     * @param index the index of selected message
      */
     public void removeArchivedMessage(int index){
         currentConversation.deleteArchiveMessage(index);
