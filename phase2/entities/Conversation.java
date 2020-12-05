@@ -73,6 +73,14 @@ public class Conversation implements Serializable {
     }
 
     /**
+     * Getter of the archive message list
+     * @return the archive message list
+     */
+    public ArrayList<String[]> getArchiveMessageGetter() {
+        return archiveMessages;
+    }
+
+    /**
      * Get the last messages of this conversation.
      *
      * @return the whole messages list of this conversation.
