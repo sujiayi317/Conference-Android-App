@@ -62,7 +62,7 @@ public class CreateANewEvent {
             } else if (eventsController.getAllAvailableSpeaker(timeInput, durationNum).size() == 0) {
                 output.printPrompt("sorry there is no available speaker yet,\n please go to create one first!\n");
             } else {
-                getAllAvailableRoomInfo(timeInput, viewAllAvailableRoom, eventsController);
+                getAllAvailableRoomInfo(timeInput, viewAllAvailableRoom, eventsController, durationNum);
                 getAllAvailableSpeaker(timeInput, eventsController, viewAllAvailableSpeaker, durationNum);
                 viewAllEventType.printALlEventType();
                 String title = "";
@@ -182,8 +182,8 @@ public class CreateANewEvent {
      * @param eventsController event controller class
      */
     private void getAllAvailableRoomInfo(String time, ViewAllAvailableRoom viewAllAvailableRoom, EventsController
-            eventsController) {
-        viewAllAvailableRoom.printAllAvailableRoom(eventsController.getAvailableRoom(time));
+            eventsController, String duration) {
+        viewAllAvailableRoom.printAllAvailableRoom(eventsController.getAvailableRoom(time, duration));
     }
 
     private void getAllAvailableSpeaker(String time, EventsController eventsController, ViewAllAvailableSpeaker

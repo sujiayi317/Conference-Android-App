@@ -100,8 +100,8 @@ public class EventsController {
      * @param time starting time String
      * @return ArrayList<String>, which is the list of all available rooms
      */
-    public ArrayList<String> getAvailableRoom(String time) {
-        return this.roomManager.getAvailableRoom(time, this.eventManager);
+    public ArrayList<String> getAvailableRoom(String time, String duration) {
+        return this.roomManager.getAvailableRoom(time, this.eventManager, duration);
     }
 
     /**

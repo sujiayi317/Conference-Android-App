@@ -1,7 +1,11 @@
-package use_cases;
+ppackage use_cases;
 
 import entities.Room;
 import entities.Event;
+import use_cases.AttendeeManager;
+import use_cases.EventFactory;
+import use_cases.RoomManager;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -76,7 +80,7 @@ public class EventManager implements Serializable {
         for (Event event : this.events) {
             for (String speaker: event.getSpeakers()) {
                 if ((event.getSpeakers().contains(speaker) || roomID.equals(event.getRoomID())) &&
-                        (!((Integer.parseInt(event.getStartTime()) + Integer.parseInt(event.getDuration())<= Integer.parseInt(startTime)) ||
+                        !(((Integer.parseInt(event.getStartTime()) + Integer.parseInt(event.getDuration())<= Integer.parseInt(startTime)) ||
                                 (Integer.parseInt(startTime) + Integer.parseInt(duration)<= Integer.parseInt(event.getStartTime()))))) {
                     return null;
                 }
@@ -298,10 +302,11 @@ public class EventManager implements Serializable {
      * @return a formatted string representation
      */
     public String generateFormattedStartTime(String startTime) {
-        int HourTime = Integer.parseInt(startTime.substring(8, 10));
+        int HourTime = Integer.parseInt(startTime.substring(11, 13));
+        //Todo: change i.e. 17 to 5
         String Ending = String.format("%s", (HourTime >= 12) ? "PM" : "AM");
-        return String.format("%s/%s/%s/%s%s", startTime.substring(0, 4), startTime.substring(4, 6),
-                startTime.substring(6, 8), startTime.substring(8, 10), Ending);
+        return String.format("%s/%s/%s/%s%s", startTime.substring(0, 4), startTime.substring(5, 7),
+                startTime.substring(8, 10), startTime.substring(11, 13), Ending);
     }
 
     /**
