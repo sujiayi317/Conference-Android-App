@@ -175,7 +175,8 @@ public class RoomManager implements Serializable {
                 Event event = eventManager.getEventFromID(eventID);
 
                 // if the time conflicts, then the room is not available
-                if (event.getStartTime().equals(time)) {
+                if (!(Integer.parseInt(event.getStartTime())<= Integer.parseInt(time)) &&
+                        (Integer.parseInt(time) <= Integer.parseInt(event.getStartTime() +Integer.parseInt(duration)))) {
                     roomList.remove(changeIdTONum(roomID));
                 }
             }
