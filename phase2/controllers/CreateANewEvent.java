@@ -57,7 +57,7 @@ public class CreateANewEvent {
                     output.printPrompt("The duration you enter is out of the bound please enter the correct integer\n");
                 }
             }
-            if (eventsController.getAvailableRoom(timeInput).size() == 0) {
+            if (eventsController.getAvailableRoom(timeInput, durationNum).size() == 0) {
                 output.printPrompt("sorry there is no available room yet,\n please go to create one first!\n");
             } else if (eventsController.getAllAvailableSpeaker(timeInput, durationNum).size() == 0) {
                 output.printPrompt("sorry there is no available speaker yet,\n please go to create one first!\n");
@@ -85,10 +85,10 @@ public class CreateANewEvent {
                     }
                 }
                 String roomNUm = "-1";
-                while (!canceled && 0 > Integer.parseInt(roomNUm) || Integer.parseInt(roomNUm) >= eventsController.getAvailableRoom(timeInput).size()) {
+                while (!canceled && 0 > Integer.parseInt(roomNUm) || Integer.parseInt(roomNUm) >= eventsController.getAvailableRoom(timeInput, durationNum).size()) {
                     roomNUm = Integer.toString(input.getInputInt("\nPlease enter a number to choose a room you " +
                             "want to use: (enter '0' to choose the first room shown in the list above.)\n"));
-                    if (0 > Integer.parseInt(roomNUm) || Integer.parseInt(roomNUm) >= eventsController.getAvailableRoom(timeInput).size()) {
+                    if (0 > Integer.parseInt(roomNUm) || Integer.parseInt(roomNUm) >= eventsController.getAvailableRoom(timeInput, durationNum).size()) {
                         output.printPrompt("The roomNum you chose is out of the bound please enter the correct number\n");
                     }
                 }
