@@ -159,7 +159,7 @@ public class RoomManager implements Serializable {
      * @param eventManager an EventManager object
      * @return an ArrayList<String> of room numbers that are available for the given time
      */
-    public ArrayList<String> getAvailableRoom(String time, EventManager eventManager) {
+    public ArrayList<String> getAvailableRoom(String time, EventManager eventManager, String duration) {
         ArrayList<String> roomList = new ArrayList<>();
 
         // First step, add all room numbers to the roomList
