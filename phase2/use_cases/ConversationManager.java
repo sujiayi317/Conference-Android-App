@@ -83,16 +83,6 @@ public class ConversationManager implements Serializable{
         return UserConversations;
     }
 
-//    public void loadConversation(String userId1, String userId2, ArrayList<String[]> messageHistory){
-//        HashSet<String> users = new HashSet<>();
-//        users.add(userId1);
-//        users.add(userId2);
-//        Iterator value = users.iterator();
-//        Conversation addConversation = new Conversation((String)value.next(),(String)value.next());
-//        addConversation.loadAllMessage(messageHistory);
-//        conversations.put(users,addConversation);
-//    }
-
     /**
      * The getter of all conversations and their associated users
      *
@@ -143,9 +133,8 @@ public class ConversationManager implements Serializable{
 
     /**
      * Remove the selected archived messages from the archived message list.
-     *
      */
-    public void removeArchivedMessage(int num){
-
+    public void removeArchivedMessage(int index){
+        currentConversation.deleteArchiveMessage(index);
     }
 }
