@@ -47,6 +47,15 @@ public class Conversation implements Serializable {
     public ArrayList<String[]> unreadMessageGetter(){
         return unreadMessages;
     }
+
+    /**
+     * Getter of the unread message list
+     * @return the unread message list
+     */
+    public void emptyUnreadMessage(){
+
+    }
+
     /**
      * Get the messages of this conversation.
      *
