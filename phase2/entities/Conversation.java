@@ -39,7 +39,7 @@ public class Conversation implements Serializable {
     }
 
 
-    /**   没写完
+    /**
      * Get the last messages of this conversation.
      *
      * @return the whole messages list of this conversation.
