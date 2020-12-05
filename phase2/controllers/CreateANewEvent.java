@@ -114,7 +114,7 @@ public class CreateANewEvent {
                     }
                 }
                 if (!canceled){
-                    String room = eventsController.getAvailableRoom(timeInput).get(Integer.parseInt(roomNUm));
+                    String room = eventsController.getAvailableRoom(timeInput, durationNum).get(Integer.parseInt(roomNUm));
                     String speaker = eventsController.getAllAvailableSpeaker(timeInput,durationNum).get(Integer.parseInt(speakerNum));
                     if (createEvent(title, eventsController.getRoomManager().changeNumTOID(room), speaker, timeInput, eventsController, durationNum, restriction, allType.get(Integer.parseInt(eventType)))) {
                         output.printPrompt("The new " + restriction + " " + allType.get(Integer.parseInt(eventType)) + " named " + title + " at Room "
