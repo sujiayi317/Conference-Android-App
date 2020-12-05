@@ -56,14 +56,21 @@ public class Conversation implements Serializable {
     }
 
     /**
-     * Add
-     * @param index
+     * Add a select message from messages list to the archive message list
+     * @param index the selected message
      */
-    public void addArchiveMessage(int index){
+    public void addArchiveMessages(int index){
         String[] archiveMessage = messages.get(index);
         archiveMessages.add(archiveMessage);
     }
 
+    /**
+     * remove a select archive message
+     * @param index the selected message
+     */
+    public void deleteArchiveMessage(int index){
+        archiveMessages.remove(index);
+    }
 
     /**
      * Get the last messages of this conversation.
