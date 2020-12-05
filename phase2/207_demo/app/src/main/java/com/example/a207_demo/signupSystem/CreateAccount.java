@@ -7,8 +7,8 @@ import com.example.a207_demo.use_cases.UserManager;
 public class CreateAccount {
 
     private final UserManager userManager = new UserManager();
-    private final UserFactory userFactory = new UserFactory();
-
+    private final UserFactory userFactory = new UserFactory(getAttendeeManager(),
+            getOrganizerManager(), getSpeakerManager());
 
     /**
      * The method of creating a new account.
