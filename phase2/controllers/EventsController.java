@@ -2,9 +2,12 @@ package controllers;
 
 import entities.Event;
 import entities.Room;
+import entities.Speaker;
 import use_cases.EventManager;
 import use_cases.RoomManager;
 import use_cases.SpeakerManager;
+import use_cases.UserManager;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,6 +17,7 @@ import java.util.List;
 public class EventsController {
     private final EventManager eventManager;
     private final RoomManager roomManager;
+    private final UserManager userManager;
     private final SpeakerManager speakerManager;
 
 
@@ -23,8 +27,8 @@ public class EventsController {
     public EventsController() {
         this.eventManager = new EventManager();
         this.roomManager = new RoomManager();
+        this.userManager = new UserManager();
         this.speakerManager = new SpeakerManager();
-
     }
 
     /**
@@ -39,20 +43,27 @@ public class EventsController {
     /**
      * Getter method for this RoomManager
      *
-     * @return this RoomManager
+     * @return this roomManager
      */
     public RoomManager getRoomManager() {
         return this.roomManager;
     }
 
     /**
+     * Getter method for this UserManager()
+     *
+     * @return this userManager
+     */
+    public UserManager getUserManager() {
+        return this.userManager;
+    }
+
+    /**
      * Getter method for this SpeakerManager()
      *
-     * @return this RoomManager
+     * @return this speakerManager
      */
-    public SpeakerManager getSpeakerManager() {
-        return this.speakerManager;
-    }
+    public SpeakerManager getSpeakerManager() { return this.speakerManager;}
 
     /**
      * Get a list of all events
@@ -116,7 +127,7 @@ public class EventsController {
     public boolean createEvent(String title, String roomID, String speakerName, String startTime, String duration,
                                String restriction, String type) {
         ArrayList<String> speakerID = new ArrayList<>();
-        speakerID.add(speakerManager.getIdFromName(speakerName));
+        speakerID.add(userManager.getUserIdFromName(speakerName));
         Event newEvent = this.eventManager.createEvent(title, roomID, speakerID, startTime, duration, restriction, type);
         if (newEvent == null) {
             return false;
@@ -139,7 +150,7 @@ public class EventsController {
         info.add(event.getStartTime());
         info.add(event.getDuration());
         for (String speaker : event.getSpeakers()){
-        info.add(speakerManager.getSpeakerNameFromID(speaker));
+        info.add(userManager.getUserNameFromID(speaker));
         }
         info.add(Integer.toString(room.getCurrentNum()));
         info.add(Integer.toString(room.getCapacity()));
