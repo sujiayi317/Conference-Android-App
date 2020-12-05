@@ -66,13 +66,35 @@ public abstract class Event implements Serializable {
         }
         for (Event event : events) {
             if (event.getAttendees().contains(attendeeID) &&
-                    !((Integer.parseInt(event.getStartTime()) + Integer.parseInt(event.getDuration()) <= Integer.parseInt(this.startTime)) ||
-                    Integer.parseInt(this.startTime) + Integer.parseInt(this.duration) <= Integer.parseInt(event.getStartTime())) ) {
+                    timeConflict(event.getStartTime(), event.getDuration())) {
                 return false;
             }
         }
         this.userIDs.add(attendeeID);
         return true;
+    }
+
+    /**
+     * Check if given time and this event's time have conflict
+     * @param startTime startTime of given event to be checked
+     * @param duration duration of given event
+     * @return
+     */
+    public boolean timeConflict(String startTime, String duration){
+        int thisTime = convertStartTimeToNum(this.startTime);
+        int checkTime = convertStartTimeToNum(startTime);
+        int thisDuration = Integer.parseInt(this.duration);
+        int checkDuration = Integer.parseInt(duration);
+
+        boolean conflict1 = thisTime <= checkTime && checkTime <= thisTime + thisDuration;
+        boolean conflict2 = checkTime <= thisTime && thisTime <= checkTime + checkDuration;
+        return conflict1 || conflict2;
+    }
+
+    private int convertStartTimeToNum(String startTime){
+        String newTime = startTime.substring(0, 4) + startTime.substring(5, 7) +
+                startTime.substring(8, 10) + startTime.substring(11, 13);
+        return Integer.parseInt(newTime);
     }
 
     /**
