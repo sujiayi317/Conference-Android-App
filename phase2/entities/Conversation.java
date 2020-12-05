@@ -6,7 +6,9 @@ import java.util.HashSet;
 
 public class Conversation implements Serializable {
     private HashSet<String> userIds = new HashSet<String>(); //Store uerIds of the two users
-    private ArrayList<String[]> messages = new ArrayList<String[]>();
+    private ArrayList<String[]> messages = new ArrayList<String[]>(); //Store the messages of the conversation.
+    private ArrayList<String[]> unreadMessages = new ArrayList<>(); // Store the unread messages of the conversation
+    private ArrayList<String[]> archiveMessages = new ArrayList<>(); // Store the archive messages of the conversation.
 
     /**
      * The constructor of the conversation class
@@ -36,6 +38,15 @@ public class Conversation implements Serializable {
      */
     public ArrayList<String[]> getMessages(){
         return messages;
+    }
+
+    public void deleteMessage(int index){
+        messages.remove(index);
+    }
+
+    public void addArchiveMessages(int index){
+        String[] archiveMessage = messages.get(index);
+        archiveMessages.add(archiveMessage);
     }
 
 
