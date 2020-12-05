@@ -137,6 +137,7 @@ public class EventsController {
         Room room = this.roomManager.getRoomBasedOnItsID(event.getRoomID());
         info.add(event.getTitle());
         info.add(event.getStartTime());
+        info.add(event.getDuration());
         for (String speaker : event.getSpeakers()){
         info.add(speakerManager.getSpeakerNameFromID(speaker));
         }
