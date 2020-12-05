@@ -49,23 +49,23 @@ public class SpeakerManager extends UserManager implements Serializable {
         UserManager.users.add(speaker);
     }
 
-    /**
-     * Check email and password, return its userID (or "NULL")
-     *
-     * @param email    email
-     * @param password password
-     * @return userID of the speaker, or "NULL" if not found
-     */
-    public String validLogIn(String email, String password) {
-        for (Speaker speaker : speakers) {
-            if (speaker.getEmail().equals(email) && speaker.getPassword().equals(password)) {
-                return speaker.getUserID();
-            } else if (speaker.getEmail().equals(email)) {
-                return "NULL";
-            }
-        }
-        return "NULL";
-    }
+//    /**
+//     * Check email and password, return its userID (or "NULL")
+//     *
+//     * @param email    email
+//     * @param password password
+//     * @return userID of the speaker, or "NULL" if not found
+//     */
+//    public String validLogIn(String email, String password) {
+//        for (Speaker speaker : speakers) {
+//            if (speaker.getEmail().equals(email) && speaker.getPassword().equals(password)) {
+//                return speaker.getUserID();
+//            } else if (speaker.getEmail().equals(email)) {
+//                return "NULL";
+//            }
+//        }
+//        return "NULL";
+//    }
 
     /**
      * Get an ArrayList<String> of all Available Speakers given a starting time
@@ -90,26 +90,26 @@ public class SpeakerManager extends UserManager implements Serializable {
         return availableSpeaker;
     }
 
-    /**
-     * Get ID of a speaker given his user name
-     * @param name name of the speaker
-     * @return user ID of the speaker, or "NULL" if not found
-     */
-    public String getIdFromName(String name) {
-        for (Speaker speaker : speakers) {
-            if (speaker.getUserName().equals(name)) {
-                return speaker.getUserID();
-            }
-        }
-        return "NULL";
-    }
+//    /**
+//     * Get ID of a speaker given his user name
+//     * @param name name of the speaker
+//     * @return user ID of the speaker, or "NULL" if not found
+//     */
+//    public String getIdFromName(String name) {
+//        for (Speaker speaker : speakers) {
+//            if (speaker.getUserName().equals(name)) {
+//                return speaker.getUserID();
+//            }
+//        }
+//        return "NULL";
+//    }
 
-    public String getSpeakerNameFromID(String speakerId){
-        for (Speaker speaker : speakers){
-            if (speaker.getUserID().equals(speakerId)){
-                return speaker.getUserName();
-            }
-        }
-        return "NULL";
-    }
+//    public String getSpeakerNameFromID(String speakerId){
+//        for (Speaker speaker : speakers){
+//            if (speaker.getUserID().equals(speakerId)){
+//                return speaker.getUserName();
+//            }
+//        }
+//        return "NULL";
+//    }
 }
