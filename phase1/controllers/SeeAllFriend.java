@@ -21,6 +21,7 @@ public class SeeAllFriend {
     /**
      *This class can present the friend list of a user, and the user can choose to enter the conversation of a given friend.
      *
+     *
      * @param userID userID
      * @param viewFriendList viewFriendList
      * @param attendeeManager attendeeManager
@@ -48,7 +49,6 @@ public class SeeAllFriend {
             }else if (chooseFriend == -1){
                 check3 = true;
             }else{
-//                System.out.println("Friend not found.");
                 output.printPrompt("Friend not found. Please enter another number.");
             }
         }
