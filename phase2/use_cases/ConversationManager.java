@@ -122,4 +122,30 @@ public class ConversationManager implements Serializable{
     public void addConversation(HashSet<String> key,Conversation conversation){
         conversations.put(key, conversation);
     }
+
+    /**
+     * Get all the unread messages from the current conversation.
+     *
+     * @return the whole unread messages list of the currentConversation.
+     */
+    public ArrayList<String[]> getUnreadMessagesOfCurrentConversation(){
+        return currentConversation.unreadMessageGetter();
+    }
+
+    /**
+     * Get all the archived messages from the current conversation.
+     *
+     * @return the whole archived messages list of the currentConversation.
+     */
+    public ArrayList<String[]> getArchiveMessagesOfCurrentConversation(){
+        return currentConversation.archivedMessageGetter();
+    }
+
+    /**
+     * Remove the selected archived messages from the archived message list.
+     *
+     */
+    public void removeArchivedMessage(int num){
+
+    }
 }
