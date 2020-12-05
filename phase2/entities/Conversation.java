@@ -32,6 +32,15 @@ public class Conversation implements Serializable {
     }
 
     /**
+     * Add a select message from messages list to the unread message list
+     * @param index the selected message
+     */
+    public void addUnreadMessage(int index){
+        String[] archiveMessage = messages.get(index);
+        unreadMessages.add(archiveMessage);
+    };
+
+    /**
      * Getter of the unread message list
      * @return the unread message list
      */
