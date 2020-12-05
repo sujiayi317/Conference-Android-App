@@ -114,12 +114,15 @@ public class ConversationManager implements Serializable{
     }
 
     /**
-     * Get all the unread messages from the current conversation.
+     * Get all the unread messages from the current conversation, and
+     * also clear the unread message list.
      *
      * @return the whole unread messages list of the currentConversation.
      */
     public ArrayList<String[]> getUnreadMessagesOfCurrentConversation(){
-        return currentConversation.unreadMessageGetter();
+        unreadMessages = currentConversation.unreadMessageGetter().clone();
+        currentConversation.emptyUnreadMessage();
+        return unreadMessages;
     }
 
     /**

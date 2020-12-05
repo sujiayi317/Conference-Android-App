@@ -49,11 +49,11 @@ public class Conversation implements Serializable {
     }
 
     /**
-     * Getter of the unread message list
-     * @return the unread message list
+     *
+     * Clear all the unread messages from the list
      */
     public void emptyUnreadMessage(){
-
+        unreadMessages.removeAll(unreadMessages);
     }
 
     /**
