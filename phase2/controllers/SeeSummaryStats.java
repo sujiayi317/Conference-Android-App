@@ -62,7 +62,7 @@ public class SeeSummaryStats {
     public void getTop5EventInfo(EventsController eventsController){
         StringBuilder overallInfo = new StringBuilder();
         overallInfo.append("There are Top5 Events' Info:\n");
-        ArrayList<String> top5Events = eventsController.getRoomManager().getTop5Events();
+        ArrayList<String> top5Events = eventsController.getEventManager().getTop5Events();
         for (int i = 0; i < top5Events.size(); i++){
             overallInfo.append("No_").append(i).append(eventsController.getEventInfo(top5Events.get(i)));
         }
