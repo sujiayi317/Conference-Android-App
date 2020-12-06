@@ -239,7 +239,7 @@ public class UserManager {
             usersInfo.add(singleInfo);
         }
         StringBuilder SummaryInfo = new StringBuilder();
-        SummaryInfo.append("All Current UserS Info");
+        SummaryInfo.append("Total Number: ").append(users.size());
         usersInfo.add(0, SummaryInfo);
         return usersInfo;
     }
