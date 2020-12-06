@@ -3,6 +3,7 @@ package use_cases;
 
 import entities.Event;
 import entities.Speaker;
+import entities.User;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -87,6 +88,20 @@ public class SpeakerManager extends UserManager implements Serializable {
             }
         }
         return availableSpeaker;
+    }
+
+    public ArrayList<StringBuilder> getAllSpeakerInfo(){
+        ArrayList<StringBuilder> usersInfo = new ArrayList<>();
+        for (int i = 0; i < speakers.size(); i++){
+            StringBuilder singleInfo = new StringBuilder();
+            User currentUser = speakers.get(i);
+            singleInfo.append(i).append(") ").append(currentUser.getUserName()).append(" ").append(currentUser.getType());
+            usersInfo.add(singleInfo);
+        }
+        StringBuilder SummaryInfo = new StringBuilder();
+        SummaryInfo.append("Total Number: ").append(speakers.size());
+        usersInfo.add(0, SummaryInfo);
+        return usersInfo;
     }
 
 //    /**
