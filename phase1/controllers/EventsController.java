@@ -27,6 +27,10 @@ public class EventsController {
 
     }
 
+    public int getAllExistingEventsSize(){
+        return this.eventManager.getAllEvent().size();
+    }
+
     /**
      * Getter method for this eventManager
      *

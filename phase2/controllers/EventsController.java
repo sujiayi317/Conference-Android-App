@@ -74,6 +74,10 @@ public class EventsController {
         return this.eventManager.getAllEvent();
     }
 
+    public int getAllExistingEventsSize(){
+        return this.eventManager.getAllEvent().size();
+    }
+
     /**
      * Get All Events For The Attendee with userID
      *
@@ -195,6 +199,8 @@ public class EventsController {
         for (String attendee : attendeeList){
             eventManager.removeAttendeeFromEvent(attendee, eventID, roomManager);
         }
-        return roomManager.getRoomBasedOnItsID(currentEvent.getRoomID()).getCurrentNum() == 0;
+        roomManager.resetTheCurrentNumberBasedONEvent(currentEvent.getRoomID(), eventID);
+        return true;
     }
+
 }

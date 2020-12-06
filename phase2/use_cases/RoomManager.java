@@ -88,9 +88,9 @@ public class RoomManager implements Serializable {
      * @param  roomID roomID
      * @return true iff the room is full
      */
-    public boolean isFull(String roomID) {
+    public boolean isFull(String roomID, String eventID) {
         Room room = getRoomBasedOnItsID(roomID);
-        return room.getCurrentNum() == room.getCapacity();
+        return room.getCurrentNumAssociateWithEvent(eventID) == room.getCapacity();
     }
 
     /**
@@ -129,6 +129,7 @@ public class RoomManager implements Serializable {
      * @param roomID the room to create and add
      */
     public void addEventToRoom(String event, String roomID) {
+        Room room = getRoomBasedOnItsID(roomID);
         if (!eventsMap.containsKey(roomID)) {
             events = new ArrayList<>();
         } else {
@@ -136,6 +137,7 @@ public class RoomManager implements Serializable {
         }
         events.add(event);
         eventsMap.put(roomID, events);
+        room.setCurrentNumAssociateWithEvent(event);
     }
 
     /**
@@ -181,6 +183,20 @@ public class RoomManager implements Serializable {
             }
         }
         return roomList;
+    }
+
+    public void resetTheCurrentNumberBasedONEvent(String roomID, String eventID){
+        Room room = getRoomBasedOnItsID(roomID);
+        room.setCurrentNumAssociateWithEvent(eventID);
+    }
+
+
+    public ArrayList<String> getTop5Event(){
+        ArrayList<String> Top5Event = new ArrayList<>();
+        int totalSize = events.size();
+        while (Top5Event.size() < Math.min(5, events.size())) {
+
+        }
     }
 
 

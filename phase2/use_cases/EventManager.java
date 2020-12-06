@@ -2,6 +2,8 @@ package use_cases;
 
 import entities.Room;
 import entities.Event;
+import entities.Speaker;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -156,9 +158,9 @@ public class EventManager implements Serializable {
                 //Todo: update room in room manager
                 //Todo: i.e. if (roommanager.updateSuccessful(room id)) then add attendee to list
                 Room room = roomManager.getRoomBasedOnItsID(event.getRoomID());
-                if (room.getCurrentNum() < room.getCapacity()) {
+                if (room.getCurrentNumAssociateWithEvent(eventID) < room.getCapacity()) {
                     if (event.addAttendee(userID, events)) {
-                        room.increaseCurrentNum();
+                        room.increaseCurrentNumAssociateWithEvent(eventID);
                         return true;
                     }
                 }
@@ -338,5 +340,4 @@ public class EventManager implements Serializable {
         }
         return vipEvents;
     }
-
 }

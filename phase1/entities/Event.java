@@ -155,4 +155,21 @@ public abstract class Event implements Serializable {
      * @return a formatted string with more data
      */
     public abstract String toFullString();
+
+    public boolean timeConflict(String startTime, String duration){
+        int thisTime = convertStartTimeToNum(this.startTime);
+        int checkTime = convertStartTimeToNum(startTime);
+        int thisDuration = Integer.parseInt(this.duration);
+        int checkDuration = Integer.parseInt(duration);
+
+        boolean conflict1 = thisTime <= checkTime && checkTime <= thisTime + thisDuration;
+        boolean conflict2 = checkTime <= thisTime && thisTime <= checkTime + checkDuration;
+        return conflict1 || conflict2;
+    }
+
+    private int convertStartTimeToNum(String startTime){
+        String newTime = startTime.substring(0, 4) + startTime.substring(5, 7) +
+                startTime.substring(8, 10) + startTime.substring(11, 13);
+        return Integer.parseInt(newTime);
+    }
 }

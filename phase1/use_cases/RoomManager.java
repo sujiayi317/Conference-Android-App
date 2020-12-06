@@ -9,6 +9,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import entities.Event;
+import entities.Room;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 /**
  * The use_cases.RoomManager class, this is the use case class to manage all rooms.
  */
@@ -88,9 +97,9 @@ public class RoomManager implements Serializable {
      * @param  roomID roomID
      * @return true iff the room is full
      */
-    public boolean isFull(String roomID) {
+    public boolean isFull(String roomID, String eventID) {
         Room room = getRoomBasedOnItsID(roomID);
-        return room.getCurrentNum() == room.getCapacity();
+        return room.getCurrentNumAssociateWithEvent(eventID) == room.getCapacity();
     }
 
     /**
@@ -129,6 +138,7 @@ public class RoomManager implements Serializable {
      * @param roomID the room to create and add
      */
     public void addEventToRoom(String event, String roomID) {
+        Room room = getRoomBasedOnItsID(roomID);
         if (!eventsMap.containsKey(roomID)) {
             events = new ArrayList<>();
         } else {
@@ -136,6 +146,7 @@ public class RoomManager implements Serializable {
         }
         events.add(event);
         eventsMap.put(roomID, events);
+        room.setCurrentNumAssociateWithEvent(event);
     }
 
     /**
@@ -175,14 +186,26 @@ public class RoomManager implements Serializable {
                 Event event = eventManager.getEventFromID(eventID);
 
                 // if the time conflicts, then the room is not available
-                if (!(Integer.parseInt(event.getStartTime())<= Integer.parseInt(time)) &&
-                        (Integer.parseInt(time) <= Integer.parseInt(event.getStartTime() +Integer.parseInt(duration)))) {
+                if (event.timeConflict(time, duration)) {
                     roomList.remove(changeIdTONum(roomID));
                 }
             }
         }
         return roomList;
     }
+    public void resetTheCurrentNumberBasedONEvent(String roomID, String eventID){
+        Room room = getRoomBasedOnItsID(roomID);
+        room.setCurrentNumAssociateWithEvent(eventID);
+    }
+//
+//
+//    public ArrayList<String> getTop5Event(){
+//        ArrayList<String> Top5Event = new ArrayList<>();
+//        int totalSize = events.size();
+//        while (Top5Event.size() < Math.min(5, events.size())) {
+//
+//        }
+//    }
 
 
 //    public void freeUpTheRoomBasedOnEvent(Addtendable event){

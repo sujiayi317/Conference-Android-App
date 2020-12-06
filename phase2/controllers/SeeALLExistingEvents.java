@@ -49,7 +49,7 @@ public class SeeALLExistingEvents {
                                 eventsController.getRoomManager(), attendeeManager)) {
                             output.printPrompt("You're successfully in " + eventTitle + "\n");
                             check += 1;
-                        } else if (eventsController.getRoomManager().isFull(eventsController.getEventManager().getEventFromID(eventID).getRoomID())) {
+                        } else if (eventsController.getRoomManager().isFull(eventsController.getEventManager().getEventFromID(eventID).getRoomID(), eventID)) {
                             output.printPrompt("Sorry, the current room is full\n");
                         } else {
                             output.printPrompt("You're already in " + eventTitle + "\n");
