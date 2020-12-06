@@ -1,18 +1,12 @@
 package com.example.a207_demo.eventSystem;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
-import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.example.a207_demo.R;
 
 import java.util.List;
@@ -23,11 +17,22 @@ import java.util.List;
 public class AttendeeEventAdapter extends EventAdapter {
     private Context context;
 
+    /**
+     * AttendeeEventAdapter
+     * @param context Context
+     * @param eventList List<Event> eventList
+     */
     public AttendeeEventAdapter(Context context, List<Event> eventList){
         super(context, eventList);
         this.context = context;
     }
 
+    /**
+     * onCreateViewHolder
+     * @param parent parent ViewGroup @NonNull ViewGroup parent
+     * @param viewType viewType
+     * @return VHEvent
+     */
     @NonNull
     @Override
     public VHEvent onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
