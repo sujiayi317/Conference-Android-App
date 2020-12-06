@@ -229,4 +229,18 @@ public class UserManager {
         }
         return null;
     }
+
+    public ArrayList<StringBuilder> getAllUsersInfo(){
+        ArrayList<StringBuilder> usersInfo = new ArrayList<>();
+        for (int i = 0; i < users.size(); i++){
+            StringBuilder singleInfo = new StringBuilder();
+            User currentUser = users.get(i);
+            singleInfo.append(i).append(") ").append(currentUser.getUserName()).append(" ").append(currentUser.getType());
+            usersInfo.add(singleInfo);
+        }
+        StringBuilder SummaryInfo = new StringBuilder();
+        SummaryInfo.append("Total Number: ").append(users.size());
+        usersInfo.add(0, SummaryInfo);
+        return usersInfo;
+    }
 }

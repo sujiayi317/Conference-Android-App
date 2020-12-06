@@ -1,6 +1,8 @@
 package use_cases;
 
 import entities.Organizer;
+import entities.User;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -46,5 +48,19 @@ public class OrganizerManager extends UserManager implements Serializable {
         Organizer organizer = new Organizer(userName, email, password, ID);
         this.organizers.add(organizer);
         UserManager.users.add(organizer);
+    }
+
+    public ArrayList<StringBuilder> getAllOrganizerInfo(){
+        ArrayList<StringBuilder> usersInfo = new ArrayList<>();
+        for (int i = 0; i < organizers.size(); i++){
+            StringBuilder singleInfo = new StringBuilder();
+            User currentUser = organizers.get(i);
+            singleInfo.append(i).append(") ").append(currentUser.getUserName()).append(" ").append(currentUser.getType());
+            usersInfo.add(singleInfo);
+        }
+        StringBuilder SummaryInfo = new StringBuilder();
+        SummaryInfo.append("Total Number: ").append(organizers.size());
+        usersInfo.add(0, SummaryInfo);
+        return usersInfo;
     }
 }

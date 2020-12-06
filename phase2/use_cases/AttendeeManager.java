@@ -1,6 +1,8 @@
 package use_cases;
 
 import entities.Attendee;
+import entities.User;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -75,5 +77,19 @@ public class AttendeeManager extends UserManager implements Serializable {
      */
     public boolean cancel(EventManager eventManager, String userID, String eventID, RoomManager roomManager) {
         return eventManager.removeAttendeeFromEvent(userID, eventID, roomManager);
+    }
+
+    public ArrayList<StringBuilder> getAllAttendeeInfo(){
+        ArrayList<StringBuilder> usersInfo = new ArrayList<>();
+        for (int i = 0; i < attendees.size(); i++){
+            StringBuilder singleInfo = new StringBuilder();
+            User currentUser = attendees.get(i);
+            singleInfo.append(i).append(") ").append(currentUser.getUserName()).append(" ").append(currentUser.getType());
+            usersInfo.add(singleInfo);
+        }
+        StringBuilder SummaryInfo = new StringBuilder();
+        SummaryInfo.append("Total Number: ").append(attendees.size());
+        usersInfo.add(0, SummaryInfo);
+        return usersInfo;
     }
 }
