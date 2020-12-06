@@ -23,6 +23,7 @@ public class OrganizerController extends AttendeeController{
     private final SendToAllAttendees sendToAllAttendees;
     private final cancelEvent cancelEvent;
     private final CreateNewAccountForOrg createNewAccountForOrg;
+    private final SeeSummaryStats seeSummaryStats;
 
     public OrganizerController(){
         this.organizerMenu = new OrganizerMenu();
@@ -36,6 +37,7 @@ public class OrganizerController extends AttendeeController{
         sendToAllAttendees = new SendToAllAttendees();
         cancelEvent = new cancelEvent();
         createNewAccountForOrg = new CreateNewAccountForOrg();
+        seeSummaryStats = new SeeSummaryStats();
         this.viewAllAvailableRoom = new ViewAllAvailableRoom();
         this.viewAllAvailableSpeaker = new ViewAllAvailableSpeaker();
         this.viewFriendList = new ViewFriendList();
@@ -115,6 +117,16 @@ public class OrganizerController extends AttendeeController{
                     case 10:
                         //cancel event
                         cancelEvent.toCancelEvent(eventsController, viewAllExistingEvents);
+                    case 11:
+                        //See all User Stat
+                        seeSummaryStats.getToSeeUserStat(eventsController, attendeeManager, organizerManager, vipUserManager);
+                    case 12:
+                        //See all EventEnrollmentStatistics
+                        seeSummaryStats.getToSeeEventEnrollmentStatistics(eventsController);
+                    case 13:
+                        // getTop5EventInfo
+                        seeSummaryStats.getTop5EventInfo(eventsController);
+
 
 
 

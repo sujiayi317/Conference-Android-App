@@ -11,11 +11,11 @@ public class SeeSummaryStats {
         output = new OutputManager();
     }
 
-    public void getToSeeUserStat(UserManager userManager, SpeakerManager speakerManager,
+    public void getToSeeUserStat(EventsController eventsController,
                                  AttendeeManager attendeeManager, OrganizerManager organizerManager,
                                  VIPUserManager vipUserManager){
-        ArrayList<StringBuilder> overallUser = userManager.getAllUsersInfo();
-        ArrayList<StringBuilder> overallSpeaker = speakerManager.getAllSpeakerInfo();
+        ArrayList<StringBuilder> overallUser = eventsController.getUserManager().getAllUsersInfo();
+        ArrayList<StringBuilder> overallSpeaker = eventsController.getSpeakerManager().getAllSpeakerInfo();
         ArrayList<StringBuilder> overallVip = vipUserManager.getAllVIPInfo();
         ArrayList<StringBuilder> overallAttendee = attendeeManager.getAllAttendeeInfo();
         ArrayList<StringBuilder> overallOrganizer = organizerManager.getAllOrganizerInfo();
@@ -44,7 +44,7 @@ public class SeeSummaryStats {
 
     }
 
-    public void getToSeeEventEnrollmentStatistics(EventsController eventsController, UserManager userManager){
+    public void getToSeeEventEnrollmentStatistics(EventsController eventsController){
         StringBuilder overallInfo = new StringBuilder();
         overallInfo.append("There are all Events' Info:\n");
         for (int i = 0; i < eventsController.getAllExistingEventsSize(); i++){
@@ -53,7 +53,7 @@ public class SeeSummaryStats {
             ArrayList<String> allAttendee = eventsController.getAttendeesFromEvent(currentEventID);
             overallInfo.append(currentName).append("has attendees as following:\n");
             for (String attendeeID: allAttendee){
-                overallInfo.append(userManager.getUserNameFromID(attendeeID));
+                overallInfo.append(eventsController.getUserManager().getUserNameFromID(attendeeID));
             }
         }
         output.printPrompt(overallInfo);
@@ -62,9 +62,11 @@ public class SeeSummaryStats {
     public void getTop5EventInfo(EventsController eventsController){
         StringBuilder overallInfo = new StringBuilder();
         overallInfo.append("There are Top5 Events' Info:\n");
-        for (int i = 0; i < eventsController.getAllExistingEventsSize(); i++){
-
+        ArrayList<String> top5Events = eventsController.getRoomManager().getTop5Events();
+        for (int i = 0; i < top5Events.size(); i++){
+            overallInfo.append("No_").append(i).append(eventsController.getEventInfo(top5Events.get(i)));
         }
+        output.printPrompt(overallInfo);
     }
 
 }
