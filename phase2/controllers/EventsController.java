@@ -191,16 +191,8 @@ public class EventsController {
 
     public ArrayList<String> getAllVIPEvents() { return eventManager.getAllVIPEvents();}
 
-    public boolean cancelEvent(String eventID){
-//        Event currentEvent = eventManager.getEventFromID(eventID);
-//        List<Event> eventList = eventManager.getAllEvent();
-//        eventList.remove(currentEvent);
-        eventManager.getAllEvent().remove(eventManager.getEventFromID(eventID));
-        ArrayList<String> attendeeList = eventManager.getEventFromID(eventID).getAttendees();
-        for (String attendee : attendeeList){
-            eventManager.removeAttendeeFromEvent(attendee, eventID, roomManager);
-        }
-        roomManager.resetTheCurrentNumberBasedONEvent(eventManager.getEventFromID(eventID).getRoomID(), eventID);
+    public boolean cancelEvent(String eventID, RoomManager roomManager){
+        eventManager.cancelEvent(eventID, roomManager);
         return true;
     }
 

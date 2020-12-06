@@ -363,4 +363,13 @@ public class EventManager implements Serializable {
         }
         return top5Events;
     }
+
+    public void cancelEvent(String eventID, RoomManager roomManager){
+        Event event = getEventFromID(eventID);
+        ArrayList<String> attendees = event.getAttendees();
+        for (String attendee: attendees){
+            removeAttendeeFromEvent(attendee, eventID, roomManager);
+        }
+        events.remove(event);
+    }
 }
