@@ -156,7 +156,7 @@ public class EventsController {
         for (String speaker : event.getSpeakers()){
         info.add(userManager.getUserNameFromID(speaker));
         }
-        info.add(Integer.toString(room.getCurrentNum()));
+        info.add(Integer.toString(room.getCurrentNumAssociateWithEvent(eventID));
         info.add(Integer.toString(room.getCapacity()));
         info.add(event.getRestriction());
         return info;
