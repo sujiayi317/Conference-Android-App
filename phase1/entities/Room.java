@@ -12,7 +12,7 @@ public class Room implements Serializable{
 
     private final String roomID;
     private int capacity;
-    private int currentNum = 0;
+//    private int currentNum = 0;
     private final String roomNum;
     private Map<String, Integer> currentNumAssociateWithEvent;
 
@@ -62,9 +62,9 @@ public class Room implements Serializable{
      *
      * @return current number
      */
-    public int getCurrentNum(){
-        return this.currentNum;
-    }
+//    public int getCurrentNum(){
+//        return this.currentNum;
+//    }
 
     public int getCurrentNumAssociateWithEvent(String eventID){
         return this.currentNumAssociateWithEvent.get(eventID);
@@ -81,29 +81,29 @@ public class Room implements Serializable{
 
 
 
-    public boolean setCapacity(int capacity){
-        if (capacity >= this.currentNum) {
-            this.capacity = capacity;
-            return true;
-        }
-        return false;
-    }
+//    public boolean setCapacity(int capacity){
+//        if (capacity >= this.currentNum) {
+//            this.capacity = capacity;
+//            return true;
+//        }
+//        return false;
+//    }
     /**
      * Increase the number of people by 1 in this room
      */
-    public void increaseCurrentNum(){
-        if (this.currentNum < this.capacity){
-            this.currentNum +=1;}
-    }
+//    public void increaseCurrentNum(){
+//        if (this.currentNum < this.capacity){
+//            this.currentNum +=1;}
+//    }
 
 
     /**
      * Decrease the number of people by 1 in this room
      */
-    public void decreaseCurrentNum(){
-        if (this.currentNum > 0){
-            this.currentNum -=1;}
-    }
+//    public void decreaseCurrentNum(){
+//        if (this.currentNum > 0){
+//            this.currentNum -=1;}
+//    }
 
 
 
