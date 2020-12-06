@@ -1,7 +1,8 @@
-package com.example.a207_demo.use_cases;
+package com.example.a207_demo.roomSystem;
 
+
+import com.example.a207_demo.roomSystem.Room;
 import com.example.a207_demo.eventSystem.Event;
-import com.example.a207_demo.entities.Room;
 import com.example.a207_demo.eventSystem.EventManager;
 
 import java.io.Serializable;
@@ -30,18 +31,23 @@ public class RoomManager implements Serializable {
     }
 
     /**
+     * Reset the room list.
+     */
+    public void reset(){this.rooms = new ArrayList<>();}
+
+    /**
      * Creates a new room
      *
      * @param roomNum the room to create and add
      * @return true iff successfully creates and adds the room
      */
-    public boolean createRoom(String roomNum) {
+    public boolean createRoom(String roomNum, int capacity) {
         for (Room room : this.rooms) {
             if (room.getRoomNum().equals(roomNum)) {
                 return false;
             }
         }
-        Room room = new Room(roomNum);
+        Room room = new Room(roomNum, capacity);
         this.rooms.add(room);
         return true;
     }
@@ -52,8 +58,8 @@ public class RoomManager implements Serializable {
      * @param roomNum the room to create and add
      * @param roomID the room ID
      */
-    public void loadRoom(String roomNum, String roomID) {
-        Room room = new Room(roomNum, roomID);
+    public void loadRoom(String roomNum, String roomID, int capacity) {
+        Room room = new Room(roomNum, roomID, capacity);
         this.rooms.add(room);
     }
 
@@ -160,7 +166,7 @@ public class RoomManager implements Serializable {
      * @param eventManager an EventManager object
      * @return an ArrayList<String> of room numbers that are available for the given time
      */
-    public ArrayList<String> getAvailableRoom(String time, EventManager eventManager) {
+    public ArrayList<String> getAvailableRoom(String time, String duration, EventManager eventManager) {
         ArrayList<String> roomList = new ArrayList<>();
 
         // First step, add all room numbers to the roomList
@@ -176,12 +182,21 @@ public class RoomManager implements Serializable {
                 Event event = eventManager.getEventFromID(eventID);
 
                 // if the time conflicts, then the room is not available
-                if (event.getStartTime().equals(time)) {
+                if (!event.timeConflict(time, duration)) {
                     roomList.remove(changeIdTONum(roomID));
                 }
             }
         }
         return roomList;
+    }
+
+    public String generateFormattedRoomInfo(String roomId){
+        for(Room room : rooms){
+            if(room.getRoomID().equals(roomId)){
+                return room.getRoomNum() + " " + roomId + " " + room.getCapacity();
+            }
+        }
+        return null;
     }
 
 
