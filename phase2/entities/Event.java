@@ -20,7 +20,6 @@ public abstract class Event implements Serializable {
     private String type;
 
     private int capacity;
-    private int currentNum;
 
     /**
      * The constructor No.1 for an event
@@ -38,7 +37,6 @@ public abstract class Event implements Serializable {
         this.duration = duration;
         this.restriction = restriction;
         this.capacity = capacity;
-        this.currentNum = 0;
     }
 
     public void setType(String type){
@@ -49,10 +47,10 @@ public abstract class Event implements Serializable {
 
     public int getCapacity(){return this.capacity;}
 
-    public int getCurrentNum(){return this.currentNum;}
+    public int getCurrentNum(){return this.userIDs.size();}
 
     private boolean isFull(){
-        return this.capacity  == this.currentNum;
+        return getCapacity() == getCurrentNum();
     }
 
     /**
@@ -82,7 +80,6 @@ public abstract class Event implements Serializable {
             }
         }
         this.userIDs.add(attendeeID);
-        this.currentNum += 1;
         return true;
     }
 
@@ -117,7 +114,6 @@ public abstract class Event implements Serializable {
      */
     public boolean removeAttendee(String attendeeID) {
         if (userIDs.contains(attendeeID)) {
-            this.currentNum += 1;
             return userIDs.remove(attendeeID);
         }
         return false;
