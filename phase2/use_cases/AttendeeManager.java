@@ -1,7 +1,9 @@
 package use_cases;
 
+import com.example.a207_demo.entities.*;
+import com.example.a207_demo.eventSystem.EventManager;
+import com.example.a207_demo.roomSystem.RoomManager;
 import entities.Attendee;
-import entities.User;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -22,12 +24,28 @@ public class AttendeeManager extends UserManager implements Serializable {
     }
 
     /**
+     * Reset the attendees: no user exists
+     */
+    public void reset() {
+        attendees = new ArrayList<>();
+    }
+
+    /**
+     * Getter method for all attendees
+     *
+     * @return list of attendees
+     */
+    public List<Attendee> getAttendees() {
+        return attendees;
+    }
+
+    /**
      * Creates An attendee and adds it to the map and lists
      */
     public void createAttendee(String userName, String email, String password) {
         Attendee attendee = new Attendee(userName, email, password);
         this.attendees.add(attendee);
-        UserManager.users.add(attendee);
+        super.addUser(attendee);
     }
 
     /**
@@ -41,17 +59,7 @@ public class AttendeeManager extends UserManager implements Serializable {
     public void loadAttendee(String userName, String email, String password, String ID) {
         Attendee attendee = new Attendee(userName, email, password, ID);
         this.attendees.add(attendee);
-        UserManager.users.add(attendee);
-    }
-
-
-    /**
-     * Getter method for all attendees
-     *
-     * @return list of attendees
-     */
-    public List<Attendee> getAttendees() {
-        return attendees;
+        super.addUser(attendee);
     }
 
     /**
@@ -62,34 +70,23 @@ public class AttendeeManager extends UserManager implements Serializable {
      * @param roomManager a roomManager
      * @return boolean value, return true iff signed up successfully
      */
-    public boolean signUp(EventManager eventManager, String userID, String eventID, RoomManager roomManager,
-                          AttendeeManager attendeeManager) {
-        return eventManager.addAttendeeToEvent(userID, eventID, roomManager, attendeeManager);
-    }
+//    public boolean signUp(EventManager eventManager, String userID, String eventID) {
+//        return eventManager.addAttendeeToEvent(userID, eventID, roomManager);
+//    }
 
     /**
      * Try to cancel an entities.Attendee from an event.
+     *
      * @param eventManager an eventManager
-     * @param userID String userIDv
-     * @param eventID String eventID
+     * @param userID       String userIDv
+     * @param eventID      String eventID
      * @param roomManager  a roomManager
-     * @return  boolean value, return true iff canceled successfully
+     * @return boolean value, return true iff canceled successfully
      */
-    public boolean cancel(EventManager eventManager, String userID, String eventID, RoomManager roomManager) {
-        return eventManager.removeAttendeeFromEvent(userID, eventID, roomManager);
-    }
+//    public boolean cancel(EventManager eventManager, String userID, String eventID, RoomManager roomManager) {
+//        return eventManager.removeAttendeeFromEvent(userID, eventID, roomManager);
+//    }
 
-    public ArrayList<StringBuilder> getAllAttendeeInfo(){
-        ArrayList<StringBuilder> usersInfo = new ArrayList<>();
-        for (int i = 0; i < attendees.size(); i++){
-            StringBuilder singleInfo = new StringBuilder();
-            User currentUser = attendees.get(i);
-            singleInfo.append(i).append(") ").append(currentUser.getUserName()).append(" ").append(currentUser.getType());
-            usersInfo.add(singleInfo);
-        }
-        StringBuilder SummaryInfo = new StringBuilder();
-        SummaryInfo.append("Total Number: ").append(attendees.size());
-        usersInfo.add(0, SummaryInfo);
-        return usersInfo;
-    }
+
+
 }

@@ -7,7 +7,6 @@ import java.util.UUID;
  * The entities.Speaker class, this creates instances of an entities.Speaker for a conference.
  */
 public class Speaker extends User implements Serializable {
-    private final String userID;
 
     /**
      * Constructor No.1 for the speaker
@@ -19,7 +18,7 @@ public class Speaker extends User implements Serializable {
     public Speaker(String userName, String email, String password) {
         super(userName, email, password);
         setType("SPEAKER");
-        this.userID = UUID.randomUUID().toString().split("-")[0];
+        setUserID(UUID.randomUUID().toString().split("-")[0]);
     }
 
     /**
@@ -33,14 +32,7 @@ public class Speaker extends User implements Serializable {
     public Speaker(String userName, String email, String password, String ID) {
         super(userName, email, password);
         setType("SPEAKER");
-        this.userID = ID;
+        setUserID(ID);
     }
 
-    /**
-     * Getter method to access this speaker's userID
-     * @return userID of this speaker
-     */
-    public String getUserID() {
-        return this.userID;
-    }
 }

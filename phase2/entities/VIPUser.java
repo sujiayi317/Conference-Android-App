@@ -19,6 +19,7 @@ public class VIPUser extends Attendee implements Serializable {
     public VIPUser(String userName, String email, String password) {
         super(userName, email, password);
         setType("VIPUser");
+        setUserID(UUID.randomUUID().toString().split("-")[0]);
     }
 
     /**
@@ -32,6 +33,7 @@ public class VIPUser extends Attendee implements Serializable {
     public VIPUser(String userName, String email, String password, String ID) {
         super(userName, email, password);
         setType("VIPUser");
+        setUserID(ID);
     }
 
 }

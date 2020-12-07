@@ -1,22 +1,52 @@
 package entities;
 
+import com.example.a207_demo.eventSystem.Event;
+
 import java.util.ArrayList;
 
-public class Talk extends Event{
+/**
+ * Talk is a type of event
+ */
+public class Talk extends Event {
 
-    private final ArrayList<String> speaker;
-    public Talk (String title, String roomID, ArrayList<String> speakerID, String startTime, String duration,
-                 String restriction){
-        super(title, roomID, startTime, duration, restriction);
+    /**
+     * Talk
+     * @param title title
+     * @param roomID roomID
+     * @param speakerID speakerID
+     * @param startTime startTime
+     * @param duration duration
+     * @param restriction restriction
+     */
+    public Talk (String title, String roomID, String startTime, String duration, String restriction,
+                 int capacity, ArrayList<String> speakerID){
+        super(title, roomID, startTime, duration, restriction, capacity);
         setType("TALK");
-        this.speaker = speakerID;
+        setSpeakerUserIDs(speakerID);
     }
 
-    @Override
-    public ArrayList<String> getSpeakers() {
-        return this.speaker;
+    /**
+     * Talk
+     * @param title title
+     * @paramt eventID eventID
+     * @param roomID roomID
+     * @param speakerID speakerID
+     * @param startTime startTime
+     * @param duration duration
+     * @param restriction restriction
+     */
+    public Talk (String title, String eventID, String roomID, String startTime, String duration,
+                 String restriction, int capacity, ArrayList<String> speakerID){
+        super(title, eventID, roomID, startTime, duration, restriction, capacity);
+        setType("TALK");
+        setSpeakerUserIDs(speakerID);
     }
 
+    /**
+     * toFullString
+
+     * @return String
+     */
     @Override
     public String toFullString(){
         return this.toString() + " in room " + this.getRoomID() + " with speaker: " + this.getSpeakers().get(0);}
