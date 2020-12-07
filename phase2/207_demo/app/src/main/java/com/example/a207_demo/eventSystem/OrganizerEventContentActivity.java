@@ -2,15 +2,23 @@ package com.example.a207_demo.eventSystem;
 
 import android.os.Bundle;
 
+import android.view.View;
 import android.widget.Button;
 
 import com.example.a207_demo.R;
+import com.example.a207_demo.roomSystem.Room;
+import com.example.a207_demo.roomSystem.RoomManager;
 import com.example.a207_demo.utility.ActivityCollector;
+
+
+import java.util.ArrayList;
 
 /**
  * OrganizerEventContentActivity
  */
-public class OrganizerEventContentActivity extends EventContentActivity{
+public class OrganizerEventContentActivity extends com.example.a207_demo.eventSystem.EventContentActivity {
+
+    private String eventToRemove;
 
     /**
      * onCreate
@@ -30,12 +38,54 @@ public class OrganizerEventContentActivity extends EventContentActivity{
      * fillContent
      * @param eventTitle String eventTitle
      * @param eventContent String eventContent
-     * @param eventImageId int eventImageId
      */
-    protected void fillContent(String eventTitle, String eventContent, int eventImageId){
-        super.fillContent(eventTitle, eventContent, eventImageId);
+    protected void fillContent(String eventTitle, String eventContent){
+        super.fillContent(eventTitle, eventContent);
+        eventToRemove = eventTitle;
         Button eventCancel = findViewById(R.id.btn_cancel_event);
         eventCancel.setOnClickListener(this);
+    }
+
+    /**
+     * onClick
+     * @param view View
+     */
+    public void onClick(View view){
+        // Todo: Organizer cancel an event
+        cancelEvent(eventToRemove);
+    }
+
+    /**
+     * cancelEvent
+     * @param eventTitle String eventTitle
+     */
+    public void cancelEvent(String eventTitle){
+        com.example.a207_demo.eventSystem.Event event = getEventManager().getEventFromTitle(eventTitle);
+        ArrayList<String> attendees = event.getAttendees();
+
+        for (String attendee: attendees){
+            removeAttendeeFromEvent(attendee, eventTitle);
+        }
+        // remove the event
+        getEventManager().removeEvent(event);
+    }
+
+    /**
+     * remove Attendee From Event
+     *
+     * @param userID      userID String object
+     * @param eventTitle  eventTitle String object
+     */
+    public void removeAttendeeFromEvent(String userID, String eventTitle) {
+        com.example.a207_demo.eventSystem.Event event = getEventManager().getEventFromTitle(eventTitle);
+        if (event != null) {
+            // decrease number of people in the room
+            Room room = getRoomManager().getRoomBasedOnItsID(event.getRoomID());
+            room.decreaseCurrentNum();
+
+            // remove the attendee
+            event.removeAttendee(userID);
+        }
     }
 
 }

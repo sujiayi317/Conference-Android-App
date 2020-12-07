@@ -3,6 +3,8 @@ package com.example.a207_demo.eventSystem;
 import com.example.a207_demo.roomSystem.Room;
 import com.example.a207_demo.use_cases.AttendeeManager;
 import com.example.a207_demo.roomSystem.RoomManager;
+import com.example.a207_demo.use_cases.SpeakerManager;
+import com.example.a207_demo.use_cases.UserManager;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
@@ -13,10 +15,10 @@ import java.util.List;
 /**
  * The use_cases.EventManager class, this is the use case class to manage all events.
  */
-public class EventManager implements Serializable{
+public class EventManager implements Serializable {
 
-    private List<Event> events;
-    private EventFactory eventFactory;
+    private List<com.example.a207_demo.eventSystem.Event> events;
+    private com.example.a207_demo.eventSystem.EventFactory eventFactory;
     private ArrayList<String> allEventType;
 
 
@@ -25,7 +27,7 @@ public class EventManager implements Serializable{
      */
     public EventManager() {
         events = new ArrayList<>();
-        eventFactory = new EventFactory();
+        eventFactory = new com.example.a207_demo.eventSystem.EventFactory();
         this.allEventType = new ArrayList<>();
         allEventType.add("TALK");
         allEventType.add("PARTY");
@@ -35,15 +37,16 @@ public class EventManager implements Serializable{
     /**
      * Reset events list
      */
-    public void reset(){
+    public void reset() {
         events = new ArrayList<>();
     }
 
     /**
      * Add an event to event list
+     *
      * @param event
      */
-    public void setEvents(Event event){
+    public void setEvents(com.example.a207_demo.eventSystem.Event event) {
         this.events.add(event);
     }
 
@@ -52,23 +55,24 @@ public class EventManager implements Serializable{
      *
      * @return a list of all events
      */
-    public List<Event> getAllEvent() {
+    public List<com.example.a207_demo.eventSystem.Event> getAllEvent() {
         return events;
     }
 
-    public ArrayList<String> getAllEventType (){
+    public ArrayList<String> getAllEventType() {
         return this.allEventType;
     }
 
     /**
      * Return a list all the VIP-only event id's
+     *
      * @return ArrayList<String> containing the event ID of all VIP-only events
      */
     public ArrayList<String> getAllVIPEvents() {
-        List<Event> allEvents = this.getAllEvent();
+        List<com.example.a207_demo.eventSystem.Event> allEvents = this.getAllEvent();
         ArrayList<String> vipEvents = new ArrayList<>();
-        for (Event event : allEvents){
-            if (event.getRestriction().equals("VIP-ONLY")){
+        for (com.example.a207_demo.eventSystem.Event event : allEvents) {
+            if (event.getRestriction().equals("VIP-ONLY")) {
                 vipEvents.add(event.getEventID());
             }
         }
@@ -79,14 +83,14 @@ public class EventManager implements Serializable{
     /**
      * Creates a new event
      *
-     * @param title title of the event
-     * @param roomName roomID of the event
+     * @param title     title of the event
+     * @param roomID    roomID of the event
      * @param speakerID speakerID of the event
-     * @param  startTime startTime of the event
+     * @param startTime startTime of the event
      * @return the newly created event or null
      */
-    public boolean createEvent(String title, String roomName, ArrayList<String> speakerID, String startTime, String duration,
-                             String restriction, String type) {
+    public boolean createEvent(String title, String roomID, ArrayList<String> speakerID, String startTime, String duration,
+                               String restriction, String type) {
 //        for (Event event : this.events) {
 //            for (String speaker: event.getSpeakers()) {
 //                if ((event.getSpeakers().contains(speaker) || roomID.equals(event.getRoomID())) &&
@@ -97,13 +101,13 @@ public class EventManager implements Serializable{
 //            }
 //        }
 
-        for(Event event : this.events){
-            if(event.timeConflict(startTime, duration)){
+        for (com.example.a207_demo.eventSystem.Event event : this.events) {
+            if (event.timeConflict(startTime, duration)) {
                 return false;
             }
         }
         // create this new event:
-        Event newEvent = eventFactory.createEvent(title, roomName, speakerID, startTime,duration, restriction, type);
+        com.example.a207_demo.eventSystem.Event newEvent = eventFactory.createEvent(title, roomID, speakerID, startTime, duration, restriction, type);
         // update the events list:
         events.add(newEvent);
 
@@ -114,20 +118,20 @@ public class EventManager implements Serializable{
     /**
      * Create a new event (full version)
      *
-     * @param title title
-     * @param roomName roomID
-     * @param speakerID speakerID
-     * @param startTime startTime
-     * @param eventID eventID
-     * @param attendeeID attendeeID
+     * @param title       title
+     * @param roomName    roomID
+     * @param speakerID   speakerID
+     * @param startTime   startTime
+     * @param eventID     eventID
+     * @param attendeeID  attendeeID
      * @param roomManager roomManager
-     * @return  the newly created event
+     * @return the newly created event
      */
-    public Event loadEvent(String title, String roomName, ArrayList<String> speakerID, String startTime, String eventID,
-                           String duration, String restriction, String type, ArrayList<String> attendeeID,
-                           RoomManager roomManager, AttendeeManager attendeeManager) {
+    public com.example.a207_demo.eventSystem.Event loadEvent(String title, String roomName, ArrayList<String> speakerID, String startTime, String eventID,
+                                                             String duration, String restriction, String type, ArrayList<String> attendeeID,
+                                                             RoomManager roomManager, AttendeeManager attendeeManager) {
         // create this new event:
-        Event newEvent = eventFactory.createEvent(title, roomName, speakerID, startTime,duration, restriction, type);
+        com.example.a207_demo.eventSystem.Event newEvent = eventFactory.createEvent(title, roomName, speakerID, startTime, duration, restriction, type);
         // update the events list:
         events.add(newEvent);
 
@@ -139,10 +143,10 @@ public class EventManager implements Serializable{
     }
 
     //Todo: eventId?
-    public void loadEvent(String type, String title, String eventID, String roomName, ArrayList<String> speakerID,
+    public void loadEvent(String type, String title, String eventID, String roomID, ArrayList<String> speakerID,
                           String startTime, String duration, String restriction) {
         // create this new event:
-        Event newEvent = eventFactory.createEvent(title, roomName, speakerID, startTime,duration, restriction, type);
+        com.example.a207_demo.eventSystem.Event newEvent = eventFactory.createEvent(title, roomID, speakerID, startTime, duration, restriction, type);
         // update the events list:
         events.add(newEvent);
 
@@ -156,7 +160,7 @@ public class EventManager implements Serializable{
 
     /**
      * Adds an attendee to the event
-     *
+     * <p>
      * Hint (Piazza question @652):
      * "When the user says they want to sign up for an event, they have a username and they know the event name.
      * So the controller method calls the use_cases.EventManager method with two String parameters:
@@ -168,20 +172,20 @@ public class EventManager implements Serializable{
      * If you want to add the Even to the entities.User, the Controller would send only the String eventName to the
      * UserManager, to store the entities.Event's name in a list of Strings inside the entities.User object."
      *
-     * @param userID userID
-     * @param eventID eventID
+     * @param userID      userID
+     * @param eventID     eventID
      * @param roomManager a RoomManager object
      * @return true iff the user has been successfully added to this event
      */
     public boolean addAttendeeToEvent(String userID, String eventID, RoomManager roomManager, AttendeeManager attendeeManager) {
-        Event event = getEventFromID(eventID);
+        com.example.a207_demo.eventSystem.Event event = getEventFromID(eventID);
         if (event != null) {
             String restriction = event.getRestriction();
             String userType = attendeeManager.getUserType(userID);
             if (!(restriction.equals("VIP-ONLY") && !userType.equals("VIPUser"))) {
                 //Todo: update room in room manager
                 //Todo: i.e. if (roommanager.updateSuccessful(room id)) then add attendee to list
-                Room room = roomManager.getRoomBasedOnItsID(event.getRoomName());
+                Room room = roomManager.getRoomBasedOnItsID(event.getRoomID());
                 if (room.getCurrentNum() < room.getCapacity()) {
                     if (event.addAttendee(userID, events)) {
                         room.increaseCurrentNum();
@@ -199,10 +203,10 @@ public class EventManager implements Serializable{
      * @param speakerID speakerID String
      * @param events    a list of events
      */
-    public boolean addSpeakerToEvent(String speakerID, List<Event> events, Event event) {
-        for (Event currentEvent : events) {
+    public boolean addSpeakerToEvent(String speakerID, List<com.example.a207_demo.eventSystem.Event> events, com.example.a207_demo.eventSystem.Event event) {
+        for (com.example.a207_demo.eventSystem.Event currentEvent : events) {
             //Todo: implement has Speaker in Event
-            for (String speaker : currentEvent.getSpeakers()){
+            for (String speaker : currentEvent.getSpeakers()) {
                 if (speaker.equals(speakerID) && event.getStartTime().equals(currentEvent.getStartTime())) {
                     return false;
                 }
@@ -213,24 +217,7 @@ public class EventManager implements Serializable{
         return true;
     }
 
-    /**
-     * Return true if we remove the attendee from a event.
-     *
-     * @param userID userID String object
-     * @param eventID eventID String object
-     * @param roomManager roomManager
-     * @return true  iff the user has been successfully removed from this event
-     */
-    public boolean removeAttendeeFromEvent(String userID, String eventID, RoomManager roomManager) {
-        Event event = getEventFromID(eventID);
-        if (event != null) {
-            //Room room = roomManager.getRoomBasedOnItsID(event.getRoomID());
-            //room.decreaseCurrentNum();
-            //Todo: check remove success first
-            return event.removeAttendee(userID);
-        }
-        return false;
-    }
+
 
     /**
      * Try to remove a speaker from a list of events
@@ -238,7 +225,7 @@ public class EventManager implements Serializable{
      * @param speakerID String
      * @return boolean true if person existed in attendee list
      */
-    public boolean removeSpeakerFromEvent(String speakerID, Event event) {
+    public boolean removeSpeakerFromEvent(String speakerID, com.example.a207_demo.eventSystem.Event event) {
         ArrayList<String> speakerList = event.getSpeakers();
         if (speakerList.contains(speakerID)) {
             //Todo: implement removeSpeaker for Event (do not directly change list from getSpeakers())
@@ -254,7 +241,7 @@ public class EventManager implements Serializable{
      * @return arraylist of attendees' ID from given event, return empty arraylist if event not found.
      */
     public ArrayList<String> getAttendeesFromEvent(String eventID) {
-        Event event = getEventFromID(eventID);
+        com.example.a207_demo.eventSystem.Event event = getEventFromID(eventID);
         if (event != null) {
             return event.getAttendees();
         }
@@ -268,7 +255,7 @@ public class EventManager implements Serializable{
      * @return arraylist of attendees' ID from given event, return empty arraylist if event not found.
      */
     public ArrayList<String> getSpeakersFromEvent(String eventID) {
-        Event event = getEventFromID(eventID);
+        com.example.a207_demo.eventSystem.Event event = getEventFromID(eventID);
         if (event != null) {
             return event.getSpeakers();
         }
@@ -283,7 +270,7 @@ public class EventManager implements Serializable{
      */
     public ArrayList<String> getEventsFromAttendee(String userID) {
         ArrayList<String> eventList = new ArrayList<>();
-        for (Event event : events) {
+        for (com.example.a207_demo.eventSystem.Event event : events) {
             if (event.getAttendees().contains(userID)) {
                 eventList.add(event.getEventID());
             }
@@ -299,7 +286,7 @@ public class EventManager implements Serializable{
      */
     public ArrayList<String> getEventsFromSpeaker(String userID) {
         ArrayList<String> eventList = new ArrayList<>();
-        for (Event event : events) {
+        for (com.example.a207_demo.eventSystem.Event event : events) {
             if (event.getSpeakers().contains(userID)) {
                 eventList.add(event.getEventID());
             }
@@ -313,8 +300,8 @@ public class EventManager implements Serializable{
      * @param eventID eventID String object
      * @return event if eventID existed in events otherwise return null
      */
-    public Event getEventFromID(String eventID) {
-        for (Event event : events) {
+    public com.example.a207_demo.eventSystem.Event getEventFromID(String eventID) {
+        for (com.example.a207_demo.eventSystem.Event event : events) {
             if (event.getEventID().equals(eventID)) {
                 return event;
             }
@@ -324,12 +311,13 @@ public class EventManager implements Serializable{
 
     /**
      * Return all Attendees' ids and user names.
+     *
      * @return a list of two list containing user ids and user names respectively.
      */
-    public ArrayList<ArrayList<String>> getAllIDAndName(){
+    public ArrayList<ArrayList<String>> getAllIDAndName() {
         ArrayList<String> IDs = new ArrayList<>();
         ArrayList<String> Names = new ArrayList<>();
-        for (Event event : events) {
+        for (com.example.a207_demo.eventSystem.Event event : events) {
             IDs.add(event.getEventID());
             Names.add(event.getTitle());
         }
@@ -341,28 +329,20 @@ public class EventManager implements Serializable{
 
 
     public String getEventRestrictionWithID(String eventID) {
-        Event event = getEventFromID(eventID);
+        com.example.a207_demo.eventSystem.Event event = getEventFromID(eventID);
         return event.getRestriction();
     }
 
 
 
-//    public String changeEventIDIntoEventTitle(String eventID) {
-//        for (Event event : events) {
-//            if (event.getEventID().equals(eventID)) {
-//                return event.getTitle();
-//            }
-//        }
-//        return "NULL";
-//    }
-
     /**
      * Given a String representing the title of this event, return the ID of this event, or "NULL"
+     *
      * @param eventTitle title String of an event
      * @return event ID
      */
     public String changeEventTitleIntoEventID(String eventTitle) {
-        for (Event event : events) {
+        for (com.example.a207_demo.eventSystem.Event event : events) {
             if (event.getTitle().equals(eventTitle)) {
                 return event.getEventID();
             }
@@ -370,13 +350,11 @@ public class EventManager implements Serializable{
         return "NULL";
     }
 
+    public boolean checkValidTime(String time) {
+        return checkValidTimeFormat(time) && checkValidFutureTime(time);
+    }
 
-    /**
-     * To check if a time format is valid.
-     * @param time given time string
-     * @return true iff the time format is correct
-     */
-    public boolean checkValidTimeFormat(String time) {
+    private boolean checkValidTimeFormat(String time) {
         if (time.length() == 13 && time.charAt(4) == '/' && time.charAt(7) == '/' && time.charAt(10) == '/') {
             String[] timeList = time.split("/");
             try {
@@ -403,12 +381,7 @@ public class EventManager implements Serializable{
         return false;
     }
 
-    /**
-     * To check if a given event time can be added.
-     * @param time given time
-     * @return true iff the time slot is available
-     */
-    public boolean checkValidFutureTime(String time) {
+    private boolean checkValidFutureTime(String time) {
         String eventTime = time.replace("/", "");
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd/HH");
         Date date = new Date();
@@ -416,18 +389,47 @@ public class EventManager implements Serializable{
         return Long.parseLong(eventTime) > Long.parseLong(currentTime);
     }
 
-    //Todo: title is larger than 3 characters and not the same as other events
-    public boolean checkValidTitle(String title){
+    /**
+     * checkValidTitle title is larger than 3 characters and not the same as other events
+     *
+     * @param title String
+     * @return boolean
+     */
+
+    public boolean checkValidTitle(String title) {
+        if (title.length() < 3) {
+            return false;
+        }
+        for (com.example.a207_demo.eventSystem.Event event : events) {
+            if (event.getTitle().equals(title)) {
+                return false;
+            }
+        }
         return true;
     }
 
-    //Todo: duration is integer and larger than 0
-    public boolean checkValidDuration(String duration){
-        return true;
+
+    /**
+     * checkValidDuration duration is integer and larger than 0
+     *
+     * @param duration String
+     * @return boolean
+     */
+    public boolean checkValidDuration(String duration) {
+        try {
+            int dur = Integer.parseInt(duration);
+            if (dur <= 0) {
+                return false;
+            }
+            return true;
+        } catch (NumberFormatException ex) {
+            return false;
+        }
     }
 
     /**
      * Generate a formatted string representation of the start time String.
+     *
      * @param startTime startTime String
      * @return a formatted string representation
      */
@@ -440,20 +442,84 @@ public class EventManager implements Serializable{
     }
 
     /**
-     * Generate the formatted event's information.
+     * Generate the formatted event's information for writing into database.
+     *
      * @param eventID the id of an event.
      * @return a string of formatted event's information.
      */
-    public String generateFormattedEventInfo(String eventID){
-        for (Event event : events){
-            if (event.getEventID().equals(eventID)){
-                System.out.println("HIIIIIIII 2" + event.getSpeakers());
+    public String generateFormattedEventInfo(String eventID) {
+        for (com.example.a207_demo.eventSystem.Event event : events) {
+            if (event.getEventID().equals(eventID)) {
                 return event.getType() + " " + event.getTitle().replace(" ", "_")
-                        + " " + eventID + " " + event.getRoomName() + " {" + event.getSpeakers() + "} "
+                        + " " + eventID + " " + event.getRoomID() + " {" + event.getSpeakers() + "} "
                         + event.getStartTime() + " " + event.getDuration() + " " + event.getRestriction();
             }
         }
         return "NULL";
     }
 
+    /**
+     * Generate the event info for laoding into event activity
+     *
+     * @return ArrayList<ArrayList<String>>
+     */
+    public ArrayList<ArrayList<String>> generateAllInfo(ArrayList<String> eventIDs) {
+        ArrayList<ArrayList<String>> result = new ArrayList<>();
+        for (String eventID : eventIDs) {
+            ArrayList<String> info = new ArrayList<>();
+
+            com.example.a207_demo.eventSystem.Event event = getEventFromID(eventID);
+            info.add(event.getTitle());
+            info.add(event.getRoomID());
+            info.add(event.getStartTime());
+            info.add(event.getDuration());
+            info.add(event.getType());
+            info.add(event.getRestriction());
+            info.add("" + event.getSpeakers());
+            result.add(info);
+        }
+        return result;
+    }
+
+    /**
+     * return an event based on its title
+     *
+     * @param title event title String object
+     * @return event if eventID existed in events otherwise return null
+     */
+    public com.example.a207_demo.eventSystem.Event getEventFromTitle(String title) {
+        for (com.example.a207_demo.eventSystem.Event event : events) {
+            if (event.getTitle().equals(title)) {
+                return event;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * removeEvent
+     * @param event Event
+     */
+    public void removeEvent(com.example.a207_demo.eventSystem.Event event) {
+        events.remove(event);
+    }
+
+    /**
+     * Return true if we remove the attendee from a event.
+     *
+     * @param userID      userID String object
+     * @param eventTitle  eventTitle String object
+     * @param roomManager roomManager
+     * @return true  iff the user has been successfully removed from this event
+     */
+//    public boolean removeAttendeeFromEvent(String userID, String eventTitle, RoomManager roomManager) {
+//        Event event = getEventFromTitle(eventTitle);
+//        if (event != null) {
+//            //Room room = roomManager.getRoomBasedOnItsID(event.getRoomID());
+//            //room.decreaseCurrentNum();
+//            //Todo: check remove success first
+//            return event.removeAttendee(userID);
+//        }
+//        return false;
+//    }
 }
