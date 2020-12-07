@@ -19,6 +19,9 @@ public abstract class Event implements Serializable {
     private String restriction;
     private String type;
 
+    private int capacity;
+    private int currentNum;
+
     /**
      * The constructor No.1 for an event
      *
@@ -26,7 +29,7 @@ public abstract class Event implements Serializable {
      * @param roomID    which room the event will be held in
      * @param startTime event starting time
      */
-    public Event(String title, String roomID, String startTime, String duration, String restriction) {
+    public Event(String title, String roomID, String startTime, String duration, String restriction, int capacity) {
         this.title = title;
         this.eventID = UUID.randomUUID().toString().split("-")[0];
         this.roomID = roomID;
@@ -34,7 +37,8 @@ public abstract class Event implements Serializable {
         this.startTime = startTime;
         this.duration = duration;
         this.restriction = restriction;
-        System.out.println(eventID);
+        this.capacity = capacity;
+        this.currentNum = 0;
     }
 
     public void setType(String type){
@@ -43,6 +47,13 @@ public abstract class Event implements Serializable {
 
     public String getType(){return this.type;}
 
+    public int getCapacity(){return this.capacity;}
+
+    public int getCurrentNum(){return this.currentNum;}
+
+    private boolean isFull(){
+        return this.capacity  == this.currentNum;
+    }
 
     /**
      * Get the value of timeSlot, i.e., startTime
@@ -66,11 +77,12 @@ public abstract class Event implements Serializable {
         }
         for (Event event : events) {
             if (event.getAttendees().contains(attendeeID) &&
-                    timeConflict(event.getStartTime(), event.getDuration())) {
+                    (timeConflict(event.getStartTime(), event.getDuration()) || event.isFull())) {
                 return false;
             }
         }
         this.userIDs.add(attendeeID);
+        this.currentNum += 1;
         return true;
     }
 
@@ -105,6 +117,7 @@ public abstract class Event implements Serializable {
      */
     public boolean removeAttendee(String attendeeID) {
         if (userIDs.contains(attendeeID)) {
+            this.currentNum += 1;
             return userIDs.remove(attendeeID);
         }
         return false;

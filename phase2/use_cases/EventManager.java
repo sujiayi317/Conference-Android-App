@@ -130,6 +130,7 @@ public class EventManager implements Serializable {
         return events;
     }
 
+
     /**
      * Adds an attendee to the event
      *
@@ -155,14 +156,17 @@ public class EventManager implements Serializable {
             String restriction = event.getRestriction();
             String userType = attendeeManager.getUserType(userID);
             if (!(restriction.equals("VIP-ONLY") && !userType.equals("VIPUser"))) {
-                //Todo: update room in room manager
-                //Todo: i.e. if (roommanager.updateSuccessful(room id)) then add attendee to list
-                Room room = roomManager.getRoomBasedOnItsID(event.getRoomID());
-                if (room.getCurrentNumAssociateWithEvent(eventID) < room.getCapacity()) {
-                    if (event.addAttendee(userID, events)) {
-                        room.increaseCurrentNumAssociateWithEvent(eventID);
-                        return true;
-                    }
+//                //Todo: update room in room manager
+//                //Todo: i.e. if (roommanager.updateSuccessful(room id)) then add attendee to list
+//                Room room = roomManager.getRoomBasedOnItsID(event.getRoomID());
+//                if (room.getCurrentNumAssociateWithEvent(eventID) < room.getCapacity()) {
+//                    if (event.addAttendee(userID, events)) {
+//                        room.increaseCurrentNumAssociateWithEvent(eventID);
+//                        return true;
+//                    }
+//                }
+                if(event.addAttendee(userID, events)){
+                    return true;
                 }
             }
         }
@@ -213,9 +217,12 @@ public class EventManager implements Serializable {
      */
     public boolean removeAttendeeFromEvent(String userID, String eventID, RoomManager roomManager) {
         Event event = getEventFromID(eventID);
-        if (event != null) {
-            Room room = roomManager.getRoomBasedOnItsID(event.getRoomID());
-            room.decreaseCurrentNumAssociateWithEvent(eventID);
+//        if (event != null) {
+//            Room room = roomManager.getRoomBasedOnItsID(event.getRoomID());
+//            room.decreaseCurrentNumAssociateWithEvent(eventID);
+//            return event.removeAttendee(userID);
+//        }
+        if(event != null) {
             return event.removeAttendee(userID);
         }
         return false;
@@ -366,10 +373,10 @@ public class EventManager implements Serializable {
 
     public void cancelEvent(String eventID, RoomManager roomManager){
         Event event = getEventFromID(eventID);
-        ArrayList<String> attendees = event.getAttendees();
-        for (String attendee: attendees){
-            removeAttendeeFromEvent(attendee, eventID, roomManager);
-        }
+//        ArrayList<String> attendees = event.getAttendees();
+//        for (String attendee: attendees){
+//            removeAttendeeFromEvent(attendee, eventID, roomManager);
+//        }
         events.remove(event);
     }
 }
