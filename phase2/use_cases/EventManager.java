@@ -5,6 +5,7 @@ import com.example.a207_demo.use_cases.AttendeeManager;
 import com.example.a207_demo.roomSystem.RoomManager;
 import com.example.a207_demo.use_cases.SpeakerManager;
 import com.example.a207_demo.use_cases.UserManager;
+import entities.Event;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
@@ -504,5 +505,13 @@ public class EventManager implements Serializable {
         return result;
     }
 
+    public void cancelEvent(String eventID, use_cases.RoomManager roomManager){
+        Event event = getEventFromID(eventID);
+        ArrayList<String> attendees = event.getAttendees();
+        for (String attendee: attendees){
+            removeAttendeeFromEvent(attendee, eventID, roomManager);
+        }
+        events.remove(event);
+    }
 
 }
