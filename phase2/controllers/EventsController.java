@@ -196,4 +196,9 @@ public class EventsController {
         return true;
     }
 
+    public int getAllExistingEventsSize(){
+        return this.eventManager.getAllEvent().size();
+    }
+
+
 }

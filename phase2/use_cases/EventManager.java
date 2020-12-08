@@ -514,4 +514,29 @@ public class EventManager implements Serializable {
         events.remove(event);
     }
 
+    public  ArrayList<String> getTop5Events(){
+        ArrayList<String> top5Events = new ArrayList<>();
+        ArrayList<String> allEvents = new ArrayList<>();
+        for (Event event: events){
+            allEvents.add(event.getEventID());
+        }
+        int totalEventNum = allEvents.size();
+        while (top5Events.size() < Math.min(5, totalEventNum)){
+            ArrayList<String> copyAllEvents = new ArrayList<>(allEvents);
+            for (Event currentEvent: events){
+                for (Event otherEvent: events){
+                    if (currentEvent.getAttendees().size() < otherEvent.getAttendees().size()){
+                        copyAllEvents.remove(currentEvent.getEventID());
+
+                    }
+                }
+            }
+            top5Events.add(copyAllEvents.get(0));
+            allEvents.remove(copyAllEvents.get(0));
+        }
+        return top5Events;
+    }
+
+
+
 }

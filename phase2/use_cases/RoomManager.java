@@ -3,6 +3,7 @@ package use_cases;
 
 import com.example.a207_demo.eventSystem.Event;
 import com.example.a207_demo.eventSystem.EventManager;
+import entities.Room;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -249,6 +250,35 @@ public class RoomManager implements Serializable {
             result.add(info);
         }
         return result;
+    }
+
+    public  ArrayList<String> getTop5Events(){
+        ArrayList<String> top5Events = new ArrayList<>();
+        ArrayList<String> allEvents = new ArrayList<>();
+
+        Map<String, Integer> eventIDToCurrentNumber = new HashMap<>();
+        for (String roomID: eventsMap.keySet()){
+            Room room = getRoomBasedOnItsID(roomID);
+            for (String eventId: eventsMap.get(roomID)){
+                Integer currentNum = room.getCurrentNumAssociateWithEvent(eventId);
+                eventIDToCurrentNumber.put(eventId, currentNum);
+                allEvents.add(eventId);
+            }
+        }
+        int totalEventNum = allEvents.size();
+        while (top5Events.size() < Math.min(5, totalEventNum)){
+            ArrayList<String> copyAllEvents = new ArrayList<>(allEvents);
+            for (String currentEventID: eventIDToCurrentNumber.keySet()){
+                for (String OtherEventID: eventIDToCurrentNumber.keySet()){
+                    if (eventIDToCurrentNumber.get(currentEventID) < eventIDToCurrentNumber.get(OtherEventID)){
+                        copyAllEvents.remove(currentEventID);
+                    }
+                }
+            }
+            top5Events.add(copyAllEvents.get(0));
+            allEvents.remove(copyAllEvents.get(0));
+        }
+        return top5Events;
     }
 
 }

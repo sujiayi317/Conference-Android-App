@@ -1,6 +1,7 @@
 package use_cases;
 
 import com.example.a207_demo.entities.VIPUser;
+import entities.User;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -54,6 +55,20 @@ public class VIPUserManager extends AttendeeManager implements Serializable {
         VIPUser vipuser = new VIPUser(userName, email, password, ID);
         this.vipUsers.add(vipuser);
         super.addUser(vipuser);
+    }
+
+    public ArrayList<StringBuilder> getAllVIPInfo(){
+        ArrayList<StringBuilder> usersInfo = new ArrayList<>();
+        for (int i = 0; i < vipUsers.size(); i++){
+            StringBuilder singleInfo = new StringBuilder();
+            User currentUser = vipUsers.get(i);
+            singleInfo.append(i).append(") ").append(currentUser.getUserName()).append(" ").append(currentUser.getType());
+            usersInfo.add(singleInfo);
+        }
+        StringBuilder SummaryInfo = new StringBuilder();
+        SummaryInfo.append("Total Number: ").append(vipUsers.size());
+        usersInfo.add(0, SummaryInfo);
+        return usersInfo;
     }
 
 }

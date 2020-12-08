@@ -1,6 +1,7 @@
 package use_cases;
 
 import com.example.a207_demo.entities.*;
+import entities.User;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -275,4 +276,19 @@ public class UserManager implements Serializable {
         }
         return "NULL";
     }
+
+    public ArrayList<StringBuilder> getAllUsersInfo(){
+        ArrayList<StringBuilder> usersInfo = new ArrayList<>();
+        for (int i = 0; i < users.size(); i++){
+            StringBuilder singleInfo = new StringBuilder();
+            User currentUser = users.get(i);
+            singleInfo.append(i).append(") ").append(currentUser.getUserName()).append(" ").append(currentUser.getType());
+            usersInfo.add(singleInfo);
+        }
+        StringBuilder SummaryInfo = new StringBuilder();
+        SummaryInfo.append("Total Number: ").append(users.size());
+        usersInfo.add(0, SummaryInfo);
+        return usersInfo;
+    }
+
 }

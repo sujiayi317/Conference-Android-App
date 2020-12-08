@@ -4,6 +4,7 @@ import com.example.a207_demo.entities.Attendee;
 import com.example.a207_demo.speakerSystem.Speaker;
 import com.example.a207_demo.eventSystem.Event;
 import com.example.a207_demo.eventSystem.EventManager;
+import entities.User;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -93,6 +94,20 @@ public class SpeakerManager extends UserManager implements Serializable {
         }
 
         return getUserNamesFromID(availableSpeaker);
+    }
+
+    public ArrayList<StringBuilder> getAllSpeakerInfo(){
+        ArrayList<StringBuilder> usersInfo = new ArrayList<>();
+        for (int i = 0; i < speakers.size(); i++){
+            StringBuilder singleInfo = new StringBuilder();
+            User currentUser = speakers.get(i);
+            singleInfo.append(i).append(") ").append(currentUser.getUserName()).append(" ").append(currentUser.getType());
+            usersInfo.add(singleInfo);
+        }
+        StringBuilder SummaryInfo = new StringBuilder();
+        SummaryInfo.append("Total Number: ").append(speakers.size());
+        usersInfo.add(0, SummaryInfo);
+        return usersInfo;
     }
 
 }
