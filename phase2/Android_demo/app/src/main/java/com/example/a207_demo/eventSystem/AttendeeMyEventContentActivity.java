@@ -1,0 +1,62 @@
+package com.example.a207_demo.eventSystem;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
+
+import com.example.a207_demo.R;
+import com.example.a207_demo.utility.ActivityCollector;
+
+import java.util.ArrayList;
+
+public class AttendeeMyEventContentActivity extends EventContentActivity implements View.OnClickListener{
+    private String eventID;
+
+    /**
+     * Required function to initiate an Activity class.
+     * @param savedInstanceState saved data for unexpected crush
+     */
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_myevent_content_attendee);
+
+        init();
+
+        ActivityCollector.addActivity(this);
+    }
+
+    /**
+     * fillContent
+     */
+    protected void init(){
+        super.init();
+        ArrayList<String> event = getIntent().getStringArrayListExtra("event");
+        eventID = event.get(0);
+        Button eventCancelEnrol = findViewById(R.id.btn_cancel_enrolment);
+        eventCancelEnrol.setOnClickListener(this);
+    }
+
+    /**
+     * onClick
+     * @param view View
+     */
+    public void onClick(View view){
+        if(cancelled()){
+            Toast.makeText(this, "You have SUCCESSFULLY cancelled your enrolment!!", Toast.LENGTH_LONG).show();
+            super.writeEvent();
+            startActivity(new Intent(AttendeeMyEventContentActivity.this, AttendeeMyEventActivity.class));
+        }else{
+            Toast.makeText(this, "Some errors have occurred!", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private boolean cancelled(){
+        return getEventManager().removeAttendeeFromEvent(getID(), eventID);
+    }
+
+}
