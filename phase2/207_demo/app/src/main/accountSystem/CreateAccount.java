@@ -1,29 +1,35 @@
-package com.example.a207_demo.signupSystem;
+package com.example.a207_demo.accountSystem;
 
-import com.example.a207_demo.use_cases.AttendeeManager;
-import com.example.a207_demo.use_cases.OrganizerManager;
+import com.example.a207_demo.use_cases.UserFactory;
 import com.example.a207_demo.use_cases.UserManager;
+import com.example.a207_demo.utility.CleanArchActivity;
 
-public class CreateAccount {
+/**
+ * Create a new account
+ */
+public class CreateAccount extends CleanArchActivity {
 
-    private final UserManager userManager = new UserManager();
+    private final UserManager userManager = getUserManager();
     private final UserFactory userFactory = new UserFactory(getAttendeeManager(),
             getOrganizerManager(), getSpeakerManager());
 
+
     /**
      * The method of creating a new account.
-     * @param type Type of user
+     *
+     * @param type     Type of user
      * @param username Username of user
-     * @param userEM Email of user
-     * @param userPW Password of user
+     * @param userEM   Email of user
+     * @param userPW   Password of user
      * @return True if created successfully
      */
-    public void createNewAccount(String username, String userEM, String userPW, String type) {
-        userFactory.createANewUser(username, userEM, userPW, type);
+    public void createNewAccount(String type, String username, String userEM, String userPW) {
+        userFactory.createNewUserAccount(type, username, userEM, userPW);
     }
 
     /**
      * Check if the email entered is valid with userManager
+     *
      * @param email email of the user
      * @return boolean
      */
@@ -33,6 +39,7 @@ public class CreateAccount {
 
     /**
      * Check if the userName entered is valid with userManager
+     *
      * @param name String username
      * @return boolean
      */

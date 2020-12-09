@@ -1,6 +1,4 @@
-package com.example.a207_demo.signupSystem;
-
-import androidx.appcompat.app.AppCompatActivity;
+package com.example.a207_demo.accountSystem;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,8 +8,6 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.example.a207_demo.gateway.FileReadWriter;
-import com.example.a207_demo.use_cases.*;
 import com.example.a207_demo.utility.ActivityCollector;
 import com.example.a207_demo.MainActivity;
 import com.example.a207_demo.R;
@@ -24,7 +20,7 @@ import com.example.a207_demo.utility.CleanArchActivity;
 public class SignUpActivity extends CleanArchActivity implements View.OnClickListener {
 
     private final CreateAccount accountCreator = new CreateAccount();
-    private FileReadWriter fileReadWriter;
+    private Intent intent;
 
     private String userName;
     private String userEmail;
@@ -52,7 +48,9 @@ public class SignUpActivity extends CleanArchActivity implements View.OnClickLis
      * Set up activity.
      */
     public void init() {
-        fileReadWriter = getFileReadWriter();
+        super.reset();
+        super.readUser();
+        intent = new Intent();
         Button signUp = findViewById(R.id.btn_signUp);
         Button login = findViewById(R.id.btn_login);
 
@@ -67,7 +65,6 @@ public class SignUpActivity extends CleanArchActivity implements View.OnClickLis
      */
     @Override
     public void onClick(View v) {
-        Intent intent;
 
         switch (v.getId()) {
             case R.id.btn_signUp:
@@ -78,10 +75,10 @@ public class SignUpActivity extends CleanArchActivity implements View.OnClickLis
                     Toast.makeText(SignUpActivity.this, "Your name is invalid, please try again",
                             Toast.LENGTH_LONG).show();
                 } else {
+                    setUpData();
+                    loadInfo();
                     Toast.makeText(SignUpActivity.this, "You have signed up SUCCESSFULLY!",
                             Toast.LENGTH_LONG).show();
-                    setUpData();
-                    intent = new Intent(SignUpActivity.this, MainActivity.class);
                     startActivity(intent);
                 }
                 break;
@@ -112,7 +109,7 @@ public class SignUpActivity extends CleanArchActivity implements View.OnClickLis
     private boolean validUsername() {
         EditText firstName = findViewById(R.id.firstname);
         EditText lastName = findViewById(R.id.lastname);
-        userName = firstName.getText().toString() + lastName.getText().toString();
+        userName = firstName.getText().toString() + " " + lastName.getText().toString();
 
         return accountCreator.isValidUserName(userName);
     }
@@ -127,8 +124,17 @@ public class SignUpActivity extends CleanArchActivity implements View.OnClickLis
         userPassword = password.getText().toString();
         userType = String.valueOf(type.getSelectedItem());
 
-        accountCreator.createNewAccount(userName, userEmail, userPassword, userType);
-        fileReadWriter.UserWriter();
+        accountCreator.createNewAccount(userType, userName, userEmail, userPassword);
+        super.writeUser();
+    }
+
+    private void loadInfo(){
+        String from = getIntent().getStringExtra("class");
+        if(from.equals("MAIN")){
+            intent = new Intent(SignUpActivity.this, MainActivity.class);
+        }else if(from.equals("ACCOUNT")){
+            intent = new Intent(SignUpActivity.this, AllAccountActivity.class);
+        }
     }
 
 }

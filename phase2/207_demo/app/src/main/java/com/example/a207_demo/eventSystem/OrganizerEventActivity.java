@@ -1,35 +1,30 @@
 package com.example.a207_demo.eventSystem;
 
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.example.a207_demo.R;
-import com.example.a207_demo.entities.Party;
-import com.example.a207_demo.gateway.FileReadWriter;
 import com.example.a207_demo.utility.ActivityCollector;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * OrganizerEventActivity
  */
 public class OrganizerEventActivity extends EventActivity implements View.OnClickListener, Serializable {
 
-    private List<Event> eventList = new ArrayList<>();
-    private OrganizerEventAdapter eventAdapter;
+    private ArrayList<ArrayList<String>> eventList;
+    private OrganizerEventAdapter organizerEventAdapter;
 
     /**
      * onCreate
-     * @param savedInstanceState
+     * @param savedInstanceState Bundle
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,11 +62,14 @@ public class OrganizerEventActivity extends EventActivity implements View.OnClic
      * createEventMenu
      */
     protected void createEventMenu() {
-        RecyclerView recyclerView = findViewById(R.id.event_recycler_view);
-        super.createEventMenu(recyclerView);
         initEvents();
-        eventAdapter = new OrganizerEventAdapter(this, eventList);
-        recyclerView.setAdapter(eventAdapter);
+        RecyclerView recyclerView = findViewById(R.id.event_recycler_view);
+        GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
+        organizerEventAdapter = new OrganizerEventAdapter(this, eventList);
+        super.createEventMenu(recyclerView, layoutManager, organizerEventAdapter);
+
+
+        //recyclerView.setAdapter(organizerEventAdapter);
     }
 
     /**
@@ -79,14 +77,13 @@ public class OrganizerEventActivity extends EventActivity implements View.OnClic
      */
     protected void initEvents() {
         super.initEvents();
-        eventList = getEventManager().getAllEvent();
 
-        //Todo: implement image later
-        for (Event event : eventList) {
-            event.setImageId(R.drawable.default_image);
-            System.out.println("HIIIIIII");
-            System.out.println(event.getStartTime());
-        }
+        eventList = getEventManager().generateAllInfo(getEventManager().getAllEventID());
+
+//        //Todo: implement image later
+//        for (Event event : eventList) {
+//            event.setImageId(R.drawable.default_image);
+//        }
 
     }
 
@@ -102,19 +99,16 @@ public class OrganizerEventActivity extends EventActivity implements View.OnClic
         switch (requestCode) {
             case 1:
                 if (resultCode == RESULT_OK) {
-                    refreshEvents();
+                    super.refreshEvents();
                 }
                 break;
         }
     }
 
-    private void refreshEvents(){
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                createEventMenu();
-                eventAdapter.notifyDataSetChanged();
-            }
-        });
+    protected void refreshEvents(){
+        createEventMenu();
+        organizerEventAdapter.notifyDataSetChanged();
+        super.refreshEvents();
     }
+
 }

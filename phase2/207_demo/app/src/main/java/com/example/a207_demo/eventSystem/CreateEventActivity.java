@@ -27,7 +27,8 @@ public class CreateEventActivity extends CleanArchActivity implements View.OnCli
     private String eventTime;
     private String eventDuration;
     private String eventRestriction = "PUBLIC";
-    private String roomName;
+    private String eventCapacity;
+    private String roomID;
     private ArrayList<String> speakerId;
 
     private Intent intent;
@@ -50,7 +51,10 @@ public class CreateEventActivity extends CleanArchActivity implements View.OnCli
      * initialize
      */
     private void init() {
-        super.read();
+        super.reset();
+        super.readEvent();
+        super.readRoom();
+        super.readUser();
         intent = new Intent();
 
         Button selectRoom = findViewById(R.id.select_room);
@@ -82,8 +86,12 @@ public class CreateEventActivity extends CleanArchActivity implements View.OnCli
                 }
                 break;
             case R.id.select_room:
-                if(!validTime()){
+                if(!getRoomManager().hasRooms()){
+                    Toast.makeText(this, "No Room available. Go create one first!", Toast.LENGTH_LONG).show();
+                }else if(!validTime()){
                     Toast.makeText(this, "You must enter VALID TIME first!", Toast.LENGTH_LONG).show();
+                }else if(!validInteger(eventCapacity)){
+                    Toast.makeText(this, "You must enter VALID CAPACITY first!", Toast.LENGTH_LONG).show();
                 }else{
                     intent = new Intent(CreateEventActivity.this, SelectRoomActivity.class);
                     loadData();
@@ -93,6 +101,8 @@ public class CreateEventActivity extends CleanArchActivity implements View.OnCli
             case R.id.select_speaker:
                 if(eventType.equals("PARTY")){
                     Toast.makeText(this, "NO SPEAKER needed for PARTY", Toast.LENGTH_LONG).show();
+                }else if(!getSpeakerManager().hasSpeakers()){
+                    Toast.makeText(this, "No Speaker available. Go create one first!", Toast.LENGTH_LONG).show();
                 }else if(!validTime()){
                     Toast.makeText(this, "You must enter VALID TIME first!", Toast.LENGTH_LONG).show();
                 }else {
@@ -110,21 +120,25 @@ public class CreateEventActivity extends CleanArchActivity implements View.OnCli
                 } else if (!validTime()) {
                     //Todo: between 0 and 12
                     Toast.makeText(this, "TIME entered is invalid!", Toast.LENGTH_LONG).show();
-                } else if(!validDuration()){
+                } else if(!validInteger(eventDuration)){
                     Toast.makeText(this, "DURATION entered is invalid!", Toast.LENGTH_LONG).show();
+                } else if(!validInteger(eventCapacity)){
+                    Toast.makeText(this, "EVENT CAPACITY entered is invalid!", Toast.LENGTH_LONG).show();
                 } else {
-                    boolean created = getEventManager().createEvent(eventTitle, roomName, speakerId,
-                            eventTime, eventDuration, eventRestriction, eventType);
+                    boolean created = getEventManager().createEvent(eventType, eventTitle, roomID, speakerId,
+                            eventTime, eventDuration, eventRestriction, Integer.parseInt(eventCapacity));
 
                     if(created){
-                        super.write();
+                        Toast.makeText(this, "You have SUCCESSFULLY created event!", Toast.LENGTH_LONG).show();
+                        super.writeEvent();
                         speakerId = new ArrayList<>();
                         intent = new Intent();
                         setResult(RESULT_OK, intent);
                         finish();
                     }else{
-                        //Todo: better time suggestion
                         Toast.makeText(this, "There is TIME CONFLICT in your event.", Toast.LENGTH_LONG).show();
+                        roomID = null;
+                        speakerId = new ArrayList<>();
                     }
                 }
                 break;
@@ -139,22 +153,26 @@ public class CreateEventActivity extends CleanArchActivity implements View.OnCli
         Spinner type = findViewById(R.id.event_type);
         EditText title = findViewById(R.id.event_title);
         EditText startTime = findViewById(R.id.event_time);
-        EditText duration = findViewById(R.id.duration);
+        EditText duration = findViewById(R.id.event_duration);
+        EditText capacity = findViewById(R.id.event_capacity);
 
         eventType = String.valueOf(type.getSelectedItem());
         eventTitle = title.getText().toString();
         eventTime = startTime.getText().toString();
+        //TODO: integer duration later?
         eventDuration = duration.getText().toString();
+        eventCapacity = capacity.getText().toString();
     }
 
     private void loadData(){
         intent.putExtra("eventTime", eventTime);
         intent.putExtra("eventDuration", eventDuration);
+        intent.putExtra("eventCapacity", eventCapacity);
     }
 
     private boolean dataMissing() {
         return eventTitle.equals("") || eventTime.equals("") || eventDuration.equals("") ||
-                roomName == null;
+                eventCapacity.equals("") || roomID == null;
     }
 
     private boolean validTitle(){
@@ -162,13 +180,13 @@ public class CreateEventActivity extends CleanArchActivity implements View.OnCli
     }
 
     private boolean validTime() {
-        return getEventManager().checkValidTimeFormat(eventTime) && getEventManager().checkValidFutureTime(eventTime);
-        //return true;
+        return getEventManager().checkValidTime(eventTime);
     }
 
-    private boolean validDuration(){
-        return getEventManager().checkValidDuration(eventDuration);
+    private boolean validInteger(String num){
+        return getEventManager().checkValidInteger(num);
     }
+
 
     /**
      * onActivityResult
@@ -182,7 +200,7 @@ public class CreateEventActivity extends CleanArchActivity implements View.OnCli
         switch (requestCode) {
             case 1:
                 if (resultCode == RESULT_OK) {
-                   roomName = data.getStringExtra("roomNum");
+                   roomID = data.getStringExtra("roomID");
                 }
                 break;
             case 2:
