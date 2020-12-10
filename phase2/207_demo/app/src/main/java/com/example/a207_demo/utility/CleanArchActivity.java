@@ -5,22 +5,43 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.a207_demo.eventSystem.EventManager;
 import com.example.a207_demo.gateway.FileReadWriter;
 import com.example.a207_demo.use_cases.AttendeeManager;
+import com.example.a207_demo.use_cases.ConversationManager;
 import com.example.a207_demo.use_cases.OrganizerManager;
+import com.example.a207_demo.roomSystem.RoomManager;
 import com.example.a207_demo.use_cases.SpeakerManager;
 import com.example.a207_demo.use_cases.UserManager;
+
+import java.util.ArrayList;
 
 /**
  * The central Activity: Superclass of child activities
  */
-public class CleanArchActivity extends AppCompatActivity {
+public class CleanArchActivity extends AppCompatActivity{
 
     private final EventManager eventManager = new EventManager();
     private final UserManager userManager = new UserManager();
     private final AttendeeManager attendeeManager = new AttendeeManager();
     private final OrganizerManager organizerManager = new OrganizerManager();
     private final SpeakerManager speakerManager = new SpeakerManager();
-    private final FileReadWriter fileReadWriter = new FileReadWriter(this, eventManager,
-            userManager, attendeeManager, organizerManager, speakerManager);
+    private final RoomManager roomManager = new RoomManager();
+    private final ConversationManager conversationManager = new ConversationManager();
+    private FileReadWriter fileReadWriter = new FileReadWriter(this);
+
+    private String ID;
+    private String TYPE;
+    private String EMAIL;
+    private String USERNAME;
+
+    public void setInfo(String ID, String TYPE, String EMAIL, String USERNAME){
+       this.ID = ID;
+       this.TYPE = TYPE;
+       this.EMAIL = EMAIL;
+       this.USERNAME = USERNAME;
+    }
+
+    public String getID(){
+        return this.ID;
+    }
 
     /**
      * Get EventManager of the whole system
@@ -55,11 +76,59 @@ public class CleanArchActivity extends AppCompatActivity {
     public SpeakerManager getSpeakerManager() {return this.speakerManager; }
 
     /**
+     * Get RoomManager of the whole system
+     * @return RoomManager
+     */
+    public RoomManager getRoomManager() {return this.roomManager;}
+
+    /**
+     * getConversationManager
+     * @return ConversationManager
+     */
+    public ConversationManager getConversationManager(){return this.conversationManager;}
+
+    /**
      * Get FileReadWriter of the whole system
      * @return FileReadWriter
      */
     public FileReadWriter getFileReadWriter() {
         return this.fileReadWriter;
+    }
+
+    public void reset(){
+        fileReadWriter.reset(eventManager, userManager,
+                attendeeManager, organizerManager, speakerManager, roomManager, conversationManager);
+    }
+
+    public void readUser(){
+        fileReadWriter.UserReader(attendeeManager, organizerManager, speakerManager);
+    }
+
+    public void readEvent(){
+        fileReadWriter.EventReader(eventManager, roomManager);
+    }
+    public void readRoom(){
+        fileReadWriter.RoomReader(roomManager);
+    }
+
+    public void readConversation() {
+        fileReadWriter.ConversationReader(conversationManager);
+    }
+
+    public void writeUser(){
+        fileReadWriter.UserWriter(userManager);
+    }
+
+    public void writeEvent(){
+        fileReadWriter.EventWriter(eventManager);
+    }
+
+    public void writeRoom(){
+        fileReadWriter.RoomWriter(roomManager);
+    }
+
+    public void writeConversation() {
+        fileReadWriter.ConversationWriter(conversationManager);
     }
 
 }

@@ -29,7 +29,7 @@ public class CreateEventActivity extends CleanArchActivity implements View.OnCli
     private String eventRestriction = "PUBLIC";
     private String eventCapacity;
     private String roomID;
-    private ArrayList<String> speakerId;
+    private ArrayList<String> speakerId = new ArrayList<>();
 
     private Intent intent;
 
@@ -118,12 +118,15 @@ public class CreateEventActivity extends CleanArchActivity implements View.OnCli
                 } else if (!validTitle()) {
                     Toast.makeText(this, "EVENT TITLE needs to be at least length 3 and unique", Toast.LENGTH_LONG).show();
                 } else if (!validTime()) {
-                    //Todo: between 0 and 12
-                    Toast.makeText(this, "TIME entered is invalid!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, "TIME must be between 9am and 4pm and is valid!", Toast.LENGTH_LONG).show();
                 } else if(!validInteger(eventDuration)){
                     Toast.makeText(this, "DURATION entered is invalid!", Toast.LENGTH_LONG).show();
+                } else if(!validLength()) {
+                    Toast.makeText(this, "Event cannot last after 4pm!", Toast.LENGTH_LONG).show();
                 } else if(!validInteger(eventCapacity)){
                     Toast.makeText(this, "EVENT CAPACITY entered is invalid!", Toast.LENGTH_LONG).show();
+                } else if(eventType.equals("TALK") && speakerId.size() > 1){
+                    Toast.makeText(this, "Only ONE SPEAKER allowed for Talk Events!", Toast.LENGTH_LONG).show();
                 } else {
                     boolean created = getEventManager().createEvent(eventType, eventTitle, roomID, speakerId,
                             eventTime, eventDuration, eventRestriction, Integer.parseInt(eventCapacity));
@@ -159,7 +162,6 @@ public class CreateEventActivity extends CleanArchActivity implements View.OnCli
         eventType = String.valueOf(type.getSelectedItem());
         eventTitle = title.getText().toString();
         eventTime = startTime.getText().toString();
-        //TODO: integer duration later?
         eventDuration = duration.getText().toString();
         eventCapacity = capacity.getText().toString();
     }
@@ -187,6 +189,10 @@ public class CreateEventActivity extends CleanArchActivity implements View.OnCli
         return getEventManager().checkValidInteger(num);
     }
 
+    private boolean validLength() {
+        return getEventManager().checkValidLength(eventTime, eventDuration);
+    }
+
 
     /**
      * onActivityResult
@@ -206,10 +212,7 @@ public class CreateEventActivity extends CleanArchActivity implements View.OnCli
             case 2:
                 if (resultCode == RESULT_OK) {
                    ArrayList<String> speakerNames = data.getStringArrayListExtra("speakerNames");
-                   if(speakerNames == null){
-                       speakerId = new ArrayList<>();
-                   }else{
-                       //Todo: fix multi speakerId saving
+                   if(speakerNames != null){
                        speakerId = getUserManager().getUserIdsFromName(speakerNames);
                    }
                 }

@@ -15,6 +15,7 @@ public abstract class User implements Serializable {
     private String type;
     private String userID;
     private ArrayList<String> friendList;
+    private ArrayList<String> announcements;
 
     /**
      * Constructor for the user
@@ -27,7 +28,6 @@ public abstract class User implements Serializable {
         this.userName = userName;
         this.email = email;
         this.password = password;
-        this.friendList = new ArrayList<String>();
     }
 
     /**
@@ -66,13 +66,25 @@ public abstract class User implements Serializable {
      */
     public void setUserID(String userID){this.userID = userID;}
 
+    public void setFriendList(ArrayList<String> friendList) {
+        this.friendList = friendList;
+    }
+
+    public void setAnnouncements(ArrayList<String> announcements){
+        this.announcements = announcements;
+    }
+
     /**
      * Add a friend to this user's friendList
      *
      * @param userId the userID of the new friend to add
      */
-    public void setFriendList(String userId) {
+    public void addFriend(String userId) {
         friendList.add(userId);
+    }
+
+    public void addAnnouncement(String announcement){
+        this.announcements.add(announcement);
     }
 
     /**
@@ -125,8 +137,13 @@ public abstract class User implements Serializable {
      * @return A copy of the friendList of this user
      */
     public ArrayList<String> getFriendList() {
-        return (ArrayList) friendList.clone();
+
+        return friendList;
     }
+
+    public ArrayList<String> getAnnouncements(){
+        return this.announcements;
+    };
 
     /**
      * Override the toString method

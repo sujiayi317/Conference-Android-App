@@ -1,10 +1,10 @@
 package use_cases;
 
 import com.example.a207_demo.entities.Attendee;
+import com.example.a207_demo.entities.User;
 import com.example.a207_demo.speakerSystem.Speaker;
 import com.example.a207_demo.eventSystem.Event;
 import com.example.a207_demo.eventSystem.EventManager;
-import entities.User;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -40,7 +40,16 @@ public class SpeakerManager extends UserManager implements Serializable {
         return speakers;
     }
 
+    public ArrayList<String> getSpeakerIDs(){
+        ArrayList<String> speakerIDs = new ArrayList<>();
+        for(Speaker speaker : speakers){
+            speakerIDs.add(speaker.getUserID());
+        }
+        return speakerIDs;
+    }
+
     public boolean hasSpeakers(){return this.speakers.size() > 0;}
+
 
     /**
      * Creates a Speaker and adds it to the lists
@@ -52,7 +61,7 @@ public class SpeakerManager extends UserManager implements Serializable {
     public void createSpeaker(String userName, String email, String password) {
         Speaker speaker = new Speaker(userName, email, password);
         speakers.add(speaker);
-        super.addUser(speaker);
+        UserManager.users.add(speaker);
     }
 
     /**
@@ -62,11 +71,13 @@ public class SpeakerManager extends UserManager implements Serializable {
      * @param email email of this speaker
      * @param password password of this speaker
      * @param ID user ID of this speaker
+     * @param announcements inbox of annoucements of this speaker
      */
-    public void loadSpeaker(String userName, String email, String password, String ID) {
-        Speaker speaker = new Speaker(userName, email, password, ID);
+    public void loadSpeaker(String userName, String email, String password, String ID,
+                            ArrayList<String> friendsID, ArrayList<String> announcements) {
+        Speaker speaker = new Speaker(userName, email, password, ID, friendsID, announcements);
         speakers.add(speaker);
-        super.addUser(speaker);
+        UserManager.users.add(speaker);
     }
 
     /**
@@ -96,18 +107,17 @@ public class SpeakerManager extends UserManager implements Serializable {
         return getUserNamesFromID(availableSpeaker);
     }
 
-    public ArrayList<StringBuilder> getAllSpeakerInfo(){
-        ArrayList<StringBuilder> usersInfo = new ArrayList<>();
-        for (int i = 0; i < speakers.size(); i++){
-            StringBuilder singleInfo = new StringBuilder();
-            User currentUser = speakers.get(i);
-            singleInfo.append(i).append(") ").append(currentUser.getUserName()).append(" ").append(currentUser.getType());
-            usersInfo.add(singleInfo);
+    public ArrayList<ArrayList<String>> generateAccountInfo(){
+        ArrayList<ArrayList<String>> result = new ArrayList<>();
+        for(Speaker speaker : speakers){
+            ArrayList<String> info = new ArrayList<>();
+            info.add(speaker.getUserName());
+            info.add(speaker.getType());
+            info.add(speaker.getEmail());
+            info.add(speaker.getUserID());
+            result.add(info);
         }
-        StringBuilder SummaryInfo = new StringBuilder();
-        SummaryInfo.append("Total Number: ").append(speakers.size());
-        usersInfo.add(0, SummaryInfo);
-        return usersInfo;
+        return result;
     }
 
 }

@@ -120,7 +120,8 @@ public class EventManager implements Serializable {
     public ArrayList<String> getTop5Events(){
         Map<String, Integer> copy = new HashMap<>(getEventToAttended());
         ArrayList<String> result = new ArrayList<>();
-        for(int i = 0; i < 5; i++){
+        int bound = Math.min(5, events.size());
+        for(int i = 0; i < bound; i++){
             String key = maxUsingCollectionsMaxAndLambda(copy);
             result.add(key);
             copy.remove(key);
@@ -496,6 +497,12 @@ public class EventManager implements Serializable {
         }
     }
 
+    public boolean checkValidLength(String time, String duration){
+        int hourTime = Integer.parseInt(time.substring(11, 13));
+        int dur = Integer.parseInt(duration);
+        return hourTime + dur <= 16;
+    }
+
     /**
      * Generate a formatted string representation of the start time String.
      *
@@ -521,7 +528,8 @@ public class EventManager implements Serializable {
                 return event.getType() + " " + event.getTitle().replace(" ", "_")
                         + " " + eventID + " " + event.getRoomID() + " "+ event.getStartTime() + " "
                         + event.getDuration() + " " + event.getRestriction() + " " +
-                        event.getCapacity() + " {" + event.getSpeakers() + "} ";
+                        event.getCapacity() + " {" + event.getSpeakers() + "}" +
+                        " ;" + event.getAttendees() + ";";
             }
         }
         return "NULL";

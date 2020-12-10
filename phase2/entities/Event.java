@@ -18,7 +18,6 @@ public abstract class Event implements Serializable {
     private String restriction;
     private String type;
     private int capacity;
-    private int imageId;
 
     private ArrayList<String> attendeeUserIDs;
     private ArrayList<String> speakerUserIDs;
@@ -72,13 +71,10 @@ public abstract class Event implements Serializable {
         this.type = type;
     }
 
-    /**
-     * setImageId
-     * @param imageId imageId
-     */
-    public void setImageId(int imageId) {
-        this.imageId = imageId;
+    public void setCapacity(int capacity){
+        this.capacity = capacity;
     }
+
 
     /**
      * set ids of attendees attending this event
@@ -177,14 +173,6 @@ public abstract class Event implements Serializable {
 
 
     /**
-     * getImageId
-     * @return imageId
-     */
-    public int getImageId() {
-        return this.imageId;
-    }
-
-    /**
      * Returns all attendees for this event
      *
      * @return all attendees
@@ -222,18 +210,8 @@ public abstract class Event implements Serializable {
      * @param events     a list of events
      * @return boolean true if we add attendee to the list
      */
-    public boolean addAttendee(String attendeeID, List<Event> events) {
-        if (this.attendeeUserIDs.contains(attendeeID)) {
-            return false;
-        }
-        for (Event event : events) {
-            if (event.getAttendees().contains(attendeeID) &&
-                    (timeConflict(event.getStartTime(), event.getDuration()))){
-                return false;
-            }
-        }
+    public void addAttendee(String attendeeID, List<Event> events) {
         this.attendeeUserIDs.add(attendeeID);
-        return true;
     }
 
     /**
@@ -280,11 +258,8 @@ public abstract class Event implements Serializable {
      * @param attendeeID attendeeID String
      * @return boolean true if person existed in attendee list
      */
-    public boolean removeAttendee(String attendeeID) {
-        if (attendeeUserIDs.contains(attendeeID)) {
-            return attendeeUserIDs.remove(attendeeID);
-        }
-        return false;
+    public void removeAttendee(String attendeeID) {
+        attendeeUserIDs.remove(attendeeID);
     }
 
     /**

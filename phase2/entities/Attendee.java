@@ -1,6 +1,7 @@
 package entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.UUID;
 
 /**
@@ -28,11 +29,15 @@ public class Attendee extends User implements Serializable {
      * @param email    the email of this Attendee
      * @param password the password of this Attendee
      * @param ID       the user ID of this Attendee
+     * @param announcements inbox of annoucements of this speaker
      */
-    public Attendee(String userName, String email, String password, String ID) {
+    public Attendee(String userName, String email, String password, String ID,
+                    ArrayList<String> friendsID, ArrayList<String> announcements) {
         super(userName, email, password);
         setType("ATTENDEE");
         setUserID(ID);
+        setFriendList(friendsID);
+        setAnnouncements(announcements);
     }
 
 }
