@@ -1,21 +1,54 @@
 package entities;
 
+import com.example.a207_demo.R;
+import com.example.a207_demo.eventSystem.Event;
+
 import java.util.ArrayList;
 
-public class Party extends Event{
-    private final ArrayList<String> speaker = new ArrayList<>();
+/**
+ * Party is a type of event
+ */
+public class Party extends Event {
 
-    public Party(String title, String roomID, String startTime, String duration, String restriction){
-        super(title, roomID, startTime, duration, restriction);
+
+    /**
+     * Party
+     * @param title title
+     * @param roomID roomID
+     * @param startTime startTime
+     * @param duration duration
+     * @param restriction restriction
+     */
+    public Party(String title, String roomID, String startTime, String duration, String restriction, int capacity) {
+        super(title, roomID, startTime, duration, restriction, capacity);
         setType("PARTY");
+        setSpeakerUserIDs(new ArrayList<String>());
     }
 
-    @Override
-    public ArrayList<String> getSpeakers() {
-        return this.speaker;
+    /**
+     * PARTY
+     * @param title title
+     * @paramt eventID eventID
+     * @param roomID roomID
+     * @param startTime startTime
+     * @param duration duration
+     * @param restriction restriction
+     */
+    public Party (String title, String eventID, String roomID, String startTime, String duration,
+                  String restriction, int capacity, ArrayList<String> attendeeID){
+        super(title, eventID, roomID, startTime, duration, restriction, capacity);
+        setType("PARTY");
+        setSpeakerUserIDs(new ArrayList<String>());
+        setAttendeeUserIDs(attendeeID);
     }
 
+    /**
+     * toFullString
+     *
+     * @return String
+     */
     @Override
-    public String toFullString(){
-        return this.toString() + " in room " + this.getRoomID();}
+    public String toFullString() {
+        return this.toString() + " in room " + this.getRoomID();
+    }
 }

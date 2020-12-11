@@ -13,7 +13,9 @@ public abstract class User implements Serializable {
     private String email;
     private String password;
     private String type;
+    private String userID;
     private ArrayList<String> friendList;
+    private ArrayList<String> announcements;
 
     /**
      * Constructor for the user
@@ -26,57 +28,6 @@ public abstract class User implements Serializable {
         this.userName = userName;
         this.email = email;
         this.password = password;
-        this.friendList = new ArrayList<String>();
-    }
-
-    /**
-     * Getter method for this user's friendList
-     *
-     * @return A copy of the friendList of this user
-     */
-    public ArrayList<String> friendListGetter() {
-        return (ArrayList) friendList.clone();
-    }
-
-    /**
-     * Add a friend to this user's friendList
-     *
-     * @param userId the userID of the new friend to add
-     */
-    public void friendListSetter(String userId) {
-        friendList.add(userId);
-    }
-
-    /**
-     * Get the type of this user
-     *
-     * @return the type of this user
-     */
-    public String getType() {
-        return type;
-    }
-
-    /**
-     * Abstract method to get this user's ID, all subclasses should implement this method
-     *
-     * @return userID for this user
-     */
-    public abstract String getUserID();
-
-    /**
-     * Set the type of this user
-     */
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    /**
-     * Get the value of userName
-     *
-     * @return the value of lastName
-     */
-    public String getUserName() {
-        return this.userName;
     }
 
     /**
@@ -86,14 +37,11 @@ public abstract class User implements Serializable {
         this.userName = userName;
     }
 
-
     /**
-     * Get the value of email
-     *
-     * @return the value of email
+     * Set the type of this user
      */
-    public String getEmail() {
-        return email;
+    public void setType(String type) {
+        this.type = type;
     }
 
     /**
@@ -106,6 +54,67 @@ public abstract class User implements Serializable {
     }
 
     /**
+     * Set the value of password
+     *
+     * @param password new value of email
+     */
+    public void setPassword(String password){ this.password = password;}
+
+    /**
+     * Set the value of userID
+     * @param userID the userID of the user
+     */
+    public void setUserID(String userID){this.userID = userID;}
+
+    public void setFriendList(ArrayList<String> friendList) {
+        this.friendList = friendList;
+    }
+
+    public void setAnnouncements(ArrayList<String> announcements){
+        this.announcements = announcements;
+    }
+
+    /**
+     * Add a friend to this user's friendList
+     *
+     * @param userId the userID of the new friend to add
+     */
+    public void addFriend(String userId) {
+        friendList.add(userId);
+    }
+
+    public void addAnnouncement(String announcement){
+        this.announcements.add(announcement);
+    }
+
+    /**
+     * Get the value of userName
+     *
+     * @return the value of lastName
+     */
+    public String getUserName() {
+        return this.userName;
+    }
+
+    /**
+     * Get the type of this user
+     *
+     * @return the type of this user
+     */
+    public String getType() {
+        return type;
+    }
+
+    /**
+     * Get the value of email
+     *
+     * @return the value of email
+     */
+    public String getEmail() {
+        return email;
+    }
+
+    /**
      * Get the password of this user
      *
      * @return the value of password
@@ -113,6 +122,28 @@ public abstract class User implements Serializable {
     public String getPassword() {
         return this.password;
     }
+
+    /**
+     * AGet this user's ID
+     *
+     * @return userID for this user
+     */
+    public String getUserID(){return this.userID;}
+
+
+    /**
+     * Getter method for this user's friendList
+     *
+     * @return A copy of the friendList of this user
+     */
+    public ArrayList<String> getFriendList() {
+
+        return friendList;
+    }
+
+    public ArrayList<String> getAnnouncements(){
+        return this.announcements;
+    };
 
     /**
      * Override the toString method

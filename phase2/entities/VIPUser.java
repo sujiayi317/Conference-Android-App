@@ -1,13 +1,13 @@
 package entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.UUID;
 
 /**
  * The entities.VIPUser class, this creates instances of entities.VIPUser to attend a conference.
  */
 public class VIPUser extends Attendee implements Serializable {
-
 
     /**
      * Constructor No.1 for the VIPUser
@@ -19,6 +19,7 @@ public class VIPUser extends Attendee implements Serializable {
     public VIPUser(String userName, String email, String password) {
         super(userName, email, password);
         setType("VIPUser");
+        setUserID(UUID.randomUUID().toString().split("-")[0]);
     }
 
     /**
@@ -29,9 +30,13 @@ public class VIPUser extends Attendee implements Serializable {
      * @param password the password of this VIPUser
      * @param ID the user ID of this VIPUser
      */
-    public VIPUser(String userName, String email, String password, String ID) {
+    public VIPUser(String userName, String email, String password, String ID,
+                   ArrayList<String> friendsID, ArrayList<String> announcements) {
         super(userName, email, password);
         setType("VIPUser");
+        setUserID(ID);
+        setFriendList(friendsID);
+        setAnnouncements(announcements);
     }
 
 }

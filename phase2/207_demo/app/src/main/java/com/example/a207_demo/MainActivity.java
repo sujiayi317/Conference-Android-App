@@ -1,7 +1,5 @@
 package com.example.a207_demo;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -12,22 +10,27 @@ import android.widget.Toast;
 import com.example.a207_demo.eventSystem.AttendeeEventActivity;
 import com.example.a207_demo.eventSystem.OrganizerEventActivity;
 import com.example.a207_demo.eventSystem.SpeakerMyEventActivity;
-import com.example.a207_demo.gateway.FileReadWriter;
-import com.example.a207_demo.signupSystem.SignUpActivity;
-import com.example.a207_demo.use_cases.UserManager;
-import com.example.a207_demo.utility.ActivityCollector;
+import com.example.a207_demo.accountSystem.SignUpActivity;
+import com.example.a207_demo.utility.CleanArchActivity;
+
+import java.util.ArrayList;
+import java.util.HashSet;
 
 /**
  * The top level class for running the app.
  */
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+public class MainActivity extends CleanArchActivity implements View.OnClickListener {
 
-    private final FileReadWriter fileReadWriter = new FileReadWriter();
-    private static String ID;
-    private static String type;
+    private Intent intent;
+
+    private String ID;
+    private String TYPE;
+    private String EMAIL;
+    private String USERNAME;
 
     /**
      * Required function to initiate an Activity class.
+     *
      * @param savedInstanceState saved data for unexpected crush
      */
     @Override
@@ -42,7 +45,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     /**
      * Set up the activity.
      */
-    public void init(){
+    public void init() {
         Button signUp = findViewById(R.id.btn_signUp);
         Button login = findViewById(R.id.btn_login);
 
@@ -52,33 +55,36 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     /**
      * Button Listener for clicking events.
+     *
      * @param v Button clicked
      */
     @Override
-    public void onClick(View v){
-        Intent intent;
-
-        switch(v.getId()){
+    public void onClick(View v) {
+        switch (v.getId()) {
             case R.id.btn_signUp:
-                fileReadWriter.reset();
                 intent = new Intent(MainActivity.this, SignUpActivity.class);
+
+                //intent = new Intent(MainActivity.this, OrganizerEventActivity.class);
+                //intent.putExtra("ID", ID);
+                //intent = new Intent(MainActivity.this, SpeakerMyEventActivity.class);
+                //intent = new Intent(MainActivity.this, AttendeeMyEventActivity.class);
+                intent.putExtra("class", "MAIN");
                 startActivity(intent);
                 break;
             case R.id.btn_login:
-                fileReadWriter.reset();
-                fileReadWriter.connectReaders(this);
-
+                super.reset();
+                super.readUser();
                 if (info_matched()) {
-                    if (type.equals("ATTENDEE")) {
+                    if (TYPE.equals("ATTENDEE") || TYPE.equals("VIPUser")) {
                         intent = new Intent(MainActivity.this, AttendeeEventActivity.class);
-                    } else if (type.equals("ORGANIZER")) {
+                    } else if (TYPE.equals("ORGANIZER")) {
                         intent = new Intent(MainActivity.this, OrganizerEventActivity.class);
                     } else {
                         intent = new Intent(MainActivity.this, SpeakerMyEventActivity.class);
                     }
-                    //Todo: too many lines written in Users.txt (FileReadWriter -> connectWrtier -> UserWriter method)
+                    loadInfo();
                     startActivity(intent);
-                } else{
+                } else {
                     Toast.makeText(MainActivity.this, "Your username and password do not match. Please try again.",
                             Toast.LENGTH_LONG).show();
                 }
@@ -88,19 +94,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    private boolean info_matched(){
+    /**
+     * Check if the information entered by the user match the data stored in the database
+     *
+     * @return boolean
+     */
+    private boolean info_matched() {
         EditText email = findViewById(R.id.email);
         EditText password = findViewById(R.id.password);
         String userEM = email.getText().toString();
         String userPW = password.getText().toString();
 
-        UserManager userManager = new UserManager();
-        if (!userManager.validLogIn(userEM, userPW).equals("NULL")){
-            ID = userManager.validLogIn(userEM, userPW);
-            type = userManager.getUserType(userEM, userPW);
-            return true;
+        if (getUserManager().validLogIn(userEM, userPW).equals("NULL")) {
+            return false;
         }
-        return false;
+        ID = getUserManager().validLogIn(userEM, userPW);
+        TYPE = getUserManager().getUserType(userEM, userPW);
+        EMAIL = userEM;
+        USERNAME = getUserManager().getUserNameFromID(ID);
+        return true;
     }
 
+    private void loadInfo(){
+        intent.putExtra("ID", ID);
+        intent.putExtra("TYPE", TYPE);
+        intent.putExtra("EMAIL", EMAIL);
+        intent.putExtra("USERNAME", USERNAME);
+    }
 }

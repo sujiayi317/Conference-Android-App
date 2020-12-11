@@ -1,4 +1,4 @@
-package controllers;
+package unused.controllers;
 
 import gateway.ReadConversation;
 import gateway.SaveConversation;
@@ -9,7 +9,7 @@ import java.util.HashSet;
 import java.util.InputMismatchException;
 
 /**
- * This is the main controller that will manage all other controllers (parts of the conference).
+ * This is the main controller that will manage all other unused.controllers (parts of the conference).
  */
 public class Conference {
 //    private final UserManager userManager;

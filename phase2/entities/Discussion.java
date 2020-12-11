@@ -1,31 +1,73 @@
 package entities;
+
+import com.example.a207_demo.R;
+import com.example.a207_demo.eventSystem.Event;
+
 import java.util.ArrayList;
-import java.util.List;
 
-public class Discussion extends Event{
-    private ArrayList<String> speakers;
+/**
+ * Discussion is a type of event
+ */
+public class Discussion extends Event {
 
-    public Discussion(String title, String roomID, String startTime, ArrayList<String> speakers, String duration,
-                      String restriction){
-        super(title, roomID, startTime, duration, restriction);
+
+    /**
+     * Discussion
+     *
+     * @param title       title
+     * @param roomID      roomID
+     * @param startTime   startTime
+     * @param speakers    speakers
+     * @param duration    duration
+     * @param restriction restriction
+     */
+    public Discussion(String title, String roomID, String startTime, String duration,
+                      String restriction, int capacity, ArrayList<String> speakers) {
+        super(title, roomID, startTime, duration, restriction, capacity);
         setType("DISCUSSION");
-        this.speakers = speakers;
+        setSpeakerUserIDs(speakers);
     }
 
-    @Override
-    public ArrayList<String> getSpeakers(){
-        return this.speakers;
+    /**
+     * Discussion
+     * @param title title
+     * @paramt eventID eventID
+     * @param roomID roomID
+     * @param speakerID speakerID
+     * @param startTime startTime
+     * @param duration duration
+     * @param restriction restriction
+     */
+    public Discussion (String title, String eventID, String roomID, String startTime,
+                       String duration, String restriction, int capacity,
+                       ArrayList<String> speakerID, ArrayList<String> attendeeID){
+        super(title, eventID, roomID, startTime, duration, restriction, capacity);
+        setType("DISCUSSION");
+        setSpeakerUserIDs(speakerID);
+        setAttendeeUserIDs(attendeeID);
     }
 
-    public StringBuilder speakersToString(){
+
+    /**
+     * speakersToString
+     *
+     * @return StringBuilder
+     */
+    public StringBuilder speakersToString() {
         StringBuilder totalString = new StringBuilder();
-        for (String s : speakers){
+        for (String s : getSpeakers()) {
             totalString.append(s);
         }
         return totalString;
     }
 
+    /**
+     * toFullString
+     *
+     * @return String
+     */
     @Override
-    public String toFullString(){
-        return this.toString() + " in room " + this.getRoomID() + " with speaker: " + this.speakersToString();}
+    public String toFullString() {
+        return this.toString() + " in room " + this.getRoomID() + " with speaker: " + this.speakersToString();
+    }
 }

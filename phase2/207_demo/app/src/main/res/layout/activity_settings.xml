@@ -8,7 +8,7 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/colorPrimary"
+        android:background="@color/green"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
@@ -19,18 +19,18 @@
         android:layout_height="150dp">
 
         <ImageView
+            android:id="@+id/setting_pic"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_gravity="center_vertical"
-            android:layout_marginStart="30dp"
-            android:src="@mipmap/ic_launcher_round"/>
+            android:layout_marginStart="30dp"/>
 
         <TextView
+            android:id="@+id/username_setting"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
             android:layout_marginTop="25dp"
-            android:text="@string/username"
             android:textSize="30sp"/>
 
     </LinearLayout>
@@ -55,6 +55,7 @@
             android:src="@drawable/email"/>
 
         <TextView
+            android:id="@+id/useremail_setting"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -77,6 +78,30 @@
             android:src="@drawable/icon_contact_gray"/>
 
         <TextView
+            android:id="@+id/usertype_setting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="20dp"
+            android:text="@string/attendeeAcc"
+            android:textSize="20sp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="30dp"
+            android:src="@drawable/icon_contact_gray"/>
+
+        <TextView
+            android:id="@+id/userid_setting"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"

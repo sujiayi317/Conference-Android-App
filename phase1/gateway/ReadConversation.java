@@ -1,7 +1,7 @@
 package gateway;
 
 import entities.Conversation;
-import controllers.ConversationController;
+import unused.controllers.ConversationController;
 
 import java.io.*;
 import java.util.ArrayList;

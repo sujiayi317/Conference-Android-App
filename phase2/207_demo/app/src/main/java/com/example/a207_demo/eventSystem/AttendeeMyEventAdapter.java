@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 
 import com.example.a207_demo.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -22,8 +23,8 @@ public class AttendeeMyEventAdapter extends EventAdapter {
      * @param context Context
      * @param eventList List<Event>
      */
-    public AttendeeMyEventAdapter(Context context, List<Event> eventList){
-        super(context, eventList);
+    public AttendeeMyEventAdapter(Context context, ArrayList<ArrayList<String>> eventList, String ID){
+        super(context, eventList, ID);
         this.context = context;
     }
 

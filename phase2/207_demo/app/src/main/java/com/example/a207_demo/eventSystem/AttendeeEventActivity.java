@@ -1,29 +1,21 @@
 package com.example.a207_demo.eventSystem;
 
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 
-import com.example.a207_demo.entities.Discussion;
-import com.example.a207_demo.entities.Party;
-import com.example.a207_demo.entities.Talk;
-import com.example.a207_demo.gateway.FileReadWriter;
 import com.example.a207_demo.utility.ActivityCollector;
 import com.example.a207_demo.R;
 
-import java.lang.reflect.Array;
-import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * Event activity to show attendee.
  */
 public class AttendeeEventActivity extends EventActivity {
 
-    //Todo: generate event list through manager
-    private List<Event> eventList = new ArrayList<>();
+    private ArrayList<ArrayList<String>> eventList;
     private AttendeeEventAdapter attendeeEventAdapter;
 
     /**
@@ -45,7 +37,7 @@ public class AttendeeEventActivity extends EventActivity {
      * Set up the activity.
      */
     public void init() {
-        super.init(this, R.id.nav_view_attendee, R.id.nav_allevents);
+        super.init(this, R.id.nav_view_attendee, R.id.nav_allevents); // From SetUpActivity
         createEventMenu();
     }
 
@@ -53,11 +45,19 @@ public class AttendeeEventActivity extends EventActivity {
      * create Event Menu
      */
     protected void createEventMenu() {
-        RecyclerView recyclerView = findViewById(R.id.event_recycler_view);
-        super.createEventMenu(recyclerView);
         initEvents();
-        attendeeEventAdapter = new AttendeeEventAdapter(this, eventList);
-        recyclerView.setAdapter(attendeeEventAdapter);
+        // Firstly, setLayoutManager for this recyclerView
+        RecyclerView recyclerView = findViewById(R.id.event_recycler_view);
+        GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
+        attendeeEventAdapter = new AttendeeEventAdapter(this, eventList, getID());
+        super.createEventMenu(recyclerView, layoutManager, attendeeEventAdapter);
+
+        // Secondly, prepare data: list of events to show
+
+
+        // Third, setAdapter for this recyclerView
+
+        //recyclerView.setAdapter(attendeeEventAdapter);
     }
 
     /**
@@ -65,11 +65,13 @@ public class AttendeeEventActivity extends EventActivity {
      */
     protected void initEvents() {
         super.initEvents();
-        eventList = getEventManager().getAllEvent();
+        eventList = getEventManager().generateAllInfo(getEventManager().getAllEventID());
 
-        //Todo: implement image later
-        for (Event event : eventList) {
-            event.setImageId(R.drawable.default_image);
-        }
+    }
+
+    protected void refreshEvents(){
+        createEventMenu();
+        attendeeEventAdapter.notifyDataSetChanged();
+        super.refreshEvents();
     }
 }

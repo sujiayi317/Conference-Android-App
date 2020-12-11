@@ -1,6 +1,6 @@
 package gateway;
 
-import controllers.EventsController;
+import unused.controllers.EventsController;
 import entities.Event;
 import use_cases.SpeakerManager;
 import use_cases.*;

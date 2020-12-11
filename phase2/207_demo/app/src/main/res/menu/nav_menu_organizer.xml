@@ -9,6 +9,15 @@
                     android:title="@string/allevents"
                     android:icon="@drawable/event"/>
 
+                <item
+                    android:id="@+id/nav_top_5_events"
+                    android:title="@string/top5Events"
+                    android:icon="@drawable/top5"/>
+
+                <item
+                    android:id="@+id/nav_event_enrollment"
+                    android:title="@string/eventEnrollment"
+                    android:icon="@drawable/eventinfo"/>
             </group>
         </menu>
 
@@ -19,27 +28,63 @@
         <menu>
             <group android:checkableBehavior="single">
                 <item
-                    android:id="@+id/nav_contacts_organizer"
+                    android:id="@+id/nav_contacts_attendee_for_organizer"
                     android:title="Attendees"
-                    android:icon="@drawable/icon_contact_gray"/>
+                    android:icon="@drawable/icon_chat_gray"/>
                 <item
+                    android:id="@+id/nav_contacts_speaker_for_organizer"
                     android:title="Speakers"
-                    android:icon="@drawable/icon_contact_gray"/>
+                    android:icon="@drawable/icon_chat_gray"/>
             </group>
         </menu>
     </item>
 
-
-    <group android:checkableBehavior="single">
-        <item
-            android:title="Manager">
-            <menu>
+    <item
+        android:title="Manage">
+        <menu>
+            <group android:checkableBehavior="single">
                 <item
                     android:id="@+id/nav_room"
                     android:title="Room"
-                    android:icon="@drawable/announcement"/>
-            </menu>
-        </item>
-    </group>
+                    android:icon="@drawable/room"/>
+            </group>
+        </menu>
+    </item>
+
+    <item
+        android:title="Account"
+        android:icon="@drawable/icon_contact_gray">
+
+        <menu>
+
+            <group android:checkableBehavior="single">
+
+                <item
+                    android:id="@+id/nav_account_all"
+                    android:title="@string/allAccounts"
+                    android:icon="@drawable/allusers"/>
+
+                <item
+                    android:id="@+id/nav_account_organizer"
+                    android:title="@string/organizer"
+                    android:icon="@drawable/organizer2"/>
+                <item
+                    android:id="@+id/nav_account_speaker"
+                    android:title="@string/speaker"
+                    android:icon="@drawable/speaker"/>
+                <item
+                    android:id="@+id/nav_account_attendee"
+                    android:title="@string/attendee"
+                    android:icon="@drawable/icon_contact_gray"/>
+                <item
+                    android:id="@+id/nav_account_vipUser"
+                    android:title="@string/vipUser"
+                    android:icon="@drawable/vip" />
+
+            </group>
+
+        </menu>
+
+    </item>
 
 </menu>

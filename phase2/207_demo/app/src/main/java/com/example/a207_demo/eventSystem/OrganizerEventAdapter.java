@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import com.example.a207_demo.R;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -21,10 +22,15 @@ public class OrganizerEventAdapter extends EventAdapter implements Serializable 
 
     /**
      * OrganizerEventAdapter Constructor
-     * @param context
-     * @param eventList
+     * @param context Context
+     * @param eventList ArrayList<ArrayList<String>> eventList
      */
-    public OrganizerEventAdapter(Context context, List<Event> eventList) {
+    public OrganizerEventAdapter(Context context, ArrayList<ArrayList<String>> eventList, String ID) {
+        super(context, eventList, ID);
+        this.context = context;
+    }
+
+    public OrganizerEventAdapter(Context context, ArrayList<ArrayList<String>> eventList) {
         super(context, eventList);
         this.context = context;
     }
@@ -33,7 +39,7 @@ public class OrganizerEventAdapter extends EventAdapter implements Serializable 
      * onCreateViewHolder for OrganizerEventAdapter
      * @param parent parent ViewGroup
      * @param viewType viewType
-     * @return
+     * @return VHEvent
      */
     @NonNull
     @Override

@@ -15,6 +15,7 @@ import com.bumptech.glide.Glide;
 import com.example.a207_demo.R;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -22,14 +23,23 @@ import java.util.List;
  */
 public abstract class EventAdapter extends RecyclerView.Adapter<EventAdapter.VHEvent> implements Serializable {
     private Context context;
-    private List<Event> eventList;
+    private ArrayList<ArrayList<String>> eventList;
+    private int imageID;
+    private ArrayList<Integer> imageIDs = new ArrayList<>();
+    private String ID;
 
     /**
      * Event Adapter for this Event Activity
-     * @param context
-     * @param eventList
+     * @param context Context
+     * @param eventList ArrayList<ArrayList<String>>
      */
-    public EventAdapter(Context context, List<Event> eventList) {
+    public EventAdapter(Context context, ArrayList<ArrayList<String>> eventList, String ID) {
+        this.context = context;
+        this.eventList = eventList;
+        this.ID = ID;
+    }
+
+    public EventAdapter(Context context, ArrayList<ArrayList<String>> eventList) {
         this.context = context;
         this.eventList = eventList;
     }
@@ -40,6 +50,7 @@ public abstract class EventAdapter extends RecyclerView.Adapter<EventAdapter.VHE
      * @param viewType viewType
      * @return VHEvent
      */
+    @Override
     abstract public VHEvent onCreateViewHolder(@NonNull ViewGroup parent, int viewType);
 
     /**
@@ -52,13 +63,12 @@ public abstract class EventAdapter extends RecyclerView.Adapter<EventAdapter.VHE
             @Override
             public void onClick(View view) {
                 int position = holder.getAdapterPosition();
-                Event event = eventList.get(position);
+                ArrayList<String> event = eventList.get(position);
                 Intent intent = new Intent(context, nextClass);
-                intent.putExtra("event_title", event.getTitle());
-                intent.putExtra("event_room", event.getRoomName());
-                intent.putExtra("event_time", event.getStartTime());
-                intent.putExtra("event_duration", event.getDuration());
-                intent.putExtra("event_image_id", event.getImageId());
+                // Pass the list of events to the next activity
+                intent.putStringArrayListExtra("event", event);
+                intent.putExtra("imageID", imageIDs.get(position));
+                intent.putExtra("ID", ID);
                 context.startActivity(intent);
             }
         });
@@ -71,9 +81,24 @@ public abstract class EventAdapter extends RecyclerView.Adapter<EventAdapter.VHE
      */
     @Override
     public void onBindViewHolder(@NonNull VHEvent holder, int position) {
-        Event event = eventList.get(position);
-        holder.eventTitle.setText(event.getTitle());
-        Glide.with(context).load(event.getImageId()).into(holder.eventImage);
+        List<String> event= eventList.get(position);
+        holder.eventTitle.setText(event.get(1));
+
+        String eventType = event.get(5);
+        loadImage(eventType);
+        Glide.with(context).load(imageID).into(holder.eventImage);
+        imageIDs.add(imageID);
+    }
+
+    //loading presenter image choices
+    private void loadImage(String eventType){
+        if(eventType.equals("TALK")){
+            imageID = R.drawable.talks;
+        }else if(eventType.equals("DISCUSSION")){
+            imageID = R.drawable.discuss;
+        }else{
+            imageID = R.drawable.party2;
+        }
     }
 
     /**
