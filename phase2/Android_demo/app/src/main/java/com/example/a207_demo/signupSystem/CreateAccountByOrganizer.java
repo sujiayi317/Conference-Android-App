@@ -12,12 +12,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.a207_demo.R;
-import com.example.a207_demo.messageSystem.AnnouncementAdapter;
-import com.example.a207_demo.roomSystem.CreateRoomActivity;
-import com.example.a207_demo.roomSystem.RoomActivity;
-import com.example.a207_demo.roomSystem.RoomAdapter;
 import com.example.a207_demo.utility.ActivityCollector;
-import com.example.a207_demo.utility.SetUpActivity;
 
 import java.util.ArrayList;
 

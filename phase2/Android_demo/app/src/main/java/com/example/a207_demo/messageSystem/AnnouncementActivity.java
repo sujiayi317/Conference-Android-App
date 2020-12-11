@@ -5,9 +5,7 @@ import android.os.Bundle;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.a207_demo.utility.ActivityCollector;
 import com.example.a207_demo.R;
-import com.example.a207_demo.utility.SetUpActivity;
 
 import java.util.ArrayList;
 

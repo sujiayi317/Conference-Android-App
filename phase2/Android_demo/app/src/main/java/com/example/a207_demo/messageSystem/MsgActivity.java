@@ -19,10 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.a207_demo.use_cases.ConversationManager;
 import com.example.a207_demo.utility.ActivityCollector;
 import com.example.a207_demo.R;
-import com.example.a207_demo.utility.SetUpActivity;
-import com.example.a207_demo.utility.Settings;
 
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;

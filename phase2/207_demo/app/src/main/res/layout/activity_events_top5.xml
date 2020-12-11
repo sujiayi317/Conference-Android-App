@@ -35,7 +35,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="60dp"
-                android:text="@string/welcome"
+                android:text="@string/top5Events"
                 android:textSize="30sp" />
 
             <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -45,7 +45,7 @@
                 app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/event_recycler_view"
+                    android:id="@+id/event_top5_recycler_view"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     />
@@ -56,11 +56,11 @@
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
     <com.google.android.material.navigation.NavigationView
-        android:id="@+id/nav_view_speaker"
+        android:id="@+id/nav_view_organizer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        app:menu="@menu/nav_menu_speaker"
+        app:menu="@menu/nav_menu_organizer"
         app:headerLayout="@layout/nav_header"/>
 
 </androidx.drawerlayout.widget.DrawerLayout>

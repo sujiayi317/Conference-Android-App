@@ -30,37 +30,27 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <TextView
-                android:layout_width="wrap_content"
+            <Button
+                android:id="@+id/btn_organizer_msg_all"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="60dp"
-                android:text="@string/welcome"
-                android:textSize="30sp" />
+                android:layout_marginTop="60dp" />
 
-            <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-                android:id="@+id/event_swipe_refresh"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/organizer_contact_recycler_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/event_recycler_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    />
-            </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+                />
 
         </LinearLayout>
-
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
     <com.google.android.material.navigation.NavigationView
-        android:id="@+id/nav_view_speaker"
+        android:id="@+id/nav_view_organizer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        app:menu="@menu/nav_menu_speaker"
+        app:menu="@menu/nav_menu_organizer"
         app:headerLayout="@layout/nav_header"/>
 
 </androidx.drawerlayout.widget.DrawerLayout>

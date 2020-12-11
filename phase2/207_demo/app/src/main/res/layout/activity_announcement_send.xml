@@ -6,55 +6,46 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="CONFERENCE"
+        android:text="@string/announcements"
         android:layout_gravity="center_horizontal"
-        android:textSize="50dp"
-        android:layout_marginTop="96dp"/>
+        android:textSize="35sp"
+        android:layout_marginTop="60dp"/>
 
     <EditText
-        android:id="@+id/email"
+        android:id="@+id/announcement_to_send"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
         android:layout_gravity="center_vertical"
-        android:layout_marginLeft="24dp"
-        android:layout_marginRight="24dp"
-        android:layout_marginTop="96dp"
-        android:hint="@string/email"
-        android:textSize="24sp"/>
 
-    <EditText
-        android:id="@+id/password"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:layout_marginLeft="24dp"
-        android:layout_marginRight="24dp"
-        android:hint="@string/password"
+        android:maxLines="2"
+        android:hint="@string/typeHere"
         android:textSize="24sp"/>
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp">
+        android:layout_marginTop="100dp">
 
         <Button
-            android:id="@+id/btn_signUp"
+            android:id="@+id/announcement_back_event"
             android:layout_width="50dp"
             android:layout_height="wrap_content"
-            android:text="@string/signUp"
+            android:text="@string/back"
             android:layout_weight="1"
             android:layout_marginStart="24dp"
-            android:layout_marginEnd="10dp"
-            android:textColor="@color/colorReceived"
-            android:background="@color/blue"/>
+            android:layout_marginEnd="10dp"/>
 
         <Button
-            android:id="@+id/btn_login"
+            android:id="@+id/send_announcement"
             android:layout_width="50dp"
             android:layout_height="wrap_content"
-            android:text="@string/login"
+            android:text="@string/send"
             android:layout_weight="1"
+            android:layout_marginStart="24dp"
             android:layout_marginEnd="24dp"
             android:textColor="@color/colorReceived"
             android:background="@color/green"/>

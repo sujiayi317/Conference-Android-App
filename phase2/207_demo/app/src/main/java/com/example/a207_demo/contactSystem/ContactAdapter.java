@@ -1,25 +1,18 @@
 package com.example.a207_demo.contactSystem;
 
 import android.content.Context;
-import android.content.Intent;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.a207_demo.R;
-import com.example.a207_demo.eventSystem.EventAdapter;
-import com.example.a207_demo.messageSystem.MsgActivity;
-import com.example.a207_demo.messageSystem.SendAnnouncementActivity;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * ContactAdapter
@@ -31,6 +24,7 @@ public abstract class ContactAdapter extends RecyclerView.Adapter<ContactAdapter
     private String myID;
     private String userName;
     private String userID;
+    private int imageID;
 
     /**
      * ContactAdapter
@@ -38,10 +32,11 @@ public abstract class ContactAdapter extends RecyclerView.Adapter<ContactAdapter
      * @param context
      * @param contactsList
      */
-    public ContactAdapter(Context context, ArrayList<ArrayList<String>> contactsList, String myID) {
+    public ContactAdapter(Context context, ArrayList<ArrayList<String>> contactsList, String myID, int imageID) {
         this.context = context;
         this.contactsList = contactsList;
         this.myID = myID;
+        this.imageID = imageID;
     }
 
     /**
@@ -77,9 +72,9 @@ public abstract class ContactAdapter extends RecyclerView.Adapter<ContactAdapter
         userID = user.get(0);
         userName = user.get(1);
         holder.contactName.setText(userName);
-        Glide.with(context).load(R.drawable.jenny).into(holder.contactImage);
-
+        Glide.with(context).load(imageID).into(holder.contactImage);
     }
+
 
     /**
      * getItemCount
@@ -91,8 +86,12 @@ public abstract class ContactAdapter extends RecyclerView.Adapter<ContactAdapter
         return contactsList.isEmpty() ? 0 : contactsList.size();
     }
 
-    public String getUserID() {
-        return userID;
+    public String getMyID() {
+        return myID;
+    }
+
+    public ArrayList<ArrayList<String>> getContactsList(){
+        return contactsList;
     }
 
     /**

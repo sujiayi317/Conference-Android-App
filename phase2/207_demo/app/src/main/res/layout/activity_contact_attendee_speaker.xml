@@ -35,32 +35,24 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="60dp"
-                android:text="@string/welcome"
+                android:text="@string/speaker"
                 android:textSize="30sp" />
 
-            <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-                android:id="@+id/event_swipe_refresh"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/attendee_contact_speaker_recycler_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/event_recycler_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    />
-            </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+                />
 
         </LinearLayout>
-
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
     <com.google.android.material.navigation.NavigationView
-        android:id="@+id/nav_view_speaker"
+        android:id="@+id/nav_view_attendee"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        app:menu="@menu/nav_menu_speaker"
+        app:menu="@menu/nav_menu_attendee"
         app:headerLayout="@layout/nav_header"/>
 
 </androidx.drawerlayout.widget.DrawerLayout>

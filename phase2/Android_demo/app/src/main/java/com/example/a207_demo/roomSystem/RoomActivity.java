@@ -10,11 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.a207_demo.R;
-import com.example.a207_demo.eventSystem.CreateEventActivity;
-import com.example.a207_demo.eventSystem.OrganizerEventActivity;
-import com.example.a207_demo.eventSystem.OrganizerEventAdapter;
 import com.example.a207_demo.utility.ActivityCollector;
-import com.example.a207_demo.utility.SetUpActivity;
 
 import java.util.ArrayList;
 

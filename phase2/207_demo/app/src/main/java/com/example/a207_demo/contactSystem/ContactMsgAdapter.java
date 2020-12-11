@@ -8,26 +8,18 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 
-import com.bumptech.glide.Glide;
 import com.example.a207_demo.R;
-import com.example.a207_demo.messageSystem.SendAnnouncementActivity;
+import com.example.a207_demo.messageSystem.ConversationActivity;
 
 import java.util.ArrayList;
 
-/**
- * Organizer Contact Adapter
- */
-public class OrganizerContactAdapter extends ContactAdapter {
+public class ContactMsgAdapter extends ContactAdapter{
 
     private Context context;
-    private String type;
-    private String myID;
 
-    public OrganizerContactAdapter(Context context, ArrayList<ArrayList<String>> contactList,
-                                   String myID, String type, int imageID) {
+    public ContactMsgAdapter(Context context, ArrayList<ArrayList<String>> contactList, String myID, int imageID) {
         super(context, contactList, myID, imageID);
         this.context = context;
-        this.type = type;
     }
 
     /**
@@ -42,7 +34,7 @@ public class OrganizerContactAdapter extends ContactAdapter {
     public VHContact onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(context).inflate(R.layout.item_contact, parent, false);
         VHContact holder = new VHContact(v);
-        setClickContactListener(holder, SendAnnouncementActivity.class);
+        setClickContactListener(holder, ConversationActivity.class);
         return holder;
     }
 
@@ -58,12 +50,11 @@ public class OrganizerContactAdapter extends ContactAdapter {
             public void onClick(View view) {
                 int position = holder.getAdapterPosition();
                 ArrayList<String> userInfo = getContactsList().get(position);
+
                 Intent intent = new Intent(context, nextClass);
-                intent.putExtra("class", type);
-                intent.putExtra("eventTitle", "");
-                ArrayList<String> ID = new ArrayList<>();
-                ID.add(userInfo.get(0));
-                intent.putExtra("userIDs", ID);
+                intent.putExtra("myID", getMyID());
+                intent.putExtra("userID", userInfo.get(0));
+                intent.putExtra("userName", userInfo.get(1));
                 context.startActivity(intent);
             }
         });

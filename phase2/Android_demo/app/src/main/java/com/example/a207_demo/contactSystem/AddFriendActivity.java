@@ -10,18 +10,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.a207_demo.MainActivity;
 import com.example.a207_demo.R;
-import com.example.a207_demo.eventSystem.AttendeeEventActivity;
-import com.example.a207_demo.eventSystem.OrganizerEventActivity;
-import com.example.a207_demo.eventSystem.SpeakerMyEventActivity;
-import com.example.a207_demo.use_cases.ConversationManager;
-import com.example.a207_demo.use_cases.UserManager;
 import com.example.a207_demo.utility.ActivityCollector;
-import com.example.a207_demo.utility.SetUpActivity;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * AddFriendActivity
