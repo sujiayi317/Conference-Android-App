@@ -2,7 +2,6 @@ package controllers;
 
 import entities.Event;
 import entities.Room;
-import entities.Speaker;
 import use_cases.EventManager;
 import use_cases.RoomManager;
 import use_cases.SpeakerManager;
