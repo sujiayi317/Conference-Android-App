@@ -2,13 +2,13 @@ package com.example.a207_demo.eventSystem;
 
 import android.os.Bundle;
 
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.a207_demo.R;
 import com.example.a207_demo.utility.ActivityCollector;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Event activity of events attendee signed up for.
@@ -36,22 +36,22 @@ public class AttendeeMyEventActivity extends EventActivity {
     /**
      * Set up the activity.
      */
-    @Override
     public void init() {
         super.init(this, R.id.nav_view_attendee, R.id.nav_myEvents);
         createEventMenu();
     }
 
     protected void createEventMenu() {
-        RecyclerView recyclerView = findViewById(R.id.event_recycler_view);
-        super.createEventMenu(recyclerView);
         initEvents();
-        attendeeMyEventAdapter = new AttendeeMyEventAdapter(this, eventList);
-        recyclerView.setAdapter(attendeeMyEventAdapter);
+        RecyclerView recyclerView = findViewById(R.id.event_recycler_view);
+        GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
+        attendeeMyEventAdapter = new AttendeeMyEventAdapter(this, eventList, getID());
+        super.createEventMenu(recyclerView, layoutManager, attendeeMyEventAdapter);
+        //recyclerView.setAdapter(attendeeMyEventAdapter);
     }
 
     /**
-     *  initialise Events
+     * initialise Events
      */
     @Override
     protected void initEvents() {
@@ -59,7 +59,7 @@ public class AttendeeMyEventActivity extends EventActivity {
         eventList = getEventManager().generateAllInfo(getEventManager().getEventsFromAttendee(getID()));
     }
 
-    protected void refreshEvents(){
+    protected void refreshEvents() {
         createEventMenu();
         attendeeMyEventAdapter.notifyDataSetChanged();
         super.refreshEvents();

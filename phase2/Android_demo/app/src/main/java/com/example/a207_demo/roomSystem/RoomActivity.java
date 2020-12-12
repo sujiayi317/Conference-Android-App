@@ -10,18 +10,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.a207_demo.R;
-import com.example.a207_demo.eventSystem.CreateEventActivity;
-import com.example.a207_demo.eventSystem.OrganizerEventActivity;
-import com.example.a207_demo.eventSystem.OrganizerEventAdapter;
 import com.example.a207_demo.utility.ActivityCollector;
-import com.example.a207_demo.utility.SetUpActivity;
+import com.example.a207_demo.utility.BaseActivity;
 
 import java.util.ArrayList;
 
 /**
  * RoomActivity
  */
-public class RoomActivity extends SetUpActivity implements View.OnClickListener {
+public class RoomActivity extends BaseActivity implements View.OnClickListener {
     private SwipeRefreshLayout swipeRefreshLayout;
 
     private ArrayList<ArrayList<String>> roomList;
@@ -77,11 +74,11 @@ public class RoomActivity extends SetUpActivity implements View.OnClickListener 
      * createEventMenu
      */
     protected void createRoomMenu() {
+        initRooms();
         RecyclerView recyclerView = findViewById(R.id.room_recycler_view);
         GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
-        recyclerView.setLayoutManager(layoutManager);
-        initRooms();
         roomAdapter = new RoomAdapter(this, roomList);
+        recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(roomAdapter);
     }
 
@@ -94,11 +91,6 @@ public class RoomActivity extends SetUpActivity implements View.OnClickListener 
 
         //eventList = getEventManager().getAllEvent();
         roomList = getRoomManager().generateAllInfo();
-
-//        //Todo: implement image later
-//        for (Event event : eventList) {
-//            event.setImageId(R.drawable.default_image);
-//        }
 
     }
 

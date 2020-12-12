@@ -6,8 +6,10 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.a207_demo.R;
 import com.example.a207_demo.utility.ActivityCollector;
 
@@ -18,7 +20,7 @@ import java.util.ArrayList;
 /**
  * Settings
  */
-public class Settings extends AppCompatActivity {
+public class Settings extends BaseActivity {
     private String ID;
     private String TYPE;
     private String EMAIL;
@@ -39,23 +41,36 @@ public class Settings extends AppCompatActivity {
      * init
      */
     public void init(){
-//        ArrayList<String> info = getIntent().getStringArrayListExtra("info");
-//        ID = info.get(0);
-//        TYPE = info.get(1);
-//        EMAIL = info.get(2);
-//        USERNAME = info.get(3);
+        ID = getIntent().getStringExtra("ID");
+        TYPE = getIntent().getStringExtra("TYPE");
+        EMAIL = getIntent().getStringExtra("EMAIL");
+        USERNAME = getIntent().getStringExtra("USERNAME");
 
+        ImageView userPic = findViewById(R.id.setting_pic);
         TextView userId = findViewById(R.id.userid_setting);
         TextView userType = findViewById(R.id.usertype_setting);
         TextView userEmail = findViewById(R.id.useremail_setting);
         TextView userName = findViewById(R.id.username_setting);
-//
-//        userId.setText(ID);
-//        userType.setText(TYPE);
-//        userEmail.setText(EMAIL);
-//        userName.setText(USERNAME);
+
+        loadPic(userPic);
+        userId.setText(ID);
+        userType.setText(TYPE);
+        userEmail.setText(EMAIL);
+        userName.setText(USERNAME);
 
         createActionBar();
+    }
+
+    private void loadPic(ImageView userPic){
+        if(TYPE.equals("ORGANIZER")){
+            Glide.with(this).load(R.drawable.organizer2).into(userPic);
+        }else if(TYPE.equals("SPEAKER")){
+            Glide.with(this).load(R.drawable.speaker).into(userPic);
+        }else if(TYPE.equals("ATTENDEE")){
+            Glide.with(this).load(R.drawable.icon_contact_gray).into(userPic);
+        }else{
+            Glide.with(this).load(R.drawable.vip).into(userPic);
+        }
     }
 
     /**

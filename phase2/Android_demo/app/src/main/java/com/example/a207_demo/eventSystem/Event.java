@@ -18,7 +18,6 @@ public abstract class Event implements Serializable {
     private String restriction;
     private String type;
     private int capacity;
-    private int imageId;
 
     private ArrayList<String> attendeeUserIDs;
     private ArrayList<String> speakerUserIDs;
@@ -72,20 +71,19 @@ public abstract class Event implements Serializable {
         this.type = type;
     }
 
-    public void setCapacity(int capacity){
+    /**
+     * setCapacity
+     *
+     * @param capacity int
+     */
+    public void setCapacity(int capacity) {
         this.capacity = capacity;
     }
 
-    /**
-     * setImageId
-     * @param imageId imageId
-     */
-    public void setImageId(int imageId) {
-        this.imageId = imageId;
-    }
 
     /**
      * set ids of attendees attending this event
+     *
      * @param attendeeUserIDs userIDs of attendees
      */
     public void setAttendeeUserIDs(ArrayList<String> attendeeUserIDs) {
@@ -94,9 +92,10 @@ public abstract class Event implements Serializable {
 
     /**
      * set ids of speakers attending this event
+     *
      * @param speakerUserIDs userIDs of attendees
      */
-    public void setSpeakerUserIDs(ArrayList<String> speakerUserIDs){
+    public void setSpeakerUserIDs(ArrayList<String> speakerUserIDs) {
         this.speakerUserIDs = speakerUserIDs;
     }
 
@@ -140,6 +139,7 @@ public abstract class Event implements Serializable {
 
     /**
      * get Duration for the event
+     *
      * @return String: duration
      */
     public String getDuration() {
@@ -148,6 +148,7 @@ public abstract class Event implements Serializable {
 
     /**
      * Get the restriction of this event.
+     *
      * @return Stirng, the restriction of this event
      */
     public String getRestriction() {
@@ -165,28 +166,22 @@ public abstract class Event implements Serializable {
 
     /**
      * Get the capacity of this event
+     *
      * @return int, the capacity of this event
      */
-    public int getCapacity(){
+    public int getCapacity() {
         return this.capacity;
     }
 
     /**
      * Get the current number of attendees of this event
-     * @return
+     *
+     * @return int
      */
-    public int getCurrentNum(){
+    public int getCurrentNum() {
         return this.attendeeUserIDs.size();
     }
 
-
-    /**
-     * getImageId
-     * @return imageId
-     */
-    public int getImageId() {
-        return this.imageId;
-    }
 
     /**
      * Returns all attendees for this event
@@ -200,11 +195,14 @@ public abstract class Event implements Serializable {
 
     /**
      * Get speakers for the event
+     *
      * @return list of String
      */
-    public ArrayList<String> getSpeakers(){
+    public ArrayList<String> getSpeakers() {
         return this.speakerUserIDs;
-    };
+    }
+
+    ;
 
 
     /**
@@ -224,7 +222,6 @@ public abstract class Event implements Serializable {
      *
      * @param attendeeID String value of an attendee's userID
      * @param events     a list of events
-     * @return boolean true if we add attendee to the list
      */
     public void addAttendee(String attendeeID, List<Event> events) {
         this.attendeeUserIDs.add(attendeeID);
@@ -234,7 +231,7 @@ public abstract class Event implements Serializable {
      * Try to add an attendee to a list of events
      *
      * @param speakerID String value of an attendee's userID
-     * @param events     a list of events
+     * @param events    a list of events
      * @return boolean true if we add attendee to the list
      */
     public boolean addSpeaker(String speakerID, List<Event> events) {
@@ -243,7 +240,7 @@ public abstract class Event implements Serializable {
         }
         for (Event event : events) {
             if (event.getAttendees().contains(speakerID) &&
-                    (timeConflict(event.getStartTime(), event.getDuration()))){
+                    (timeConflict(event.getStartTime(), event.getDuration()))) {
                 return false;
             }
         }
@@ -251,7 +248,7 @@ public abstract class Event implements Serializable {
         return true;
     }
 
-    public boolean timeConflict(String startTime, String duration){
+    public boolean timeConflict(String startTime, String duration) {
         int thisTime = convertStartTimeToNum(this.startTime);
         int checkTime = convertStartTimeToNum(startTime);
         int thisDuration = Integer.parseInt(this.duration);
@@ -262,7 +259,7 @@ public abstract class Event implements Serializable {
         return conflict1 || conflict2;
     }
 
-    private int convertStartTimeToNum(String startTime){
+    private int convertStartTimeToNum(String startTime) {
         String newTime = startTime.substring(0, 4) + startTime.substring(5, 7) +
                 startTime.substring(8, 10) + startTime.substring(11, 13);
         return Integer.parseInt(newTime);
@@ -272,7 +269,6 @@ public abstract class Event implements Serializable {
      * Try to remove an attendee from the instance variable: userIDs
      *
      * @param attendeeID attendeeID String
-     * @return boolean true if person existed in attendee list
      */
     public void removeAttendee(String attendeeID) {
         attendeeUserIDs.remove(attendeeID);

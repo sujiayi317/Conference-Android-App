@@ -11,6 +11,8 @@ import com.example.a207_demo.roomSystem.RoomManager;
 import com.example.a207_demo.use_cases.SpeakerManager;
 import com.example.a207_demo.use_cases.UserManager;
 
+import java.util.ArrayList;
+
 /**
  * The central Activity: Superclass of child activities
  */
@@ -25,19 +27,21 @@ public class CleanArchActivity extends AppCompatActivity{
     private final ConversationManager conversationManager = new ConversationManager();
     private FileReadWriter fileReadWriter = new FileReadWriter(this);
 
-    private static String ID;
-    private static String TYPE;
+    private String ID;
+    private String TYPE;
+    private String EMAIL;
+    private String USERNAME;
 
-    public void setInfo(String ID, String TYPE){
-        this.ID = ID;
-        this.TYPE = TYPE;
+    public void setInfo(String ID, String TYPE, String EMAIL, String USERNAME){
+       this.ID = ID;
+       this.TYPE = TYPE;
+       this.EMAIL = EMAIL;
+       this.USERNAME = USERNAME;
     }
 
     public String getID(){
         return this.ID;
     }
-
-    public String getTYPE() { return this.TYPE;}
 
     /**
      * Get EventManager of the whole system
@@ -93,7 +97,7 @@ public class CleanArchActivity extends AppCompatActivity{
 
     public void reset(){
         fileReadWriter.reset(eventManager, userManager,
-                attendeeManager, organizerManager, speakerManager, roomManager);
+                attendeeManager, organizerManager, speakerManager, roomManager, conversationManager);
     }
 
     public void readUser(){
@@ -107,6 +111,10 @@ public class CleanArchActivity extends AppCompatActivity{
         fileReadWriter.RoomReader(roomManager);
     }
 
+    public void readConversation() {
+        fileReadWriter.ConversationReader(conversationManager);
+    }
+
     public void writeUser(){
         fileReadWriter.UserWriter(userManager);
     }
@@ -117,6 +125,10 @@ public class CleanArchActivity extends AppCompatActivity{
 
     public void writeRoom(){
         fileReadWriter.RoomWriter(roomManager);
+    }
+
+    public void writeConversation() {
+        fileReadWriter.ConversationWriter(conversationManager);
     }
 
 }

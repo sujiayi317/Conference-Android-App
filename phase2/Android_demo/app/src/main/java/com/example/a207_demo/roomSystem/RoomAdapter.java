@@ -61,8 +61,6 @@ public class RoomAdapter extends RecyclerView.Adapter<RoomAdapter.VHRoom> implem
         List<String> roomInfo = roomList.get(position);
         String content = roomInfo.get(0) + "\n" + "Capacity: " + roomInfo.get(1);
         holder.roomInfo.setText(content);
-        //Todo: implement image later
-        //Glide.with(context).load(R.drawable.default_image).into(holder.eventImage);
     }
 
     /**
@@ -81,6 +79,10 @@ public class RoomAdapter extends RecyclerView.Adapter<RoomAdapter.VHRoom> implem
         CardView cardView;
         TextView roomInfo;
 
+        /**
+         * VHRoom
+         * @param v View
+         */
         public VHRoom(View v) {
             super(v);
             cardView = (CardView) v;

@@ -50,18 +50,30 @@ public class OrganizerManager extends UserManager implements Serializable {
      * @param password password of this organizer
      * @param ID       user ID of this organizer
      */
-    public void loadOrganizer(String userName, String email, String password, String ID) {
-        Organizer organizer = new Organizer(userName, email, password, ID);
+    public void loadOrganizer(String userName, String email, String password, String ID,
+                              ArrayList<String> friendsID, ArrayList<String> announcements) {
+        Organizer organizer = new Organizer(userName, email, password, ID, friendsID, announcements);
         this.organizers.add(organizer);
         UserManager.users.add(organizer);
     }
 
-    public boolean sendAnnouncement(String userID, String eventTitle, String announcement){
-        return super.setAnnouncement(userID, eventTitle, announcement);
-    }
 
-    public boolean sendAnnouncement(ArrayList<String> userIDs, String eventTitle, String announcement){
-        return super.setAnnouncement(userIDs, eventTitle, announcement);
+    /**
+     * generateAccountInfo
+     * @return ArrayList<ArrayList<String>>
+     */
+    @Override
+    public ArrayList<ArrayList<String>> generateAccountInfo(){
+        ArrayList<ArrayList<String>> result = new ArrayList<>();
+        for(Organizer organizer : organizers){
+            ArrayList<String> info = new ArrayList<>();
+            info.add(organizer.getUserName());
+            info.add(organizer.getType());
+            info.add(organizer.getEmail());
+            info.add(organizer.getUserID());
+            result.add(info);
+        }
+        return result;
     }
 
 

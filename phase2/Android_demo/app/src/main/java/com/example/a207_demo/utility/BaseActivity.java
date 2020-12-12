@@ -3,6 +3,8 @@ package com.example.a207_demo.utility;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -12,35 +14,37 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.bumptech.glide.Glide;
 import com.example.a207_demo.R;
+import com.example.a207_demo.accountSystem.AllAccountActivity;
+import com.example.a207_demo.accountSystem.AttendeeAccountActivity;
+import com.example.a207_demo.accountSystem.OrganizerAccountActivity;
+import com.example.a207_demo.accountSystem.SpeakerAccountActivity;
+import com.example.a207_demo.accountSystem.VIPUserAccountActivity;
 import com.example.a207_demo.contactSystem.AttendeeContactAttendeeActivity;
 import com.example.a207_demo.contactSystem.AttendeeContactSpeakerActivity;
-import com.example.a207_demo.contactSystem.ContactActivity;
 import com.example.a207_demo.contactSystem.OrganizerContactAttendeeActivity;
 import com.example.a207_demo.contactSystem.OrganizerContactSpeakerActivity;
 import com.example.a207_demo.contactSystem.SpeakerContactAttendeeActivity;
 import com.example.a207_demo.eventSystem.AttendeeEventActivity;
 import com.example.a207_demo.eventSystem.AttendeeMyEventActivity;
+import com.example.a207_demo.eventSystem.EventEnrollmentActivity;
 import com.example.a207_demo.eventSystem.OrganizerEventActivity;
 import com.example.a207_demo.eventSystem.SpeakerMyEventActivity;
-import com.example.a207_demo.messageSystem.AnnouncementActivity;
+import com.example.a207_demo.eventSystem.Top5EventsActivity;
 import com.example.a207_demo.messageSystem.AttendeeAnnouncementActivity;
 import com.example.a207_demo.messageSystem.SpeakerAnnouncementActivity;
 import com.example.a207_demo.roomSystem.RoomActivity;
-import com.example.a207_demo.signupSystem.CreateAccountByOrganizer;
-import com.example.a207_demo.signupSystem.SignUpActivity;
 import com.google.android.material.navigation.NavigationView;
-
-import java.util.ArrayList;
 
 /**
  * SetUpActivity class
  */
-public class SetUpActivity extends CleanArchActivity {
+public class BaseActivity extends CleanArchActivity {
     private DrawerLayout mDrawerLayout;
+    private NavigationView navigationView;
     private Intent intent;
 
-    private ArrayList<String> info;
     private String ID;
     private String TYPE;
     private String EMAIL;
@@ -52,33 +56,34 @@ public class SetUpActivity extends CleanArchActivity {
      * @param id_nav_view int
      * @param id_nav_item int
      */
-    public void init(AppCompatActivity context, int id_nav_view, int id_nav_item) {
-//        info = getIntent().getStringArrayListExtra("info");
-//        System.out.println("INFOOO" + info);
-//        ID = info.get(0);
-//        TYPE = info.get(1);
-//        EMAIL = info.get(2);
-//        USERNAME = info.get(3);
+    protected void init(AppCompatActivity context, int id_nav_view, int id_nav_item) {
         ID = getIntent().getStringExtra("ID");
         TYPE = getIntent().getStringExtra("TYPE");
-        super.setInfo(ID, TYPE);
+        EMAIL = getIntent().getStringExtra("EMAIL");
+        USERNAME = getIntent().getStringExtra("USERNAME");
+        super.setInfo(ID, TYPE, EMAIL, USERNAME);
         createActionBar();
         createNavView(context, id_nav_view, id_nav_item);
     }
 
-    /**
-     * For initializing user ID in Msg
-     */
-
-    public void init(){
-        ID = getIntent().getStringExtra("ID");
-        TYPE = getIntent().getStringExtra("TYPE");
-
-        super.setInfo(ID, TYPE);
-    }
+//    protected void init(){
+//        ID = getIntent().getStringExtra("ID");
+//        TYPE = getIntent().getStringExtra("TYPE");
+//        EMAIL = getIntent().getStringExtra("EMAIL");
+//        USERNAME = getIntent().getStringExtra("USERNAME");
+//        super.setInfo(ID, TYPE, EMAIL, USERNAME);
+//    }
 
     public String getID(){
         return ID;
+    }
+
+    public String getTYPE() { return this.TYPE;}
+
+    public String getEMAIL() { return this.EMAIL;}
+
+    public String getUSERNAME() {
+        return this.USERNAME;
     }
 
     /**
@@ -102,14 +107,14 @@ public class SetUpActivity extends CleanArchActivity {
      * @param id_nav_item int
      */
     protected void createNavView(final AppCompatActivity context, int id_nav_view, int id_nav_item) {
-        NavigationView navigationView = findViewById(id_nav_view);
+        navigationView = findViewById(id_nav_view);
         navigationView.setCheckedItem(id_nav_item);
-        //loadInfo();
+        loadInfo();
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 switch (menuItem.getItemId()) {
-                    //ATTENDEEMENU
+                    //ATTENDEE MENU
                     case R.id.nav_allevents:
                         mDrawerLayout.closeDrawers();
                         intent = new Intent(context, AttendeeEventActivity.class);
@@ -135,6 +140,14 @@ public class SetUpActivity extends CleanArchActivity {
                         mDrawerLayout.closeDrawers();
                         intent = new Intent(context, OrganizerEventActivity.class);
                         break;
+                    case R.id.nav_top_5_events:
+                        mDrawerLayout.closeDrawers();
+                        intent = new Intent(context, Top5EventsActivity.class);
+                        break;
+                    case R.id.nav_event_enrollment:
+                        mDrawerLayout.closeDrawers();
+                        intent = new Intent(context, EventEnrollmentActivity.class);
+                        break;
                     case R.id.nav_contacts_attendee_for_organizer:
                         mDrawerLayout.closeDrawers();
                         intent = new Intent(context, OrganizerContactAttendeeActivity.class);
@@ -147,9 +160,25 @@ public class SetUpActivity extends CleanArchActivity {
                         mDrawerLayout.closeDrawers();
                         intent = new Intent(context, RoomActivity.class);
                         break;
-                    case R.id.nav_account:
+                    case R.id.nav_account_all:
                         mDrawerLayout.closeDrawers();
-                        intent = new Intent(context, CreateAccountByOrganizer.class);
+                        intent = new Intent(context, AllAccountActivity.class);
+                        break;
+                    case R.id.nav_account_organizer:
+                        mDrawerLayout.closeDrawers();
+                        intent = new Intent(context, OrganizerAccountActivity.class);
+                        break;
+                    case R.id.nav_account_speaker:
+                        mDrawerLayout.closeDrawers();
+                        intent = new Intent(context, SpeakerAccountActivity.class);
+                        break;
+                    case R.id.nav_account_attendee:
+                        mDrawerLayout.closeDrawers();
+                        intent = new Intent(context, AttendeeAccountActivity.class);
+                        break;
+                    case R.id.nav_account_vipUser:
+                        mDrawerLayout.closeDrawers();
+                        intent = new Intent(context, VIPUserAccountActivity.class);
                         break;
                     //SPEAKER MENU
                     case R.id.nav_myEvents_speaker:
@@ -158,15 +187,17 @@ public class SetUpActivity extends CleanArchActivity {
                         break;
                     case R.id.nav_contacts_attendee_for_speaker:
                         mDrawerLayout.closeDrawers();
-                        startActivity(new Intent(context, AttendeeContactSpeakerActivity.class));
+                        intent = new Intent(context, SpeakerContactAttendeeActivity.class);
                         break;
                     case R.id.nav_announcements_speaker:
                         mDrawerLayout.closeDrawers();
                         intent = new Intent(context, SpeakerAnnouncementActivity.class);
                         break;
                 }
-                //intent.putExtra("info", info);
                 intent.putExtra("ID", ID);
+                intent.putExtra("TYPE", TYPE);
+                intent.putExtra("EMAIL", EMAIL);
+                intent.putExtra("USERNAME", USERNAME);
                 startActivity(intent);
                 return true;
             }
@@ -174,13 +205,31 @@ public class SetUpActivity extends CleanArchActivity {
     }
 
     private void loadInfo(){
-        TextView userType = findViewById(R.id.nav_head_type);
-        TextView userName = findViewById(R.id.nav_head_username);
-        TextView userEmail = findViewById(R.id.nav_head_email);
+        View view = navigationView.getHeaderView(0);
+        ImageView userPic = view.findViewById(R.id.profile_image);
+        TextView userType = view.findViewById(R.id.nav_head_type);
+        TextView userName = view.findViewById(R.id.nav_head_username);
+        TextView userEmail = view.findViewById(R.id.nav_head_email);
 
         userType.setText(TYPE);
         userName.setText(USERNAME);
         userEmail.setText(EMAIL);
+
+        loadImage(userPic);
+    }
+
+    private void loadImage(ImageView userPic){
+        if(TYPE.equals("ORGANIZER")){
+            Glide.with(this).load(R.drawable.organizer2).into(userPic);
+            //userPic.setImageResource(R.drawable.organizer);
+        }else if(TYPE.equals("SPEAKER")){
+            userPic.setImageResource(R.drawable.speaker);
+        }else if(TYPE.equals("ATTENDEE")){
+            Glide.with(this).load(R.drawable.icon_contact_blue).into(userPic);
+            //userPic.setImageResource(R.drawable.icon_contact_gray);
+        }else{
+            userPic.setImageResource(R.drawable.vip);
+        }
     }
 
     /**
@@ -201,11 +250,15 @@ public class SetUpActivity extends CleanArchActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
+                //NavUtils.navigateUpFromSameTask(this);
                 mDrawerLayout.openDrawer(GravityCompat.START);
                 break;
             case R.id.settings:
-                intent = new Intent(SetUpActivity.this, Settings.class);
-                intent.putExtra("info", info);
+                intent = new Intent(BaseActivity.this, Settings.class);
+                intent.putExtra("ID", ID);
+                intent.putExtra("TYPE", TYPE);
+                intent.putExtra("EMAIL", EMAIL);
+                intent.putExtra("USERNAME", USERNAME);
                 startActivity(intent);
                 break;
             case R.id.signOut:

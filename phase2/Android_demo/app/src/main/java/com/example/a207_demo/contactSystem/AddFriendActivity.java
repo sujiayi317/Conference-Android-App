@@ -1,80 +1,104 @@
 package com.example.a207_demo.contactSystem;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.a207_demo.MainActivity;
+import com.bumptech.glide.Glide;
 import com.example.a207_demo.R;
-import com.example.a207_demo.eventSystem.AttendeeEventActivity;
-import com.example.a207_demo.eventSystem.OrganizerEventActivity;
-import com.example.a207_demo.eventSystem.SpeakerMyEventActivity;
-import com.example.a207_demo.use_cases.ConversationManager;
-import com.example.a207_demo.use_cases.UserManager;
 import com.example.a207_demo.utility.ActivityCollector;
-import com.example.a207_demo.utility.SetUpActivity;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.example.a207_demo.utility.BaseActivity;
 
 /**
  * AddFriendActivity
  */
-public class AddFriendActivity extends SetUpActivity implements View.OnClickListener{
+public class AddFriendActivity extends BaseActivity implements View.OnClickListener {
 
-    /**
-     * onCreate
-     *
-     * @param savedInstanceState Bundle
-     */
+    private String myID;
+    private String userID;
+    private Intent intent;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_friend);
+        setContentView(R.layout.activity_friend_add);
+        ActivityCollector.addActivity(this);
 
         init();
-
-        ActivityCollector.addActivity(this);
     }
 
-    /**
-     * init
-     */
     public void init() {
+        intent = new Intent();
         super.reset();
         super.readUser();
-        Button search = findViewById(R.id.btn_search);
+        loadView();
+        loadButton();
+    }
 
-        search.setOnClickListener(this);
+    private void loadView() {
+        myID = getIntent().getStringExtra("myID");
+        userID = getIntent().getStringExtra("userID");
+        String userName = getIntent().getStringExtra("userName");
+        String userType = getIntent().getStringExtra("userType");
+        String content = userName + "\n" + userType;
+
+        ImageView imageUser = findViewById(R.id.add_friend_image);
+        TextView textUser = findViewById(R.id.add_friend_name);
+        Glide.with(this).load(R.drawable.icon_contact_gray).into(imageUser);
+        textUser.setText(content);
+    }
+
+    private void loadButton() {
+        Button back = findViewById(R.id.friend_back_search);
+        Button add = findViewById(R.id.btn_add);
+
+        back.setOnClickListener(this);
+        add.setOnClickListener(this);
     }
 
     /**
      * onClick
-     * @param v View
+     *
+     * @param view View
      */
-    public void onClick(View v) {
-        EditText friend = findViewById(R.id.friendname);
-        String friendname = friend.toString();
-        if (!addFriend(friendname)){
-            Toast.makeText(AddFriendActivity.this, "Please check the friend name again",
-                    Toast.LENGTH_LONG).show();
-        }else{
-            Toast.makeText(AddFriendActivity.this, "Add friend successfully",
-                    Toast.LENGTH_LONG).show();
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.btn_add:
+                if (myID.equals(userID)) {
+                    Toast.makeText(this, "You cannot add yourself!",
+                            Toast.LENGTH_LONG).show();
+                } else if (areFriends()) {
+                    Toast.makeText(this, "This user is ALREADY in your friend list!",
+                            Toast.LENGTH_LONG).show();
+                } else if (addFriend()) {
+                    super.writeUser();
+                    Toast.makeText(this, "You have successfully added this user!!",
+                            Toast.LENGTH_LONG).show();
+                    setResult(RESULT_OK, intent);
+                    finish();
+                } else {
+                    Toast.makeText(this, "Some errors have occurred!",
+                            Toast.LENGTH_LONG).show();
+                }
+                break;
+            case R.id.friend_back_search:
+                setResult(RESULT_CANCELED, intent);
+                finish();
+                break;
         }
-
     }
 
-    private boolean addFriend(String friendId){
-        //Todo: set up ID
-        return getUserManager().addFriend(getID(), friendId);
 
+    private boolean areFriends() {
+        return getUserManager().areFriends(myID, userID);
     }
+
+    private boolean addFriend() {
+        return getUserManager().addFriend(myID, userID);
+    }
+
 }
