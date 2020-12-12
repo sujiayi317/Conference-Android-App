@@ -12,25 +12,56 @@ import java.util.ArrayList;
 public class EventFactory implements Serializable {
     /**
      * create an event according to the type
-     *
+     * @param type String type
      * @param title String title
-     * @param roomName String roomID
-     * @param speakerID ArrayList<String> speakerID
+     * @param roomID String roomID
      * @param startTime String startTime
      * @param duration String duration
      * @param restriction String restriction
-     * @param type String type
+     * @param capacity int capacity
+     * @param speakerID ArrayList<String> speakerID
      * @return Event that is just created
      */
-    public Event createEvent(String title, String roomName, ArrayList<String> speakerID, String startTime, String duration,
-                             String restriction, String type) {
+    public Event createEvent(String type, String title, String roomID, String startTime,
+                             String duration, String restriction, int capacity, ArrayList<String> speakerID) {
         switch (type) {
             case "TALK":
-                return new Talk(title, roomName, speakerID, startTime, duration, restriction);
+                return new Talk(title, roomID, startTime, duration, restriction, capacity, speakerID);
             case "DISCUSSION":
-                return new Discussion(title, roomName, startTime, speakerID, duration, restriction);
+                return new Discussion(title, roomID, startTime, duration, restriction, capacity, speakerID);
             case "PARTY":
-                return new Party(title, roomName, startTime, duration, restriction);
+                return new Party(title, roomID, startTime, duration, restriction, capacity);
+        }
+        return null;
+    }
+
+    /**
+     * create an event according to the type
+     *@param type String type
+     * @param title String title
+     * @param eventID String eventID
+     * @param roomID String roomID
+     * @param startTime String startTime
+     * @param duration String duration
+     * @param restriction String restriction
+     * @param capacity int capacity
+     * @param speakerID ArrayList<String> speakerID
+     * @param attendeeID ArrayList<String attendeeID
+     * @return Event that is just created
+     */
+    public Event loadEvent(String type, String title, String eventID, String roomID,
+                             String startTime, String duration, String restriction, int capacity,
+                             ArrayList<String> speakerID, ArrayList<String> attendeeID) {
+        switch (type) {
+            case "TALK":
+                return new Talk(title, eventID, roomID, startTime, duration, restriction, capacity,
+                        speakerID, attendeeID);
+            case "DISCUSSION":
+                return new Discussion(title, eventID, roomID, startTime, duration, restriction,
+                        capacity, speakerID, attendeeID);
+            case "PARTY":
+                return new Party(title, eventID, roomID, startTime, duration, restriction,
+                        capacity, attendeeID);
         }
         return null;
     }

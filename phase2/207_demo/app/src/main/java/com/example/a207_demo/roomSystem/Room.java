@@ -1,6 +1,8 @@
 package com.example.a207_demo.roomSystem;
 
 import java.io.Serializable;
+import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -9,9 +11,8 @@ import java.util.UUID;
 public class Room implements Serializable{
 
     private final String roomID;
-    private int capacity;
-    private int currentNum = 0;
     private final String roomNum;
+    private final int capacity;
 
     /**
      * Constructor No.1 for Room
@@ -55,15 +56,6 @@ public class Room implements Serializable{
     }
 
     /**
-     * Get current number of people in this room
-     *
-     * @return current number
-     */
-    public int getCurrentNum(){
-        return this.currentNum;
-    }
-
-    /**
      * Get the capacity for this room
      *
      * @return capacity
@@ -71,35 +63,6 @@ public class Room implements Serializable{
     public int getCapacity(){
         return this.capacity;
     }
-
-
-
-    public boolean setCapacity(int capacity){
-        if (capacity >= this.currentNum) {
-            this.capacity = capacity;
-            return true;
-        }
-        return false;
-    }
-    /**
-     * Increase the number of people by 1 in this room
-     */
-    public void increaseCurrentNum(){
-        if (this.currentNum < this.capacity){
-            this.currentNum +=1;}
-    }
-
-    /**
-     * Decrease the number of people by 1 in this room
-     */
-    public void decreaseCurrentNum(){
-        if (this.currentNum > 0){
-            this.currentNum -=1;}
-    }
-
-//    public void resetTheCurrentNum(){
-//        this.currentNum = 0;
-//    }
 
     /**
      * Returns a formatted string of this room with roomNum (and roomID)

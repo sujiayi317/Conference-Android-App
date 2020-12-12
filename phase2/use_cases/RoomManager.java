@@ -3,7 +3,6 @@ package use_cases;
 
 import com.example.a207_demo.eventSystem.Event;
 import com.example.a207_demo.eventSystem.EventManager;
-import entities.Room;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -131,6 +130,17 @@ public class RoomManager implements Serializable {
         return roomIDs;
     }
 
+    public int getRoomCapFromEvent(String eventID){
+        for(String roomID : eventsMap.keySet()){
+            for(String event : eventsMap.get(roomID)){
+                if(event.equals(eventID)){
+                   return getRoomFromID(roomID).getCapacity();
+                }
+            }
+        }
+        return -1;
+    }
+
 
     /**
      * Get an ArrayList<String> of room numbers that are available for the given time
@@ -139,25 +149,28 @@ public class RoomManager implements Serializable {
      * @param eventManager an EventManager object
      * @return an ArrayList<String> of room numbers that are available for the given time
      */
-    public ArrayList<String> getAvailableRoom(String time, String duration, EventManager eventManager) {
+    public ArrayList<String> getAvailableRoom(String time, String duration, int capacity, EventManager eventManager) {
         ArrayList<String> roomList = new ArrayList<>();
 
         // First step, add all room numbers to the roomList
         for (Room room : rooms) {
-            roomList.add(room.getRoomID());
+            if(room.getCapacity() >= capacity){
+                roomList.add(room.getRoomID());
+            }
         }
 
         // Next step, remove unavailable room numbers from the roomList
         for (String roomID : eventsMap.keySet()) {
-            // Loop though the list of eventIDs of the current room's events:
-            for (String eventID : eventsMap.get(roomID)) {
-                // Find the event object with this event ID
-                Event event = eventManager.getEventFromID(eventID);
+            if(roomList.contains(roomID)){
+                // Loop though the list of eventIDs of the current room's events:
+                for (String eventID : eventsMap.get(roomID)) {
+                    // Find the event object with this event ID
+                    Event event = eventManager.getEventFromID(eventID);
 
-                // if the time conflicts, then the room is not available
-                if (!event.timeConflict(time, duration) ||
-                        event.getCapacity() > getRoomFromID(roomID).getCapacity()) {
-                    roomList.remove(roomID);
+                    // if the time conflicts, then the room is not available
+                    if (!event.timeConflict(time, duration)) {
+                        roomList.remove(roomID);
+                    }
                 }
             }
         }
@@ -250,35 +263,6 @@ public class RoomManager implements Serializable {
             result.add(info);
         }
         return result;
-    }
-
-    public  ArrayList<String> getTop5Events(){
-        ArrayList<String> top5Events = new ArrayList<>();
-        ArrayList<String> allEvents = new ArrayList<>();
-
-        Map<String, Integer> eventIDToCurrentNumber = new HashMap<>();
-        for (String roomID: eventsMap.keySet()){
-            Room room = getRoomBasedOnItsID(roomID);
-            for (String eventId: eventsMap.get(roomID)){
-                Integer currentNum = room.getCurrentNumAssociateWithEvent(eventId);
-                eventIDToCurrentNumber.put(eventId, currentNum);
-                allEvents.add(eventId);
-            }
-        }
-        int totalEventNum = allEvents.size();
-        while (top5Events.size() < Math.min(5, totalEventNum)){
-            ArrayList<String> copyAllEvents = new ArrayList<>(allEvents);
-            for (String currentEventID: eventIDToCurrentNumber.keySet()){
-                for (String OtherEventID: eventIDToCurrentNumber.keySet()){
-                    if (eventIDToCurrentNumber.get(currentEventID) < eventIDToCurrentNumber.get(OtherEventID)){
-                        copyAllEvents.remove(currentEventID);
-                    }
-                }
-            }
-            top5Events.add(copyAllEvents.get(0));
-            allEvents.remove(copyAllEvents.get(0));
-        }
-        return top5Events;
     }
 
 }

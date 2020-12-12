@@ -1,4 +1,4 @@
-package controllers;
+package unused.controllers;
 
 import entities.Attendee;
 import use_cases.AttendeeManager;

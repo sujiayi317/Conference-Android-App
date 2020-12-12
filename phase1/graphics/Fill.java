@@ -1,7 +1,7 @@
-package graphics;
+package unused.graphics;
 
 /**
- * Fill graphics
+ * Fill unused.graphics
  */
 public class Fill {
     private UIPanel parentPanel;
@@ -10,7 +10,7 @@ public class Fill {
     private char stroke;
 
     /**
-     * Fill graphics
+     * Fill unused.graphics
      *
      * @param x1 x1 coordinate
      * @param y1 y1 coordinate

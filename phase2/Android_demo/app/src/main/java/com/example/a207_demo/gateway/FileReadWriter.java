@@ -140,7 +140,7 @@ public class FileReadWriter implements Serializable {
     public void EventReader(EventManager eventManager, RoomManager roomManager) {
         ArrayList<String> lines = new ArrayList<>();
         try {
-            FileInputStream in = context.openFileInput("Events.txt");
+            FileInputStream in = context.openFileInput("unused/Events.txt");
             BufferedReader reader = new BufferedReader(new InputStreamReader(in));
             String line;
             while ((line = reader.readLine()) != null) {
@@ -233,7 +233,7 @@ public class FileReadWriter implements Serializable {
     public void EventWriter(EventManager eventManager) {
         List<String> eventIds = eventManager.getAllEventID();
         try {
-            FileOutputStream out = context.openFileOutput("Events.txt", Context.MODE_PRIVATE);
+            FileOutputStream out = context.openFileOutput("unused/Events.txt", Context.MODE_PRIVATE);
             BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(out));
             for (String eventId : eventIds) {
                 String line = eventManager.generateFormattedEventInfo(eventId);

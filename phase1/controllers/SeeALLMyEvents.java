@@ -1,6 +1,6 @@
-package controllers;
+package unused.controllers;
 
-import presenters.ViewAllAttendeeEvents;
+import unused.presenters.ViewAllAttendeeEvents;
 
 /**
  * This is the class for viewing all my events

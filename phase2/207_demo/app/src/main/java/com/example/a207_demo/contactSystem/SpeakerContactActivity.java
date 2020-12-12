@@ -7,7 +7,6 @@ import android.os.Bundle;
 
 import com.example.a207_demo.R;
 import com.example.a207_demo.utility.ActivityCollector;
-import com.example.a207_demo.utility.SetUpActivity;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,7 +1,7 @@
-package graphics;
+package unused.graphics;
 
 /**
- * Point of graphics
+ * Point of unused.graphics
  */
 public class Point {
     public int x = 0;

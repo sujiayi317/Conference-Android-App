@@ -1,17 +1,18 @@
 package com.example.a207_demo.messageSystem;
 
+import android.os.Bundle;
+
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.a207_demo.R;
-import com.example.a207_demo.utility.BaseActivity;
 
 import java.util.ArrayList;
 
 /**
  * AnnouncementActivity
  */
-public class AnnouncementActivity extends BaseActivity {
+public class AnnouncementActivity extends SetUpActivity {
 
     private ArrayList<String> announcementList;
 
@@ -25,6 +26,7 @@ public class AnnouncementActivity extends BaseActivity {
     }
 
     private void initAnnouncements(){
+        super.init();
         announcementList = getUserManager().getAnnouncements(getID());
     }
 
