@@ -1,4 +1,4 @@
-package com.example.a207_demo.signupSystem;
+package com.example.a207_demo.accountSystem;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -16,29 +16,34 @@ import com.example.a207_demo.R;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.List;
 
-public class CreateAccountByOrgAdapter extends RecyclerView.Adapter<CreateAccountByOrgAdapter.VHAccount> implements Serializable {
+/**
+ * AccountAdapter
+ */
+public class AccountAdapter extends RecyclerView.Adapter<AccountAdapter.VHAccount> implements Serializable {
     private Context context;
     private ArrayList<ArrayList<String>> accountList;
+    private int imageID;
 
     /**
      * Event Adapter for this Event Activity
+     *
      * @param context
      * @param accountList
      */
-    public CreateAccountByOrgAdapter(Context context, ArrayList<ArrayList<String>> accountList) {
+    public AccountAdapter(Context context, ArrayList<ArrayList<String>> accountList) {
         this.context = context;
         this.accountList = accountList;
     }
 
     /**
      * on Create View Holder
-     * @param parent parent ViewGroup
+     *
+     * @param parent   parent ViewGroup
      * @param viewType viewType
      * @return VHEvent
      */
-    public VHAccount onCreateViewHolder(@NonNull ViewGroup parent, int viewType){
+    public VHAccount onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(context).inflate(R.layout.item_account, parent, false);
         VHAccount holder = new VHAccount(v);
         return holder;
@@ -46,7 +51,8 @@ public class CreateAccountByOrgAdapter extends RecyclerView.Adapter<CreateAccoun
 
     /**
      * on Bind View Holder
-     * @param holder VHEvent
+     *
+     * @param holder   VHEvent
      * @param position int
      */
     @Override
@@ -59,13 +65,26 @@ public class CreateAccountByOrgAdapter extends RecyclerView.Adapter<CreateAccoun
         String content = name + "\n" + type + "\n" + email + "\n" + "ID: " + id;
 
         holder.accountInfo.setText(content);
-        //Todo: implement image later
-        Glide.with(context).load(R.drawable.jenny).into(holder.accountImage);
+        loadImage(type);
+        Glide.with(context).load(imageID).into(holder.accountImage);
+    }
+
+    private void loadImage(String accountType){
+        if(accountType.equals("ORGANIZER")){
+            imageID = R.drawable.organizer2;
+        }else if(accountType.equals("SPEAKER")){
+            imageID = R.drawable.speaker;
+        }else if(accountType.equals("ATTENDEE")){
+            imageID = R.drawable.icon_contact_gray;
+        }else{
+            imageID = R.drawable.vip;
+        }
     }
 
 
     /**
      * getItemCount
+     *
      * @return int
      */
     @Override

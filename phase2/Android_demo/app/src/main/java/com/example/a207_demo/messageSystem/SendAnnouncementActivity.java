@@ -10,17 +10,21 @@ import android.widget.Toast;
 import com.example.a207_demo.R;
 import com.example.a207_demo.contactSystem.OrganizerContactAttendeeActivity;
 import com.example.a207_demo.contactSystem.OrganizerContactSpeakerActivity;
+import com.example.a207_demo.contactSystem.SpeakerContactAttendeeActivity;
 import com.example.a207_demo.entities.Organizer;
 import com.example.a207_demo.eventSystem.OrganizerEventContentActivity;
+import com.example.a207_demo.eventSystem.SpeakerMyEventContentActivity;
 import com.example.a207_demo.utility.CleanArchActivity;
 
 import java.util.ArrayList;
 
+/**
+ * SendAnnouncementActivity
+ */
 public class SendAnnouncementActivity extends CleanArchActivity implements View.OnClickListener{
     private Intent intent;
 
     private String announcement;
-    private String type;
     private ArrayList<String> userIDs;
     private String eventTitle;
 
@@ -36,7 +40,6 @@ public class SendAnnouncementActivity extends CleanArchActivity implements View.
         super.reset();
         super.readUser();
         setUpInfo();
-//        type = getIntent().getStringExtra("type");
 
         Button back = findViewById(R.id.announcement_back_event);
         Button send = findViewById(R.id.send_announcement);
@@ -45,6 +48,10 @@ public class SendAnnouncementActivity extends CleanArchActivity implements View.
         send.setOnClickListener(this);
     }
 
+    /**
+     * onClick
+     * @param view View
+     */
     public void onClick(View view){
         switch (view.getId()){
             case R.id.send_announcement:
@@ -78,14 +85,18 @@ public class SendAnnouncementActivity extends CleanArchActivity implements View.
 
         if(from.equals("eventContent")){
             intent = new Intent(SendAnnouncementActivity.this, OrganizerEventContentActivity.class);
-        }else if(from.equals("attendeeContact")){
+        }else if(from.equals("organizerContactAttendee")){
             intent = new Intent(SendAnnouncementActivity.this, OrganizerContactAttendeeActivity.class);
-        }else if(from.equals("speakerContact")){
+        }else if(from.equals("organizerContactSpeaker")){
             intent = new Intent(SendAnnouncementActivity.this, OrganizerContactSpeakerActivity.class);
+        }else if(from.equals("speakerEventContent")){
+            intent = new Intent(SendAnnouncementActivity.this, SpeakerMyEventContentActivity.class);
+        }else if(from.equals("speakerContactAttendee")){
+            intent = new Intent(SendAnnouncementActivity.this, SpeakerContactAttendeeActivity.class);
         }
     }
 
     private boolean sendAnnouncement(){
-        return getOrganizerManager().sendAnnouncement(userIDs, eventTitle, announcement);
+        return getUserManager().sendAnnouncement(userIDs, eventTitle, announcement);
     }
 }

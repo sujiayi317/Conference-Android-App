@@ -1,10 +1,8 @@
 package com.example.a207_demo.use_cases;
 
 import com.example.a207_demo.entities.*;
-import com.example.a207_demo.eventSystem.Event;
 
 import java.io.Serializable;
-import java.net.IDN;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,57 +19,84 @@ public class UserManager implements Serializable {
         users = new ArrayList<>();
     }
 
+
     /**
-     * Add another user's userID to the current user's friend list.
+     * checkUser
      *
-     * @param currId1 current user ID
-     * @param userId2 another user ID
-     * @return true iff another user is successfully added to the current user's friendList
+     * @param userID String
+     * @return boolean
      */
-    public boolean addFriend(String currId1, String userId2) {
-        List<String> idList = getUserIDs();
-        if (idList.contains(currId1) && idList.contains(userId2)) {
-            for (User user : users) {
-                if (user.getUserID().equals(currId1)) {
-                    if (!user.getFriendList().contains(userId2)) {
-                        user.setFriendList(userId2);
-                    }
-                }if (user.getUserID().equals(userId2)) {
-                    if (!user.getFriendList().contains(currId1)) {
-                        user.setFriendList(currId1);
-                    }
-                }
+    public boolean checkUser(String userID) {
+        return getUserIDs().contains(userID);
+    }
+
+    /**
+     * areFriends
+     *
+     * @param userID1 String
+     * @param userID2 String
+     * @return
+     */
+    public boolean areFriends(String userID1, String userID2) {
+        for (User user : users) {
+            if ((user.getUserID().equals(userID1) && user.getFriendList().contains(userID2)) ||
+                    (user.getUserID().equals(userID2) && user.getFriendList().contains(userID1))) {
+                return true;
             }
-            return true;
         }
+
         return false;
     }
 
-    protected boolean setAnnouncement(String userID, String eventTitle, String announcement){
-        for(User user : users){
-            if(user.getUserID().equals(userID)){
-                user.addAnnouncement("From event '" + eventTitle + "': " + announcement);
+    /**
+     * Add another user's userID to the current user's friend list.
+     *
+     * @param myID     current user ID
+     * @param friendID another user ID
+     * @return true iff another user is successfully added to the current user's friendList
+     */
+    public boolean addFriend(String myID, String friendID) {
+        boolean selfAdded = false;
+        boolean friendAdded = false;
+        for (User user : users) {
+            if (user.getUserID().equals(myID)) {
+                user.addFriend(friendID);
+                selfAdded = true;
+            }
+            if (user.getUserID().equals(friendID)) {
+                user.addFriend(myID);
+                friendAdded = true;
+            }
+            if (selfAdded && friendAdded) {
                 return true;
             }
         }
         return false;
     }
 
-    protected boolean setAnnouncement(ArrayList<String> userIDs, String eventTitle, String announcement){
-        for(String userID : userIDs){
+
+    /**
+     * sendAnnouncement
+     *
+     * @param userIDs      ArrayList<String> userIDs
+     * @param eventTitle   String eventTitle
+     * @param announcement String announcement
+     * @return boolean
+     */
+    public boolean sendAnnouncement(ArrayList<String> userIDs, String eventTitle, String announcement) {
+        for (String userID : userIDs) {
             boolean hasUser = false;
-            for(User user : users){
-                if(user.getUserID().equals(userID)){
+            for (User user : users) {
+                if (user.getUserID().equals(userID)) {
                     user.addAnnouncement("From '" + eventTitle + "': " + announcement);
                     hasUser = true;
                     break;
                 }
             }
-            if(!hasUser){
+            if (!hasUser) {
                 return false;
             }
         }
-
         return true;
     }
 
@@ -172,7 +197,7 @@ public class UserManager implements Serializable {
      */
     public ArrayList<String> getUserNamesFromID(List<String> userIDs) {
         ArrayList<String> names = new ArrayList<>();
-        for(String userID : userIDs){
+        for (String userID : userIDs) {
             names.add(getUserNameFromID(userID));
         }
         return names;
@@ -194,9 +219,15 @@ public class UserManager implements Serializable {
         return null;
     }
 
-    public ArrayList<String> getUserIdsFromName(List<String> userNames){
+    /**
+     * getUserIdsFromName
+     *
+     * @param userNames List<String> userNames
+     * @return ArrayList<String>
+     */
+    public ArrayList<String> getUserIdsFromName(List<String> userNames) {
         ArrayList<String> ids = new ArrayList<>();
-        for(String userName : userNames){
+        for (String userName : userNames) {
             ids.add(getUserIdFromName(userName));
         }
         return ids;
@@ -208,7 +239,7 @@ public class UserManager implements Serializable {
      * @param userID String user ID
      * @return the friend list of the user with user ID or null if this user does not exist
      */
-    public ArrayList<String> friendListGetter(String userID) {
+    public ArrayList<String> getFriendList(String userID) {
         for (User user : users) {
             if (user.getUserID().equals(userID)) {
                 return user.getFriendList();
@@ -219,17 +250,19 @@ public class UserManager implements Serializable {
 
     /**
      * Get the announcement list of a user
+     *
      * @param userID ID of the user
      * @return a list of announcements
      */
-    public ArrayList<String> getAnnouncements(String userID){
-        for (User user : users){
-            if(user.getUserID().equals(userID)){
+    public ArrayList<String> getAnnouncements(String userID) {
+        for (User user : users) {
+            if (user.getUserID().equals(userID)) {
                 return user.getAnnouncements();
             }
         }
         return null;
     }
+
 
     /**
      * Check if the given String is a valid new email
@@ -301,27 +334,24 @@ public class UserManager implements Serializable {
     public String generateFormattedUserInfo(String userID) {
         for (User user : users) {
             if (user.getUserID().equals(userID)) {
-                String info = user.getType() + " " + user.getUserName() + " " + user.getEmail()
-                        + " " + user.getPassword() + " " + userID;
-                if(user.getAnnouncements() != null){
-                    info += " &" + user.getAnnouncements() +"&";
-                }
-                return info;
+                return user.getType() + " " + user.getUserName() + " " + user.getEmail()
+                        + " " + user.getPassword() + " " + userID +
+                        " ;" + user.getFriendList() + ";" +
+                        " &" + user.getAnnouncements() + "&";
             }
         }
         return "NULL";
     }
 
     /**
-     * Generate the formatted user's information.
-     *
+     * Generate the formatted user's information for loading into activity.
      *
      * @return a string of formatted event's information.
      */
-    public  ArrayList<ArrayList<String>> generateFormattedFriendInfo(String userID) {
+    public ArrayList<ArrayList<String>> generateFormattedFriendInfo(String userID) {
         ArrayList<ArrayList<String>> result = new ArrayList<>();
 
-        for (String friendID: friendListGetter(userID)){
+        for (String friendID : getFriendList(userID)) {
             ArrayList<String> info = new ArrayList<>();
 
             info.add(friendID);
@@ -331,9 +361,15 @@ public class UserManager implements Serializable {
         return result;
     }
 
-    public ArrayList<ArrayList<String>> generateIDNameInfo(ArrayList<String> userIDs){
+    /**
+     * generateIDNameInfo
+     *
+     * @param userIDs ArrayList<String> userIDs
+     * @return ArrayList<ArrayList < String>>
+     */
+    public ArrayList<ArrayList<String>> generateIDNameInfo(ArrayList<String> userIDs) {
         ArrayList<ArrayList<String>> result = new ArrayList<>();
-        for(String userID : userIDs){
+        for (String userID : userIDs) {
             ArrayList<String> IDNamePair = new ArrayList<>();
             IDNamePair.add(userID);
             IDNamePair.add(getUserNameFromID(userID));
@@ -342,9 +378,14 @@ public class UserManager implements Serializable {
         return result;
     }
 
-    public ArrayList<ArrayList<String>> generateAccountInfo(){
+    /**
+     * generateAccountInfo
+     *
+     * @return ArrayList<ArrayList < String>>
+     */
+    public ArrayList<ArrayList<String>> generateAccountInfo() {
         ArrayList<ArrayList<String>> result = new ArrayList<>();
-        for(User user : users){
+        for (User user : users) {
             ArrayList<String> info = new ArrayList<>();
             info.add(user.getUserName());
             info.add(user.getType());

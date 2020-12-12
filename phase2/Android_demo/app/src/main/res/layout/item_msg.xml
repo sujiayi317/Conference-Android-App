@@ -52,5 +52,37 @@
             android:background="@drawable/triangle_chats_sent"/>
 
     </RelativeLayout>
+<!--    <LinearLayout-->
+<!--        android:id="@+id/layout_left"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_gravity="left"-->
+<!--        android:background="@drawable/bubble_chats_received">-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/msg_left"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:layout_margin="10dp"-->
+<!--            android:textColor="#fff"/>-->
+
+<!--    </LinearLayout>-->
+
+<!--    <LinearLayout-->
+<!--        android:id="@+id/layout_right"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_gravity="right"-->
+<!--        android:background="@drawable/bubble_chats_received">-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/msg_right"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:layout_margin="10dp" />-->
+
+<!--    </LinearLayout>-->
 
 </LinearLayout>

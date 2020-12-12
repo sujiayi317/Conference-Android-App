@@ -1,5 +1,6 @@
 package com.example.a207_demo.eventSystem;
 
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
@@ -61,11 +62,14 @@ public class OrganizerEventActivity extends EventActivity implements View.OnClic
      * createEventMenu
      */
     protected void createEventMenu() {
-        RecyclerView recyclerView = findViewById(R.id.event_recycler_view);
-        super.createEventMenu(recyclerView);
         initEvents();
-        organizerEventAdapter = new OrganizerEventAdapter(this, eventList);
-        recyclerView.setAdapter(organizerEventAdapter);
+        RecyclerView recyclerView = findViewById(R.id.event_recycler_view);
+        GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
+        organizerEventAdapter = new OrganizerEventAdapter(this, eventList, getID());
+        super.createEventMenu(recyclerView, layoutManager, organizerEventAdapter);
+
+
+        //recyclerView.setAdapter(organizerEventAdapter);
     }
 
     /**
@@ -75,12 +79,6 @@ public class OrganizerEventActivity extends EventActivity implements View.OnClic
         super.initEvents();
 
         eventList = getEventManager().generateAllInfo(getEventManager().getAllEventID());
-
-//        //Todo: implement image later
-//        for (Event event : eventList) {
-//            event.setImageId(R.drawable.default_image);
-//        }
-
     }
 
     /**

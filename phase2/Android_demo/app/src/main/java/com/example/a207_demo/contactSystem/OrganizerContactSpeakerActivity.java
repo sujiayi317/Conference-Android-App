@@ -1,23 +1,19 @@
 package com.example.a207_demo.contactSystem;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
-import android.nfc.tech.NfcA;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
 import com.example.a207_demo.R;
-import com.example.a207_demo.entities.Organizer;
 import com.example.a207_demo.messageSystem.SendAnnouncementActivity;
 import com.example.a207_demo.utility.ActivityCollector;
 
 import java.util.ArrayList;
-import java.util.List;
 
-public class OrganizerContactSpeakerActivity extends ContactActivity implements View.OnClickListener{
+public class OrganizerContactSpeakerActivity extends ContactActivity implements View.OnClickListener {
 
     private ArrayList<ArrayList<String>> contactList = new ArrayList<>();
     private OrganizerContactAdapter organizerContactAdapter;
@@ -44,17 +40,20 @@ public class OrganizerContactSpeakerActivity extends ContactActivity implements 
     public void init() {
         super.init(this, R.id.nav_view_organizer, R.id.nav_contacts_speaker_for_organizer);
 
-        Button msgAll = findViewById(R.id.btn_msg_all);
-        String msg = "Message All Speakers";
-        msgAll.setText(msg);
+        Button msgAll = findViewById(R.id.btn_organizer_msg_all);
+        msgAll.setText(R.string.msgAllSpeakers);
         msgAll.setOnClickListener(this);
 
         createContactMenu();
     }
 
-    public void onClick(View view){
+    /**
+     * onClick
+     * @param view View
+     */
+    public void onClick(View view) {
         Intent intent = new Intent(OrganizerContactSpeakerActivity.this, SendAnnouncementActivity.class);
-        intent.putExtra("class", "speakerContact");
+        intent.putExtra("class", "organizerContactSpeaker");
         intent.putExtra("eventTitle", "");
         intent.putExtra("userIDs", getSpeakerManager().getSpeakerIDs());
         startActivity(intent);
@@ -63,7 +62,8 @@ public class OrganizerContactSpeakerActivity extends ContactActivity implements 
     protected void createContactMenu() {
         initContacts();
         RecyclerView recyclerView = findViewById(R.id.organizer_contact_recycler_view);
-        organizerContactAdapter = new OrganizerContactAdapter(this, contactList, "speakerContact");
+        organizerContactAdapter = new OrganizerContactAdapter(this, contactList, getID(),
+                "organizerContactSpeaker", R.drawable.speaker);
         super.createContactMenu(recyclerView, organizerContactAdapter);
     }
 

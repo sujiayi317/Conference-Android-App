@@ -4,7 +4,6 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -13,26 +12,28 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.a207_demo.R;
 
-import java.util.List;
+import java.util.ArrayList;
 
 /**
  * MsgAdapter
  */
-public class MsgAdapter extends RecyclerView.Adapter<MsgAdapter.VHMsg> {
+public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapter.VHMsg> {
 
     private Context context;
-    private List<Msg> mMsgList;
+    private ArrayList<ArrayList<String>> conversationList;
+    private String myID;
 
 
     /**
      * MsgAdapter constructor
      *
-     * @param context
-     * @param mMsgList
+     * @param context Context
+     * @param conversationList ArrayList<ArrayList<String>>
      */
-    public MsgAdapter(Context context, List<Msg> mMsgList) {
+    public ConversationAdapter(Context context, ArrayList<ArrayList<String>> conversationList, String myID) {
         this.context = context;
-        this.mMsgList = mMsgList;
+        this.conversationList = conversationList;
+        this.myID = myID;
     }
 
     /**
@@ -58,16 +59,18 @@ public class MsgAdapter extends RecyclerView.Adapter<MsgAdapter.VHMsg> {
      */
     @Override
     public void onBindViewHolder(@NonNull VHMsg holder, int position) {
-        Msg msg = mMsgList.get(position);
+        ArrayList<String> conversation = conversationList.get(position);
+        String ID = conversation.get(0);
+        String msg = conversation.get(1);
 
-        if (msg.getType() == Msg.TYPE_RECEIVED) {
-            holder.leftLayout.setVisibility(View.VISIBLE);
-            holder.rightLayout.setVisibility(View.GONE);
-            holder.leftMsg.setText(msg.getContent());
-        } else {
+        if (ID.equals(myID)) {
             holder.rightLayout.setVisibility(View.VISIBLE);
             holder.leftLayout.setVisibility(View.GONE);
-            holder.rightMsg.setText(msg.getContent());
+            holder.rightMsg.setText(msg);
+        } else {
+            holder.leftLayout.setVisibility(View.VISIBLE);
+            holder.rightLayout.setVisibility(View.GONE);
+            holder.leftMsg.setText(msg);
         }
     }
 
@@ -78,7 +81,7 @@ public class MsgAdapter extends RecyclerView.Adapter<MsgAdapter.VHMsg> {
      */
     @Override
     public int getItemCount() {
-        return mMsgList.isEmpty() ? 0 : mMsgList.size();
+        return conversationList.isEmpty() ? 0 : conversationList.size();
     }
 
     /**

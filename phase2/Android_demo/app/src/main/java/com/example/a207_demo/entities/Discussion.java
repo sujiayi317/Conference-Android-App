@@ -1,14 +1,15 @@
 package com.example.a207_demo.entities;
 
+import com.example.a207_demo.R;
 import com.example.a207_demo.eventSystem.Event;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Discussion is a type of event
  */
 public class Discussion extends Event {
+
 
     /**
      * Discussion
@@ -29,17 +30,18 @@ public class Discussion extends Event {
 
     /**
      * Discussion
-     * @param title title
-     * @paramt eventID eventID
-     * @param roomID roomID
-     * @param speakerID speakerID
-     * @param startTime startTime
-     * @param duration duration
+     *
+     * @param title       title
+     * @param roomID      roomID
+     * @param speakerID   speakerID
+     * @param startTime   startTime
+     * @param duration    duration
      * @param restriction restriction
+     * @param eventID eventID
      */
-    public Discussion (String title, String eventID, String roomID, String startTime,
-                       String duration, String restriction, int capacity,
-                       ArrayList<String> speakerID, ArrayList<String> attendeeID){
+    public Discussion(String title, String eventID, String roomID, String startTime,
+                      String duration, String restriction, int capacity,
+                      ArrayList<String> speakerID, ArrayList<String> attendeeID) {
         super(title, eventID, roomID, startTime, duration, restriction, capacity);
         setType("DISCUSSION");
         setSpeakerUserIDs(speakerID);

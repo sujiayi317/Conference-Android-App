@@ -1,12 +1,13 @@
 package com.example.a207_demo.messageSystem;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 
 import com.example.a207_demo.R;
 import com.example.a207_demo.utility.ActivityCollector;
 
+/**
+ * AttendeeAnnouncementActivity
+ */
 public class AttendeeAnnouncementActivity extends AnnouncementActivity {
 
     @Override
@@ -14,10 +15,9 @@ public class AttendeeAnnouncementActivity extends AnnouncementActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_announcement_attendee);
+        ActivityCollector.addActivity(this);
 
         init();
-
-        ActivityCollector.addActivity(this);
     }
 
     /**

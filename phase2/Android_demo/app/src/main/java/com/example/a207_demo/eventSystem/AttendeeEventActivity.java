@@ -1,21 +1,14 @@
 package com.example.a207_demo.eventSystem;
 
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 
-import com.example.a207_demo.entities.Discussion;
-import com.example.a207_demo.entities.Party;
-import com.example.a207_demo.entities.Talk;
-import com.example.a207_demo.gateway.FileReadWriter;
 import com.example.a207_demo.utility.ActivityCollector;
 import com.example.a207_demo.R;
 
-import java.lang.reflect.Array;
-import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * Event activity to show attendee.
@@ -52,17 +45,19 @@ public class AttendeeEventActivity extends EventActivity {
      * create Event Menu
      */
     protected void createEventMenu() {
-
+        initEvents();
         // Firstly, setLayoutManager for this recyclerView
         RecyclerView recyclerView = findViewById(R.id.event_recycler_view);
-        super.createEventMenu(recyclerView);
+        GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
+        attendeeEventAdapter = new AttendeeEventAdapter(this, eventList, getID());
+        super.createEventMenu(recyclerView, layoutManager, attendeeEventAdapter);
 
         // Secondly, prepare data: list of events to show
-        initEvents();
+
 
         // Third, setAdapter for this recyclerView
-        attendeeEventAdapter = new AttendeeEventAdapter(this, eventList);
-        recyclerView.setAdapter(attendeeEventAdapter);
+
+        //recyclerView.setAdapter(attendeeEventAdapter);
     }
 
     /**
@@ -72,13 +67,9 @@ public class AttendeeEventActivity extends EventActivity {
         super.initEvents();
         eventList = getEventManager().generateAllInfo(getEventManager().getAllEventID());
 
-//        //Todo: implement image later
-//        for (Event event : eventList) {
-//            event.setImageId(R.drawable.default_image);
-//        }
     }
 
-    protected void refreshEvents(){
+    protected void refreshEvents() {
         createEventMenu();
         attendeeEventAdapter.notifyDataSetChanged();
         super.refreshEvents();

@@ -15,6 +15,7 @@ public abstract class User implements Serializable {
     private String type;
     private String userID;
     private ArrayList<String> friendList;
+    private ArrayList<String> announcements;
 
     /**
      * Constructor for the user
@@ -27,7 +28,6 @@ public abstract class User implements Serializable {
         this.userName = userName;
         this.email = email;
         this.password = password;
-        this.friendList = new ArrayList<>();
     }
 
     /**
@@ -58,28 +58,39 @@ public abstract class User implements Serializable {
      *
      * @param password new value of email
      */
-    public void setPassword(String password){ this.password = password;}
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
     /**
      * Set the value of userID
+     *
      * @param userID the userID of the user
      */
-    public void setUserID(String userID){this.userID = userID;}
+    public void setUserID(String userID) {
+        this.userID = userID;
+    }
+
+    public void setFriendList(ArrayList<String> friendList) {
+        this.friendList = friendList;
+    }
+
+    public void setAnnouncements(ArrayList<String> announcements) {
+        this.announcements = announcements;
+    }
 
     /**
      * Add a friend to this user's friendList
      *
      * @param userId the userID of the new friend to add
      */
-    public void setFriendList(String userId) {
+    public void addFriend(String userId) {
         friendList.add(userId);
     }
 
-    /**
-     * Add an annoucement to this user's announcement list
-     * @param announcement
-     */
-    public abstract void addAnnouncement(String announcement);
+    public void addAnnouncement(String announcement) {
+        this.announcements.add(announcement);
+    }
 
     /**
      * Get the value of userName
@@ -122,7 +133,9 @@ public abstract class User implements Serializable {
      *
      * @return userID for this user
      */
-    public String getUserID(){return this.userID;}
+    public String getUserID() {
+        return this.userID;
+    }
 
 
     /**
@@ -135,11 +148,11 @@ public abstract class User implements Serializable {
         return friendList;
     }
 
-    /**
-     * Get inbox of announcements of this user
-     * @return a list of announcements
-     */
-    public abstract ArrayList<String> getAnnouncements();
+    public ArrayList<String> getAnnouncements() {
+        return this.announcements;
+    }
+
+    ;
 
     /**
      * Override the toString method

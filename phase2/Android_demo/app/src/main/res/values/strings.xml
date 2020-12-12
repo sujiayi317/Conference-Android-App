@@ -2,6 +2,19 @@
     <string name="app_name">207_demo</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
+    <string name="organizer">Organizer</string>
+    <string name="speaker">Speaker</string>
+    <string name="speakers">Speakers</string>
+    <string name="attendee">Attendee</string>
+    <string name="vipUser">VIP User</string>
+    <string name="allAccounts">All Users</string>
+    <string name="accounts">Users</string>
+    <string name="msgAllAttendees">Message All Attendees</string>
+    <string name="msgAllSpeakers">Message All Speakers</string>
+    <string name="addSpeaker">Add Speaker</string>
+    <string name="addAttendee">Add Attendee</string>
+    <string name="enterFriendName">Enter Friend Name</string>
+    <string name="add">Add</string>
 
     <string name="signUp">Sign up</string>
     <string name="search">Search</string>
@@ -48,6 +61,8 @@
     <string name="typeHere">Type here</string>
     <string name="createAccount">Create Account</string>
     <string name="changeCapacity">Change Capacity</string>
+    <string name="top5Events">Top 5 Events</string>
+    <string name="eventEnrollment">Event Enrollment</string>
 
     <string name="useremail">nancielee@gmail.com</string>
     <string-array name="event_types">

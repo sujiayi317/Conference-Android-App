@@ -25,6 +25,7 @@ public class SelectSpeakerActivity extends CleanArchActivity implements View.OnC
 
     private Intent intent;
 
+
     /**
      * onCreate
      * @param savedInstanceState Bundle
@@ -86,7 +87,6 @@ public class SelectSpeakerActivity extends CleanArchActivity implements View.OnC
     }
 
     private void initSpeakers(){
-        //Todo: clean up after implementing speaker System
         super.reset();
         super.readUser();
 

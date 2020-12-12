@@ -1,43 +1,48 @@
 package com.example.a207_demo.contactSystem;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.a207_demo.R;
-import com.example.a207_demo.eventSystem.EventAdapter;
-import com.example.a207_demo.eventSystem.OrganizerEventContentActivity;
-import com.example.a207_demo.messageSystem.MsgActivity;
 import com.example.a207_demo.messageSystem.SendAnnouncementActivity;
 
 import java.util.ArrayList;
 
-import static android.app.Activity.RESULT_OK;
-
-public class OrganizerContactAdapter extends ContactAdapter{
+/**
+ * Organizer Contact Adapter
+ */
+public class OrganizerContactAdapter extends ContactAdapter {
 
     private Context context;
     private String type;
+    private String myID;
 
-    public OrganizerContactAdapter(Context context, ArrayList<ArrayList<String>> contactList, String type){
-        super(context, contactList);
+    /**
+     * Organizer Contact Adapter
+     *
+     * @param context     Context
+     * @param contactList ArrayList
+     * @param myID        String
+     * @param type        String
+     * @param imageID     int
+     */
+    public OrganizerContactAdapter(Context context, ArrayList<ArrayList<String>> contactList,
+                                   String myID, String type, int imageID) {
+        super(context, contactList, myID, imageID);
         this.context = context;
         this.type = type;
     }
 
     /**
      * onCreateViewHolder for OrganizerEventAdapter
-     * @param parent parent ViewGroup
+     *
+     * @param parent   parent ViewGroup
      * @param viewType viewType
      * @return VHEvent
      */
@@ -60,11 +65,13 @@ public class OrganizerContactAdapter extends ContactAdapter{
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                int position = holder.getAdapterPosition();
+                ArrayList<String> userInfo = getContactsList().get(position);
                 Intent intent = new Intent(context, nextClass);
                 intent.putExtra("class", type);
                 intent.putExtra("eventTitle", "");
                 ArrayList<String> ID = new ArrayList<>();
-                ID.add(getUserID());
+                ID.add(userInfo.get(0));
                 intent.putExtra("userIDs", ID);
                 context.startActivity(intent);
             }

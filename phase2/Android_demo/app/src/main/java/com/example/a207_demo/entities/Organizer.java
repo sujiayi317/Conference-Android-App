@@ -30,24 +30,13 @@ public class Organizer extends User implements Serializable {
      * @param password the password of this Organizer
      * @param ID       the user ID of this Organizer
      */
-    public Organizer(String userName, String email, String password, String ID) {
+    public Organizer(String userName, String email, String password, String ID,
+                     ArrayList<String> friendsID, ArrayList<String> announcements) {
         super(userName, email, password);
         setType("ORGANIZER");
         setUserID(ID);
+        setFriendList(friendsID);
+        setAnnouncements(announcements);
     }
-
-    /**
-     * Not to be implemented yet
-     * @param announcement
-     */
-    public void addAnnouncement(String announcement){
-        getAnnouncements();
-    }
-
-    /**
-     * Not to be implemented yet
-     * @return null
-     */
-    public ArrayList<String> getAnnouncements(){return null;}
 
 }
