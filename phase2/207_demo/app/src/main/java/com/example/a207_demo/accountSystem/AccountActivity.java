@@ -65,6 +65,10 @@ public class AccountActivity extends BaseActivity {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(accountAdapter);
 
+
+        TextView numOfUsers = findViewById(R.id.num_of_users);
+        String num = "Total # of users: " + accountList.size();
+        numOfUsers.setText(num);
     }
 
     /**
