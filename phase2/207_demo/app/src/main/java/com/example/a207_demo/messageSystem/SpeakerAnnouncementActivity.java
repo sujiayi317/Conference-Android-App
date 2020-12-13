@@ -18,7 +18,6 @@ public class SpeakerAnnouncementActivity extends AnnouncementActivity {
         setContentView(R.layout.activity_announcement_speaker);
         ActivityCollector.addActivity(this);
         init();
-
     }
 
     /**

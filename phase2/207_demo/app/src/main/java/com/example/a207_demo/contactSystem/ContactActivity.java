@@ -9,7 +9,6 @@ import com.example.a207_demo.utility.BaseActivity;
  * ContactActivity
  */
 public abstract class ContactActivity extends BaseActivity {
-
     /**
      * createContactMenu
      *
@@ -29,6 +28,8 @@ public abstract class ContactActivity extends BaseActivity {
     protected void initContacts() {
         super.reset();
         super.readUser();
+        super.readEvent();
+        super.readConversation();
     }
 
 }

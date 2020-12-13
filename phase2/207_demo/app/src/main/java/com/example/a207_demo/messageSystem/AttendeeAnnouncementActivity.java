@@ -5,6 +5,9 @@ import android.os.Bundle;
 import com.example.a207_demo.R;
 import com.example.a207_demo.utility.ActivityCollector;
 
+/**
+ * AttendeeAnnouncementActivity
+ */
 public class AttendeeAnnouncementActivity extends AnnouncementActivity {
 
     @Override
@@ -15,8 +18,6 @@ public class AttendeeAnnouncementActivity extends AnnouncementActivity {
         ActivityCollector.addActivity(this);
 
         init();
-
-        ActivityCollector.addActivity(this);
     }
 
     /**

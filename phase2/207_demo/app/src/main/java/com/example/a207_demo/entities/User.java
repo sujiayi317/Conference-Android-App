@@ -73,7 +73,6 @@ public abstract class User implements Serializable {
 
     /**
      * setFriendList
-     *
      * @param friendList ArrayList<String> friendList
      */
     public void setFriendList(ArrayList<String> friendList) {
@@ -82,7 +81,6 @@ public abstract class User implements Serializable {
 
     /**
      * setAnnouncements
-     *
      * @param announcements ArrayList<String> announcements
      */
     public void setAnnouncements(ArrayList<String> announcements) {
@@ -162,6 +160,7 @@ public abstract class User implements Serializable {
 
         return friendList;
     }
+
 
     /**
      * getAnnouncements
