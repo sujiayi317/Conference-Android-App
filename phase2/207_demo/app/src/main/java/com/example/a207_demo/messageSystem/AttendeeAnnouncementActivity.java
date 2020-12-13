@@ -12,6 +12,7 @@ public class AttendeeAnnouncementActivity extends AnnouncementActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_announcement_attendee);
+        ActivityCollector.addActivity(this);
 
         init();
 
