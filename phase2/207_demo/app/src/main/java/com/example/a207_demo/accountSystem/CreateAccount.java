@@ -21,7 +21,6 @@ public class CreateAccount extends CleanArchActivity {
      * @param username Username of user
      * @param userEM   Email of user
      * @param userPW   Password of user
-     * @return True if created successfully
      */
     public void createNewAccount(String type, String username, String userEM, String userPW) {
         userFactory.createNewUserAccount(type, username, userEM, userPW);
