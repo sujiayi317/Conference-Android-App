@@ -1,57 +1,4 @@
-# Conference System
-
-# Project Phase 1
-
-## Specification
-This is a program that allows people at a conference (examples: a tech conference, a TED-style conference,
-an employment fair, etc.) to communicate with each other in very specific ways.
-
-### Users
-**1. Organizers have the following abilities:**
-- enter rooms into the system
-- create speaker accounts
-- schedule the speakers to each speak in one or more rooms at different times so that at most one speaker speaks in each room at any given time and each room has at most one speaker at any given time
-- all talks are 1 hour long and happen between 9 am and 5 pm by assumption
-
-**2. Speakers have the following abilities:**
-- log in and see a list of talks that they are giving
-- message all Attendees who are signed up for a particular event, at once or individually
-
-**3. Attendees have the following abilities:**
-- log in and see a schedule of events for which they can sign up
-- sign up for events
-- cancel their enrolment in an event
-- see the schedule of the events for which they signed up
-- send messages to and receive messages from other Attendees
-- message with Speakers
-
-### Login System
-Every user should be able to log into the system and interact with a menu of options that are specific to their type of user.
-
-### Schedule System
-Organizer can schedule each speaker to give a talk at specific times in specific rooms, without double-booking a speaker (scheduling them to speak two places at the same time) or double-booking a room (scheduling two people to speak in the same room at the same time).
-
-This is done automatically by our system, by giving the user enough information to avoid such conflicts, and restricting the choices an Organizer can make.
-
-### Sign-Up System
-Attendees can browse the talks and decide which ones they want to see. They will also be able to sign up for the talk.
-
-You can assume that each room has a capacity of 2 people besides the speaker. Attendees should not be able to sign up for an event that is already full.
-
-### Messaging System
-
-**Speakers** are able to send a message that automatically goes to all Attendees of their talk or multiple talks that they gave.
-
-**Organizers** are able to send a message to all speakers, one specific speaker, all Attendees, or one specific Attendee.
-
-**Attendees** are able to message other Attendees or Speakers. Speakers are able to respond to a specific Attendee.
-
-### Saving and Persistence of Information
-When your program finishes running, information inside the program will be deleted. In order to be able to use that information the next time we run our program, we store that info outside of our program and have our program read it back in with `.txt` file and `.ser` file.
-
-
-
-# Project Phase 2
+# Conference System - Project Phase 2
 
 ### 1. Mandatory extensions
 
@@ -79,7 +26,7 @@ You will implement four of these, unless you implement a GUI. Please see the not
 
 ### 3. A list of features that we implemented for Phase 2
 
--  All the mandatory extensions mentioned above and more than two optional extensions. (Nancy, Steve, Shawn, Maggie, Tony, Hardy and Bruce)
+-   All the mandatory extensions mentioned above and more than two optional extensions. (Nancy, Steve, Shawn, Maggie, Tony, Hardy and Bruce)
 -   Implementing a GUI with Android, which should follow the Model-View-Presenter architecture, and a detailed analysis of the design patterns we use. (Nancy and Jenny)
 
 Details are described below:
@@ -97,5 +44,5 @@ Details are described below:
 -   Please refer to the video demos for how to download and install Android Studio and run our project: 207_demo.
 -   https://youtu.be/gc34WXBEiVI [This](https://youtu.be/gc34WXBEiVI) is the link to the youTube video showing how to download and install Android Studio.
 -   https://youtu.be/J9Mjt3aRb8M [This](https://youtu.be/J9Mjt3aRb8M) is the link to the youTube video demonstrating an example usage of our project.
--   The UML design is in design_UML folder inside of the phase 2 package.
+-   The UML design is in design_UML folder inside of the phase2 package.
 -   The list of design patterns that we used is inside design_patterns_we_use folder inside of the phase 2 package.
