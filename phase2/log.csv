@@ -1,0 +1,143 @@
+3c36c5f, NancyLi0637, 2 days ago, fixed icon error
+fbe7d4e, Jiayi Su, 2 days ago, Add missing Javadoc in User, Minor fix of addFriend() method in User
+3ae5bee, hardygu, 3 days ago, icon change
+da7b584, NancyLi0637, 3 days ago, Merge remote-tracking branch 'origin/master'
+696d163, NancyLi0637, 3 days ago, added organizer search
+16a63f6, NancyLi0637, 3 days ago, -fixed attendee search
+29fd25a, NancyLi0637, 3 days ago, -updated account num of users
+827f0eb, Jiayi Su, 3 days ago, Merge remote-tracking branch 'origin/master'
+afcbd6f, Jiayi Su, 3 days ago, Finish Javadoc in the project files
+5f0c8ba, Jiayi Su, 3 days ago, Finish Javadoc in use case classes
+29ab5ca, Jiayi Su, 3 days ago, Finish Javadoc in eventSystem
+9d7890f, Deshang Kong, 3 days ago, Deleted import android.graphics.fonts.SystemFonts;
+53c4e91, Jiayi Su, 3 days ago, Minor change and Javadoc
+0bad513, NancyLi0637, 4 days ago, -code clean up
+b12ceaf, NancyLi0637, 4 days ago, -fixed minor bug and updated color
+0189ce6, NancyLi0637, 4 days ago, room cap update
+4578193, NancyLi0637, 4 days ago, finished before debugging
+b207b03, NancyLi0637, 4 days ago, updated image
+fa2b3be, NancyLi0637, 4 days ago, updated color
+d3a04c1, NancyLi0637, 4 days ago, implemented event image
+2289976, NancyLi0637, 4 days ago, implemented nav view
+c29be98, NancyLi0637, 4 days ago, updated nav pic
+302a38a, NancyLi0637, 5 days ago, fixed create event time duration limit
+5e0662c, NancyLi0637, 5 days ago, fixed minor adding friend error
+ba43058, NancyLi0637, 5 days ago, implemented add friend for attendee
+5107e3f, NancyLi0637, 5 days ago, implemented contact for attendee and fixed minor contact errors
+2658405, NancyLi0637, 5 days ago, implemented view message and send message
+4223e2e, NancyLi0637, 5 days ago, Merge remote-tracking branch 'origin/master'
+24eeb47, NancyLi0637, 5 days ago, fixed errors on gateway and creating events
+21b5a6c, NancyLi0637, 5 days ago, fixed file saving and conversation manager
+6caa1be, Jiayi Su, 5 days ago, Merge remote-tracking branch 'origin/master'
+1595fb7, Jiayi Su, 5 days ago, Minor fix and Javadoc in files in accountSystem
+fb6e1cb, NancyLi0637, 5 days ago, minor change on button position
+720eec1, NancyLi0637, 5 days ago, added sending announcement upon event cancel
+81d26de, NancyLi0637, 5 days ago, implemented add speaker function
+b618aec, NancyLi0637, 5 days ago, implemented partial speaker contact and added speaker send announcement
+0c8b467, NancyLi0637, 5 days ago, fixed minor error in eventmanager and eventfactory
+206ce34, NancyLi0637, 5 days ago, added user info stat
+e450564, NancyLi0637, 6 days ago, added event enrollment stat
+68698aa, NancyLi0637, 6 days ago, added top 5 events feature
+56647ca, Jiayi Su, 6 days ago, Minor fix and Javadoc in files in contactSystem
+bb50c7d, NancyLi0637, 6 days ago, Merge remote-tracking branch 'origin/master'
+74d5f7e, NancyLi0637, 6 days ago, added change room capacity feature
+49221a6, NancyLi0637, 6 days ago, implemented create account by organizer
+d4b5253, Jiayi Su, 6 days ago, Add README guidelines summary
+03f151c, NancyLi0637, 6 days ago, implemented vipuser system
+24c3bef, NancyLi0637, 6 days ago, Merge remote-tracking branch 'origin/master'
+469007b, NancyLi0637, 6 days ago, complete announcement system
+e734a68, NancyLi0637, 7 days ago, announcementactivity partially done
+3d62fad, Jiayi Su, 7 days ago, More Javadoc in contactSystem
+1697a78, Jiayi Su, 7 days ago, Javadoc in contactSystem
+1aba8ce, NancyLi0637, 7 days ago, 95% event system
+c3fcad1, NancyLi0637, 7 days ago, finished event system for organizer
+ba32cfb, NancyLi0637, 7 days ago, finished event system for organizer
+495907c, NancyLi0637, 7 days ago, update on msgsystem
+a7bbd8c, NancyLi0637, 8 days ago, file clean up
+2a21fde, NancyLi0637, 8 days ago, file clean up
+b2d8dda, Jiayi Su, 8 days ago, Merge remote-tracking branch 'origin/master'
+28df9b8, Jiayi Su, 8 days ago, CancelEvent and removeAttendeeFromEvent onClick in OrganizerEventContentActivity.java
+b3df253, xiaotonghuang, 8 days ago, minor change
+52d31bb, xiaotonghuang, 8 days ago, Merge remote-tracking branch 'origin/master' into master
+a23e94e, xiaotonghuang, 8 days ago, minor change
+6dad935, Jiayi Su, 8 days ago, Fix: check valid duration in EventManager and Javadoc
+59031f0, Jiayi Su, 8 days ago, Merge remote-tracking branch 'origin/master'
+628073e, Jiayi Su, 8 days ago, Check valid duration in EventManager
+6674161, xiaotonghuang, 8 days ago, Merge remote-tracking branch 'origin/master' into master
+3a5d27c, xiaotonghuang, 8 days ago, minor change
+7695879, Jiayi Su, 8 days ago, Merge remote-tracking branch 'origin/master'
+2b78dbf, Jiayi Su, 8 days ago, More comments in eventSystem
+045f680, xiaotonghuang, 8 days ago, minor change
+d302909, xiaotonghuang, 8 days ago, Merge remote-tracking branch 'origin/master' into master
+b6dc474, xiaotonghuang, 8 days ago, minor change
+a606d76, Jiayi Su, 8 days ago, Merge remote-tracking branch 'origin/master'
+48ba192, Jiayi Su, 8 days ago, Comment and Javadoc in the project
+69179a1, xiaotonghuang, 8 days ago, minor change
+6b7ce6d, xiaotonghuang, 8 days ago, minor change
+26dd9c7, Jiayi Su, 8 days ago, Merge remote-tracking branch 'origin/master'
+11785d0, Jiayi Su, 8 days ago, Add other Javadoc in the project
+8772e1b, xiaotonghuang, 8 days ago, Merge remote-tracking branch 'origin/master' into master
+26fe3ed, xiaotonghuang, 8 days ago, minor change
+435dcd4, Jiayi Su, 8 days ago, Add Javadoc
+af63960, Jiayi Su, 8 days ago, Merge branch 'master' of https://github.com/NancyLi0637/207_demo
+030bc55, NancyLi0637, 8 days ago, added contact
+b1d7142, NancyLi0637, 8 days ago, added id
+b50bec1, NancyLi0637, 8 days ago, added id
+12341e4, NancyLi0637, 8 days ago, added id
+b233351, xiaotonghuang, 8 days ago, minor change
+c2c167b, Jiayi Su, 8 days ago, Merge branch 'master' of https://github.com/NancyLi0637/207_demo
+6516e56, NancyLi0637, 8 days ago, added id
+551cee0, NancyLi0637, 8 days ago, added id
+b11e784, xiaotonghuang, 8 days ago, minor change
+3f5be13, NancyLi0637, 8 days ago, added room feature
+ea715f6, Jiayi Su, 8 days ago, Merge branch 'master' of https://github.com/NancyLi0637/207_demo
+d412db3, Jiayi Su, 8 days ago, EventManager
+84ecbfc, NancyLi0637, 8 days ago, modified Event
+39b4fa2, Jiayi Su, 8 days ago, Implement checkValidTitle in EventManager
+551f102, NancyLi0637, 9 days ago, modified select
+858076c, NancyLi0637, 9 days ago, Merge remote-tracking branch 'origin/master'
+a21a355, NancyLi0637, 9 days ago, 90% completed event system
+75694b0, xiaotonghuang, 9 days ago, FORM IJ
+3c0be5d, Jiayi Su, 9 days ago, Javadoc in files in speakerSystem
+c6a37d3, Jiayi Su, 9 days ago, Javadoc in files in messageSystem
+77d08d1, Jiayi Su, 9 days ago, Javadoc in files in roomSystem
+dd1a0d8, NancyLi0637, 9 days ago, update on event system
+32d77e1, NancyLi0637, 9 days ago, attentative event system
+4b88605, NancyLi0637, 10 days ago, minor updates according to ij
+cd17606, Jiayi Su, 10 days ago, Format in usecases
+6405444, Jiayi Su, 10 days ago, Javadoc in files in entities
+0badd02, Jiayi Su, 10 days ago, Javadoc in files in contactSystem
+b714abd, Jiayi Su, 10 days ago, Other javadocs
+c55983e, Jiayi Su, 10 days ago, Basic Javadoc
+a24d799, Jiayi Su, 10 days ago, Javadoc for Event, EventActivity, EventAdapter
+365eb0c, Jiayi Su, 10 days ago, Add a constructor in UserFactory.java in android use_cases using dependency injection; Javadoc
+4257ab2, Jiayi Su, 10 days ago, Use managers from CleanArchActivity in UserFactory data fields
+e6b3f19, Jiayi Su, 10 days ago, Add Javadoc
+43735ba, NancyLi0637, 10 days ago, attentive event system
+381eb79, NancyLi0637, 10 days ago, attentive event system
+3cc0e37, NancyLi0637, 10 days ago, fixed sign up and login error
+6b63dad, NancyLi0637, 11 days ago, -fixed database file error
+9acd9e8, Jiayi Su, 11 days ago, Add printMessage method in FileReadWriter
+0e504de, NancyLi0637, 11 days ago, -finished sign up and log in activity -connected to Users.txt file
+7ce0c94, NancyLi0637, 11 days ago, connected logic for sign up and log in
+5c07ed7, Jiayi Su, 12 days ago, Add account checking logic and error message in SignUpActivity and MainActivity
+47e10c7, Jiayi Su, 12 days ago, Implement error message in SignUpActivity
+c0985fe, Jiayi Su, 12 days ago, Add javadoc to SignUpActivity
+e7ef9cc, NancyLi0637, 12 days ago, fixed setUpData() in SignUpActivity
+c7391a8, NancyLi0637, 12 days ago, updated class structure for event system as well as correspongding layout
+9ef1e63, Jiayi Su, 12 days ago, Add email and username checking logic in SignUpActivity
+c60d2de, NancyLi0637, 12 days ago, update on navigation view for Attendee and Speaker
+bc939a3, NancyLi0637, 13 days ago, -modified nav_view activities for Attendee menu -temporary complete draft of Speaker menu
+2efb8f8, NancyLi0637, 13 days ago, added more p2 use cases and entities
+9c8ca68, NancyLi0637, 13 days ago, added more p2 use cases and entities
+c6289e2, Jiayi Su, 13 days ago, Merge result from master
+98d6257, Jiayi Su, 13 days ago, Connect to backend files
+169db82, NancyLi0637, 13 days ago, temporary complete version for Attendee Menu (before connecting to logic)
+a6a2d5f, NancyLi0637, 13 days ago, changes to MainActivity and SignUpActivity
+c1907da, NancyLi0637, 2 weeks ago, new package utility for common methods among activities    -SetUpActivity(new activity) - for toolbar and navigation views
+adc5dbc, Jiayi Su, 2 weeks ago, Fix SIGN UP button not showing up
+37c7b45, Jiayi Su, 2 weeks ago, Store the String of type the user selected in the spinner (e.g, Speaker) in SignUpActivity.java
+4160eb1, Jiayi Su, 2 weeks ago, Create a Spinner in activity_signup.xml to allow User to specify their role when at Sign-Up
+10fc216, Jiayi Su, 2 weeks ago, Test: First push
+771ca22, NancyLi0637, 2 weeks ago, Create README.md
+0ccf0e3, NancyLi0637, 2 weeks ago, first draft
