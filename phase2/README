@@ -79,21 +79,23 @@ You will implement four of these, unless you implement a GUI. Please see the not
 
 ### 3. A list of features that we implemented for Phase 2
 
-- All the mandatory extensions mentioned above and more than two optional extensions. (Nancy, Steve, Shawn, Maggie, Tony, Hardy and Bruce)
-- Implementing a GUI with Android, which should follow the Model-View-Presenter architecture, and a detailed analysis of the design patterns we use. (Nancy and Jenny)
+-  All the mandatory extensions mentioned above and more than two optional extensions. (Nancy, Steve, Shawn, Maggie, Tony, Hardy and Bruce)
+-   Implementing a GUI with Android, which should follow the Model-View-Presenter architecture, and a detailed analysis of the design patterns we use. (Nancy and Jenny)
 
 Details are described below:
 
-- We allow the same users to log in and select which conference they want to participate in. Here, participation means viewing and signing up for events.
-- We expand the menus available to organizers to allow them to get useful summary stats about the conference. Include app traffic statistics, event enrollment statistics, and top-five-event lists.
-- We enhance the feature of adding friend: Attendees are able to add attendees as friends, organizers are able to add organizers as friends. Besides, all the users are able to search and add friends.
-- We enrich the user experience by adding a "setting" section in our GUI, the users can see their own names, email addresses and type of their own accounts.
-- We use the following design patterns in our project: Adapter, Dependency Injection, Facade, Factory, and Observer Design Patterns (Details in the pdf files in design_patterns_we_use package).
+-   We allow the same users to log in and select which conference they want to participate in. Here, participation means viewing and signing up for events.
+-   We expand the menus available to organizers to allow them to get useful summary stats about the conference. Include app traffic statistics, event enrollment statistics, and top-five-event lists.
+-   We enhance the feature of adding friend: Attendees are able to add attendees as friends, organizers are able to add organizers as friends. Besides, all the users are able to search and add friends.
+-   We enrich the user experience by adding a "setting" section in our GUI, the users can see their own names, email addresses and type of their own accounts.
+-   We use the following design patterns in our project: Adapter, Dependency Injection, Facade, Factory, and Observer Design Patterns (Details in the pdf files in design_patterns_we_use package).
 
-### 4. Others
+### 4. Other important details:
 
-- 207_demo in the phase2 package contains the latest version of our project moved from the GitHub private project.
-- Android_demo is for testing purpose (We were trying to see if the Android Studio project moved here was able to run without issue and explore what configuration we had to make).
-- Please refer to the video demos for how to download and install Android Studio and run our project: 207_demo.
-- The UML design is in design_UML folder inside of the phase 2 package.
-- The list of design patterns that we used is inside design_patterns_we_use folder inside of the phase 2 package.
+-   207_demo in the phase2 package contains the latest version of our project moved from the GitHub private project.
+-   Android_demo is for testing purpose (We were trying to see if the Android Studio project moved here was able to run without issue and explore what configuration we had to make).
+-   Please refer to the video demos for how to download and install Android Studio and run our project: 207_demo.
+-   https://youtu.be/gc34WXBEiVI [This](https://youtu.be/gc34WXBEiVI) is the link to the youTube video showing how to download and install Android Studio.
+-   https://youtu.be/J9Mjt3aRb8M [This](https://youtu.be/J9Mjt3aRb8M) is the link to the youTube video demonstrating an example usage of our project.
+-   The UML design is in design_UML folder inside of the phase 2 package.
+-   The list of design patterns that we used is inside design_patterns_we_use folder inside of the phase 2 package.
