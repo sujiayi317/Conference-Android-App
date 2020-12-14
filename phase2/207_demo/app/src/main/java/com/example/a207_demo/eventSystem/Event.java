@@ -71,11 +71,6 @@ public abstract class Event implements Serializable {
         this.type = type;
     }
 
-    /**
-     * setCapacity
-     *
-     * @param capacity int
-     */
     public void setCapacity(int capacity) {
         this.capacity = capacity;
     }
@@ -202,8 +197,6 @@ public abstract class Event implements Serializable {
         return this.speakerUserIDs;
     }
 
-    ;
-
 
     /**
      * Formats and returns the time slot
@@ -248,6 +241,13 @@ public abstract class Event implements Serializable {
         return true;
     }
 
+    /**
+     * Check for time Conflict
+     *
+     * @param startTime String startTime
+     * @param duration  String duration
+     * @return boolean
+     */
     public boolean timeConflict(String startTime, String duration) {
         int thisTime = convertStartTimeToNum(this.startTime);
         int checkTime = convertStartTimeToNum(startTime);
